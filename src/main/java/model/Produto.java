@@ -94,7 +94,7 @@ public class Produto {
         this.idProduto = idProduto;
     }
 
-    public void leituraProduto() {
+    public void lerDados() {
         this.nomeProduto = sc.nextLine();
         this.precoUnit = sc.nextDouble();
         this.unidadeProduto = sc.nextInt();
