@@ -14,11 +14,12 @@ public class Produto {
     private int quantMin;
     private int quantMax;
     private Categoria categoria;
+    private int idProduto;
 
     public Produto() {
     }
 
-    public Produto(String nomeProduto, double precoUnit, int unidadeProduto, int quantEstoque, int quantMin, int quantMax, Categoria categoria) {
+    public Produto(String nomeProduto, double precoUnit, int unidadeProduto, int quantEstoque, int quantMin, int quantMax, Categoria categoria, int idProduto) {
         this.nomeProduto = nomeProduto;
         this.precoUnit = precoUnit;
         this.unidadeProduto = unidadeProduto;
@@ -26,6 +27,7 @@ public class Produto {
         this.quantMin = quantMin;
         this.quantMax = quantMax;
         this.categoria = categoria;
+        this.idProduto = idProduto;
     }
 
     public String getNomeProduto() {
@@ -84,6 +86,14 @@ public class Produto {
         this.categoria = categoria;
     }
 
+    public int getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto() {
+        this.idProduto = idProduto;
+    }
+
     public void leituraProduto() {
         this.nomeProduto = sc.nextLine();
         this.precoUnit = sc.nextDouble();
@@ -92,6 +102,7 @@ public class Produto {
         this.quantMin = sc.nextInt();
         this.quantMax = sc.nextInt();
         //this.categoria = sc.nextLine();
+        this.idProduto = sc.nextInt();
 
     }
 }
