@@ -24,7 +24,7 @@ public class ControleEstoque {
 
             for (int i = 0; i < produtos.size(); i++) { //roda a lista a procura do produto
                 Produto produtoProcurado = produtos.get(i);
-                if (produtoProcurado.getNome().equalsIgnoreCase(produtoBuscado.trim())) { //se o nome do produto da posição i for igual ao nome do produto que o usuário esta procurando
+                if (produtoProcurado.getNomeProduto().equalsIgnoreCase(produtoBuscado.trim())) { //se o nome do produto da posição i for igual ao nome do produto que o usuário esta procurando
                     posicao = i;
                     encontrado = true;
                     break;
@@ -41,5 +41,21 @@ public class ControleEstoque {
         return posicao; //devolve a posição do produto consultado para os métodos que precisarem
     }
 
-   
+public void pesquisaProduto() {
+   int posicao = consultaProduto();
+   if (!produtos.isEmpty() && posicao != -1) { //se a lista não estiver vazia e o prodito tiver sido encontrado, então pega as informações dele
+       Produto produtoPesquisado = produtos.get(posicao); // transforma o produto pesquisado naquele que foi buscado
+       String informacoes = String.format("Nome: %s\nID: %s\nPreço unitário: %s\nUnidade de medida: %s\nQuantidades em estoque: %s\nQuantidade mínima: %s\nQuantidade máxima: %s\nCategoria: %s\n",
+      produtoPesquisado.getNomeProduto(),
+      produtoPesquisado.getIdProduto(), 
+      produtoPesquisado.getPrecoUnit(), 
+      produtoPesquisado.getUnidadeProduto(), 
+      produtoPesquisado.getQuantEstoque(),
+      produtoPesquisado.getQuantMin(),
+      produtoPesquisado.getQuantMax(),
+      produtoPesquisado.getCategoria());
+       System.out.println(informacoes);
+   }
+}
+        
 }
