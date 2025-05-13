@@ -10,4 +10,5 @@
         <maven.compiler.release>23</maven.compiler.release>
         <exec.mainClass>com.mycompany.a3.controledeestoque.A3ControleDeEstoque</exec.mainClass>
     </properties>
+    <name>A3-ControleDeEstoque</name>
 </project>
