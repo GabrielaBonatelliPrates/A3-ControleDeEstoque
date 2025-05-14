@@ -2,7 +2,7 @@ package model;
 
 import java.util.Scanner;
 
-public class Produto extends Categoria { //faz Produto herdar métodos e atributos da classe Categoria
+public class Produto { 
 
     Scanner sc = new Scanner(System.in);
 
@@ -14,12 +14,12 @@ public class Produto extends Categoria { //faz Produto herdar métodos e atribut
     private int quantMin;
     private int quantMax;
     private int idProduto;
+    private String categoria;
 
     public Produto() {
     }
 
-    public Produto(String nome, char tamanho, String embalagem, String nomeProduto, double precoUnit, int unidadeProduto, int quantEstoque, int quantMin, int quantMax, int idProduto) {
-        super(nome, tamanho, embalagem);
+    public Produto(String nomeProduto, double precoUnit, int unidadeProduto, int quantEstoque, int quantMin, int quantMax, int idProduto, String categoria) {
         this.nomeProduto = nomeProduto;
         this.precoUnit = precoUnit;
         this.unidadeProduto = unidadeProduto;
@@ -27,6 +27,7 @@ public class Produto extends Categoria { //faz Produto herdar métodos e atribut
         this.quantMin = quantMin;
         this.quantMax = quantMax;
         this.idProduto = idProduto;
+        this.categoria = categoria;
     }
 
     public String getNomeProduto() {
@@ -85,8 +86,17 @@ public class Produto extends Categoria { //faz Produto herdar métodos e atribut
         this.idProduto = idProduto;
     }
 
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+    
+    
+
     public void lerDados() {
-        super.leituraCategoria();
         this.nomeProduto = sc.nextLine();
         this.precoUnit = sc.nextDouble();
         this.unidadeProduto = sc.nextInt();
@@ -94,5 +104,6 @@ public class Produto extends Categoria { //faz Produto herdar métodos e atribut
         this.quantMin = sc.nextInt();
         this.quantMax = sc.nextInt();
         this.idProduto = sc.nextInt();
+        this.categoria = sc.nextLine();
     }
 }
