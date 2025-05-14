@@ -13,6 +13,12 @@ public class Categoria {
     public Categoria() {
     }
 
+    public Categoria(String nome, char tamanho, String embalagem) {
+        this.nome = nome;
+        this.tamanho = tamanho;
+        this.embalagem = embalagem;
+    }
+    
     public String getNome() {
         return nome;
     }
