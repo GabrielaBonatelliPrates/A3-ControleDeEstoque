@@ -53,9 +53,8 @@ public class ControleEstoque {
                     produtoPesquisado.getUnidadeProduto(),
                     produtoPesquisado.getQuantEstoque(),
                     produtoPesquisado.getQuantMin(),
-                    produtoPesquisado.getQuantMax(),
-                    produtoPesquisado.getCategoria());
-            System.out.println(informacoes);
+                    produtoPesquisado.getQuantMax());
+                    System.out.println(informacoes);
         }
     }
 
