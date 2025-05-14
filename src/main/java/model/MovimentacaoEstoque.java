@@ -1,6 +1,6 @@
 package model;
 
-public class MovimentacaoEstoque {
+public class MovimentacaoEstoque extends ControleEstoque{
 
     private int data; //se possivel implementar a data
     private String tipoMovimentacao;
