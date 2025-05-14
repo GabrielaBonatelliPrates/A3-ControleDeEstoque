@@ -43,7 +43,7 @@ public class Categoria {
         this.embalagem = embalagem;
     }
 
-    public void leituraCategoria() {
+    public void lerDados() {
         
         
         this.nome = sc.nextLine(); //Pegando o nome
