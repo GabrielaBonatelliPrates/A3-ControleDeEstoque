@@ -58,5 +58,9 @@ public class ControleEstoque {
                     System.out.println(informacoes);
         }
     }
+ public void movimentacaoEstoque(){ //metodo para chamar a classe MovimentacaoEstoque quando houver uma movimentacao
+    MovimentacaoEstoque atualizacao = new MovimentacaoEstoque ();
+    atualizacao.atualizaEstoque ();    
 
+    }
 }
