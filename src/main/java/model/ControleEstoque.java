@@ -117,7 +117,7 @@ public class ControleEstoque {
            for (String nome : nomeProdutos){
             for (Produto p : produtos){
               if (p.getNomeProduto().equals(nome)) {
-              listaDePrecos += String.format("Nome: %s\nPreço: R$ %.2f %s\nUnidade de medida: %s\nCategoria: %s\n\n",
+              listaDePrecos += String.format("Nome: %s\nPreço: R$ %.2f \nUnidade de medida: %s\nCategoria: %s\n\n",
             p.getNomeProduto(),
             p.getPrecoUnit(),
             p.getUnidadeProduto(),
