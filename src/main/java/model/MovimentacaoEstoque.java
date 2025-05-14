@@ -1,29 +1,42 @@
 package model;
 
 public class MovimentacaoEstoque {
-    private String entrada;
-    private String saida;
+
     private int data;
-    private int quantidade;
-    private String produto;
+    private String tipoMovimentacao;
+    private int quantidadeMovimentada;
+    private String nomeProduto;
+
+    public MovimentacaoEstoque(int quantidadeMovimentada, String nomeProduto) {
+        this.quantidadeMovimentada = quantidadeMovimentada;
+        this.nomeProduto = nomeProduto;
+    }
 
     public MovimentacaoEstoque() {
     }
 
-    public String getEntrada() {
-        return entrada;
+    public int getQuantidadeMovimentada() {
+        return quantidadeMovimentada;
     }
 
-    public void setEntrada(String entrada) {
-        this.entrada = entrada;
+    public void setQuantidadeMovimentada(int quantidadeMovimentada) {
+        this.quantidadeMovimentada = quantidadeMovimentada;
     }
 
-    public String getSaida() {
-        return saida;
+    public String getNomeProduto() {
+        return nomeProduto;
     }
 
-    public void setSaida(String saida) {
-        this.saida = saida;
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
+
+    public String getTipoMovimentacao() {
+        return tipoMovimentacao;
+    }
+
+    public void setTipoMovimentacao(String tipoMovimentacao) {
+        this.tipoMovimentacao = tipoMovimentacao;
     }
 
     public int getData() {
@@ -33,22 +46,6 @@ public class MovimentacaoEstoque {
     public void setData(int data) {
         this.data = data;
     }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public String getProduto() {
-        return produto;
-    }
-
-    public void setProduto(String produto) {
-        this.produto = produto;
-    }
-    
-    
 }
+
+
