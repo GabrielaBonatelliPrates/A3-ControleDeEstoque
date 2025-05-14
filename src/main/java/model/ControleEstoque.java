@@ -6,8 +6,8 @@ import java.util.List;
 
 public class ControleEstoque {
 
-    private final List<Produto> produtos = new ArrayList<>();//cria lista que vai armazenar os produtos
-    private final Scanner input = new Scanner(System.in); //cria scanner para a classe toda
+    protected  List<Produto> produtos = new ArrayList<>();//cria lista que vai armazenar os produtos
+    private  Scanner input = new Scanner(System.in); //cria scanner para a classe toda
 
     public void cadastraProduto() { //metodo para cadastrar produto e adicionar ele na lista
         Produto produto = new Produto(); //instanciar a classe produto (cria um objeto "produto")
