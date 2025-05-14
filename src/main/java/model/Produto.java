@@ -2,7 +2,7 @@ package model;
 
 import java.util.Scanner;
 
-public class Produto {
+public class Produto extends Categoria { //faz Produto herdar métodos e atributos da classe Categoria
 
     Scanner sc = new Scanner(System.in);
 
@@ -13,20 +13,19 @@ public class Produto {
     private int quantEstoque;
     private int quantMin;
     private int quantMax;
-    private Categoria categoria;
     private int idProduto;
 
     public Produto() {
     }
 
-    public Produto(String nomeProduto, double precoUnit, int unidadeProduto, int quantEstoque, int quantMin, int quantMax, Categoria categoria, int idProduto) {
+    public Produto(String nome, char tamanho, String embalagem, String nomeProduto, double precoUnit, int unidadeProduto, int quantEstoque, int quantMin, int quantMax, int idProduto) {
+        super(nome, tamanho, embalagem);
         this.nomeProduto = nomeProduto;
         this.precoUnit = precoUnit;
         this.unidadeProduto = unidadeProduto;
         this.quantEstoque = quantEstoque;
         this.quantMin = quantMin;
         this.quantMax = quantMax;
-        this.categoria = categoria;
         this.idProduto = idProduto;
     }
 
@@ -78,14 +77,6 @@ public class Produto {
         this.quantMax = quantMax;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
     public int getIdProduto() {
         return idProduto;
     }
@@ -95,14 +86,13 @@ public class Produto {
     }
 
     public void lerDados() {
+        super.leituraCategoria();
         this.nomeProduto = sc.nextLine();
         this.precoUnit = sc.nextDouble();
         this.unidadeProduto = sc.nextInt();
         this.quantEstoque = sc.nextInt();
         this.quantMin = sc.nextInt();
         this.quantMax = sc.nextInt();
-        //this.categoria = sc.nextLine();
         this.idProduto = sc.nextInt();
-
     }
 }
