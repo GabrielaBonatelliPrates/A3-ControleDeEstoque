@@ -14,7 +14,8 @@ public class ControleEstoque {
         produto.lerDados(); //le os dados do produto
         produtos.add(produto); //adiciona o objeto criado à lista produtos
     }
-        public int consultaProduto() { //metodo para procurar o produto correspondente ao nome que o usuario digitar
+
+    public int consultaProduto() { //metodo para procurar o produto correspondente ao nome que o usuario digitar
 
         boolean encontrado = false;
         int posicao = -1;
@@ -41,21 +42,21 @@ public class ControleEstoque {
         return posicao; //devolve a posição do produto consultado para os métodos que precisarem
     }
 
-public void pesquisaProduto() {
-   int posicao = consultaProduto();
-   if (!produtos.isEmpty() && posicao != -1) { //se a lista não estiver vazia e o prodito tiver sido encontrado, então pega as informações dele
-       Produto produtoPesquisado = produtos.get(posicao); // transforma o produto pesquisado naquele que foi buscado
-       String informacoes = String.format("Nome: %s\nID: %s\nPreço unitário: %s\nUnidade de medida: %s\nQuantidades em estoque: %s\nQuantidade mínima: %s\nQuantidade máxima: %s\nCategoria: %s\n",
-      produtoPesquisado.getNomeProduto(),
-      produtoPesquisado.getIdProduto(), 
-      produtoPesquisado.getPrecoUnit(), 
-      produtoPesquisado.getUnidadeProduto(), 
-      produtoPesquisado.getQuantEstoque(),
-      produtoPesquisado.getQuantMin(),
-      produtoPesquisado.getQuantMax(),
-      produtoPesquisado.getCategoria());
-       System.out.println(informacoes);
-   }
-}
-        
+    public void pesquisaProduto() {
+        int posicao = consultaProduto();
+        if (!produtos.isEmpty() && posicao != -1) { //se a lista não estiver vazia e o prodito tiver sido encontrado, então pega as informações dele
+            Produto produtoPesquisado = produtos.get(posicao); // transforma o produto pesquisado naquele que foi buscado
+            String informacoes = String.format("Nome: %s\nID: %s\nPreço unitário: %s\nUnidade de medida: %s\nQuantidades em estoque: %s\nQuantidade mínima: %s\nQuantidade máxima: %s\nCategoria: %s\n",
+                    produtoPesquisado.getNomeProduto(),
+                    produtoPesquisado.getIdProduto(),
+                    produtoPesquisado.getPrecoUnit(),
+                    produtoPesquisado.getUnidadeProduto(),
+                    produtoPesquisado.getQuantEstoque(),
+                    produtoPesquisado.getQuantMin(),
+                    produtoPesquisado.getQuantMax(),
+                    produtoPesquisado.getCategoria());
+            System.out.println(informacoes);
+        }
+    }
+
 }

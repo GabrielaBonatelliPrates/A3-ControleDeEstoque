@@ -3,20 +3,14 @@ package model;
 import java.util.Scanner;
 
 public class Categoria {
-    
+
     Scanner sc = new Scanner(System.in);
-    
+
     private String nome;
-    private String tamanho;
+    private char tamanho;
     private String embalagem;
 
     public Categoria() {
-    }
-
-    public Categoria(String nome, String tamanho, String embalagem) {
-        this.nome = nome;
-        this.tamanho = tamanho;
-        this.embalagem = embalagem;
     }
 
     public String getNome() {
@@ -27,11 +21,11 @@ public class Categoria {
         this.nome = nome;
     }
 
-    public String getTamanho() {
+    public char getTamanho() {
         return tamanho;
     }
 
-    public void setTamanho(String tamanho) {
+    public void setTamanho(char tamanho) {
         this.tamanho = tamanho;
     }
 
@@ -42,12 +36,34 @@ public class Categoria {
     public void setEmbalagem(String embalagem) {
         this.embalagem = embalagem;
     }
-    
-    public void leituraCategoria(){
-        this.nome = sc.nextLine();
-        this.tamanho = sc.nextLine();
-        this.embalagem = sc.nextLine();
+
+    public void leituraCategoria() {
         
-        //Dai a gnt troca 
+        
+        this.nome = sc.nextLine(); //Pegando o nome
+
+        //Pegando o tamanho
+        System.out.print("Insira o tamanho (P/M/G)");
+        char resposta = Character.toUpperCase(sc.next().charAt(0));
+        if (resposta == 'P'){
+            this.tamanho = 'P';
+        }if (resposta == 'M'){
+            this.tamanho = sc.next().charAt(0);
+        } else {
+            this.tamanho = sc.next().charAt(0);
+        }
+        
+        //Pegando a embalagem
+        System.out.print("Insira a embalagem (Vidro/Plastico/Metal)");
+        String embalagens = sc.nextLine();
+        if (embalagens == "Vidro"){
+            this.embalagem = "Vidro";
+        }if (embalagens == "Plastico"){
+            this.embalagem = "Plastico";
+        } else {
+            this.embalagem = "Metal";
+        }
+        
+        //Verifiquem se ta certo, caso estiver errado algo favor avisar e arrumar
     }
 }
