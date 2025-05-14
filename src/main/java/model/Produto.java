@@ -9,7 +9,7 @@ public class Produto {
     //variaveis de intancia
     private String nomeProduto;
     private double precoUnit;
-    private int unidadeProduto;
+    private String unidadeProduto;
     private int quantidadeEstoque;
     private int estoqueMinimo;
     private int estoqueMaximo;
