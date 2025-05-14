@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 import java.util.List;
 
@@ -97,4 +98,35 @@ public class ControleEstoque {
     }
 }
     
+  public void listaDePrecos(){
+      if(produtos.isEmpty()){
+          System.out.println("O estoque está sem produtos");
+        return;
+      }     
+      
+      ArrayList<String> nomeProdutos = new ArrayList<>();
+            for(Produto p : produtos){ 
+                   nomeProdutos.add(p.getNomeProduto());
+            }
+            
+            Collections.sort(nomeProdutos); //para organizar em ordem alfabética
+            
+            
+            
+            String listaDePrecos = "Lista de preços:\n";
+           for (String nome : nomeProdutos){
+            for (Produto p : produtos){
+              if (p.getNomeProduto().equals(nome)) {
+              listaDePrecos += String.format("Nome: %s\nPreço: R$ %.2f %s\nUnidade de medida: %s\nCategoria: %s\n\n",
+            p.getNomeProduto(),
+            p.getPrecoUnit(),
+            p.getUnidadeProduto(),
+            p.getNomeCategoria());
+            }
+        }
+  }
+  
+   System.out.println(listaDePrecos);
+ 
+  }
 }
