@@ -6,30 +6,32 @@ public class Produto {
 
     Scanner sc = new Scanner(System.in);
 
-    //Declaração dos atributos privados da classe Produto
+    //variaveis de intancia
     private String nomeProduto;
     private double precoUnit;
     private int unidadeProduto;
-    private int quantEstoque;
-    private int quantMin;
-    private int quantMax;
+    private int quantidadeEstoque;
+    private int estoqueMinimo;
+    private int estoqueMaximo;
     private int idProduto;
-    private String categoria;
+    private String nomeCategoria;
 
+    //construtores
     public Produto() {
     }
 
-    public Produto(String nomeProduto, double precoUnit, int unidadeProduto, int quantEstoque, int quantMin, int quantMax, int idProduto, String categoria) {
+    public Produto(String nomeProduto, double precoUnit, String unidadeProduto, int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo, String nomeCategoria, int idProduto) {
         this.nomeProduto = nomeProduto;
         this.precoUnit = precoUnit;
         this.unidadeProduto = unidadeProduto;
-        this.quantEstoque = quantEstoque;
-        this.quantMin = quantMin;
-        this.quantMax = quantMax;
+        this.quantidadeEstoque = quantidadeEstoque;
+        this.estoqueMinimo = estoqueMinimo;
+        this.estoqueMaximo = estoqueMaximo;
         this.idProduto = idProduto;
-        this.categoria = categoria;
+        this.nomeCategoria = nomeCategoria;
     }
 
+    //getters e setters
     public String getNomeProduto() {
         return nomeProduto;
     }
@@ -46,36 +48,44 @@ public class Produto {
         this.precoUnit = precoUnit;
     }
 
-    public int getUnidadeProduto() {
+      public String getUnidadeProduto() {
         return unidadeProduto;
     }
 
-    public void setUnidadeProduto(int unidadeProduto) {
+    public void setUnidadeProduto(String unidadeProduto) {
         this.unidadeProduto = unidadeProduto;
     }
 
-    public int getQuantEstoque() {
-        return quantEstoque;
+    public int getQuantidadeEstoque() {
+        return quantidadeEstoque;
     }
 
-    public void setQuantEstoque(int quantEstoque) {
-        this.quantEstoque = quantEstoque;
+    public void setQuantidadeEstoque(int quantidadeEstoque) {
+        this.quantidadeEstoque = quantidadeEstoque;
     }
 
-    public int getQuantMin() {
-        return quantMin;
+    public int getEstoqueMinimo() {
+        return estoqueMinimo;
     }
 
-    public void setQuantMin(int quantMin) {
-        this.quantMin = quantMin;
+    public void setEstoqueMinimo(int estoqueMinimo) {
+        this.estoqueMinimo = estoqueMinimo;
     }
 
-    public int getQuantMax() {
-        return quantMax;
+    public int getEstoqueMaximo() {
+        return estoqueMaximo;
     }
 
-    public void setQuantMax(int quantMax) {
-        this.quantMax = quantMax;
+    public void setEstoqueMaximo(int estoqueMaximo) {
+        this.estoqueMaximo = estoqueMaximo;
+    }
+
+     public String getNomeCategoria() {
+        return nomeCategoria;
+    }
+
+    public void setNomeCategoria(String nomeCategoria) {
+        this.nomeCategoria = nomeCategoria;
     }
 
     public int getIdProduto() {
@@ -86,24 +96,38 @@ public class Produto {
         this.idProduto = idProduto;
     }
 
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-    
-    
-
+    //le os dados dos produtos
     public void lerDados() {
-        this.nomeProduto = sc.nextLine();
-        this.precoUnit = sc.nextDouble();
-        this.unidadeProduto = sc.nextInt();
-        this.quantEstoque = sc.nextInt();
-        this.quantMin = sc.nextInt();
-        this.quantMax = sc.nextInt();
+
+        System.out.print("Digite o ID do produto: ");
         this.idProduto = sc.nextInt();
-        this.categoria = sc.nextLine();
+
+        sc.nextLine (); //limpa a linha
+
+        System.out.print("Digite o nome do produto: ");
+        this.nomeProduto = sc.nextLine();
+
+        System.out.print("Digite o preço unitário do produto: ");
+        this.precoUnit = sc.nextDouble();
+
+        sc.nextLine (); //limpa a linha
+
+        System.out.print("Digite a unidade do produto: ");
+        this.unidadeProduto = sc.nextLine ();
+
+        System.out.print("Digite a quantidade em estoque: ");
+        this.quantidadeEstoque = sc.nextInt();
+
+        System.out.print("Digite a quantidade mínima permitida em estoque: ");
+        this.estoqueMinimo = sc.nextInt();
+
+        System.out.print("Digite a quantidade máxima permitida em estoque: ");
+        this.estoqueMaximo = sc.nextInt();
+
+        sc.nextLine(); //limpa a linha
+
+        Categoria cat = new Categoria();
+        cat.lerDados();
+        setNomeCategoria (cat.getNome ());
     }
 }
