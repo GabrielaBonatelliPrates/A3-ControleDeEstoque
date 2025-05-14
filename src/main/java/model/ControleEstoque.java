@@ -61,6 +61,40 @@ public class ControleEstoque {
  public void movimentacaoEstoque(){ //metodo para chamar a classe MovimentacaoEstoque quando houver uma movimentacao
     MovimentacaoEstoque atualizacao = new MovimentacaoEstoque ();
     atualizacao.atualizaEstoque ();    
-
     }
+
+    
+ public void relatorioProdutoCategoria() { //metodo para gerar relatorio de produto por categoria
+        if (produtos.isEmpty ()) { //verifica se há produtos cadastados
+            System.out.println ("Nenhum produto cadastrado.");
+            return;
+        }
+
+        System.out.print ("Digite o nome da categoria que deseja pesquisar: "); //pede a categoria que o usuario deseja emitir o relatorio
+        String categoriaDigitada = input.nextLine ().trim ();
+
+        String nomeId = "";
+        int contador = 0;
+
+        if (!produtos.isEmpty ()) { 
+            for (Produto p : produtos) { //procura por produtos que tem a categoria correspondente a que o usuario deseja
+                if (p.getNomeCategoria ().equalsIgnoreCase (categoriaDigitada.trim ())) { //se for correspondente é adicionada à saída
+                    nomeId += "ID: " + p.getIdProduto ()
+                            + " | Nome: " + p.getNomeProduto () + "\n";
+                    contador++; //conta quantos produtos existem com a categoria correspondente
+                }
+            }
+            if (contador > 0) { //se houver pelo menos algum produto com a categoria correspondente
+                System.out.println ("\nLista de Produtos da Categoria: " + categoriaDigitada);
+                System.out.println (nomeId); //imprime todos os produtos da categoria
+                System.out.println ("Total de produtos distintos na categoria \"" + categoriaDigitada + "\": " + contador); //imprime o total de produtos distintos presentes na categoria
+            } else { //se não houver nenhum produto com a categoria correspondente
+                System.out.println ("Nenhum produto encontrado na categoria \"" + categoriaDigitada + "\".");
+            }
+        }
+    else { //se não houver produtos cadastrados na lista
+            System.out.println ("Nenhum produto cadastrado.");
+    }
+}
+    
 }
