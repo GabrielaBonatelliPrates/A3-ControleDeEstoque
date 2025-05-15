@@ -5,20 +5,24 @@ import java.util.Scanner;
 public class Categoria {
 
     Scanner sc = new Scanner(System.in);
-
+    
+    //Declaração das variáveis de instância
     private String nome;
     private char tamanho;
     private String embalagem;
-
+    
+    //Construtor vazio
     public Categoria() {
     }
-
+    
+    //Construtor com parâmetros
     public Categoria(String nome, char tamanho, String embalagem) {
         this.nome = nome;
         this.tamanho = tamanho;
         this.embalagem = embalagem;
     }
 
+    //Getters e setters
     public String getNome() {
         return nome;
     }
@@ -42,7 +46,8 @@ public class Categoria {
     public void setEmbalagem(String embalagem) {
         this.embalagem = embalagem;
     }
-
+    
+    //Pedir e armazenar dados nos atributos da classe
     public void lerDados() {
 
         this.nome = sc.nextLine(); //Pegando o nome
