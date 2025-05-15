@@ -2,7 +2,7 @@ package model;
 
 import java.util.Scanner;
 
-public class Produto { 
+public class Produto {
 
     Scanner sc = new Scanner(System.in);
 
@@ -48,7 +48,7 @@ public class Produto {
         this.precoUnit = precoUnit;
     }
 
-      public String getUnidadeProduto() {
+    public String getUnidadeProduto() {
         return unidadeProduto;
     }
 
@@ -80,7 +80,7 @@ public class Produto {
         this.estoqueMaximo = estoqueMaximo;
     }
 
-     public String getNomeCategoria() {
+    public String getNomeCategoria() {
         return nomeCategoria;
     }
 
@@ -92,8 +92,16 @@ public class Produto {
         return idProduto;
     }
 
-    public void setIdProduto() {
+    public void setIdProduto(int idProduto) {
         this.idProduto = idProduto;
+    }
+    //Método 1 que mostra se o estoque do produto está no mínimo
+    public boolean estaNoEstoqueMin() {
+        return this.quantidadeEstoque == this.estoqueMinimo;
+    }
+    //Método 2 que mostra se o estoque do produto está no máximo
+    public boolean estaNoEstoqueMax() {
+        return this.quantidadeEstoque == this.estoqueMaximo;
     }
 
     //le os dados dos produtos
@@ -102,7 +110,7 @@ public class Produto {
         System.out.print("Digite o ID do produto: ");
         this.idProduto = sc.nextInt();
 
-        sc.nextLine (); //limpa a linha
+        sc.nextLine(); //limpa a linha
 
         System.out.print("Digite o nome do produto: ");
         this.nomeProduto = sc.nextLine();
@@ -110,10 +118,10 @@ public class Produto {
         System.out.print("Digite o preço unitário do produto: ");
         this.precoUnit = sc.nextDouble();
 
-        sc.nextLine (); //limpa a linha
+        sc.nextLine(); //limpa a linha
 
         System.out.print("Digite a unidade do produto: ");
-        this.unidadeProduto = sc.nextLine ();
+        this.unidadeProduto = sc.nextLine();
 
         System.out.print("Digite a quantidade em estoque: ");
         this.quantidadeEstoque = sc.nextInt();
@@ -128,6 +136,19 @@ public class Produto {
 
         Categoria cat = new Categoria();
         cat.lerDados();
-        setNomeCategoria (cat.getNome ());
+        setNomeCategoria(cat.getNome());
+        
+        //Mostra a seguinte mensagem se estiver em baixo estoque:
+        if (quantidadeEstoque < estoqueMinimo) {
+            System.out.println("Estoque baixo!");
+        } else if (quantidadeEstoque > estoqueMaximo) { //Mostra a seguinte mensagem se estiver em estoque máximo
+            System.out.println("Estoque acima do limite!");
+        } else {
+            System.out.println("Estoque dentro do esperado."); //Mostra mensagem caso esteja dentro do estoque esperado
+        }
+        
+        //Vou terminar ou trocar caso algo esteja faltando ou errado
+
     }
+
 }
