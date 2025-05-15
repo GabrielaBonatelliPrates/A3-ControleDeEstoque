@@ -1,5 +1,9 @@
 package principal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import model.Produto;
+import model.Relatorios;
 
 public class Principal {
     public static void main(String[] args) {
@@ -75,5 +79,50 @@ public class Principal {
             }
         } while (opcao != 0);
 
+        Scanner scanner = new Scanner(System.in);
+        List<Produto> produtos = new ArrayList<>();
+        Relatorios relatorio = new Relatorios();
+
+        while (true) {
+            System.out.println("\n=== SISTEMA DE GESTÃO DE PRODUTOS ===");
+            System.out.print("Escolha uma opção: ");
+            System.out.println("\n1. Adicionar novo produto");
+            System.out.println("2. Exibir balanço financeiro");
+            System.out.println("0. Sair");
+
+
+            int opcao1 = scanner.nextInt();
+            scanner.nextLine(); // Clear buffer
+
+            switch (opcao) {
+                case 1:
+                    // Criar novo produto
+                    Produto novoProduto = new Produto();
+                    novoProduto.lerDados();
+                    produtos.add(novoProduto);
+
+                    // Adicionar ao relatório
+                    if (produtos.size() == 1) {
+                        // Adicionar cabeçalho apenas na primeira vez
+                        relatorio.adicionarCabecalho();
+                    }
+                    relatorio.adicionarProduto(novoProduto);
+                    System.out.println("Produto adicionado com sucesso!");
+                    break;
+                case 2:
+                    Relatorios.gerarRelatorio(produtos);
+                    break;
+
+                case 0:
+                    System.out.println("Encerrando o programa...");
+                    scanner.close();
+                    return;
+
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }
+        }
+        
     }
 }
