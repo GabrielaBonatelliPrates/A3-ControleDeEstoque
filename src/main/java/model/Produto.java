@@ -95,15 +95,7 @@ public class Produto {
     public void setIdProduto(int idProduto) {
         this.idProduto = idProduto;
     }
-    //Método 1 que mostra se o estoque do produto está no mínimo
-    public boolean estaNoEstoqueMin() {
-        return this.quantidadeEstoque == this.estoqueMinimo;
-    }
-    //Método 2 que mostra se o estoque do produto está no máximo
-    public boolean estaNoEstoqueMax() {
-        return this.quantidadeEstoque == this.estoqueMaximo;
-    }
-
+   
     //le os dados dos produtos
     public void lerDados() {
 
@@ -137,17 +129,6 @@ public class Produto {
         Categoria cat = new Categoria();
         cat.lerDados();
         setNomeCategoria(cat.getNome());
-        
-        //Mostra a seguinte mensagem se estiver em baixo estoque:
-        if (quantidadeEstoque < estoqueMinimo) {
-            System.out.println("Estoque baixo!");
-        } else if (quantidadeEstoque > estoqueMaximo) { //Mostra a seguinte mensagem se estiver em estoque máximo
-            System.out.println("Estoque acima do limite!");
-        } else {
-            System.out.println("Estoque dentro do esperado."); //Mostra mensagem caso esteja dentro do estoque esperado
-        }
-        
-        //Vou terminar ou trocar caso algo esteja faltando ou errado
 
     }
 
