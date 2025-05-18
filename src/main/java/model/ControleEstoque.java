@@ -74,7 +74,7 @@ public class ControleEstoque {
             if (quantidade < minimo) {
                 System.out.println("O produto " + p.getNomeProduto() + " está ABAIXO do estoque mínimo!");
                 System.out.println("Quantidade mínima permitida: " + minimo);
-                System.out.println("Quntidade em estoque: " + quantidade);
+                System.out.println("Quantidade em estoque: " + quantidade);
             } else if (quantidade > maximo) {
                 System.out.println("O produto: " + p.getNomeProduto() + " está ACIMA do estoque máximo!");
                 System.out.println("Quantidade máxima permitida: " + maximo);
