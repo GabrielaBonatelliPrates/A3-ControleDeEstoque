@@ -74,8 +74,9 @@ public class Categoria {
                 this.tamanho = 'G';
                 break;
             default:
-                System.out.println("Opção inválida. Tamanho definido como 'P' por padrão.");
-                this.tamanho = 'P';
+                System.out.println("Opção inválida");
+                break;
+        }
 
                 //Declarando o tipo de embalagem da categoria
                 System.out.println("Escolha o tipo de embalagem:");
@@ -96,10 +97,8 @@ public class Categoria {
                         this.embalagem = "Metal";
                         break;
                     default:
-                        System.out.println("Opção inválida, definindo 'Vidro' como embalagem padrão.");
-
-                    //Verifiquem se ta certo, caso estiver errado algo favor avisar e arrumar
+                        System.out.println("Opção inválida");
+                        break;
                 }
-        }
     }
 }
