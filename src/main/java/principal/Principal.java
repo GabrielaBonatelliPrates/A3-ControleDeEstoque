@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 import model.Produto;
 import model.Relatorios;
+import model.Categoria;
 
 public class Principal {
     public static void main(String[] args) {
@@ -19,30 +20,12 @@ public class Principal {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("Nome: ");
-                    String nome = input.next();
-                    System.out.println("Preço unitário (R$): ");
-                    Double preco = input.nextDouble();
-                    System.out.println("Quantidade de produto: ");
-                    int quantidadeP = input.nextInt();
-                    System.out.println("Quantidade em estoque: ");
-                    int quantidadeE = input.nextInt();
-                    System.out.println("Quantidade mínima necessãria: ");
-                    int quantidadeMin = input.nextInt();
-                    System.out.println("Quantidade máxima aceita: ");
-                    int quantidadeMax = input.nextInt();
-                    System.out.println("Defina a categoria do produto: ");
-                    String categoria = input.next();
-                    System.out.println("Defina o Id (código de identificação) do produto: ");
-                    int Id = input.nextInt();
+                    Produto produto = new Produto();
+                    produto.lerDados();
                     break;
                 case 2:
-                    System.out.println("Defina o nome para a categoria: ");
-                    String nomeC = input.next();
-                    System.out.println("Determine o tamanho dos produtos pertencentes à categoria: ");
-                    String tamanhoC = input.next();
-                    System.out.println("Escolha o tipo de embalagem dos produtos da categoria ");
-                    String embalagemC = input.next();
+                    Categoria categoria = new Categoria();
+                    categoria.lerDados();
                     break;
                 case 3:
                     System.out.println("Escolha o tipo de relátorio a ser acessado: ");
