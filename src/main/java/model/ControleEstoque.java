@@ -65,6 +65,25 @@ public class ControleEstoque {
         atualizacao.atualizaEstoque();
     }
 
+    public void relatorioEstoqueMinMax() {
+        for (Produto p : produtos) {
+            int quantidade = p.getQuantidadeEstoque();
+            int minimo = p.getEstoqueMinimo();
+            int maximo = p.getEstoqueMaximo();
+
+            if (quantidade < minimo) {
+                System.out.println("O produto " + p.getNomeProduto() + " está ABAIXO do estoque mínimo!");
+                System.out.println("Quantidade mínima permitida: " + minimo);
+                System.out.println("Quntidade em estoque: " + quantidade);
+            } else if (quantidade > maximo) {
+                System.out.println("O produto: " + p.getNomeProduto() + " está ACIMA do estoque máximo!");
+                System.out.println("Quantidade máxima permitida: " + maximo);
+                System.out.println("Quantidade em estoque: " + quantidade);
+
+            }
+        }
+    }
+
     public void relatorioProdutoCategoria() { //metodo para gerar relatorio de produto por categoria
         if (produtos.isEmpty()) { //verifica se há produtos cadastados
             System.out.println("Nenhum produto cadastrado.");
@@ -128,12 +147,11 @@ public class ControleEstoque {
     }
 
     public void reajusteDePreco(double novoPreco) {             //Tendo em vista que terá um "consultarProduto" antes de ter um reajuste de preço
-        
+
         Produto produto = new Produto();
 
         System.out.print("Insira a nova quantidade do produto"); //Pedindo o novo preço
         novoPreco = input.nextDouble();                          //Pegando o novo preço
-        
 
         for (int i = 0; i < produtos.size(); i++) {
             if (i == consultaProduto()) {                        //Indo até o produto selecionado
