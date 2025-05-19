@@ -8,15 +8,23 @@ public class Categoria {
 
     //Declaração das variáveis de instância
     private String nome;
-    private char tamanho;
-    private String embalagem;
+    private Tamanho tamanho;
+    private Embalagem embalagem;
+    
+    public enum Embalagem{
+        Plastico, Vidro, Metal;
+    }
+    
+    public enum Tamanho{
+        Pequeno, Medio, Grande;
+    }
 
     //Construtor vazio
     public Categoria() {
     }
 
     //Construtor com parâmetros
-    public Categoria(String nome, char tamanho, String embalagem) {
+    public Categoria(String nome, Tamanho tamanho, Embalagem embalagem) {
         this.nome = nome;
         this.tamanho = tamanho;
         this.embalagem = embalagem;
@@ -31,19 +39,19 @@ public class Categoria {
         this.nome = nome;
     }
 
-    public char getTamanho() {
+    public Tamanho getTamanho() {
         return tamanho;
     }
 
-    public void setTamanho(char tamanho) {
+    public void setTamanho(Tamanho tamanho) {
         this.tamanho = tamanho;
     }
 
-    public String getEmbalagem() {
+    public Embalagem getEmbalagem() {
         return embalagem;
     }
 
-    public void setEmbalagem(String embalagem) {
+    public void setEmbalagem(Embalagem embalagem) {
         this.embalagem = embalagem;
     }
 
@@ -65,13 +73,13 @@ public class Categoria {
 
         switch (opcaoTamanho) {
             case 1:
-                this.tamanho = 'P';
+                this.tamanho = Tamanho.Pequeno;
                 break;
             case 2:
-                this.tamanho = 'M';
+                this.tamanho = Tamanho.Medio;
                 break;
             case 3:
-                this.tamanho = 'G';
+                this.tamanho = Tamanho.Grande;
                 break;
             default:
                 System.out.println("Opção inválida");
@@ -88,13 +96,13 @@ public class Categoria {
 
                 switch (opcaoEmbalagem) {
                     case 1:
-                        this.embalagem = "Vidro";
+                        this.embalagem = Embalagem.Vidro;
                         break;
                     case 2:
-                        this.embalagem = "Plastico";
+                        this.embalagem = Embalagem.Plastico;
                         break;
                     case 3:
-                        this.embalagem = "Metal";
+                        this.embalagem = Embalagem.Metal;
                         break;
                     default:
                         System.out.println("Opção inválida");
