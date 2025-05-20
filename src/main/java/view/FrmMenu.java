@@ -43,6 +43,7 @@ public class FrmMenu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("MenuControleEstoque");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         JLControleDeEstoque.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         JLControleDeEstoque.setText("Controle de Estoque");
