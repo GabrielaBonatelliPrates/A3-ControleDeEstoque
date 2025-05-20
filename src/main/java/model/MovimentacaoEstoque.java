@@ -1,8 +1,10 @@
 package model;
 
+import java.time.Instant;
+
 public class MovimentacaoEstoque extends ControleEstoque {
 
-    private int data; //se possivel implementar a data
+    private Instant data; //se possivel implementar a data
     private String tipoMovimentacao;
     private int quantidadeMovimentada;
     private String nomeProduto;
@@ -39,11 +41,11 @@ public class MovimentacaoEstoque extends ControleEstoque {
         this.tipoMovimentacao = tipoMovimentacao;
     }
 
-    public int getData() {
+    public Instant getData() {
         return data;
     }
 
-    public void setData(int data) {
+    public void setData(Instant data) {
         this.data = data;
     }
 
