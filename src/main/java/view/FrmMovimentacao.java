@@ -163,12 +163,14 @@ public class FrmMovimentacao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAdicionarActionPerformed
-        try {
-            // criando variaveis para receber os valores/nomes da interface gráfica
+        
+        // criando variaveis para receber os valores/nomes da interface gráfica
             String nomeProduto = "";
             int codigo = 0;
             int quantidade = 0;
-
+        
+        try {
+            
             //validando os dados.
             //Nome do produto
             if (this.JTFProdutoMovimentacao.getText().length() < 2) {
@@ -198,7 +200,15 @@ public class FrmMovimentacao extends javax.swing.JFrame {
         } catch (NumberFormatException erro2) {
             JOptionPane.showMessageDialog(null, "Informe um número válido.");
         }finally{
-         movEst.setData(Instant.now());
+            
+            movEst.cadastraProduto();
+            
+            //Pegando as informações da movimentação
+            
+            movEst.setData(Instant.now());
+            movEst.setNomeProduto(nomeProduto);
+            movEst.setQuantidadeMovimentada(quantidade);
+            
         }
     }//GEN-LAST:event_JBAdicionarActionPerformed
 
