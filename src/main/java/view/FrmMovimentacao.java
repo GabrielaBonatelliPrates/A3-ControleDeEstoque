@@ -6,6 +6,7 @@ package view;
 
 import java.time.Instant;
 import javax.swing.JOptionPane;
+import model.ControleEstoque;
 import model.MovimentacaoEstoque;
 import model.Produto;
 
@@ -17,6 +18,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
 
     private Produto produto;
     private MovimentacaoEstoque movEst;
+    private ControleEstoque contEst;
 
     /**
      * Creates new form FrmMovimentacao
@@ -25,6 +27,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
         initComponents();
         this.produto = new Produto();
         movEst = new MovimentacaoEstoque();
+        contEst = new ControleEstoque();
     }
 
     /**
@@ -40,13 +43,13 @@ public class FrmMovimentacao extends javax.swing.JFrame {
         JLProdutoMovimentacao = new javax.swing.JLabel();
         JTFProdutoMovimentacao = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        JTFCodigoMovimentacao = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         JBAdicionar = new javax.swing.JButton();
         JBRemover = new javax.swing.JButton();
         JBLimpar = new javax.swing.JButton();
         JBSair = new javax.swing.JButton();
         JTFQuantidadeMovimentacao = new javax.swing.JTextField();
+        JLCodigoMovimentacao = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Movimentação de Estoque");
@@ -68,6 +71,11 @@ public class FrmMovimentacao extends javax.swing.JFrame {
         });
 
         JBRemover.setText("Remover");
+        JBRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBRemoverActionPerformed(evt);
+            }
+        });
 
         JBLimpar.setText("Limpar");
         JBLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -88,6 +96,8 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 JTFQuantidadeMovimentacaoActionPerformed(evt);
             }
         });
+
+        JLCodigoMovimentacao.setText("0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,8 +120,10 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(5, 5, 5)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JTFCodigoMovimentacao, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JTFProdutoMovimentacao, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(JTFProdutoMovimentacao, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(JLCodigoMovimentacao)))))
                 .addGap(24, 24, 24))
             .addGroup(layout.createSequentialGroup()
                 .addGap(44, 44, 44)
@@ -143,7 +155,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(JTFCodigoMovimentacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JLCodigoMovimentacao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -156,65 +168,70 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(JBLimpar)
                     .addComponent(JBSair))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAdicionarActionPerformed
-        
+
         // criando variaveis para receber os valores/nomes da interface gráfica
-            String nomeProduto = "";
-            int codigo = 0;
-            int quantidade = 0;
-        
+        String nomeProduto = "";
+        int codigo = 0;
+        int quantidade = 0;
+
         try {
-            
+
             //validando os dados.
+            boolean acesso = false;
+            while (acesso = false) {
+                for (int i = 0; i >= contEst.tamanhoLista(); i++) {
+                    if (this.JTFProdutoMovimentacao.getText().equals(produto.getNomeProduto().trim())) {
+                        codigo = i;
+                        this.JLCodigoMovimentacao.setText(String.valueOf(codigo));
+                        acesso = true;
+                    }
+                }
+                if (acesso = false) {
+                    JOptionPane.showMessageDialog(null, "Insira um produto existente.");
+                    break;
+                }
+            }
             //Nome do produto
             if (this.JTFProdutoMovimentacao.getText().length() < 2) {
                 throw new Mensagem("Nome do produto deve conter ao menos 2 caracteres.");
             } else {
                 nomeProduto = this.JTFProdutoMovimentacao.getText();
             }
-            //Codigo do produto
-            if (this.JTFCodigoMovimentacao.getText().length() <= 0) {
-                throw new Mensagem("Codigo deve ser número e maior que zero.");
-            } else {
-                codigo = Integer.parseInt(this.JTFCodigoMovimentacao.getText());
-            }
             //Quantidade a ser alterada
             if (this.JTFQuantidadeMovimentacao.getText().length() <= 0) {
-                throw new Mensagem("Codigo deve ser número e maior que zero.");
+                throw new Mensagem("Quantidade deve ser número e maior que zero.");
             } else {
                 quantidade = Integer.parseInt(this.JTFQuantidadeMovimentacao.getText());
             }
-            
-            
+
             //Fazer a parte da adição das informaçÕes ao Produto
-            
-            
         } catch (Mensagem erro) {
             JOptionPane.showMessageDialog(null, erro.getMessage());
         } catch (NumberFormatException erro2) {
             JOptionPane.showMessageDialog(null, "Informe um número válido.");
-        }finally{
-            
-            movEst.cadastraProduto();
-            
+        } finally {
+
+            //Adicionando no estoque
+            movEst.movimentacaoEstoqueAdicao(nomeProduto, quantidade);
+
             //Pegando as informações da movimentação
-            
             movEst.setData(Instant.now());
             movEst.setNomeProduto(nomeProduto);
             movEst.setQuantidadeMovimentada(quantidade);
-            
+
         }
     }//GEN-LAST:event_JBAdicionarActionPerformed
 
     private void JBLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBLimparActionPerformed
         this.JTFProdutoMovimentacao.setText("");
-        this.JTFCodigoMovimentacao.setText("");
+        this.JLCodigoMovimentacao.setText("0");
         this.JTFQuantidadeMovimentacao.setText("");
     }//GEN-LAST:event_JBLimparActionPerformed
 
@@ -225,6 +242,59 @@ public class FrmMovimentacao extends javax.swing.JFrame {
     private void JTFQuantidadeMovimentacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFQuantidadeMovimentacaoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTFQuantidadeMovimentacaoActionPerformed
+
+    private void JBRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBRemoverActionPerformed
+        // criando variaveis para receber os valores/nomes da interface gráfica
+        String nomeProduto = "";
+        int codigo = 0;
+        int quantidade = 0;
+
+        try {
+
+            //validando os dados.
+            boolean acesso = false;
+            while (acesso = false) {
+                for (int i = 0; i >= contEst.tamanhoLista(); i++) {
+                    if (this.JTFProdutoMovimentacao.getText().equals(produto.getNomeProduto().trim())) {
+                        codigo = i;
+                        this.JLCodigoMovimentacao.setText(String.valueOf(codigo));
+                        acesso = true;
+                    }
+                }
+                if (acesso = false) {
+                    JOptionPane.showMessageDialog(null, "Insira um produto existente.");
+                    break;
+                }
+            }
+            //Nome do produto
+            if (this.JTFProdutoMovimentacao.getText().length() < 2) {
+                throw new Mensagem("Nome do produto deve conter ao menos 2 caracteres.");
+            } else {
+                nomeProduto = this.JTFProdutoMovimentacao.getText();
+            }
+            //Quantidade a ser alterada
+            if (this.JTFQuantidadeMovimentacao.getText().length() <= 0) {
+                throw new Mensagem("Quantidade deve ser número e maior que zero.");
+            } else {
+                quantidade = Integer.parseInt(this.JTFQuantidadeMovimentacao.getText());
+            }
+
+            //Fazer a parte da adição das informaçÕes ao Produto
+        } catch (Mensagem erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        } catch (NumberFormatException erro2) {
+            JOptionPane.showMessageDialog(null, "Informe um número válido.");
+        } finally {
+
+            //Adicionando no estoque
+            movEst.movimentacaoEstoqueReducao(nomeProduto, quantidade);
+
+            //Pegando as informações da movimentação
+            movEst.setData(Instant.now());
+            movEst.setNomeProduto(nomeProduto);
+            movEst.setQuantidadeMovimentada(quantidade);
+        }
+    }//GEN-LAST:event_JBRemoverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,9 +336,9 @@ public class FrmMovimentacao extends javax.swing.JFrame {
     private javax.swing.JButton JBLimpar;
     private javax.swing.JButton JBRemover;
     private javax.swing.JButton JBSair;
+    private javax.swing.JLabel JLCodigoMovimentacao;
     private javax.swing.JLabel JLMovimentacao;
     private javax.swing.JLabel JLProdutoMovimentacao;
-    private javax.swing.JTextField JTFCodigoMovimentacao;
     private javax.swing.JTextField JTFProdutoMovimentacao;
     private javax.swing.JTextField JTFQuantidadeMovimentacao;
     private javax.swing.JLabel jLabel3;
