@@ -25,9 +25,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuSobre = new javax.swing.JMenuItem();
-        jMenuSair = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuNovoProduto = new javax.swing.JMenuItem();
         jMenuGerenciarProduto = new javax.swing.JMenuItem();
@@ -38,6 +35,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuProdutosPorCategoria = new javax.swing.JMenuItem();
         jMenuAbaixoDaMinima = new javax.swing.JMenuItem();
         jMenuAcimaDaMaxima = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuSobre = new javax.swing.JMenuItem();
+        jMenuSair = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -48,33 +48,29 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Controle de Estoque");
+        setAutoRequestFocus(false);
+        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setForeground(java.awt.Color.white);
+        setLocationByPlatform(true);
 
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\laisp_omzy4s1\\OneDrive\\Documentos\\NetBeansProjects\\A3-ControleDeEstoque\\src\\resources\\titulo_menu.png")); // NOI18N
         jLabel2.setText("jLabel2");
 
-        jLabel3.setText("jLabel3");
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\laisp_omzy4s1\\OneDrive\\Documentos\\NetBeansProjects\\A3-ControleDeEstoque\\src\\resources\\caixa_icone.png")); // NOI18N
+        jLabel3.setToolTipText("");
 
-        jMenu1.setText("Arquivo");
+        jMenuBar1.setBackground(new java.awt.Color(156, 73, 0));
+        jMenuBar1.setBorder(null);
+        jMenuBar1.setBorderPainted(false);
+        jMenuBar1.setOpaque(true);
+        jMenuBar1.setPreferredSize(new java.awt.Dimension(400, 50));
 
-        jMenuSobre.setText("Sobre");
-        jMenuSobre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuSobreActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuSobre);
-
-        jMenuSair.setText("Sair");
-        jMenuSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuSairActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuSair);
-
-        jMenuBar1.add(jMenu1);
-
+        jMenu4.setForeground(new java.awt.Color(255, 255, 255));
         jMenu4.setText("Controle");
+        jMenu4.setFont(new java.awt.Font("Inter 18pt Medium", 0, 14)); // NOI18N
 
+        jMenuNovoProduto.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
         jMenuNovoProduto.setText("Cadastro produto");
         jMenuNovoProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +79,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuNovoProduto);
 
+        jMenuGerenciarProduto.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
         jMenuGerenciarProduto.setText("Gerencia produto");
         jMenuGerenciarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,6 +88,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuGerenciarProduto);
 
+        jMenuMovimentarEstoque.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
         jMenuMovimentarEstoque.setText("Movimentação");
         jMenuMovimentarEstoque.setToolTipText("");
         jMenuMovimentarEstoque.addActionListener(new java.awt.event.ActionListener() {
@@ -102,8 +100,12 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
+        jMenu5.setForeground(new java.awt.Color(255, 255, 255));
         jMenu5.setText("Relatórios");
+        jMenu5.setFont(new java.awt.Font("Inter 18pt Medium", 0, 14)); // NOI18N
+        jMenu5.setMinimumSize(new java.awt.Dimension(80, 40));
 
+        jMenuListarProecos.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
         jMenuListarProecos.setText("Lista de preços");
         jMenuListarProecos.setToolTipText("");
         jMenuListarProecos.addActionListener(new java.awt.event.ActionListener() {
@@ -113,15 +115,19 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuListarProecos);
 
+        jMenuBalancoFinanceiro.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
         jMenuBalancoFinanceiro.setText("Balanço financeiro");
         jMenu5.add(jMenuBalancoFinanceiro);
 
+        jMenuProdutosPorCategoria.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
         jMenuProdutosPorCategoria.setText("Produto por categoria");
         jMenu5.add(jMenuProdutosPorCategoria);
 
+        jMenuAbaixoDaMinima.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
         jMenuAbaixoDaMinima.setText("Produtos abaixo da quantidade mínima");
         jMenu5.add(jMenuAbaixoDaMinima);
 
+        jMenuAcimaDaMaxima.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
         jMenuAcimaDaMaxima.setText("Produtos acima da quantidade máxima");
         jMenuAcimaDaMaxima.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,6 +138,31 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu5);
 
+        jMenu1.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu1.setText("Arquivo");
+        jMenu1.setFont(new java.awt.Font("Inter 18pt Medium", 0, 14)); // NOI18N
+        jMenu1.setPreferredSize(new java.awt.Dimension(80, 40));
+
+        jMenuSobre.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
+        jMenuSobre.setText("Sobre");
+        jMenuSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSobreActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuSobre);
+
+        jMenuSair.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
+        jMenuSair.setText("Sair");
+        jMenuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSairActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuSair);
+
+        jMenuBar1.add(jMenu1);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -140,19 +171,19 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(248, 248, 248)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 939, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(494, Short.MAX_VALUE))
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(498, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(667, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(640, Short.MAX_VALUE))
         );
 
         pack();
