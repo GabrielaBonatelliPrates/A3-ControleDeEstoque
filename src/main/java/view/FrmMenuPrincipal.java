@@ -21,6 +21,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuSobre = new javax.swing.JMenuItem();
@@ -42,14 +45,30 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         jMenuItem3.setText("jMenuItem3");
 
+        jLabel1.setText("jLabel1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel2.setText("jLabel2");
+
+        jLabel3.setText("jLabel3");
 
         jMenu1.setText("Arquivo");
 
         jMenuSobre.setText("Sobre");
+        jMenuSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSobreActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuSobre);
 
         jMenuSair.setText("Sair");
+        jMenuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSairActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuSair);
 
         jMenuBar1.add(jMenu1);
@@ -57,6 +76,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenu4.setText("Controle");
 
         jMenuNovoProduto.setText("Cadastro produto");
+        jMenuNovoProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuNovoProdutoActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuNovoProduto);
 
         jMenuGerenciarProduto.setText("Gerencia produto");
@@ -69,6 +93,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         jMenuMovimentarEstoque.setText("Movimentação");
         jMenuMovimentarEstoque.setToolTipText("");
+        jMenuMovimentarEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuMovimentarEstoqueActionPerformed(evt);
+            }
+        });
         jMenu4.add(jMenuMovimentarEstoque);
 
         jMenuBar1.add(jMenu4);
@@ -109,11 +138,21 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 521, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(248, 248, 248)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 939, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(494, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(57, 57, 57)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(667, Short.MAX_VALUE))
         );
 
         pack();
@@ -130,6 +169,22 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private void jMenuListarProecosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListarProecosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuListarProecosActionPerformed
+
+    private void jMenuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSobreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuSobreActionPerformed
+
+    private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuSairActionPerformed
+
+    private void jMenuNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuNovoProdutoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuNovoProdutoActionPerformed
+
+    private void jMenuMovimentarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuMovimentarEstoqueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuMovimentarEstoqueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -167,6 +222,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
