@@ -57,6 +57,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setForeground(java.awt.Color.white);
         setLocationByPlatform(true);
+        setPreferredSize(new java.awt.Dimension(1920, 1080));
 
         jLabel3.setToolTipText("");
         jLabel3.setName(""); // NOI18N
@@ -203,9 +204,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(318, 318, 318)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 325, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1232, Short.MAX_VALUE))
+                .addGap(259, 259, 259))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,7 +218,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(574, Short.MAX_VALUE))
+                .addContainerGap(534, Short.MAX_VALUE))
         );
 
         pack();

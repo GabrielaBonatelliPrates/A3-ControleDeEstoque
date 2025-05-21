@@ -203,6 +203,9 @@
       <Color blue="ff" green="ff" id="white" palette="1" red="ff" type="palette"/>
     </Property>
     <Property name="locationByPlatform" type="boolean" value="true"/>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[1920, 1080]"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
@@ -235,9 +238,9 @@
                       <Component id="jLabel4" min="-2" pref="400" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="318" max="-2" attributes="0"/>
+              <EmptySpace pref="325" max="32767" attributes="0"/>
               <Component id="jLabel2" min="-2" pref="930" max="-2" attributes="0"/>
-              <EmptySpace pref="1232" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="259" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -253,7 +256,7 @@
                       <Component id="jLabel4" min="-2" pref="400" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="574" max="32767" attributes="0"/>
+              <EmptySpace pref="534" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
