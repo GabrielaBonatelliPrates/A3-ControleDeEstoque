@@ -54,10 +54,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         setForeground(java.awt.Color.white);
         setLocationByPlatform(true);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\laisp_omzy4s1\\OneDrive\\Documentos\\NetBeansProjects\\A3-ControleDeEstoque\\src\\resources\\titulo_menu.png")); // NOI18N
         jLabel2.setText("jLabel2");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\laisp_omzy4s1\\OneDrive\\Documentos\\NetBeansProjects\\A3-ControleDeEstoque\\src\\resources\\caixa_icone.png")); // NOI18N
         jLabel3.setToolTipText("");
 
         jMenuBar1.setBackground(new java.awt.Color(156, 73, 0));
@@ -179,11 +177,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addGap(69, 69, 69)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(640, Short.MAX_VALUE))
+                .addContainerGap(628, Short.MAX_VALUE))
         );
 
         pack();
@@ -206,7 +204,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuSobreActionPerformed
 
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jMenuSairActionPerformed
 
     private void jMenuNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuNovoProdutoActionPerformed
@@ -214,7 +212,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuNovoProdutoActionPerformed
 
     private void jMenuMovimentarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuMovimentarEstoqueActionPerformed
-        // TODO add your handling code here:
+        FrmMovimentacao movimentacao = new FrmMovimentacao();
+        movimentacao.setVisible(true);
     }//GEN-LAST:event_jMenuMovimentarEstoqueActionPerformed
 
     /**
