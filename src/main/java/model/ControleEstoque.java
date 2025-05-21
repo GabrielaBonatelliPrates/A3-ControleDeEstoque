@@ -10,10 +10,43 @@ public class ControleEstoque {
     protected List<Produto> produtos = new ArrayList<>();//cria lista que vai armazenar os produtos
     protected Scanner input = new Scanner(System.in); //cria scanner para a classe toda
 
-    public void cadastraProduto() { //metodo para cadastrar produto e adicionar ele na lista
+    public void cadastraProduto(String nomeProduto, double precoUnit, String unidadeProduto, int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo, String nomeCategoria, int idProduto) { //metodo para cadastrar produto e adicionar ele na lista
         Produto produto = new Produto(); //instanciar a classe produto (cria um objeto "produto")
-        produto.lerDados(); //le os dados do produto
+        produto.setNomeProduto(nomeProduto);
+        produto.setPrecoUnit(precoUnit);
+        produto.setUnidadeProduto(unidadeProduto);
+        produto.setQuantidadeEstoque(quantidadeEstoque);
+        produto.setEstoqueMinimo(estoqueMinimo);
+        produto.setEstoqueMaximo(estoqueMaximo);
+        produto.setIdProduto(idProduto);
+        produto.setNomeCategoria(nomeCategoria); //le os dados do produto
         produtos.add(produto); //adiciona o objeto criado à lista produtos
+    }
+    
+    public void movimentacaoEstoqueReducao(String nomeProduto,int atualizacao){
+        Produto produto = new Produto();
+        for(int i=0; i >= produtos.size();i++){
+            if(produto.getNomeProduto().equals(nomeProduto.trim())){
+                int x = produto.getQuantidadeEstoque();
+                x -= atualizacao;
+                produto.setQuantidadeEstoque(x);
+            }
+        }
+    }
+    
+    public void movimentacaoEstoqueAdicao(String nomeProduto,int atualizacao){
+        Produto produto = new Produto();
+        for(int i=0; i >= produtos.size();i++){
+            if(produto.getNomeProduto().equals(nomeProduto.trim())){
+                int x = produto.getQuantidadeEstoque();
+                x += atualizacao;
+                produto.setQuantidadeEstoque(x);
+            }
+        }
+    }
+    
+    public int tamanhoLista(){
+        return produtos.size();
     }
 
     public int consultaProduto() { //metodo para procurar o produto correspondente ao nome que o usuario digitar
