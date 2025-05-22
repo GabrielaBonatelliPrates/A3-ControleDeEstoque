@@ -1,4 +1,5 @@
 package principal;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -6,16 +7,21 @@ import model.Produto;
 import model.Relatorios;
 import model.Categoria;
 import view.FrmMenuPrincipal;
+import view.JProdutoNovo;
 
 public class Principal {
-    private static final FrmMenuPrincipal menuPrincipal = new FrmMenuPrincipal ();
+
+    private static final FrmMenuPrincipal menuPrincipal = new FrmMenuPrincipal();
+    
+
     public static void main(String[] args) {
         menuPrincipal.setSize(1920, 1080);
         menuPrincipal.setExtendedState(FrmMenuPrincipal.MAXIMIZED_BOTH);
         menuPrincipal.setVisible(true);
         
         
-         Scanner input = new Scanner(System.in);
+
+        Scanner input = new Scanner(System.in);
         int opcao;
         do {
             System.out.println("O quê você deseja fazer?");
@@ -57,9 +63,7 @@ public class Principal {
                             break;
                         default:
                             System.out.println("Saindo...");
-
                     }
-
                     break;
                 case 0:
                     System.out.println("Saindo...");
@@ -79,7 +83,6 @@ public class Principal {
             System.out.println("\n1. Adicionar novo produto");
             System.out.println("2. Exibir balanço financeiro");
             System.out.println("0. Sair");
-
 
             int opcao1 = scanner.nextInt();
             scanner.nextLine(); // Clear buffer
@@ -113,6 +116,5 @@ public class Principal {
                     break;
             }
         }
-        
     }
 }

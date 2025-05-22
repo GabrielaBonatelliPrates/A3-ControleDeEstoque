@@ -1,8 +1,11 @@
 package view;
+import java.util.ArrayList;
+import java.util.List;
 import model.Categoria;
 import model.Produto;
 
 public class JProdutoNovo extends javax.swing.JFrame {
+public List <Produto> produtos = new ArrayList();
 
     /**
      * Creates new form JProdutoNovo
@@ -11,8 +14,6 @@ public class JProdutoNovo extends javax.swing.JFrame {
         initComponents();
     }
 
-    Produto produtonovo = new Produto();
-    Categoria categoria = new Categoria();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -86,6 +87,11 @@ public class JProdutoNovo extends javax.swing.JFrame {
         JBVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 JBVoltarMouseClicked(evt);
+            }
+        });
+        JBVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBVoltarActionPerformed(evt);
             }
         });
 
@@ -243,15 +249,15 @@ public class JProdutoNovo extends javax.swing.JFrame {
     }//GEN-LAST:event_JBVoltarMouseClicked
 
     private void JTFNomeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNomeProdutoActionPerformed
-       
+
     }//GEN-LAST:event_JTFNomeProdutoActionPerformed
 
     private void JTFIdProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFIdProdutoActionPerformed
-      
+
     }//GEN-LAST:event_JTFIdProdutoActionPerformed
 
     private void JTFValorProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFValorProdutoActionPerformed
-        
+
     }//GEN-LAST:event_JTFValorProdutoActionPerformed
 
     private void JTFUniProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFUniProdutoActionPerformed
@@ -273,52 +279,31 @@ public class JProdutoNovo extends javax.swing.JFrame {
     }//GEN-LAST:event_JTFCategoriaActionPerformed
 
     private void JBAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAdicionarProdutoActionPerformed
-      
-         produtonovo.setNomeProduto(JTFNomeProduto.getText());
-         produtonovo.setIdProduto(Integer.parseInt(JTFIdProduto.getText()));
-         produtonovo.setPrecoUnit(Double.parseDouble(JTFValorProduto.getText()));
-         produtonovo.setUnidadeProduto((JTFUniProduto.getText())); 
-         produtonovo.setQuantidadeEstoque(Integer.parseInt(JTFQuantidadeProduto.getText()));
-         produtonovo.setEstoqueMinimo(Integer.parseInt(JTFQuantidadeMinimaProduto.getText()));
-         produtonovo.setEstoqueMaximo(Integer.parseInt(JTFQuantidadeMaximaProduto.getText()));
-         categoria.setNome(JTFCategoria.getText());
+
+         Produto novoProduto = new Produto();
+         Categoria categoria = new Categoria();
+         novoProduto.setNomeProduto(JTFNomeProduto.getText());
+         novoProduto.setIdProduto(Integer.parseInt(JTFIdProduto.getText()));
+         novoProduto.setPrecoUnit(Double.parseDouble(JTFValorProduto.getText()));
+         novoProduto.setUnidadeProduto((JTFUniProduto.getText())); 
+         novoProduto.setQuantidadeEstoque(Integer.parseInt(JTFQuantidadeProduto.getText()));
+         novoProduto.setEstoqueMinimo(Integer.parseInt(JTFQuantidadeMinimaProduto.getText()));
+         novoProduto.setEstoqueMaximo(Integer.parseInt(JTFQuantidadeMaximaProduto.getText()));
+         novoProduto.setNomeCategoria(JTFCategoria.getText());
+         produtos.add(novoProduto);
+
          
     }//GEN-LAST:event_JBAdicionarProdutoActionPerformed
+
+    private void JBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBVoltarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_JBVoltarActionPerformed
+
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JProdutoNovo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JProdutoNovo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JProdutoNovo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JProdutoNovo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JProdutoNovo().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBAdicionarProduto;
