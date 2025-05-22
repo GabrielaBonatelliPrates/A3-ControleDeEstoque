@@ -175,8 +175,9 @@ public class FrmMovimentacao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAdicionarActionPerformed
-
-        // criando variaveis para receber os valores/nomes da interface gráfica
+        MovimentacaoEstoque novaMov = new MovimentacaoEstoque();
+        novaMov.setTipoMovimentacao("Adicao");
+// criando variaveis para receber os valores/nomes da interface gráfica
         String nomeProduto = "";
         int codigo = 0;
         int quantidade = 0;
@@ -187,7 +188,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
             boolean acesso = false;
             while (acesso = false) {
                 for (int i = 0; i >= contEst.tamanhoLista(); i++) {
-                    if (this.JTFProdutoMovimentacao.getText().equals(produto.getNomeProduto().trim())) {
+                    if (this.JTFProdutoMovimentacao.getText().equalsIgnoreCase(produto.getNomeProduto().trim())) {
                         codigo = i;
                         this.JLCodigoMovimentacao.setText(String.valueOf(codigo));
                         acesso = true;
@@ -198,12 +199,14 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                     break;
                 }
             }
+
             //Nome do produto
             if (this.JTFProdutoMovimentacao.getText().length() < 2) {
                 throw new Mensagem("Nome do produto deve conter ao menos 2 caracteres.");
             } else {
                 nomeProduto = this.JTFProdutoMovimentacao.getText();
             }
+
             //Quantidade a ser alterada
             if (this.JTFQuantidadeMovimentacao.getText().length() <= 0) {
                 throw new Mensagem("Quantidade deve ser número e maior que zero.");
@@ -211,21 +214,24 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 quantidade = Integer.parseInt(this.JTFQuantidadeMovimentacao.getText());
             }
 
-            //Fazer a parte da adição das informaçÕes ao Produto
+            //Verificando quantidade minima
+            if (movEst.movimentacaoEstoqueReducao(nomeProduto, quantidade) == false) {
+                throw new Mensagem("Abaixo do minimo no estoque");
+            }
+            //Caso tudo estiver certo, dar baixa no estoque
+            if (novaMov.movimentacaoEstoqueReducao(nomeProduto, quantidade) == true) {
+                JOptionPane.showMessageDialog(null, "Adicao confirmada!");
+
+                //Pegando as informações da movimentação
+                novaMov.setData(Instant.now());
+                novaMov.setNomeProduto(nomeProduto);
+                novaMov.setQuantidadeMovimentada(quantidade);
+            }
+
         } catch (Mensagem erro) {
             JOptionPane.showMessageDialog(null, erro.getMessage());
         } catch (NumberFormatException erro2) {
             JOptionPane.showMessageDialog(null, "Informe um número válido.");
-        } finally {
-
-            //Adicionando no estoque
-            movEst.movimentacaoEstoqueAdicao(nomeProduto, quantidade);
-
-            //Pegando as informações da movimentação
-            movEst.setData(Instant.now());
-            movEst.setNomeProduto(nomeProduto);
-            movEst.setQuantidadeMovimentada(quantidade);
-
         }
     }//GEN-LAST:event_JBAdicionarActionPerformed
 
@@ -244,7 +250,10 @@ public class FrmMovimentacao extends javax.swing.JFrame {
     }//GEN-LAST:event_JTFQuantidadeMovimentacaoActionPerformed
 
     private void JBRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBRemoverActionPerformed
-        // criando variaveis para receber os valores/nomes da interface gráfica
+        MovimentacaoEstoque novaMov = new MovimentacaoEstoque();
+        novaMov.setTipoMovimentacao("Baixa");
+
+// criando variaveis para receber os valores/nomes da interface gráfica
         String nomeProduto = "";
         int codigo = 0;
         int quantidade = 0;
@@ -255,7 +264,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
             boolean acesso = false;
             while (acesso = false) {
                 for (int i = 0; i >= contEst.tamanhoLista(); i++) {
-                    if (this.JTFProdutoMovimentacao.getText().equals(produto.getNomeProduto().trim())) {
+                    if (this.JTFProdutoMovimentacao.getText().equalsIgnoreCase(produto.getNomeProduto().trim())) {
                         codigo = i;
                         this.JLCodigoMovimentacao.setText(String.valueOf(codigo));
                         acesso = true;
@@ -266,12 +275,14 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                     break;
                 }
             }
+
             //Nome do produto
             if (this.JTFProdutoMovimentacao.getText().length() < 2) {
                 throw new Mensagem("Nome do produto deve conter ao menos 2 caracteres.");
             } else {
                 nomeProduto = this.JTFProdutoMovimentacao.getText();
             }
+
             //Quantidade a ser alterada
             if (this.JTFQuantidadeMovimentacao.getText().length() <= 0) {
                 throw new Mensagem("Quantidade deve ser número e maior que zero.");
@@ -279,20 +290,26 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 quantidade = Integer.parseInt(this.JTFQuantidadeMovimentacao.getText());
             }
 
-            //Fazer a parte da adição das informaçÕes ao Produto
+            //Verificando quantidade minima
+            if (novaMov.movimentacaoEstoqueReducao(nomeProduto, quantidade) == false) {
+                throw new Mensagem("Abaixo do minimo no estoque");
+            }
+            //Caso tudo estiver certo, dar baixa no estoque
+            if (novaMov.movimentacaoEstoqueReducao(nomeProduto, quantidade) == true) {
+                JOptionPane.showMessageDialog(null, "Baixa confirmada!");
+                
+                
+                
+                //Pegando as informações da movimentação
+                novaMov.setData(Instant.now());
+                novaMov.setNomeProduto(nomeProduto);
+                novaMov.setQuantidadeMovimentada(quantidade);
+            }
+
         } catch (Mensagem erro) {
             JOptionPane.showMessageDialog(null, erro.getMessage());
         } catch (NumberFormatException erro2) {
             JOptionPane.showMessageDialog(null, "Informe um número válido.");
-        } finally {
-
-            //Adicionando no estoque
-            movEst.movimentacaoEstoqueReducao(nomeProduto, quantidade);
-
-            //Pegando as informações da movimentação
-            movEst.setData(Instant.now());
-            movEst.setNomeProduto(nomeProduto);
-            movEst.setQuantidadeMovimentada(quantidade);
         }
     }//GEN-LAST:event_JBRemoverActionPerformed
 

@@ -22,30 +22,42 @@ public class ControleEstoque {
         produto.setNomeCategoria(nomeCategoria); //le os dados do produto
         produtos.add(produto); //adiciona o objeto criado à lista produtos
     }
-    
-    public void movimentacaoEstoqueReducao(String nomeProduto,int atualizacao){
-        Produto produto = new Produto();
-        for(int i=0; i >= produtos.size();i++){
-            if(produto.getNomeProduto().equals(nomeProduto.trim())){
-                int x = produto.getQuantidadeEstoque();
-                x -= atualizacao;
-                produto.setQuantidadeEstoque(x);
+
+    public boolean movimentacaoEstoqueReducao(String nomeProduto, int atualizacao) {
+        for (Produto produto : produtos) {
+            if (produto.getNomeProduto().equalsIgnoreCase(nomeProduto.trim())) {
+                int novaQuantidade = produto.getQuantidadeEstoque() - atualizacao;
+                
+                if (novaQuantidade <= produto.getEstoqueMinimo()) {
+                    return false;
+                } else {
+                    produto.setQuantidadeEstoque(novaQuantidade);
+                    return true;
+                }
             }
         }
+        // Produto não encontrado
+        return false;
     }
-    
-    public void movimentacaoEstoqueAdicao(String nomeProduto,int atualizacao){
-        Produto produto = new Produto();
-        for(int i=0; i >= produtos.size();i++){
-            if(produto.getNomeProduto().equals(nomeProduto.trim())){
-                int x = produto.getQuantidadeEstoque();
-                x += atualizacao;
-                produto.setQuantidadeEstoque(x);
+
+    public boolean movimentacaoEstoqueAdicao(String nomeProduto, int atualizacao) {
+        for (Produto produto : produtos) {
+            if (produto.getNomeProduto().equalsIgnoreCase(nomeProduto.trim())) {
+                int novaQuantidade = produto.getQuantidadeEstoque() - atualizacao;
+                
+                if (novaQuantidade >= produto.getEstoqueMaximo()) {
+                    return false;
+                } else {
+                    produto.setQuantidadeEstoque(novaQuantidade);
+                    return true;
+                }
             }
         }
+        // Produto não encontrado
+        return false;
     }
-    
-    public int tamanhoLista(){
+
+    public int tamanhoLista() {
         return produtos.size();
     }
 
