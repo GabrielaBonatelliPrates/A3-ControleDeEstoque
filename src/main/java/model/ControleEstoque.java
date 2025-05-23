@@ -27,8 +27,8 @@ public class ControleEstoque {
         for (Produto produto : produtos) {
             if (produto.getNomeProduto().equalsIgnoreCase(nomeProduto.trim())) {
                 int novaQuantidade = produto.getQuantidadeEstoque() - atualizacao;
-                
-                if (novaQuantidade <= produto.getEstoqueMinimo()) {
+
+                if (novaQuantidade < 0) {
                     return false;
                 } else {
                     produto.setQuantidadeEstoque(novaQuantidade);
@@ -43,14 +43,11 @@ public class ControleEstoque {
     public boolean movimentacaoEstoqueAdicao(String nomeProduto, int atualizacao) {
         for (Produto produto : produtos) {
             if (produto.getNomeProduto().equalsIgnoreCase(nomeProduto.trim())) {
-                int novaQuantidade = produto.getQuantidadeEstoque() - atualizacao;
-                
-                if (novaQuantidade >= produto.getEstoqueMaximo()) {
-                    return false;
-                } else {
-                    produto.setQuantidadeEstoque(novaQuantidade);
-                    return true;
-                }
+                int novaQuantidade = produto.getQuantidadeEstoque() + atualizacao;
+
+                produto.setQuantidadeEstoque(novaQuantidade);
+                return true;
+
             }
         }
         // Produto não encontrado

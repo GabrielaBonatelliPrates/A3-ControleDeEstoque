@@ -195,8 +195,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                     }
                 }
                 if (acesso = false) {
-                    JOptionPane.showMessageDialog(null, "Insira um produto existente.");
-                    break;
+                    throw new Mensagem("Insira um produto ja existente");
                 }
             }
 
@@ -214,10 +213,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 quantidade = Integer.parseInt(this.JTFQuantidadeMovimentacao.getText());
             }
 
-            //Verificando quantidade minima
-            if (movEst.movimentacaoEstoqueReducao(nomeProduto, quantidade) == false) {
-                throw new Mensagem("Abaixo do minimo no estoque");
-            }
+            
             //Caso tudo estiver certo, dar baixa no estoque
             if (novaMov.movimentacaoEstoqueReducao(nomeProduto, quantidade) == true) {
                 JOptionPane.showMessageDialog(null, "Adicao confirmada!");
@@ -292,7 +288,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
 
             //Verificando quantidade minima
             if (novaMov.movimentacaoEstoqueReducao(nomeProduto, quantidade) == false) {
-                throw new Mensagem("Abaixo do minimo no estoque");
+                throw new Mensagem("Estoque abaixo de zero");
             }
             //Caso tudo estiver certo, dar baixa no estoque
             if (novaMov.movimentacaoEstoqueReducao(nomeProduto, quantidade) == true) {
