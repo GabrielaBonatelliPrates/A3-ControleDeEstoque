@@ -8,19 +8,19 @@ public class Produto {
 
     //variaveis de intancia
     private String nomeProduto;
+    private int idProduto;
     private double precoUnit;
     private String unidadeProduto;
     private int quantidadeEstoque;
     private int estoqueMinimo;
     private int estoqueMaximo;
-    private int idProduto;
     private String nomeCategoria;
 
     //construtores
     public Produto() {
     }
 
-    public Produto(String nomeProduto, double precoUnit, String unidadeProduto, int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo, String nomeCategoria, int idProduto) {
+    public Produto(String nomeProduto, int idProduto, double precoUnit, String unidadeProduto, int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo, String nomeCategoria) {
         this.nomeProduto = nomeProduto;
         this.precoUnit = precoUnit;
         this.unidadeProduto = unidadeProduto;

@@ -1,11 +1,14 @@
 package view;
+
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import model.Categoria;
 import model.Produto;
 
 public class JProdutoNovo extends javax.swing.JFrame {
-public List <Produto> produtos = new ArrayList();
+
+    public List<Produto> produtos = new ArrayList();
 
     /**
      * Creates new form JProdutoNovo
@@ -13,7 +16,6 @@ public List <Produto> produtos = new ArrayList();
     public JProdutoNovo() {
         initComponents();
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -267,43 +269,92 @@ public List <Produto> produtos = new ArrayList();
      }//GEN-LAST:event_JTFQuantidadeProdutoActionPerformed
 
     private void JTFQuantidadeMinimaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFQuantidadeMinimaProdutoActionPerformed
-      
+
     }//GEN-LAST:event_JTFQuantidadeMinimaProdutoActionPerformed
 
     private void JTFQuantidadeMaximaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFQuantidadeMaximaProdutoActionPerformed
-        
+
     }//GEN-LAST:event_JTFQuantidadeMaximaProdutoActionPerformed
 
     private void JTFCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFCategoriaActionPerformed
-        
+
     }//GEN-LAST:event_JTFCategoriaActionPerformed
 
     private void JBAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAdicionarProdutoActionPerformed
 
-         Produto novoProduto = new Produto();
-         Categoria categoria = new Categoria();
-         novoProduto.setNomeProduto(JTFNomeProduto.getText());
-         novoProduto.setIdProduto(Integer.parseInt(JTFIdProduto.getText()));
-         novoProduto.setPrecoUnit(Double.parseDouble(JTFValorProduto.getText()));
-         novoProduto.setUnidadeProduto((JTFUniProduto.getText())); 
-         novoProduto.setQuantidadeEstoque(Integer.parseInt(JTFQuantidadeProduto.getText()));
-         novoProduto.setEstoqueMinimo(Integer.parseInt(JTFQuantidadeMinimaProduto.getText()));
-         novoProduto.setEstoqueMaximo(Integer.parseInt(JTFQuantidadeMaximaProduto.getText()));
-         novoProduto.setNomeCategoria(JTFCategoria.getText());
-         produtos.add(novoProduto);
+        try {
+            String nome = "";
+            int id = 0;
+            int valorUnitario = 0;
+            String unidade = "";
+            int quantidadeEstoque = 0;
+            int quantidadeEstoqueMinima = 0;
+            int quantidadeEstoqueMaxima = 0;
 
-         
+            if (this.JTFNomeProduto.getText().length() < 2) {
+                throw new Mensagem(" O nome do produto deve conter ao menos 2 caracteres. ");
+            } else {
+                nome = this.JTFNomeProduto.getText();
+            }
+
+            if (this.JTFIdProduto.getText().length() <= 0) {
+                throw new Mensagem("O Id do produto deve ser número e maior que zero. ");
+            } else {
+                id = Integer.parseInt(this.JTFIdProduto.getText());
+            }
+
+            if (this.JTFValorProduto.getText().length() <= 0) {
+                throw new Mensagem("O valor do produto deve ser número e maior que zero. ");
+            } else {
+                valorUnitario = Integer.parseInt(this.JTFValorProduto.getText());
+            }
+
+            if (this.JTFUniProduto.getText().length() < 2) {
+                throw new Mensagem("A unidade de medida tem que ser válida e conter ao menos 2 caracteres. ");
+            } else {
+                unidade = this.JTFUniProduto.getText();
+            }
+            if (this.JTFQuantidadeProduto.getText().length() <= 0) {
+                throw new Mensagem("Insira uma quantidade válida. ");
+            } else {
+                quantidadeEstoque = Integer.parseInt(this.JTFQuantidadeProduto.getText());
+            }
+            if (this.JTFQuantidadeMinimaProduto.getText().length() <= 0) {
+                throw new Mensagem("A quantidade mínima do produto deve ser número e maior que zero. ");
+            } else {
+                id = Integer.parseInt(this.JTFQuantidadeMinimaProduto.getText());
+            }
+            if (this.JTFQuantidadeMaximaProduto.getText().length() <= 0) {
+                throw new Mensagem("A quantidade máxima do produto deve ser número e maior que zero. ");
+            } else {
+                id = Integer.parseInt(this.JTFQuantidadeMaximaProduto.getText());
+            }
+
+            // limpa campos da interface
+            this.JTFNomeProduto.setText("");
+            this.JTFIdProduto.setText("");
+            this.JTFValorProduto.setText("");
+            this.JTFUniProduto.setText("");
+            this.JTFQuantidadeProduto.setText("");
+            this.JTFQuantidadeMinimaProduto.setText("");
+            this.JTFQuantidadeMaximaProduto.setText("");
+
+        } catch (Mensagem erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
+        } catch (NumberFormatException erro2) {
+            JOptionPane.showMessageDialog(null, "Informe um número válido.");
+        }
+
+
     }//GEN-LAST:event_JBAdicionarProdutoActionPerformed
 
     private void JBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBVoltarActionPerformed
         this.dispose();
     }//GEN-LAST:event_JBVoltarActionPerformed
 
-
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBAdicionarProduto;
