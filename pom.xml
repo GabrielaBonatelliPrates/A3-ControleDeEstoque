@@ -10,5 +10,15 @@
         <maven.compiler.release>23</maven.compiler.release>
         <exec.mainClass>com.mycompany.a3.controledeestoque.A3ControleDeEstoque</exec.mainClass>
     </properties>
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.3.0</version>
+        </dependency>
+    </dependencies>
+
+    
     <name>A3-ControleDeEstoque</name>
 </project>
