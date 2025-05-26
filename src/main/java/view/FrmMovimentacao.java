@@ -207,8 +207,9 @@ public class FrmMovimentacao extends javax.swing.JFrame {
             }
 
             //Quantidade a ser alterada
-            if (this.JTFQuantidadeMovimentacao.getText().length() <= 0) {
-                throw new Mensagem("Quantidade deve ser número e maior que zero.");
+            int x = Integer.parseInt(this.JTFQuantidadeMovimentacao.getText());
+            if (x < 0) {
+                throw new Mensagem("Quantidade deve ser um numero e maior que zero.");
             } else {
                 quantidade = Integer.parseInt(this.JTFQuantidadeMovimentacao.getText());
             }
@@ -280,8 +281,9 @@ public class FrmMovimentacao extends javax.swing.JFrame {
             }
 
             //Quantidade a ser alterada
-            if (this.JTFQuantidadeMovimentacao.getText().length() <= 0) {
-                throw new Mensagem("Quantidade deve ser número e maior que zero.");
+            int x = Integer.parseInt(this.JTFQuantidadeMovimentacao.getText());
+            if (x < 0) {
+                throw new Mensagem("Quantidade deve ser um numero e maior que zero.");
             } else {
                 quantidade = Integer.parseInt(this.JTFQuantidadeMovimentacao.getText());
             }
