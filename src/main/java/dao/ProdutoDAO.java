@@ -1,4 +1,4 @@
-package daoa;
+package dao;
 
 public class ProdutoDAO {
     
