@@ -11,4 +11,4 @@ Gabriela Bonatelli Prates, RA 10725112623
 
 Laís Paiva Portela, RA 1072517961
 
-Mateo Alessandro Padilla Chalela, RA 1072519604
+Mateo Alessandro Padilla Chalela, RA 1072519604 - nome de usuário relacionado aos commits: Mateo-Padilla
