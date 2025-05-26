@@ -1,14 +1,9 @@
-# A3-ControleDeEstoque
+## Integrantes do Grupo
 
-
-#### Este projeto foi realizado pelos seguinte alunos da UNISUL,
-
-Davi Wolff de Abreu, RA 10725112049
-
-Ester da Rosa Mariani, RA 10725115450
-
-Gabriela Bonatelli Prates, RA 10725112623
-
-Laís Paiva Portela, RA 1072517961
-
-Mateo Alessandro Padilla Chalela, RA 1072519604 - nome de usuário relacionado aos commits: Mateo-Padilla
+| Nome Completo                       | RA             | Nome de Usuário (GitHub)        |
+|-------------------------------------|----------------|---------------------------------|
+| Davi Wolff de Abreu                 | 10725112049    | Davi-Wolff                      |
+| Ester da Rosa Mariani               | 10725115450    | Estermrn                        |
+| Gabriela Bonatelli Prates           | 10725112623    | GabrielaBonatelliPrates         |
+| Laís Paiva Portela                  | 1072517961     | laispaivaportela                |
+| Mateo Alessandro Padilla Chalela    | 1072519604     | Mateo-Padilla                   |
