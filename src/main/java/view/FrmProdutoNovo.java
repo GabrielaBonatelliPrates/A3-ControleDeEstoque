@@ -281,8 +281,8 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
     }//GEN-LAST:event_JTFCategoriaActionPerformed
 
     private void JBAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAdicionarProdutoActionPerformed
-                                              
-  try {
+
+        try {
             String nome = "";
             int id = 0;
             int valorUnitario = 0;
@@ -290,6 +290,7 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
             int quantidadeEstoque = 0;
             int quantidadeEstoqueMinima = 0;
             int quantidadeEstoqueMaxima = 0;
+            String nomeCategoria = "";
 
             if (this.JTFNomeProduto.getText().length() < 2) {
                 throw new Mensagem(" O nome do produto deve conter ao menos 2 caracteres. ");
@@ -329,6 +330,11 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
             } else {
                 id = Integer.parseInt(this.JTFQuantidadeMaximaProduto.getText());
             }
+            if (this.JTFCategoria.getText().length() <= 0){
+                throw new Mensagem("Insira um nome de categoria válido. ");
+            } else{
+                 nomeCategoria = JTFCategoria.getText();
+            }
 
             // limpa campos da interface
             this.JTFNomeProduto.setText("");
@@ -338,15 +344,20 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
             this.JTFQuantidadeProduto.setText("");
             this.JTFQuantidadeMinimaProduto.setText("");
             this.JTFQuantidadeMaximaProduto.setText("");
+            this.JTFCategoria.setText("");
 
-        } catch (Mensagem erro) {
-            JOptionPane.showMessageDialog(null, erro.getMessage());
-        } catch (NumberFormatException erro2) {
-            JOptionPane.showMessageDialog(null, "Informe um número válido.");
+            Produto produto = new Produto(nome, id, valorUnitario, unidade, quantidadeEstoque, quantidadeEstoqueMinima, quantidadeEstoqueMaxima, nomeCategoria);
+            produtos.add(produto);
+
+            JOptionPane.showMessageDialog(this, "Produto adicionado com sucesso!");
+
+        } catch (Mensagem e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Erro ao converter número: " + e.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro inesperado: " + e.getMessage());
         }
-
-
-
 
 
     }//GEN-LAST:event_JBAdicionarProdutoActionPerformed
