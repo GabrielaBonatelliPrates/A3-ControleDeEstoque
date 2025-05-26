@@ -281,8 +281,8 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
     }//GEN-LAST:event_JTFCategoriaActionPerformed
 
     private void JBAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAdicionarProdutoActionPerformed
-
-        try {
+                                              
+  try {
             String nome = "";
             int id = 0;
             int valorUnitario = 0;
@@ -344,6 +344,9 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
         } catch (NumberFormatException erro2) {
             JOptionPane.showMessageDialog(null, "Informe um número válido.");
         }
+
+
+
 
 
     }//GEN-LAST:event_JBAdicionarProdutoActionPerformed
