@@ -1,4 +1,4 @@
-package DAO;
+package daoa;
 
 public class CategoriaDAO {
     
