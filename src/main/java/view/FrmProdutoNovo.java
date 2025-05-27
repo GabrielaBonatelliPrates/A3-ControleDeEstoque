@@ -291,27 +291,25 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
             int quantidadeEstoqueMinima = 0;
             int quantidadeEstoqueMaxima = 0;
             String nomeCategoria = "";
-            
-            
+
             //Nome do Produto
             if (this.JTFNomeProduto.getText().length() < 2) {
                 throw new Mensagem(" O nome do produto deve conter ao menos 2 caracteres. ");
             } else {
                 nome = this.JTFNomeProduto.getText();
             }
-            
+
             //Id do Produto
             int x = Integer.parseInt(this.JTFIdProduto.getText());
             if (x <= 0) {
                 throw new Mensagem("O Id do produto deve ser número e maior que zero. ");
             }
-            
             if (this.JTFIdProduto.getText().length() <= 0) {
                 throw new Mensagem("O Id do produto deve ser número e maior que zero. ");
             } else {
                 id = Integer.parseInt(this.JTFIdProduto.getText());
             }
-            
+
             //Valor do produto
             x = Integer.parseInt(this.JTFValorProduto.getText());
             if (x <= 0) {
@@ -322,14 +320,14 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
             } else {
                 valorUnitario = Integer.parseInt(this.JTFValorProduto.getText());
             }
-            
+
             //Unidade de medida do Produto
             if (this.JTFUniProduto.getText().length() < 2) {
                 throw new Mensagem("A unidade de medida tem que ser válida e conter ao menos 2 caracteres. ");
             } else {
                 unidade = this.JTFUniProduto.getText();
             }
-            
+
             //Quantidade do produto
             x = Integer.parseInt(this.JTFQuantidadeProduto.getText());
             if (x <= 0) {
@@ -340,7 +338,7 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
             } else {
                 quantidadeEstoque = Integer.parseInt(this.JTFQuantidadeProduto.getText());
             }
-            
+
             //Quantidade Mínima do produto
             x = Integer.parseInt(this.JTFQuantidadeMinimaProduto.getText());
             if (x <= 0) {
@@ -351,7 +349,7 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
             } else {
                 id = Integer.parseInt(this.JTFQuantidadeMinimaProduto.getText());
             }
-            
+
             //Quantidade Máxima do produto
             x = Integer.parseInt(this.JTFQuantidadeMaximaProduto.getText());
             if (x <= 0) {
@@ -362,12 +360,12 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
             } else {
                 id = Integer.parseInt(this.JTFQuantidadeMaximaProduto.getText());
             }
-            
+
             //Categoria do Produto
-            if (this.JTFCategoria.getText().length() <= 0){
+            if (this.JTFCategoria.getText().length() <= 0) {
                 throw new Mensagem("Insira um nome de categoria válido. ");
-            } else{
-                 nomeCategoria = JTFCategoria.getText();
+            } else {
+                nomeCategoria = JTFCategoria.getText();
             }
 
             // limpa campos da interface
