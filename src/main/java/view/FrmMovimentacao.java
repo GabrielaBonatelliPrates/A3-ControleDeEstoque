@@ -226,10 +226,10 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 
                 produto.verificaMediaAbaixo();
                 produto.verificaMediaAcima();
-                if(produto.isAbaixoMedia()){
+                if(produto.isAbaixoMedia()==true){
                     JOptionPane.showMessageDialog(null, "O produto esta abaixo da média");
                 }
-                if(produto.isAcimaMedia()){
+                if(produto.isAcimaMedia()==true){
                     JOptionPane.showMessageDialog(null, "O produto esta acima da média");
                 }
                 
