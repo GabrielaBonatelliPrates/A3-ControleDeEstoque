@@ -1,14 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
-/**
- *
- * @author USER
- */
+import javax.swing.JOptionPane;
+import java.util.List;
+import java.util.ArrayList;
+import model.Categoria;
+import model.Categoria.Tamanho;
+import model.Categoria.Embalagem;
+
 public class FrmCategoriaNova extends javax.swing.JFrame {
+    
+    public List<Categoria> categorias = new ArrayList();
 
     /**
      * Creates new form FrmCategoriaNova
@@ -64,11 +65,16 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
         JCOEmbalagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vidro", "Plástico", "Metal" }));
 
         JBCadastrar.setText("Cadastrar");
+        JBCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBCadastrarActionPerformed(evt);
+            }
+        });
 
         JBVoltar.setText("Voltar");
-        JBVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JBVoltarActionPerformed(evt);
+        JBVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JBVoltarMouseClicked(evt);
             }
         });
 
@@ -140,9 +146,74 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JCOTamanhoActionPerformed
 
-    private void JBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBVoltarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JBVoltarActionPerformed
+    private void JBVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBVoltarMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_JBVoltarMouseClicked
+
+    private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
+        try {
+            //Recebe entrada do usuário e verifica possível erro
+            String nome = JTFNomeCategoria.getText();
+            if (this.JTFNomeCategoria.getText().length() < 3) {
+                throw new Mensagem("O nome da categoria deve conter mais de três caracteres.");
+            } else {
+                nome = this.JTFNomeCategoria.getText();
+            }
+            
+            //Conversão dos tamanhos pré-definidos na classe Categoria para tamanhos dentro da combo box
+            String tipoTamanho = JCOTamanho.getSelectedItem().toString();
+            Tamanho tamanho = null;
+            switch (tipoTamanho) {
+                case "Pequeno (P)":
+                    tamanho = Tamanho.Pequeno;
+                    break;
+                case "Médio (M)":
+                    tamanho = Tamanho.Medio;
+                    break;
+                case "Grande (G)":
+                    tamanho = Tamanho.Grande;
+                default:
+                    if (this.JCOTamanho.getSelectedItem() == null) {
+                        throw new Mensagem("Selecione um tamanho.");
+                    } else {
+                        tipoTamanho = this.JCOTamanho.getSelectedItem().toString();
+                    }
+            }
+            //Conversão das embalagens pré-definidas dentro da classe Categoria para embalagens dentro da combo box
+            String tipoEmbalagem = JCOEmbalagem.getSelectedItem().toString();
+            Embalagem embalagem = null;
+            switch (tipoEmbalagem) {
+                case "Plástico":
+                    embalagem = Embalagem.Plastico;
+                    break;
+                case "Vidro":
+                    embalagem = Embalagem.Vidro;
+                    break;
+                case "Metal":
+                    embalagem = Embalagem.Metal;
+                    break;
+                default:
+                    if (this.JCOEmbalagem.getSelectedItem() ==  null) {
+                        throw new Mensagem("Selecione uma embalagem.");
+                    } else {
+                        tipoEmbalagem = this.JCOEmbalagem.getSelectedItem().toString();
+                    }
+            }
+            //Limpar entradas do usuário
+            this.JTFNomeCategoria.setText("");
+            this.JCOTamanho.setSelectedItem(tipoTamanho);
+            this.JCOEmbalagem.setSelectedItem(tipoEmbalagem);
+
+            Categoria categoria = new Categoria(nome, tamanho, embalagem);
+            categorias.add(categoria);
+            JOptionPane.showMessageDialog(this, "Categoria criada com sucesso!");
+
+        } catch (Mensagem e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro inesperado " + e.getMessage());
+        }
+    }//GEN-LAST:event_JBCadastrarActionPerformed
 
     /**
      * @param args the command line arguments

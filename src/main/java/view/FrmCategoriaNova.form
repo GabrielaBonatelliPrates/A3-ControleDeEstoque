@@ -157,13 +157,16 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cadastrar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBCadastrarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="JBVoltar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Voltar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBVoltarActionPerformed"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="JBVoltarMouseClicked"/>
       </Events>
     </Component>
   </SubComponents>
