@@ -32,6 +32,14 @@ public class ControleEstoque {
                     return false;
                 } else {
                     produto.setQuantidadeEstoque(novaQuantidade);
+                    
+                    //Boolean para avisar se ta abaixo da média
+                    if(produto.getQuantidadeEstoque() <= produto.getEstoqueMinimo()){
+                    produto.setAcimaMedia(true);
+                } else{
+                     produto.setAcimaMedia(false);
+                }
+                    
                     return true;
                 }
             }
@@ -46,6 +54,15 @@ public class ControleEstoque {
                 int novaQuantidade = produto.getQuantidadeEstoque() + atualizacao;
 
                 produto.setQuantidadeEstoque(novaQuantidade);
+                
+                //Boolean para avisar se ta acima da média
+                if(produto.getQuantidadeEstoque() >= produto.getEstoqueMaximo()){
+                    produto.setAcimaMedia(true);
+                } else{
+                     produto.setAcimaMedia(false);
+                }
+                
+                
                 return true;
 
             }

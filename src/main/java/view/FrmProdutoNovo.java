@@ -60,6 +60,7 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
         jMenuBar1.add(jMenu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Novo Produto");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Novo Produto");
@@ -380,6 +381,8 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
 
             Produto produto = new Produto(nome, id, valorUnitario, unidade, quantidadeEstoque, quantidadeEstoqueMinima, quantidadeEstoqueMaxima, nomeCategoria);
             produtos.add(produto);
+            produto.verificaMediaAbaixo();
+            produto.verificaMediaAcima();
 
             JOptionPane.showMessageDialog(this, "Produto adicionado com sucesso!");
 

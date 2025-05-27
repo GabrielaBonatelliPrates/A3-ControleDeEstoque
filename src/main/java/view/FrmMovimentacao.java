@@ -223,6 +223,16 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 novaMov.setData(Instant.now());
                 novaMov.setNomeProduto(nomeProduto);
                 novaMov.setQuantidadeMovimentada(quantidade);
+                
+                produto.verificaMediaAbaixo();
+                produto.verificaMediaAcima();
+                if(produto.isAbaixoMedia()){
+                    JOptionPane.showMessageDialog(null, "O produto esta abaixo da média");
+                }
+                if(produto.isAcimaMedia()){
+                    JOptionPane.showMessageDialog(null, "O produto esta acima da média");
+                }
+                
             }
 
         } catch (Mensagem erro) {
@@ -302,6 +312,15 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 novaMov.setData(Instant.now());
                 novaMov.setNomeProduto(nomeProduto);
                 novaMov.setQuantidadeMovimentada(quantidade);
+                
+                produto.verificaMediaAbaixo();
+                produto.verificaMediaAcima();
+                if(produto.isAbaixoMedia()){
+                    JOptionPane.showMessageDialog(null, "O produto esta abaixo da média");
+                }
+                if(produto.isAcimaMedia()){
+                    JOptionPane.showMessageDialog(null, "O produto esta acima da média");
+                }
             }
 
         } catch (Mensagem erro) {

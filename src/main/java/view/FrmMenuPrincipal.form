@@ -121,6 +121,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Balan&#xe7;o financeiro"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuBalancoFinanceiroActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuProdutosPorCategoria">
               <Properties>
@@ -318,9 +321,6 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnPesquisar">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\laisp_omzy4s1\OneDrive\Documentos\NetBeansProjects\A3-ControleDeEstoque\src\resources\lupa_pesquisa.png"/>
-        </Property>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[48, 48]"/>
         </Property>
@@ -338,11 +338,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\laisp_omzy4s1\OneDrive\Documentos\NetBeansProjects\A3-ControleDeEstoque\src\resources\caixa_icone.png"/>
-        </Property>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -15,6 +15,8 @@ public class Produto {
     private int estoqueMinimo;
     private int estoqueMaximo;
     private String nomeCategoria;
+    private boolean acimaMedia;
+    private boolean abaixoMedia;
 
     //construtores
     public Produto() {
@@ -22,13 +24,26 @@ public class Produto {
 
     public Produto(String nomeProduto, int idProduto, double precoUnit, String unidadeProduto, int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo, String nomeCategoria) {
         this.nomeProduto = nomeProduto;
+        this.idProduto = idProduto;
         this.precoUnit = precoUnit;
         this.unidadeProduto = unidadeProduto;
         this.quantidadeEstoque = quantidadeEstoque;
         this.estoqueMinimo = estoqueMinimo;
         this.estoqueMaximo = estoqueMaximo;
-        this.idProduto = idProduto;
         this.nomeCategoria = nomeCategoria;
+    }
+
+    public Produto(String nomeProduto, int idProduto, double precoUnit, String unidadeProduto, int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo, String nomeCategoria, boolean acimaMedia, boolean abaixoMedia) {
+        this.nomeProduto = nomeProduto;
+        this.idProduto = idProduto;
+        this.precoUnit = precoUnit;
+        this.unidadeProduto = unidadeProduto;
+        this.quantidadeEstoque = quantidadeEstoque;
+        this.estoqueMinimo = estoqueMinimo;
+        this.estoqueMaximo = estoqueMaximo;
+        this.nomeCategoria = nomeCategoria;
+        this.acimaMedia = acimaMedia;
+        this.abaixoMedia = abaixoMedia;
     }
 
     //getters e setters
@@ -95,7 +110,39 @@ public class Produto {
     public void setIdProduto(int idProduto) {
         this.idProduto = idProduto;
     }
-   
+
+    public boolean isAcimaMedia() {
+        return acimaMedia;
+    }
+
+    public void setAcimaMedia(boolean acimaMedia) {
+        this.acimaMedia = acimaMedia;
+    }
+
+    public boolean isAbaixoMedia() {
+        return abaixoMedia;
+    }
+
+    public void setAbaixoMedia(boolean abaixoMedia) {
+        this.abaixoMedia = abaixoMedia;
+    }
+
+    public void verificaMediaAcima() {
+        if (getQuantidadeEstoque() >= getEstoqueMaximo()) {
+            setAcimaMedia(true);
+        } else {
+            setAcimaMedia(false);
+        }
+    }
+    
+    public void verificaMediaAbaixo() {
+        if (getQuantidadeEstoque() <= getEstoqueMinimo()) {
+            setAbaixoMedia(true);
+        } else {
+            setAbaixoMedia(false);
+        }
+    }
+
     //le os dados dos produtos
     public void lerDados() {
 

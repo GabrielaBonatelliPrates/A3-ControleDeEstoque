@@ -37,6 +37,7 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
         JBVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("telaNovaCategoria");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Nova Categoria");

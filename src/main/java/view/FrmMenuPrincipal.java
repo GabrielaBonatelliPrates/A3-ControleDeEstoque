@@ -11,9 +11,12 @@ import java.util.ArrayList;
 
 
 public class FrmMenuPrincipal extends javax.swing.JFrame {
-JProdutoNovo telaCadastro = new JProdutoNovo();
+FrmProdutoNovo telaCadastro = new FrmProdutoNovo();
+FrmCategoriaNova telaCategoria = new FrmCategoriaNova();
+FrmMovimentacao telaMovimentacao = new FrmMovimentacao();
+BalancoFinanceiro balancoFinanceiro = new BalancoFinanceiro();
     /**
-     * Creates new form FrmMenuPrincipal
+     * Creates new form FrmMenuPrincipal.
      */
     public FrmMenuPrincipal() {
         initComponents();
@@ -90,7 +93,6 @@ JProdutoNovo telaCadastro = new JProdutoNovo();
 
         txtFicha.setFont(new java.awt.Font("Inter 18pt Light", 0, 20)); // NOI18N
 
-        btnPesquisar.setIcon(new javax.swing.ImageIcon("C:\\Users\\laisp_omzy4s1\\OneDrive\\Documentos\\NetBeansProjects\\A3-ControleDeEstoque\\src\\resources\\lupa_pesquisa.png")); // NOI18N
         btnPesquisar.setMinimumSize(new java.awt.Dimension(48, 48));
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,8 +102,6 @@ JProdutoNovo telaCadastro = new JProdutoNovo();
 
         jLabel5.setFont(new java.awt.Font("Inter 18pt Medium", 0, 30)); // NOI18N
         jLabel5.setText("Ficha Produto");
-
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\laisp_omzy4s1\\OneDrive\\Documentos\\NetBeansProjects\\A3-ControleDeEstoque\\src\\resources\\caixa_icone.png")); // NOI18N
 
         jMenuBar1.setBackground(new java.awt.Color(156, 73, 0));
         jMenuBar1.setBorder(null);
@@ -160,6 +160,11 @@ JProdutoNovo telaCadastro = new JProdutoNovo();
 
         jMenuBalancoFinanceiro.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
         jMenuBalancoFinanceiro.setText("Balanço financeiro");
+        jMenuBalancoFinanceiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuBalancoFinanceiroActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuBalancoFinanceiro);
 
         jMenuProdutosPorCategoria.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
@@ -281,12 +286,13 @@ JProdutoNovo telaCadastro = new JProdutoNovo();
 
     private void jMenuNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuNovoProdutoActionPerformed
         telaCadastro.setVisible(true);
-        
+        //Ativação da tela de cadastro de Produto
         
     }//GEN-LAST:event_jMenuNovoProdutoActionPerformed
 
     private void jMenuMovimentarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuMovimentarEstoqueActionPerformed
-        // TODO add your handling code here:
+        telaMovimentacao.setVisible(true);
+        //Ativação da tela de movimentação de estoque
     }//GEN-LAST:event_jMenuMovimentarEstoqueActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
@@ -314,6 +320,10 @@ JProdutoNovo telaCadastro = new JProdutoNovo();
             txtFicha.setText(dadosProduto);
         }
     }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void jMenuBalancoFinanceiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBalancoFinanceiroActionPerformed
+        balancoFinanceiro.setVisible(true);
+    }//GEN-LAST:event_jMenuBalancoFinanceiroActionPerformed
     
     /**
      * @param args the command line arguments
