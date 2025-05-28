@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class FrmMenuPrincipal extends javax.swing.JFrame {
 FrmProdutoNovo telaCadastro = new FrmProdutoNovo();
+FrmProdutos produtos = new FrmProdutos();
 FrmCategoriaNova telaCategoria = new FrmCategoriaNova();
 FrmMovimentacao telaMovimentacao = new FrmMovimentacao();
 BalancoFinanceiro balancoFinanceiro = new BalancoFinanceiro();
@@ -47,6 +48,7 @@ BalancoFinanceiro balancoFinanceiro = new BalancoFinanceiro();
         jMenuNovoProduto = new javax.swing.JMenuItem();
         jMenuGerenciarProduto = new javax.swing.JMenuItem();
         jMenuMovimentarEstoque = new javax.swing.JMenuItem();
+        itmProdutos = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuListarProecos = new javax.swing.JMenuItem();
         jMenuBalancoFinanceiro = new javax.swing.JMenuItem();
@@ -72,7 +74,6 @@ BalancoFinanceiro balancoFinanceiro = new BalancoFinanceiro();
         setForeground(java.awt.Color.white);
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(1436, 955));
-        setPreferredSize(new java.awt.Dimension(1436, 955));
 
         jLabel3.setToolTipText("");
         jLabel3.setName(""); // NOI18N
@@ -93,6 +94,17 @@ BalancoFinanceiro balancoFinanceiro = new BalancoFinanceiro();
 
         txtFicha.setFont(new java.awt.Font("Inter 18pt Light", 0, 20)); // NOI18N
 
+        btnPesquisar.setIcon(new javax.swing.JLabel() {
+            public javax.swing.Icon getIcon() {
+                try {
+                    return new javax.swing.ImageIcon(
+                        new java.net.URL("https://raw.githubusercontent.com/GabrielaBonatelliPrates/A3-ControleDeEstoque/main/src/resources/lupa_pesquisa.png")
+                    );
+                } catch (java.net.MalformedURLException e) {
+                }
+                return null;
+            }
+        }.getIcon());
         btnPesquisar.setMinimumSize(new java.awt.Dimension(48, 48));
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +152,15 @@ BalancoFinanceiro balancoFinanceiro = new BalancoFinanceiro();
             }
         });
         jMenu4.add(jMenuMovimentarEstoque);
+
+        itmProdutos.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
+        itmProdutos.setText("Ver Produtos");
+        itmProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itmProdutosActionPerformed(evt);
+            }
+        });
+        jMenu4.add(itmProdutos);
 
         jMenuBar1.add(jMenu4);
 
@@ -324,6 +345,10 @@ BalancoFinanceiro balancoFinanceiro = new BalancoFinanceiro();
     private void jMenuBalancoFinanceiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBalancoFinanceiroActionPerformed
         balancoFinanceiro.setVisible(true);
     }//GEN-LAST:event_jMenuBalancoFinanceiroActionPerformed
+
+    private void itmProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmProdutosActionPerformed
+        produtos.setVisible(true);
+    }//GEN-LAST:event_itmProdutosActionPerformed
     
     /**
      * @param args the command line arguments
@@ -331,6 +356,7 @@ BalancoFinanceiro balancoFinanceiro = new BalancoFinanceiro();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPesquisar;
+    private javax.swing.JMenuItem itmProdutos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private static final javax.swing.JLabel jLabel3 = new javax.swing.JLabel();
