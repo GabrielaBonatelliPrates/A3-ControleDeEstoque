@@ -5,12 +5,33 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexao {
-    
-    private static final String URL = "jdbc:mysql://127.0.0.1:3306/controle_estoque";
-    private static final String USUARIO = "root";
-    private static final String SENHA = "2007";
 
-    public static Connection conectar() throws SQLException {
-        return DriverManager.getConnection(URL, USUARIO, SENHA);
+    public static Connection conectar() {
+        Connection connection = null;
+        try {
+            String driver = "com.mysql.cj.jdbc.Driver"; //nome do driver
+            Class.forName(driver); //carrega a classe do driver
+
+            String url = "jdbc:mysql://127.0.0.1:3306/controle_estoque"; //url de conexão com o banco de dados
+            String user = "root"; //nome de usuário do banco de dados
+            String senha = "senha"; //senha do banco de dados
+
+            connection = DriverManager.getConnection(url, user, senha); //vai tentar conectar com o banco
+
+            if (connection != null) {
+                System.out.println("Conectado!"); //se conseguir conectar vai enviar pro terminal que está conectado
+            } else {
+                System.out.println("Não Conectado!"); //se não conseguir conectar vai enviar pro terminal que está não conectado
+            }
+            return connection; //retorna o objeto de conexão
+        } catch (ClassNotFoundException e) {
+            System.out.println("Driver não encontrado."); //se não encontrar o drive vai enviar pro terminal que ele não foi encontrado
+            e.printStackTrace(); //exibe o erro completo no console
+            return null;
+        } catch (SQLException e) {
+            System.out.println("Não foi possivel conectar..."); //se tiver algum erro ao tentar conectar vai enviar pro terminal que não foi possível conectar
+            e.printStackTrace(); //exibe os detalhes do erro de SQL
+            return null;
+        }
     }
 }

@@ -292,7 +292,7 @@ public class JProdutoNovo extends javax.swing.JFrame {
             int quantidadeEstoqueMaxima = 0;
 
             if (this.JTFNomeProduto.getText().length() < 2) {
-                throw new Mensagem(" O nome do produto deve conter ao menos 2 caracteres. ");
+                throw new Mensagem("O nome do produto deve conter ao menos 2 caracteres. ");
             } else {
                 nome = this.JTFNomeProduto.getText();
             }
