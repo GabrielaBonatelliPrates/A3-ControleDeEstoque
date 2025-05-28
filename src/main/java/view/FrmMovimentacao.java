@@ -4,12 +4,12 @@
  */
 package view;
 
+import controller.MovimentacaoEstoque;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import model.ControleEstoque;
-import model.MovimentacaoEstoque;
+import controller.ControleEstoque;
 import model.Produto;
 
 /**
