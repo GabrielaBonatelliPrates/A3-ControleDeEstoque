@@ -5,6 +5,8 @@
 package view;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import model.ControleEstoque;
 import model.MovimentacaoEstoque;
@@ -19,6 +21,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
     private Produto produto;
     private MovimentacaoEstoque movEst;
     private ControleEstoque contEst;
+    private List<Produto> produtos;
 
     /**
      * Creates new form FrmMovimentacao
@@ -28,6 +31,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
         this.produto = new Produto();
         movEst = new MovimentacaoEstoque();
         contEst = new ControleEstoque();
+        produtos = new ArrayList();
     }
 
     /**
@@ -187,8 +191,13 @@ public class FrmMovimentacao extends javax.swing.JFrame {
             //validando os dados.
             boolean acesso = false;
             while (acesso = false) {
-                for (int i = 0; i >= contEst.tamanhoLista(); i++) {
-                    if (this.JTFProdutoMovimentacao.getText().equalsIgnoreCase(produto.getNomeProduto().trim())) {
+                for (int i = 0; i >= produtos.size(); i++) {
+                    
+                    //Pegando o nome do Produto na Lista "produtos"
+                    Produto x = produtos.get(i);
+                    String y = x.getNomeProduto();
+
+                    if (this.JTFProdutoMovimentacao.getText().equalsIgnoreCase(y.trim())) {
                         codigo = i;
                         this.JLCodigoMovimentacao.setText(String.valueOf(codigo));
                         acesso = true;
@@ -214,7 +223,6 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 quantidade = Integer.parseInt(this.JTFQuantidadeMovimentacao.getText());
             }
 
-            
             //Caso tudo estiver certo, dar baixa no estoque
             if (novaMov.movimentacaoEstoqueReducao(nomeProduto, quantidade) == true) {
                 JOptionPane.showMessageDialog(null, "Adicao confirmada!");
@@ -223,16 +231,16 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 novaMov.setData(Instant.now());
                 novaMov.setNomeProduto(nomeProduto);
                 novaMov.setQuantidadeMovimentada(quantidade);
-                
+
                 produto.verificaMediaAbaixo();
                 produto.verificaMediaAcima();
-                if(produto.isAbaixoMedia()==true){
+                if (produto.isAbaixoMedia() == true) {
                     JOptionPane.showMessageDialog(null, "O produto esta abaixo da média");
                 }
-                if(produto.isAcimaMedia()==true){
+                if (produto.isAcimaMedia() == true) {
                     JOptionPane.showMessageDialog(null, "O produto esta acima da média");
                 }
-                
+
             }
 
         } catch (Mensagem erro) {
@@ -271,15 +279,20 @@ public class FrmMovimentacao extends javax.swing.JFrame {
             boolean acesso = false;
             while (acesso = false) {
                 for (int i = 0; i >= contEst.tamanhoLista(); i++) {
-                    if (this.JTFProdutoMovimentacao.getText().equalsIgnoreCase(produto.getNomeProduto().trim())) {
+                    
+                    //Pegando o nome do Produto na Lista "produtos"
+                    Produto x = produtos.get(i);
+                    String y = x.getNomeProduto();
+
+                    if (this.JTFProdutoMovimentacao.getText().equalsIgnoreCase(y.trim())) {
                         codigo = i;
                         this.JLCodigoMovimentacao.setText(String.valueOf(codigo));
                         acesso = true;
                     }
                 }
                 if (acesso = false) {
-                    JOptionPane.showMessageDialog(null, "Insira um produto existente.");
-                    break;
+                    throw new Mensagem("Nome do produto deve conter ao menos 2 caracteres.");
+
                 }
             }
 
@@ -305,20 +318,18 @@ public class FrmMovimentacao extends javax.swing.JFrame {
             //Caso tudo estiver certo, dar baixa no estoque
             if (novaMov.movimentacaoEstoqueReducao(nomeProduto, quantidade) == true) {
                 JOptionPane.showMessageDialog(null, "Baixa confirmada!");
-                
-                
-                
+
                 //Pegando as informações da movimentação
                 novaMov.setData(Instant.now());
                 novaMov.setNomeProduto(nomeProduto);
                 novaMov.setQuantidadeMovimentada(quantidade);
-                
+
                 produto.verificaMediaAbaixo();
                 produto.verificaMediaAcima();
-                if(produto.isAbaixoMedia()){
+                if (produto.isAbaixoMedia()) {
                     JOptionPane.showMessageDialog(null, "O produto esta abaixo da média");
                 }
-                if(produto.isAcimaMedia()){
+                if (produto.isAcimaMedia()) {
                     JOptionPane.showMessageDialog(null, "O produto esta acima da média");
                 }
             }
