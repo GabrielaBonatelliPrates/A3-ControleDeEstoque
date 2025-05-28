@@ -63,6 +63,11 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
         jLabel4.setText("Embalagem:");
 
         JCOEmbalagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vidro", "Plástico", "Metal" }));
+        JCOEmbalagem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JCOEmbalagemActionPerformed(evt);
+            }
+        });
 
         JBCadastrar.setText("Cadastrar");
         JBCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -214,6 +219,10 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Erro inesperado " + e.getMessage());
         }
     }//GEN-LAST:event_JBCadastrarActionPerformed
+
+    private void JCOEmbalagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCOEmbalagemActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JCOEmbalagemActionPerformed
 
     /**
      * @param args the command line arguments

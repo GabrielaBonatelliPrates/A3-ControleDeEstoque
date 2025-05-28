@@ -1,6 +1,7 @@
-package model;
+package controller;
 
 import java.time.Instant;
+import model.Produto;
 
 public class MovimentacaoEstoque extends ControleEstoque {
 

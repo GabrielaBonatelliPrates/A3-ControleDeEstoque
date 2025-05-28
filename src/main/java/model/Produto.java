@@ -134,7 +134,7 @@ public class Produto {
             setAcimaMedia(false);
         }
     }
-    
+
     public void verificaMediaAbaixo() {
         if (getQuantidadeEstoque() <= getEstoqueMinimo()) {
             setAbaixoMedia(true);
