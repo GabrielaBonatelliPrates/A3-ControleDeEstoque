@@ -5,6 +5,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import model.Categoria;
 import model.Produto;
+import dao.ProdutoDAO;
 
 public class FrmProdutoNovo extends javax.swing.JFrame {
 
@@ -286,7 +287,7 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
         try {
             String nome = "";
             int id = 0;
-            int valorUnitario = 0;
+            double valorUnitario = 0;
             String unidade = "";
             int quantidadeEstoque = 0;
             int quantidadeEstoqueMinima = 0;
@@ -312,7 +313,7 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
             }
 
             //Valor do produto
-            x = Integer.parseInt(this.JTFValorProduto.getText());
+            x = (int) Double.parseDouble(this.JTFValorProduto.getText());
             if (x <= 0) {
                 throw new Mensagem("O Id do produto deve ser número e maior que zero. ");
             }
@@ -379,11 +380,11 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
             this.JTFQuantidadeMaximaProduto.setText("");
             this.JTFCategoria.setText("");
 
-            Produto produto = new Produto(nome, id, valorUnitario, unidade, quantidadeEstoque, quantidadeEstoqueMinima, quantidadeEstoqueMaxima, nomeCategoria);
-            produtos.add(produto);
-            produto.verificaMediaAbaixo();
-            produto.verificaMediaAcima();
-
+            //Produto produto = new Produto(nome, id, valorUnitario, unidade, quantidadeEstoque, quantidadeEstoqueMinima, quantidadeEstoqueMaxima, nomeCategoria);
+            String tamanho = "tamanho";
+            String embalagem = "embalgem";
+            ProdutoDAO.inserirProduto(nome, valorUnitario, unidade, quantidadeEstoque, quantidadeEstoqueMinima, quantidadeEstoqueMaxima, nomeCategoria, tamanho, embalagem);
+            
             JOptionPane.showMessageDialog(this, "Produto adicionado com sucesso!");
 
         } catch (Mensagem e) {
