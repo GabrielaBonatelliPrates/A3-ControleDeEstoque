@@ -25,24 +25,24 @@ public class ControleEstoque {
     }
 
     public boolean movimentacaoEstoqueReducao(String nomeProduto, int atualizacao) {
-        for (Produto produto : produtos) {
-            if (produto.getNomeProduto().equalsIgnoreCase(nomeProduto.trim())) {
-                int novaQuantidade = produto.getQuantidadeEstoque() - atualizacao;
+        for (int i = 0; i >= produtos.size(); i++) {
+                    
+                    //Pegando o nome do Produto na Lista "produtos"
+                    Produto x = produtos.get(i);
+                    String y = x.getNomeProduto();
 
-                if (novaQuantidade < 0) {
-                    return false;
+            if (nomeProduto.equalsIgnoreCase(y.trim())) {
+                int novaQuantidade = x.getQuantidadeEstoque() + atualizacao;
+
+                x.setQuantidadeEstoque(novaQuantidade);
+
+                //Boolean para avisar se ta acima da média
+                if (x.getQuantidadeEstoque() >= x.getEstoqueMaximo()) {
+                    x.setAcimaMedia(true);
                 } else {
-                    produto.setQuantidadeEstoque(novaQuantidade);
-
-                    //Boolean para avisar se ta abaixo da média
-                    if (produto.getQuantidadeEstoque() <= produto.getEstoqueMinimo()) {
-                        produto.setAcimaMedia(true);
-                    } else {
-                        produto.setAcimaMedia(false);
-                    }
-
-                    return true;
+                    x.setAcimaMedia(false);
                 }
+                return true;
             }
         }
         // Produto não encontrado
@@ -50,21 +50,24 @@ public class ControleEstoque {
     }
 
     public boolean movimentacaoEstoqueAdicao(String nomeProduto, int atualizacao) {
-        for (Produto produto : produtos) {
-            if (produto.getNomeProduto().equalsIgnoreCase(nomeProduto.trim())) {
-                int novaQuantidade = produto.getQuantidadeEstoque() + atualizacao;
+        for (int i = 0; i >= produtos.size(); i++) {
+                    
+                    //Pegando o nome do Produto na Lista "produtos"
+                    Produto x = produtos.get(i);
+                    String y = x.getNomeProduto();
 
-                produto.setQuantidadeEstoque(novaQuantidade);
+            if (nomeProduto.equalsIgnoreCase(y.trim())) {
+                int novaQuantidade = x.getQuantidadeEstoque() + atualizacao;
+
+                x.setQuantidadeEstoque(novaQuantidade);
 
                 //Boolean para avisar se ta acima da média
-                if (produto.getQuantidadeEstoque() >= produto.getEstoqueMaximo()) {
-                    produto.setAcimaMedia(true);
+                if (x.getQuantidadeEstoque() >= x.getEstoqueMaximo()) {
+                    x.setAcimaMedia(true);
                 } else {
-                    produto.setAcimaMedia(false);
+                    x.setAcimaMedia(false);
                 }
-
                 return true;
-
             }
         }
         // Produto não encontrado

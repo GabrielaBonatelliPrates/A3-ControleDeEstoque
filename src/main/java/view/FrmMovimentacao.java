@@ -224,7 +224,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
             }
 
             //Caso tudo estiver certo, dar baixa no estoque
-            if (novaMov.movimentacaoEstoqueReducao(nomeProduto, quantidade) == true) {
+            
                 JOptionPane.showMessageDialog(null, "Adicao confirmada!");
 
                 //Pegando as informações da movimentação
@@ -241,7 +241,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "O produto esta acima da média");
                 }
 
-            }
+            
 
         } catch (Mensagem erro) {
             JOptionPane.showMessageDialog(null, erro.getMessage());
