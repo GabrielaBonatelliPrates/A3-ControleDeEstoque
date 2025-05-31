@@ -68,6 +68,50 @@ public class ProdutoDAO {
         }
     }
 
+    public boolean atualizarProduto(Produto produto) {
+        String sql = "UPDATE produtos set nome = ? , preco_unitario = ? ,unidade = ? ,estoque_atual = ? ,estoque_minimo = ? ,estoque_maximo = ? , nome_categoria = ? ,tamanho = ? ,embalagem = ? WHERE id = ?";
+        try {
+            Connection connection = Conexao.conectar();
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, produto.getNomeProduto());
+            statement.setDouble(2, produto.getPrecoUnit());
+            statement.setString(3, produto.getUnidadeProduto());
+            statement.setInt(4, produto.getQuantidadeEstoque());
+            statement.setInt(5, produto.getEstoqueMinimo());
+            statement.setInt(6, produto.getEstoqueMaximo());
+            statement.setString(7, produto.getNomeCategoria());
+            //stmt.setString(8, produto.getTamanho());
+            //stmt.setString(9, produto.getEmbalagem());
+            statement.setInt(10, produto.getIdProduto());
+
+            statement.execute();
+            statement.close();
+            return true;
+        } catch (SQLException erro) { //mostra erros de sql
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, erro);
+            return false;
+        }
+    }
+
+    public boolean deletarProduto(int idProduto) {
+        String sql = "DELETE FROM produtos WHERE id = ?";
+        try {
+            Connection connection = Conexao.conectar();
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, idProduto);
+            statement.executeUpdate();
+
+            statement.close();
+            return true;
+
+        } catch (SQLException erro) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, erro);
+            return false;
+        }
+    }
+
     public static List insereLista(String nomeProduto, int id, double precoUnit, String unidadeProduto, int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo, String nomeCategoria) {
         Produto produto = new Produto(nomeProduto, id, precoUnit, unidadeProduto, quantidadeEstoque, estoqueMinimo, estoqueMaximo, nomeCategoria);
         produtos.add(produto); //adiciona o objeto criado à lista produtos 
@@ -233,4 +277,3 @@ public class ProdutoDAO {
     }
 
 }
-
