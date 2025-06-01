@@ -349,7 +349,7 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
             if (this.JTFQuantidadeMinimaProduto.getText().length() <= 0) {
                 throw new Mensagem("A quantidade mínima do produto deve ser número e maior que zero. ");
             } else {
-                id = Integer.parseInt(this.JTFQuantidadeMinimaProduto.getText());
+               int idMinimo = Integer.parseInt(this.JTFQuantidadeMinimaProduto.getText());
             }
 
             //Quantidade Máxima do produto
@@ -360,7 +360,7 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
             if (this.JTFQuantidadeMaximaProduto.getText().length() <= 0) {
                 throw new Mensagem("A quantidade máxima do produto deve ser número e maior que zero. ");
             } else {
-                id = Integer.parseInt(this.JTFQuantidadeMaximaProduto.getText());
+               int idMaximo = Integer.parseInt(this.JTFQuantidadeMaximaProduto.getText());
             }
 
             //Categoria do Produto
