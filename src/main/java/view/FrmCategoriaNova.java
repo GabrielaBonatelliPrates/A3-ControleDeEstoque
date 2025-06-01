@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import model.Categoria;
 
 public class FrmCategoriaNova extends javax.swing.JFrame {
-    
+
     public List<Categoria> categorias = new ArrayList();
 
     /**
@@ -137,66 +137,43 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
 
     private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
         try {
-            //Recebe entrada do usuário e verifica possível erro
-            String nome;
-            if (this.JTFNomeCategoria.getText().length() < 3) {
-                throw new Mensagem("O nome da categoria deve conter mais de três caracteres.");
+            //Recebe entrada do usuário
+            String nome = "";
+            String tamanho = "";
+            String embalagem = "";
+
+            //Erro no nome da categoria
+            if (this.JTFNomeCategoria.getText().length() < 2) {
+                throw new Mensagem("O nome da categoria deve conter pelo menos 2 caracteres.");
             } else {
                 nome = this.JTFNomeCategoria.getText();
             }
-            
-            //Conversão dos tamanhos pré-definidos na classe Categoria para tamanhos dentro da combo box
-            String tipoTamanho = JCOTamanho.getSelectedItem().toString();
-            Tamanho tamanho = null;
-            switch (tipoTamanho) {
-                case "Pequeno (P)":
-                    tamanho = Tamanho.Pequeno;
-                    break;
-                case "Médio (M)":
-                    tamanho = Tamanho.Medio;
-                    break;
-                case "Grande (G)":
-                    tamanho = Tamanho.Grande;
-                default:
-                    if (this.JCOTamanho.getSelectedItem() == null) {
-                        throw new Mensagem("Selecione um tamanho.");
-                    } else {
-                        tipoTamanho = this.JCOTamanho.getSelectedItem().toString();
-                    }
+
+            //Erro no tamanho da categoria
+            if (this.JTFTamanho.getText().length() < 1) {
+                throw new Mensagem("O tamanho do produto deve conter pelo menos 1 caractere. ");
+            } else {
+                tamanho = this.JTFTamanho.getText();
             }
-            //Conversão das embalagens pré-definidas dentro da classe Categoria para embalagens dentro da combo box
-            String tipoEmbalagem = JCOEmbalagem.getSelectedItem().toString();
-            Embalagem embalagem = null;
-            switch (tipoEmbalagem) {
-                case "Plástico":
-                    embalagem = Embalagem.Plastico;
-                    break;
-                case "Vidro":
-                    embalagem = Embalagem.Vidro;
-                    break;
-                case "Metal":
-                    embalagem = Embalagem.Metal;
-                    break;
-                default:
-                    if (this.JCOEmbalagem.getSelectedItem() ==  null) {
-                        throw new Mensagem("Selecione uma embalagem.");
-                    } else {
-                        tipoEmbalagem = this.JCOEmbalagem.getSelectedItem().toString();
-                    }
+
+            //Erro no tipo de embalagem
+            if (this.JTFEmbalagem.getText().length() < 2) {
+                throw new Mensagem("O tipo de emabalagem deve conter pelo menos 2 caracteres.");
+            } else {
+                embalagem = this.JTFEmbalagem.getText();
             }
-            //Limpar entradas do usuário
+
+            //Limpa os campos da interface
             this.JTFNomeCategoria.setText("");
-            this.JCOTamanho.setSelectedItem(tipoTamanho);
-            this.JCOEmbalagem.setSelectedItem(tipoEmbalagem);
+            this.JTFTamanho.setText("");
+            this.JTFEmbalagem.setText("");
 
-            Categoria categoria = new Categoria(nome, tamanho, embalagem);
-            categorias.add(categoria);
-            JOptionPane.showMessageDialog(this, "Categoria criada com sucesso!");
-
+            //Conectar ao banco de dados depois
+            JOptionPane.showMessageDialog(this, "Categoria adicionada com sucesso!");
         } catch (Mensagem e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro inesperado " + e.getMessage());
+            JOptionPane.showMessageDialog(this, "Erro inesperado: " + e.getMessage());
         }
     }//GEN-LAST:event_JBCadastrarActionPerformed
 
