@@ -4,6 +4,8 @@ import javax.swing.JOptionPane;
 import java.util.List;
 import java.util.ArrayList;
 import model.Categoria;
+import dao.CategoriaDAO;
+import static dao.CategoriaDAO.verificaCategoria;
 
 public class FrmCategoriaNova extends javax.swing.JFrame {
 
@@ -168,8 +170,14 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
             this.JTFTamanho.setText("");
             this.JTFEmbalagem.setText("");
 
-            //Conectar ao banco de dados depois
-            JOptionPane.showMessageDialog(this, "Categoria adicionada com sucesso!");
+            //Verifica se a categoria já existe
+            boolean existe = verificaCategoria(nome, tamanho, embalagem);
+            if (existe) {
+                JOptionPane.showMessageDialog(this, "Categoria já cadastrada anteriormente!");
+            } else {
+
+            }
+
         } catch (Mensagem e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (Exception e) {
