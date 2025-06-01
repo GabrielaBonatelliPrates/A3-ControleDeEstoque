@@ -177,7 +177,16 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
             } else {
 
             }
-
+            
+            //Criar categoria nova e mostrar possiível erro
+            CategoriaDAO.inserirCategoria(nome, tamanho, embalagem);
+            boolean criou = verificaCategoria(nome, tamanho, embalagem);
+            if (criou) {
+                JOptionPane.showMessageDialog(this, "Categoria criada com sucesso!");
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro ao cadastrar nova categoria, tente novamente!");
+            }
+            
         } catch (Mensagem e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (Exception e) {
