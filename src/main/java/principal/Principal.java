@@ -7,10 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import model.Produto;
-import model.Relatorios;
 import model.Categoria;
 import view.FrmMenuPrincipal;
-import view.JProdutoNovo;
 
 public class Principal {
 
@@ -21,6 +19,6 @@ public class Principal {
         menuPrincipal.setExtendedState(FrmMenuPrincipal.MAXIMIZED_BOTH);
         menuPrincipal.setVisible(true);
         Connection conexao = Conexao.conectar();
-
+//comentario para realizar commit;
     }
 }
