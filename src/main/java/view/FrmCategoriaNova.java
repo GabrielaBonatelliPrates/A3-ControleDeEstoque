@@ -4,8 +4,6 @@ import javax.swing.JOptionPane;
 import java.util.List;
 import java.util.ArrayList;
 import model.Categoria;
-import model.Categoria.Tamanho;
-import model.Categoria.Embalagem;
 
 public class FrmCategoriaNova extends javax.swing.JFrame {
     
@@ -31,11 +29,11 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         JTFNomeCategoria = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        JCOTamanho = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        JCOEmbalagem = new javax.swing.JComboBox<>();
         JBCadastrar = new javax.swing.JButton();
         JBVoltar = new javax.swing.JButton();
+        JTFTamanho = new javax.swing.JTextField();
+        JTFEmbalagem = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("telaNovaCategoria");
@@ -53,21 +51,7 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
 
         jLabel3.setText("Tamanho:");
 
-        JCOTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pequeno (P)", "Médio (M)", "Grande (G)" }));
-        JCOTamanho.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JCOTamanhoActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("Embalagem:");
-
-        JCOEmbalagem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Vidro", "Plástico", "Metal" }));
-        JCOEmbalagem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JCOEmbalagemActionPerformed(evt);
-            }
-        });
 
         JBCadastrar.setText("Cadastrar");
         JBCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -96,21 +80,21 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JCOTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(JTFNomeCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(JTFNomeCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(JTFEmbalagem, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(JTFTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(218, 218, 218)
                         .addComponent(JBCadastrar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(JCOEmbalagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(JBVoltar)))
@@ -128,11 +112,11 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(JCOTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JTFTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(JCOEmbalagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JTFEmbalagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(JBCadastrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -146,10 +130,6 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
     private void JTFNomeCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNomeCategoriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTFNomeCategoriaActionPerformed
-
-    private void JCOTamanhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCOTamanhoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JCOTamanhoActionPerformed
 
     private void JBVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBVoltarMouseClicked
         this.dispose();
@@ -220,10 +200,6 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JBCadastrarActionPerformed
 
-    private void JCOEmbalagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JCOEmbalagemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_JCOEmbalagemActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -262,9 +238,9 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBCadastrar;
     private javax.swing.JButton JBVoltar;
-    private javax.swing.JComboBox<String> JCOEmbalagem;
-    private javax.swing.JComboBox<String> JCOTamanho;
+    private javax.swing.JTextField JTFEmbalagem;
     private javax.swing.JTextField JTFNomeCategoria;
+    private javax.swing.JTextField JTFTamanho;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
