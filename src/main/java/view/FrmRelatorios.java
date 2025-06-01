@@ -27,7 +27,7 @@ public class FrmRelatorios extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        JBBalancoFinanceiro = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
@@ -38,7 +38,12 @@ public class FrmRelatorios extends javax.swing.JFrame {
 
         jButton1.setText("Lista de preços");
 
-        jButton2.setText("Balanço financeiro");
+        JBBalancoFinanceiro.setText("Balanço financeiro");
+        JBBalancoFinanceiro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JBBalancoFinanceiroMouseClicked(evt);
+            }
+        });
 
         jButton3.setText("Produtos por categoria");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +84,7 @@ public class FrmRelatorios extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jButton1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton2)
+                                        .addComponent(JBBalancoFinanceiro)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jButton3)))
                                 .addGap(39, 39, 39))))
@@ -95,7 +100,7 @@ public class FrmRelatorios extends javax.swing.JFrame {
                 .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(JBBalancoFinanceiro)
                     .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -112,6 +117,10 @@ public class FrmRelatorios extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void JBBalancoFinanceiroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBBalancoFinanceiroMouseClicked
+        new BalancoFinanceiro().setVisible(true);
+    }//GEN-LAST:event_JBBalancoFinanceiroMouseClicked
 
     /**
      * @param args the command line arguments
@@ -152,8 +161,8 @@ public class FrmRelatorios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBBalancoFinanceiro;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
