@@ -5,20 +5,26 @@ import javax.swing.table.DefaultTableModel;
 import model.Produto;
 import dao.ProdutoDAO;
 import java.util.List;
+import javax.swing.JOptionPane;
+import controller.ProdutoController;
 
 public class FrmGerenciarProduto extends javax.swing.JFrame {
 
+    private ProdutoController objetoProduto;
+
     public FrmGerenciarProduto() {
         initComponents();
+        this.objetoProduto = new ProdutoController();
+        this.mostrarTabela();
     }
-    
-        ProdutoDAO prodDAO = new ProdutoDAO();
 
-    public void carregaTabela() {
+    ProdutoDAO prodDAO = new ProdutoDAO();
+
+    public void mostrarTabela() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTableGerenciaProdutos.getModel(); // para manipular a tabela 
-        modelo.setNumRows(0); 
-        List<Produto>listaProdutos = prodDAO.emiteLista();
-        for(Produto p: listaProdutos){
+        modelo.setNumRows(0);
+        List<Produto> listaProdutos = prodDAO.emiteLista();
+        for (Produto p : listaProdutos) {
             modelo.addRow(new Object[]{
                 p.getIdProduto(),
                 p.getNomeProduto(),
@@ -27,7 +33,7 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
                 p.getQuantidadeEstoque(),
                 p.getEstoqueMinimo(),
                 p.getEstoqueMaximo(),
-                p.getNomeCategoria(),
+                p.getNomeCategoria(), 
                 //p.getTamanho(),
                 //p.getEmbalagem()
             });
@@ -138,8 +144,18 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
         });
 
         JBAtualizarProduto.setText("Atualizar informações");
+        JBAtualizarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBAtualizarProdutoActionPerformed(evt);
+            }
+        });
 
         JBExcluirProduto.setText("Excluir produto");
+        JBExcluirProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBExcluirProdutoActionPerformed(evt);
+            }
+        });
 
         JBVoltar.setText("Voltar");
         JBVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -434,25 +450,193 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
             String quantidadeEstoque = this.jTableGerenciaProdutos.getValueAt(this.jTableGerenciaProdutos.getSelectedRow(), 4).toString();
             String estoqueMinimo = this.jTableGerenciaProdutos.getValueAt(this.jTableGerenciaProdutos.getSelectedRow(), 5).toString();
             String estoqueMaximo = this.jTableGerenciaProdutos.getValueAt(this.jTableGerenciaProdutos.getSelectedRow(), 6).toString();
-            String categoria = this.jTableGerenciaProdutos.getValueAt(this.jTableGerenciaProdutos.getSelectedRow(), 7).toString();
+            String nomeCategoria = this.jTableGerenciaProdutos.getValueAt(this.jTableGerenciaProdutos.getSelectedRow(), 7).toString();
             String tamanho = this.jTableGerenciaProdutos.getValueAt(this.jTableGerenciaProdutos.getSelectedRow(), 8).toString();
             String embalagem = this.jTableGerenciaProdutos.getValueAt(this.jTableGerenciaProdutos.getSelectedRow(), 9).toString();
-       
-        this.JTFNomeProduto.setText(nome);
-        this.JTFPrecoUnit.setText(precoUnit);
-        this.JTFUnidadeProduto.setText(unidadeProduto);
-        this.JTFQuantidadeEstoque.setText(quantidadeEstoque);
-        this.JTFEstoqueMinimo.setText(estoqueMinimo);
-        this.JTFEstoqueMaximo.setText(estoqueMaximo);
-        this.JTFNomeCategoria.setText(categoria);
-        this.JTFTamanho.setText(tamanho);
-        this.JTFEmbalagem.setText(embalagem);
+
+            this.JTFNomeProduto.setText(nome);
+            this.JTFPrecoUnit.setText(precoUnit);
+            this.JTFUnidadeProduto.setText(unidadeProduto);
+            this.JTFQuantidadeEstoque.setText(quantidadeEstoque);
+            this.JTFEstoqueMinimo.setText(estoqueMinimo);
+            this.JTFEstoqueMaximo.setText(estoqueMaximo);
+            this.JTFNomeCategoria.setText(nomeCategoria);
+            this.JTFTamanho.setText(tamanho);
+            this.JTFEmbalagem.setText(embalagem);
         }
     }//GEN-LAST:event_jTableGerenciaProdutosMouseClicked
 
+    private void JBAtualizarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAtualizarProdutoActionPerformed
+        try {
+            int idProduto = 0;
+            String nomeProduto = "";
+            double precoUnit = 0.00;
+            String unidadeProduto = "";
+            int quantidadeEstoque = 0;
+            int estoqueMinimo = 0;
+            int estoqueMaximo = 0;
+            String nomeCategoria = "";
+            String tamanho = "";
+            String embalagem = "";
+
+            // Atualizar nome do produto
+            if (this.JTFNomeProduto.getText().length() < 2) {
+                throw new Mensagem(" O nome do produto deve conter ao menos 2 caracteres.");
+            } else {
+                nomeProduto = this.JTFNomeProduto.getText();
+            }
+
+            // Atualizar o preço unitário do produto
+            double x = Double.parseDouble(this.JTFPrecoUnit.getText());
+            if (x <= 0) {
+                throw new Mensagem(" O valor do produto deve ser maior que zero.");
+            }
+            if (this.JTFPrecoUnit.getText().length() <= 0) {
+                throw new Mensagem(" O valor do produto deve ser maior que zero.");
+            } else {
+                precoUnit = Double.parseDouble(this.JTFPrecoUnit.getText());
+            }
+
+            //Atualizar unidade do produto
+            if (this.JTFUnidadeProduto.getText().length() < 1) {
+                throw new Mensagem(" O nome do produto deve conter ao menos 1 caractere.");
+            } else {
+                unidadeProduto = this.JTFUnidadeProduto.getText();
+            }
+
+            //Atualizar quantidade no estoque do produto
+            int y = Integer.parseInt(this.JTFQuantidadeEstoque.getText());
+            if (y <= 0) {
+                throw new Mensagem(" A quantidade de produto em estoque deve ser maior que zero.");
+            }
+            if (this.JTFQuantidadeEstoque.getText().length() <= 0) {
+                throw new Mensagem(" A quantidade de produto em estoque deve ser maior que zero.");
+            } else {
+                quantidadeEstoque = Integer.parseInt(this.JTFQuantidadeEstoque.getText());
+            }
+
+            //Atualizar quantidade mínima necessária do produto
+            y = Integer.parseInt(this.JTFEstoqueMinimo.getText());
+            if (y <= 0) {
+                throw new Mensagem(" A quantidade mínima de produto em estoque deve ser maior que zero.");
+            }
+            if (this.JTFEstoqueMinimo.getText().length() <= 0) {
+                throw new Mensagem(" A quantidade mínima de produto em estoque deve ser maior que zero.");
+            } else {
+                estoqueMinimo = Integer.parseInt(this.JTFEstoqueMinimo.getText());
+            }
+
+            //Atualizar quantidade máxima necessária do produto
+            y = Integer.parseInt(this.JTFEstoqueMaximo.getText());
+            if (y <= 0) {
+                throw new Mensagem(" A quantidade máxima de produto em estoque deve ser maior que zero.");
+            }
+            if (this.JTFEstoqueMaximo.getText().length() <= 0) {
+                throw new Mensagem(" A quantidade máxima de produto em estoque deve ser maior que zero.");
+            } else {
+                estoqueMinimo = Integer.parseInt(this.JTFEstoqueMaximo.getText());
+            }
+
+            //Atualizar categoria do produto
+            if (this.JTFNomeCategoria.getText().length() < 2) {
+                throw new Mensagem(" O nome da categoria deve conter ao menos 2 caracteres.");
+            } else {
+                nomeCategoria = this.JTFNomeCategoria.getText();
+            }
+
+            //Atualizar tamanho do produto
+            if (this.JTFTamanho.getText().length() < 1) {
+                throw new Mensagem(" O tamanho do produto deve conter ao menos 1 caractere.");
+            } else {
+                tamanho = this.JTFTamanho.getText();
+            }
+
+            //Atualizar embalagem do produto
+            if (this.JTFEmbalagem.getText().length() < 2) {
+                throw new Mensagem(" O tipo de embalagem do produto deve conter ao menos 2 caracteres.");
+            } else {
+                embalagem = this.JTFEmbalagem.getText();
+            }
+
+            //Para garantir que tenha um produto selecionado na hora de alterar os dados
+            if (this.jTableGerenciaProdutos.getSelectedRow() == -1) {
+                throw new Mensagem("Você precisa selecionar um produto para poder alterá-lo");
+            } else {
+                idProduto = Integer.parseInt(this.jTableGerenciaProdutos.getValueAt(this.jTableGerenciaProdutos.getSelectedRow(), 0).toString());
+            }
+
+            //Atualiza o produto e limpa os campos
+            if (this.objetoProduto.atualizarProdutoBD(idProduto, nomeProduto, precoUnit, unidadeProduto, quantidadeEstoque, estoqueMinimo,
+                    estoqueMaximo, nomeCategoria, tamanho, embalagem)) {
+                this.JTFNomeProduto.setText("");
+                this.JTFPrecoUnit.setText("");
+                this.JTFUnidadeProduto.setText("");
+                this.JTFQuantidadeEstoque.setText("");
+                this.JTFEstoqueMinimo.setText("");
+                this.JTFEstoqueMaximo.setText("");
+                this.JTFNomeCategoria.setText("");
+                this.JTFTamanho.setText("");
+                this.JTFEmbalagem.setText("");
+                JOptionPane.showMessageDialog(null, "Produto atualizado");
+            }
+
+            // Caso aconteça algum erro:
+        } catch (Mensagem e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Erro ao converter número: " + e.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro inesperado: " + e.getMessage());
+        } 
+            //Vai atualizar a tabela
+        finally {
+            mostrarTabela();
+        }
+    }//GEN-LAST:event_JBAtualizarProdutoActionPerformed
+
+    private void JBExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBExcluirProdutoActionPerformed
+        try {
+            int idProduto = 0; // variável para armazenar o ID excluído
+
+            //Para garantir que tenha um produto selecionado na hora de alterar os dados
+            if (this.jTableGerenciaProdutos.getSelectedRow() == -1) {
+                throw new Mensagem("Você precisa selecionar um produto para poder alterá-lo");
+            } else {
+                idProduto = Integer.parseInt(this.jTableGerenciaProdutos.getValueAt(this.jTableGerenciaProdutos.getSelectedRow(), 0).toString());
+            }
+
+            //Garantir que o usuário quer apagar o produto
+            String[] confirmacao = {"Sim", "Não"};
+            int resposta = JOptionPane.showOptionDialog(null, "Quer excluir o produto?","Confirmação",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, confirmacao, confirmacao[0]);
+
+            //Limpar os campos caso o usuário aperte sim
+            if (resposta == 0) {
+                if (this.objetoProduto.deletarProdutoBD(idProduto)) {
+                    this.JTFNomeProduto.setText("");
+                    this.JTFPrecoUnit.setText("");
+                    this.JTFUnidadeProduto.setText("");
+                    this.JTFQuantidadeEstoque.setText("");
+                    this.JTFEstoqueMinimo.setText("");
+                    this.JTFEstoqueMaximo.setText("");
+                    this.JTFNomeCategoria.setText("");
+                    this.JTFTamanho.setText("");
+                    this.JTFEmbalagem.setText("");
+                    JOptionPane.showMessageDialog(null, "Produto excluído");
+                }
+            }
+}
+                catch (Mensagem e){
+                 JOptionPane.showMessageDialog(this, e.getMessage());
+                        }
+                finally {
+            mostrarTabela();
+        }
+    }//GEN-LAST:event_JBExcluirProdutoActionPerformed
+
     /**
-     * @param args the command line arguments
-     */
+         * @param args the command line arguments
+         */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

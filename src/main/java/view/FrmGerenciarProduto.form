@@ -309,11 +309,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Atualizar informa&#xe7;&#xf5;es"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBAtualizarProdutoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="JBExcluirProduto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Excluir produto"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBExcluirProdutoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="JBVoltar">
       <Properties>

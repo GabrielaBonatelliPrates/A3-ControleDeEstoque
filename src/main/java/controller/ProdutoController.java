@@ -24,7 +24,7 @@ public class ProdutoController {
         return true;
     }
 
-    public boolean atualizarProdutoBD(String nomeProduto, int idProduto, double precoUnit, String unidadeProduto, int quantidadeEstoque,
+    public boolean atualizarProdutoBD( int idProduto, String nomeProduto, double precoUnit, String unidadeProduto, int quantidadeEstoque,
             int estoqueMinimo, int estoqueMaximo, String nomeCategoria, String tamanho, String embalagem) {
         Produto produto = new Produto(nomeProduto, idProduto, precoUnit, unidadeProduto, quantidadeEstoque, estoqueMinimo,
                 estoqueMaximo, nomeCategoria, tamanho, embalagem); // precisa arrumar o "tamanho" e a "embalagem"
