@@ -67,6 +67,85 @@ public class ProdutoDAO {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex); //registra o erro no log
         }
     }
+    
+     public static List emiteLista() {
+        return produtos; //retorna a lista 
+    }
+
+    public static ResultSet listarProdutos() { //método que retorna todos os produtos do banco
+        String sql = "SELECT * FROM produtos"; //consulta sql que seleciona tudo da tabela produtos
+        try {
+            Connection connection = Conexao.conectar();
+            PreparedStatement statement = connection.prepareStatement(sql); //prepara a consulta
+            return statement.executeQuery(); //executa a consulta e retorna o resultado
+        } catch (SQLException ex) { //em caso de erro
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex); //log do erro
+            return null; //retorna nulo se ocorrer falha
+        }
+    }
+    
+    public static DefaultTableModel tabelaAtualizada() throws SQLException{
+        ResultSet resultSet = listarProdutos(); //todos os produtos do banco
+        DefaultTableModel model = montarTabela(resultSet);
+        return model;
+    }
+
+    public static DefaultTableModel montarTabela(ResultSet resultSet) throws SQLException { //constroi um modelo de tabela com base no ResultSet
+        DefaultTableModel model = new DefaultTableModel(); //cria um novo modelo de tabela
+        ResultSetMetaData metaData = resultSet.getMetaData(); //pega os metadados do resultado
+        int columnCount = metaData.getColumnCount(); //conta o numero de colunas
+
+        //adiciona os nomes das colunas
+        for (int column = 1; column <= columnCount; column++) {
+            model.addColumn(metaData.getColumnName(column));
+        }
+
+        //adiciona as linhas
+        while (resultSet.next()) {
+            Object[] row = new Object[columnCount];
+            for (int i = 0; i < columnCount; i++) {
+                row[i] = resultSet.getObject(i + 1);
+            }
+            model.addRow(row); //adiciona a linha ao modelo
+        }
+
+        return model; //retorna o modelo completo certinho
+    }
+    
+    //carrega um produto pelo nome
+    public static Produto buscarPorNome(String nomePesquisado) { //busca um produto específico no banco através do nome dele
+        Connection connection = Conexao.conectar();
+        Produto objeto = null; //inicializa o objeto que será retornado
+
+        String sql = "SELECT id, nome, preco_unitario, unidade, estoque_atual, estoque_minimo, estoque_maximo, nome_categoria, tamanho, embalagem FROM produtos WHERE nome= ?"; //query para buscar produto pelo nome
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql); //prepara a query
+            statement.setString(1, nomePesquisado); //valor do nome é o parametro
+
+            ResultSet resultSet = statement.executeQuery(); //executa a consulta
+
+            if (resultSet.next()) {
+                objeto = new Produto();
+                objeto.setIdProduto(resultSet.getInt("id"));
+                objeto.setNomeProduto(resultSet.getString("nome"));
+                objeto.setPrecoUnit(resultSet.getDouble("preco_unitario"));
+                objeto.setUnidadeProduto(resultSet.getString("unidade"));
+                objeto.setQuantidadeEstoque(resultSet.getInt("estoque_atual"));
+                objeto.setEstoqueMinimo(resultSet.getInt("estoque_minimo"));
+                objeto.setEstoqueMaximo(resultSet.getInt("estoque_maximo"));
+                objeto.setNomeCategoria(resultSet.getString("nome_categoria"));
+                //objeto.setTamanho(resultSet.getString("tamanho")); //vai definir o tamanho
+                // objeto.setEmbalagem(resultSet.getString("embalagem")); //vai definir a embalagem
+            }
+
+        } catch (SQLException erro) { //em caso de erro na consulta
+            System.out.println("Erro: " + erro.getMessage()); //imprime mensagem de erro
+        }
+
+        return objeto; //retorna o produto encontrado ou null
+    }
+
 
     public boolean atualizarProduto(Produto produto) {
         String sql = "UPDATE produtos set nome = ? , preco_unitario = ? ,unidade = ? ,estoque_atual = ? ,estoque_minimo = ? ,estoque_maximo = ? , nome_categoria = ? ,tamanho = ? ,embalagem = ? WHERE id = ?";
@@ -118,43 +197,7 @@ public class ProdutoDAO {
         return produtos; //retorna a lista atualizada
     }
 
-    public static List emiteLista() {
-        return produtos; //retorna a lista 
-    }
-
-    public static ResultSet listarProdutos() { //método que retorna todos os produtos do banco
-        String sql = "SELECT * FROM produtos"; //consulta sql que seleciona tudo da tabela produtos
-        try {
-            Connection connection = Conexao.conectar();
-            PreparedStatement statement = connection.prepareStatement(sql); //prepara a consulta
-            return statement.executeQuery(); //executa a consulta e retorna o resultado
-        } catch (SQLException ex) { //em caso de erro
-            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex); //log do erro
-            return null; //retorna nulo se ocorrer falha
-        }
-    }
-
-    public static DefaultTableModel montarTabela(ResultSet resultSet) throws SQLException { //constroi um modelo de tabela com base no ResultSet
-        DefaultTableModel model = new DefaultTableModel(); //cria um novo modelo de tabela
-        ResultSetMetaData metaData = resultSet.getMetaData(); //pega os metadados do resultado
-        int columnCount = metaData.getColumnCount(); //conta o numero de colunas
-
-        //adiciona os nomes das colunas
-        for (int column = 1; column <= columnCount; column++) {
-            model.addColumn(metaData.getColumnName(column));
-        }
-
-        //adiciona as linhas
-        while (resultSet.next()) {
-            Object[] row = new Object[columnCount];
-            for (int i = 0; i < columnCount; i++) {
-                row[i] = resultSet.getObject(i + 1);
-            }
-            model.addRow(row); //adiciona a linha ao modelo
-        }
-
-        return model; //retorna o modelo completo certinho
-    }
+   
 
     //carrega um produto pelo id
     public static Produto buscarPorId(int idPesquisado) { //busca um produto específico no banco através do id
@@ -166,40 +209,6 @@ public class ProdutoDAO {
         try {
             PreparedStatement statement = connection.prepareStatement(sql); //prepara a query
             statement.setInt(1, idPesquisado); //define o valor do id como parâmetro da query
-
-            ResultSet resultSet = statement.executeQuery(); //executa a consulta
-
-            if (resultSet.next()) {
-                objeto = new Produto();
-                objeto.setIdProduto(resultSet.getInt("id"));
-                objeto.setNomeProduto(resultSet.getString("nome"));
-                objeto.setPrecoUnit(resultSet.getDouble("preco_unitario"));
-                objeto.setUnidadeProduto(resultSet.getString("unidade"));
-                objeto.setQuantidadeEstoque(resultSet.getInt("estoque_atual"));
-                objeto.setEstoqueMinimo(resultSet.getInt("estoque_minimo"));
-                objeto.setEstoqueMaximo(resultSet.getInt("estoque_maximo"));
-                objeto.setNomeCategoria(resultSet.getString("nome_categoria"));
-                //objeto.setTamanho(resultSet.getString("tamanho")); //vai definir o tamanho
-                // objeto.setEmbalagem(resultSet.getString("embalagem")); //vai definir a embalagem
-            }
-
-        } catch (SQLException erro) { //em caso de erro na consulta
-            System.out.println("Erro: " + erro.getMessage()); //imprime mensagem de erro
-        }
-
-        return objeto; //retorna o produto encontrado ou null
-    }
-
-    //carrega um produto pelo nome
-    public static Produto buscarPorNome(String nomePesquisado) { //busca um produto específico no banco através do nome dele
-        Connection connection = Conexao.conectar();
-        Produto objeto = null; //inicializa o objeto que será retornado
-
-        String sql = "SELECT id, nome, preco_unitario, unidade, estoque_atual, estoque_minimo, estoque_maximo, nome_categoria, tamanho, embalagem FROM produtos WHERE nome= ?"; //query para buscar produto pelo nome
-
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql); //prepara a query
-            statement.setString(1, nomePesquisado); //valor do nome é o parametro
 
             ResultSet resultSet = statement.executeQuery(); //executa a consulta
 

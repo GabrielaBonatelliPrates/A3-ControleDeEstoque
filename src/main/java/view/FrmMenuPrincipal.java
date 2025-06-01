@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class FrmMenuPrincipal extends javax.swing.JFrame {
 FrmProdutoNovo telaCadastro = new FrmProdutoNovo();
 FrmProdutos produtos = new FrmProdutos();
+FrmCategorias categorias = new FrmCategorias();
 FrmCategoriaNova telaCategoria = new FrmCategoriaNova();
 FrmMovimentacao telaMovimentacao = new FrmMovimentacao();
 BalancoFinanceiro balancoFinanceiro = new BalancoFinanceiro();
@@ -294,11 +295,11 @@ BalancoFinanceiro balancoFinanceiro = new BalancoFinanceiro();
     }//GEN-LAST:event_jMenuAcimaDaMaximaActionPerformed
 
     private void jMenuListarProecosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListarProecosActionPerformed
-        // TODO add your handling code here:
+       categorias.setVisible(true);
     }//GEN-LAST:event_jMenuListarProecosActionPerformed
 
     private void jMenuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSobreActionPerformed
-        // TODO add your handling code here:
+        telaCategoria.setVisible(true);
     }//GEN-LAST:event_jMenuSobreActionPerformed
 
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
