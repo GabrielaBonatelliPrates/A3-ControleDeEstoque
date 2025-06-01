@@ -8,7 +8,7 @@ import model.Produto;
 
 public class ControleEstoque {
 
-    protected List<Produto> produtos = new ArrayList<>();//cria lista que vai armazenar os produtos
+    public List<Produto> produtos = new ArrayList<>();//cria lista que vai armazenar os produtos
     protected Scanner input = new Scanner(System.in); //cria scanner para a classe toda
 
     public void cadastraProduto(String nomeProduto, double precoUnit, String unidadeProduto, int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo, String nomeCategoria, int idProduto) { //metodo para cadastrar produto e adicionar ele na lista
@@ -25,7 +25,7 @@ public class ControleEstoque {
     }
 
     public boolean movimentacaoEstoqueReducao(String nomeProduto, int atualizacao) {
-        for (int i = 0; i >= produtos.size(); i++) {
+        for (int i = 0; i < produtos.size(); i++) {
                     
                     //Pegando o nome do Produto na Lista "produtos"
                     Produto x = produtos.get(i);
@@ -50,7 +50,7 @@ public class ControleEstoque {
     }
 
     public boolean movimentacaoEstoqueAdicao(String nomeProduto, int atualizacao) {
-        for (int i = 0; i >= produtos.size(); i++) {
+        for (int i = 0; i < produtos.size(); i++) {
                     
                     //Pegando o nome do Produto na Lista "produtos"
                     Produto x = produtos.get(i);
