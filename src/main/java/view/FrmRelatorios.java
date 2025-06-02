@@ -137,7 +137,7 @@ public class FrmRelatorios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBProdutosActionPerformed
-        // TODO add your handling code here:
+        new FrmProdutos().setVisible(true);
     }//GEN-LAST:event_JBProdutosActionPerformed
 
     private void JBBalancoFinanceiroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBBalancoFinanceiroMouseClicked
