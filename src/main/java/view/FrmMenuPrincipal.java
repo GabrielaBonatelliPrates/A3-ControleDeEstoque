@@ -1,7 +1,6 @@
 package view;
 
 import java.net.MalformedURLException;
-import view.JProdutoNovo;
 import javax.swing.*;
 import java.net.URL;
 import javax.swing.ImageIcon;

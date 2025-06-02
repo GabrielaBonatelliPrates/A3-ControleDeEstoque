@@ -8,12 +8,12 @@ package view;
  *
  * @author User
  */
-public class BalancoFinanceiro extends javax.swing.JFrame {
+public class FrmBalancoFinanceiro extends javax.swing.JFrame {
 
     /**
      * Creates new form BalancoFinanceiro
      */
-    public BalancoFinanceiro() {
+    public FrmBalancoFinanceiro() {
         initComponents();
     }
 
