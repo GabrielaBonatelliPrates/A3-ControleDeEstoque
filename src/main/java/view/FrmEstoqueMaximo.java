@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
 import dao.ProdutoDAO;
@@ -9,10 +5,6 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.Produto;
 
-/**
- *
- * @author USER
- */
 public class FrmEstoqueMaximo extends javax.swing.JFrame {
 
     /**
@@ -22,10 +14,10 @@ public class FrmEstoqueMaximo extends javax.swing.JFrame {
         this.carregaTabela();
         initComponents();
     }
-    
+
     public void carregaTabela() {
         ProdutoDAO prod = new ProdutoDAO();
-        
+
         DefaultTableModel modelo = (DefaultTableModel) this.JTEstoqueMaximo.getModel();
         modelo.setNumRows(0); //Posiciona na primeira linha da tabela
 
@@ -35,8 +27,7 @@ public class FrmEstoqueMaximo extends javax.swing.JFrame {
                 a.getIdProduto(),
                 a.getNomeProduto(),
                 a.getQuantidadeEstoque(),
-                a.getEstoqueMinimo(),
-            });
+                a.getEstoqueMaximo(),});
         }
     }
 
