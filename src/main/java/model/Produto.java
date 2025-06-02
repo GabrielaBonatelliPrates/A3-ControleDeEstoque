@@ -25,17 +25,6 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(String nomeProduto, int idProduto, double precoUnit, String unidadeProduto, int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo, String nomeCategoria) {
-        this.nomeProduto = nomeProduto;
-        this.idProduto = idProduto;
-        this.precoUnit = precoUnit;
-        this.unidadeProduto = unidadeProduto;
-        this.quantidadeEstoque = quantidadeEstoque;
-        this.estoqueMinimo = estoqueMinimo;
-        this.estoqueMaximo = estoqueMaximo;
-        this.categoria = categoria;
-    }
-
     public Produto(String nomeProduto, int idProduto, double precoUnit, String unidadeProduto, int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo, String nomeCategoria, boolean acimaMedia, boolean abaixoMedia) {
         this.nomeProduto = nomeProduto;
         this.idProduto = idProduto;

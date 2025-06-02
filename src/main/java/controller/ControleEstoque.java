@@ -20,7 +20,7 @@ public class ControleEstoque {
         produto.setEstoqueMinimo(estoqueMinimo);
         produto.setEstoqueMaximo(estoqueMaximo);
         produto.setIdProduto(idProduto);
-        produto.setNomeCategoria(nomeCategoria); //le os dados do produto
+       // produto.setNomeCategoria(nomeCategoria); //le os dados do produto
         produtos.add(produto); //adiciona o objeto criado à lista produtos
     }
 
@@ -109,15 +109,15 @@ public class ControleEstoque {
         int posicao = consultaProduto();
         if (!produtos.isEmpty() && posicao != -1) { //se a lista não estiver vazia e o prodito tiver sido encontrado, então pega as informações dele
             Produto produtoPesquisado = produtos.get(posicao); // transforma o produto pesquisado naquele que foi buscado
-            String informacoes = String.format("Nome: %s\nID: %s\nPreço unitário: %s\nUnidade de medida: %s\nQuantidades em estoque: %s\nQuantidade mínima: %s\nQuantidade máxima: %s\nCategoria: %s\n",
+            String informacoes = String.format("Nome: %s\nID: %s\nPreço unitário: %s\nUnidade de medida: %s\nQuantidades em estoque: %s\nQuantidade mínima: %s\nQuantidade máxima: %s\n",
                     produtoPesquisado.getNomeProduto(),
                     produtoPesquisado.getIdProduto(),
                     produtoPesquisado.getPrecoUnit(),
                     produtoPesquisado.getUnidadeProduto(),
                     produtoPesquisado.getQuantidadeEstoque(),
                     produtoPesquisado.getEstoqueMinimo(),
-                    produtoPesquisado.getEstoqueMaximo(),
-                    produtoPesquisado.getNomeCategoria());
+                    produtoPesquisado.getEstoqueMaximo());
+                    //produtoPesquisado.getNomeCategoria());
             System.out.println(informacoes);
         }
     }
@@ -157,7 +157,7 @@ public class ControleEstoque {
 
         String nomeId = "";
         int contador = 0;
-
+/**
         if (!produtos.isEmpty()) {
             for (Produto p : produtos) { //procura por produtos que tem a categoria correspondente a que o usuario deseja
                 if (p.getNomeCategoria().equalsIgnoreCase(categoriaDigitada.trim())) { //se for correspondente é adicionada à saída
@@ -177,7 +177,8 @@ public class ControleEstoque {
             System.out.println("Nenhum produto cadastrado.");
         }
     }
-
+    */
+/**
     public void listaDePrecos() {
         if (produtos.isEmpty()) {
             System.out.println("O estoque está sem produtos");
@@ -203,11 +204,12 @@ public class ControleEstoque {
                 }
             }
         }
+        
 
         System.out.println(listaDePrecos);
-
+*/
     }
-
+/**
     public void reajusteDePreco(double novoPreco) {             //Tendo em vista que terá um "consultarProduto" antes de ter um reajuste de preço
 
         Produto produto = new Produto();
@@ -221,4 +223,5 @@ public class ControleEstoque {
             }
         }
     }
+    */
 }

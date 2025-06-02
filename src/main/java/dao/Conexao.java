@@ -14,7 +14,7 @@ public class Conexao {
 
             String url = "jdbc:mysql://127.0.0.1:3306/controle_estoque"; //url de conexão com o banco de dados
             String user = "root"; //nome de usuário do banco de dados
-            String senha = "gabi061006"; //senha do banco de dados
+            String senha = "2007"; //senha do banco de dados
 
             connection = DriverManager.getConnection(url, user, senha); //vai tentar conectar com o banco
 

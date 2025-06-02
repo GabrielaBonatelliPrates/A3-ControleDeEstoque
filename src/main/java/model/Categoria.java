@@ -7,7 +7,7 @@ public class Categoria {
     Scanner sc = new Scanner(System.in);
 
     //Declaração das variáveis de instância
-    private String nome;
+    private String nomeCategoria;
     private String tamanho;
     private String embalagem;
 
@@ -16,19 +16,19 @@ public class Categoria {
     }
 
     //Construtor com parâmetros
-    public Categoria(String nome, String tamanho, String embalagem) {
-        this.nome = nome;
+    public Categoria(String nomeCategoria, String tamanho, String embalagem) {
+        this.nomeCategoria = nomeCategoria;
         this.tamanho = tamanho;
         this.embalagem = embalagem;
     }
 
     //Getters e setters
-    public String getNome() {
-        return nome;
+    public String getNomeCategoria() {
+        return nomeCategoria;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeCategoria(String nome) {
+        this.nomeCategoria = nome;
     }
 
     public String getTamanho() {
@@ -52,7 +52,7 @@ public class Categoria {
 
         //Declarando o nome de categoria
         System.out.print("Digite o nome da categoria: ");
-        this.nome = sc.nextLine();
+        this.nomeCategoria = sc.nextLine();
 
         sc.nextLine();
 

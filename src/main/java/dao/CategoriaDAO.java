@@ -54,6 +54,30 @@ public class CategoriaDAO {
             return null; //retorna nulo se ocorrer falha
         }
     }
+    
+       public ArrayList<String> mostrarCategorias() { //método que retorna os nomes das categorias do banco
+           ArrayList<String> mostrarCategorias = new ArrayList();
+        String sql = "SELECT nome FROM categorias"; //consulta sql que seleciona o nome da categoria na tabela categorias
+        try {
+            Connection connection = Conexao.conectar();
+            PreparedStatement statement = connection.prepareStatement(sql); 
+            ResultSet resultSet = statement.executeQuery();
+            
+            while(resultSet.next()){
+                mostrarCategorias.add(resultSet.getString("nome")); //retorna o nome de todas as categorias que estão cadastradas no banco de dados
+            }
+            
+            resultSet.close();
+            statement.close();
+            connection.close();
+
+        } catch (SQLException ex) { //em caso de erro
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex); 
+            return null; //retorna nulo caso dê erro
+        }
+        return mostrarCategorias;
+       }
+
 
     public static DefaultTableModel tabelaAtualizada() throws SQLException {
         ResultSet resultSet = listarCategorias(); //todas as categorias do banco
@@ -98,7 +122,7 @@ public class CategoriaDAO {
 
             if (resultSet.next()) {
                 objeto = new Categoria();
-                objeto.setNome(resultSet.getString("nome"));
+                objeto.setNomeCategoria(resultSet.getString("nome"));
                 objeto.setTamanho(resultSet.getString("tamanho"));
                 objeto.setEmbalagem(resultSet.getString("embalagem"));
             }
@@ -120,7 +144,7 @@ public class CategoriaDAO {
                 + "Categoria: %s\n"
                 + "Tamanho: %s\n"
                 + "Embalagem: %s\n",
-                categoriaPesquisada.getNome(),
+                categoriaPesquisada.getNomeCategoria(),
                 categoriaPesquisada.getTamanho(),
                 categoriaPesquisada.getEmbalagem()
         );
@@ -162,7 +186,7 @@ public class CategoriaDAO {
 
             while (resultSet.next()) {
                 Categoria objeto = new Categoria();
-                objeto.setNome(resultSet.getString("nome"));
+                objeto.setNomeCategoria(resultSet.getString("nome"));
                 objeto.setTamanho(resultSet.getString("tamanho"));
                 objeto.setEmbalagem(resultSet.getString("embalagem"));
                 

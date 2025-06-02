@@ -137,7 +137,7 @@ public class ProdutoDAO {
                 produto.setQuantidadeEstoque(resultSet.getInt("estoque_atual"));
                 produto.setEstoqueMinimo(resultSet.getInt("estoque_minimo"));
                 produto.setEstoqueMaximo(resultSet.getInt("estoque_maximo"));
-                categoria.setNome(resultSet.getString("nome_categoria"));
+                categoria.setNomeCategoria(resultSet.getString("nome_categoria"));
                 categoria.setTamanho(resultSet.getString("tamanho")); //vai definir o tamanho
                  categoria.setEmbalagem(resultSet.getString("embalagem")); //vai definir a embalagem
             }
@@ -149,7 +149,7 @@ public class ProdutoDAO {
         return produto; //retorna o produto encontrado ou null
     }
 
-/*
+
     public boolean atualizarProduto(Produto produto) {
         String sql = "UPDATE produtos set nome = ? , preco_unitario = ? ,unidade = ? ,estoque_atual = ? ,estoque_minimo = ? ,estoque_maximo = ? , nome_categoria = ? ,tamanho = ? ,embalagem = ? WHERE id = ?";
         try {
@@ -162,7 +162,7 @@ public class ProdutoDAO {
             statement.setInt(4, produto.getQuantidadeEstoque());
             statement.setInt(5, produto.getEstoqueMinimo());
             statement.setInt(6, produto.getEstoqueMaximo());
-            statement.setString(7, produto.getNomeCategoria());
+            //statement.setString(7, produto.getNomeCategoria());
             //stmt.setString(8, produto.getTamanho());
             //stmt.setString(9, produto.getEmbalagem());
             statement.setInt(10, produto.getIdProduto());
@@ -199,7 +199,7 @@ public class ProdutoDAO {
         produtos.add(produto); //adiciona o objeto criado à lista produtos 
         return produtos; //retorna a lista atualizada
     }
-*/
+
    
 
     //carrega um produto pelo id
@@ -226,7 +226,7 @@ public class ProdutoDAO {
                 produto.setQuantidadeEstoque(resultSet.getInt("estoque_atual"));
                 produto.setEstoqueMinimo(resultSet.getInt("estoque_minimo"));
                 produto.setEstoqueMaximo(resultSet.getInt("estoque_maximo"));
-                categoria.setNome(resultSet.getString("nome_categoria"));
+                categoria.setNomeCategoria(resultSet.getString("nome_categoria"));
                 categoria.setTamanho(resultSet.getString("tamanho")); //vai definir o tamanho
                  categoria.setEmbalagem(resultSet.getString("embalagem")); //vai definir a embalagem
             }
