@@ -26,7 +26,7 @@ public class FrmRelatorios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        JBListaDePrecos = new javax.swing.JButton();
         JBBalancoFinanceiro = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -37,7 +37,12 @@ public class FrmRelatorios extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Lista de preços");
+        JBListaDePrecos.setText("Lista de preços");
+        JBListaDePrecos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JBListaDePrecosMouseClicked(evt);
+            }
+        });
 
         JBBalancoFinanceiro.setText("Balanço financeiro");
         JBBalancoFinanceiro.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -86,7 +91,7 @@ public class FrmRelatorios extends javax.swing.JFrame {
                                 .addComponent(JBAcimaMaximo)
                                 .addGap(6, 6, 6))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(JBListaDePrecos)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(JBBalancoFinanceiro)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -111,7 +116,7 @@ public class FrmRelatorios extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(JBListaDePrecos)
                     .addComponent(JBBalancoFinanceiro)
                     .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -138,6 +143,10 @@ public class FrmRelatorios extends javax.swing.JFrame {
                 new FrmEstoqueMaximo().setVisible(true);
 
     }//GEN-LAST:event_JBAcimaMaximoMouseClicked
+
+    private void JBListaDePrecosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBListaDePrecosMouseClicked
+                new FrmListaPrecos().setVisible(true);
+    }//GEN-LAST:event_JBListaDePrecosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -180,7 +189,7 @@ public class FrmRelatorios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBAcimaMaximo;
     private javax.swing.JButton JBBalancoFinanceiro;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton JBListaDePrecos;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
