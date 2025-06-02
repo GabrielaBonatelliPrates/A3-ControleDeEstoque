@@ -16,7 +16,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     FrmCategoriaNova telaCategoria = new FrmCategoriaNova();
     FrmGerenciarProduto telaGerenciar = new FrmGerenciarProduto();
     FrmMovimentacao telaMovimentacao = new FrmMovimentacao();
-    BalancoFinanceiro balancoFinanceiro = new BalancoFinanceiro();
+    FrmBalancoFinanceiro balancoFinanceiro = new FrmBalancoFinanceiro();
 
     /**
      * Creates new form FrmMenuPrincipal.

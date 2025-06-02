@@ -284,5 +284,52 @@ public class ProdutoDAO {
 
         return statusProduto; //retorna o status do produto
     }
+    
+    public List<Produto> pegarProdutos() {
+        
+        String sql = "SELECT id, nome, preco_unitario, unidade, estoque_atual, estoque_minimo, estoque_maximo, nome_categoria, tamanho, embalagem FROM produtos WHERE id = ?";
+        
+        try (Connection connection = Conexao.conectar();
+             PreparedStatement stmt = connection.prepareStatement(sql);
+             ResultSet resultSet = stmt.executeQuery()) {
 
+            while (resultSet.next()) {
+                Produto objeto = new Produto();
+                objeto.setIdProduto(resultSet.getInt("id"));
+                objeto.setNomeProduto(resultSet.getString("nome"));
+                objeto.setPrecoUnit(resultSet.getDouble("preco_unitario"));
+                objeto.setUnidadeProduto(resultSet.getString("unidade"));
+                objeto.setQuantidadeEstoque(resultSet.getInt("estoque_atual"));
+                objeto.setEstoqueMinimo(resultSet.getInt("estoque_minimo"));
+                objeto.setEstoqueMaximo(resultSet.getInt("estoque_maximo"));
+                objeto.setNomeCategoria(resultSet.getString("nome_categoria"));
+                
+                produtos.add(objeto);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return produtos;
+    }
+    
+    public List<Produto> pegarProdutosAcimaMaximo() {
+        List<Produto> produtosAcima = new ArrayList<>();
+        for(Produto a : produtos){
+            if(a.getQuantidadeEstoque() >= a.getEstoqueMaximo()){
+                produtosAcima.add(a);
+            }
+        }   
+            return produtosAcima;
+    }
+    
+    public List<Produto> pegarProdutosAbaixoMinimo() {
+        List<Produto> produtosAbaixo = new ArrayList<>();
+        for(Produto a : produtos){
+            if(a.getQuantidadeEstoque() <= a.getEstoqueMaximo()){
+                produtosAbaixo.add(a);
+            }
+        }   
+            return produtosAbaixo;
+    }
 }

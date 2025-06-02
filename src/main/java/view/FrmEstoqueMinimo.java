@@ -5,20 +5,21 @@
 package view;
 
 import dao.ProdutoDAO;
+import java.sql.SQLException;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.Produto;
 
 /**
  *
- * @author USER
+ * @author daviw
  */
-public class FrmEstoqueMaximo extends javax.swing.JFrame {
+public class FrmEstoqueMinimo extends javax.swing.JFrame {
 
     /**
-     * Creates new form FrmEstoqueMaximo
+     * Creates new form FrmEstoqueMinimo
      */
-    public FrmEstoqueMaximo() {
+    public FrmEstoqueMinimo() {
         this.carregaTabela();
         initComponents();
     }
@@ -26,11 +27,11 @@ public class FrmEstoqueMaximo extends javax.swing.JFrame {
     public void carregaTabela() {
         ProdutoDAO prod = new ProdutoDAO();
         
-        DefaultTableModel modelo = (DefaultTableModel) this.JTEstoqueMaximo.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) this.JTEstoqueMinimo.getModel();
         modelo.setNumRows(0); //Posiciona na primeira linha da tabela
 
-        List<Produto> acimaMedia = prod.pegarProdutosAcimaMaximo();
-        for (Produto a : acimaMedia) {
+        List<Produto> abaixoMedia = prod.pegarProdutosAbaixoMinimo();
+        for (Produto a : abaixoMedia) {
             modelo.addRow(new Object[]{
                 a.getIdProduto(),
                 a.getNomeProduto(),
@@ -49,30 +50,35 @@ public class FrmEstoqueMaximo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        JLEstoqueMinimo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        JTEstoqueMaximo = new javax.swing.JTable();
+        JTEstoqueMinimo = new javax.swing.JTable();
         JBVoltar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Estoque Maximo");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("Acima do Estoque Máximo");
+        JLEstoqueMinimo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        JLEstoqueMinimo.setText("Acima do Estoque Máximo");
 
-        JTEstoqueMaximo.setModel(new javax.swing.table.DefaultTableModel(
+        JTEstoqueMinimo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "Produto", "ID", "Quantidade", "Quantidade máxima"
+                "Produto", "ID", "Quantidade", "Quantidade mínima"
             }
         ));
-        jScrollPane1.setViewportView(JTEstoqueMaximo);
+        jScrollPane1.setViewportView(JTEstoqueMinimo);
 
         JBVoltar.setText("Voltar");
         JBVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -96,11 +102,11 @@ public class FrmEstoqueMaximo extends javax.swing.JFrame {
                         .addGap(43, 43, 43)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(114, 114, 114)
-                        .addComponent(jLabel1))
+                        .addComponent(JLEstoqueMinimo))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(279, 279, 279)
                         .addComponent(JBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,7 +114,7 @@ public class FrmEstoqueMaximo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
-                        .addComponent(jLabel1))
+                        .addComponent(JLEstoqueMinimo))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(41, 41, 41)
                         .addComponent(jLabel2)))
@@ -116,7 +122,7 @@ public class FrmEstoqueMaximo extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(JBVoltar)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -125,6 +131,10 @@ public class FrmEstoqueMaximo extends javax.swing.JFrame {
     private void JBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBVoltarActionPerformed
         this.dispose();
     }//GEN-LAST:event_JBVoltarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -143,28 +153,28 @@ public class FrmEstoqueMaximo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmEstoqueMaximo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmEstoqueMinimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmEstoqueMaximo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmEstoqueMinimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmEstoqueMaximo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmEstoqueMinimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmEstoqueMaximo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmEstoqueMinimo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmEstoqueMaximo().setVisible(true);
+                new FrmEstoqueMinimo().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBVoltar;
-    private javax.swing.JTable JTEstoqueMaximo;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel JLEstoqueMinimo;
+    private javax.swing.JTable JTEstoqueMinimo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
