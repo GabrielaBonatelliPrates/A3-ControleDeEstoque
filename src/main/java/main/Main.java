@@ -15,8 +15,6 @@ public class Main {
     private static final FrmMenuPrincipal menuPrincipal = new FrmMenuPrincipal();
 
     public static void main(String[] args) {
-        menuPrincipal.setSize(1920, 1080);
-        menuPrincipal.setExtendedState(FrmMenuPrincipal.MAXIMIZED_BOTH);
         menuPrincipal.setVisible(true);
         Connection conexao = Conexao.conectar();
         //comentario para realizar commit;
