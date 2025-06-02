@@ -23,6 +23,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
      */
     public FrmMenuPrincipal() {
         initComponents();
+       setSize(1920, 1080);
+       setExtendedState(FrmMenuPrincipal.MAXIMIZED_BOTH);
     }
 
     /**
