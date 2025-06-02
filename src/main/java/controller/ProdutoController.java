@@ -13,7 +13,7 @@ public class ProdutoController {
     public List<Produto> produtos() {
         return prodDAO.emiteLista();
     }
-
+/*
     public boolean cadastrarProdutoBD(String nomeProduto, double precoUnit, String unidadeProduto, int quantidadeEstoque,
             int estoqueMinimo, int estoqueMaximo, String nomeCategoria, String tamanho, String embalagem) {
         // adicionar ID
@@ -35,6 +35,6 @@ public class ProdutoController {
     public boolean deletarProdutoBD(int idProduto) {
         prodDAO.deletarProduto(idProduto);
         return true;
-    }
+    } */
 
 }

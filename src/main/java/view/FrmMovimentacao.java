@@ -5,11 +5,13 @@
 package view;
 
 import controller.MovimentacaoEstoque;
+import dao.MovimentacaoDAO;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import controller.ControleEstoque;
+import java.util.Date;
 import model.Produto;
 
 /**
@@ -19,7 +21,7 @@ import model.Produto;
 public class FrmMovimentacao extends javax.swing.JFrame {
 
     private Produto produto;
-    private MovimentacaoEstoque movEst;
+    private MovimentacaoDAO movEst;
     private ControleEstoque contEst;
     private List<Produto> produtos;
 
@@ -29,7 +31,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
     public FrmMovimentacao() {
         initComponents();
         this.produto = new Produto();
-        movEst = new MovimentacaoEstoque();
+        movEst = new MovimentacaoDAO();
         contEst = new ControleEstoque();
         produtos = new ArrayList();
     }
@@ -228,7 +230,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Adicao confirmada!");
 
                 //Pegando as informações da movimentação
-                novaMov.setData(Instant.now());
+                novaMov.setData(Date.from(Instant.now()));
                 novaMov.setNomeProduto(nomeProduto);
                 novaMov.setQuantidadeMovimentada(quantidade);
                 movEst.movimentacoes.add(novaMov);
@@ -321,7 +323,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Baixa confirmada!");
 
                 //Pegando as informações da movimentação
-                novaMov.setData(Instant.now());
+                novaMov.setData(Date.from(Instant.now()));
                 novaMov.setNomeProduto(nomeProduto);
                 novaMov.setQuantidadeMovimentada(quantidade);
 

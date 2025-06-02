@@ -17,7 +17,7 @@ public class Produto {
     private int quantidadeEstoque;
     private int estoqueMinimo;
     private int estoqueMaximo;
-    private String nomeCategoria;
+    private Categoria categoria;
     private boolean acimaMedia;
     private boolean abaixoMedia;
 
@@ -33,7 +33,7 @@ public class Produto {
         this.quantidadeEstoque = quantidadeEstoque;
         this.estoqueMinimo = estoqueMinimo;
         this.estoqueMaximo = estoqueMaximo;
-        this.nomeCategoria = nomeCategoria;
+        this.categoria = categoria;
     }
 
     public Produto(String nomeProduto, int idProduto, double precoUnit, String unidadeProduto, int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo, String nomeCategoria, boolean acimaMedia, boolean abaixoMedia) {
@@ -44,7 +44,7 @@ public class Produto {
         this.quantidadeEstoque = quantidadeEstoque;
         this.estoqueMinimo = estoqueMinimo;
         this.estoqueMaximo = estoqueMaximo;
-        this.nomeCategoria = nomeCategoria;
+        this.categoria = categoria;
         this.acimaMedia = acimaMedia;
         this.abaixoMedia = abaixoMedia;
     }
@@ -98,12 +98,12 @@ public class Produto {
         this.estoqueMaximo = estoqueMaximo;
     }
 
-    public String getNomeCategoria() {
-        return nomeCategoria;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setNomeCategoria(String nomeCategoria) {
-        this.nomeCategoria = nomeCategoria;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public int getIdProduto() {
@@ -179,7 +179,7 @@ public class Produto {
             }
         }
     }
-
+/*
     //le os dados dos produtos
     public void lerDados() {
 
@@ -215,5 +215,5 @@ public class Produto {
         setNomeCategoria(cat.getNome());
 
     }
-
+*/
 }

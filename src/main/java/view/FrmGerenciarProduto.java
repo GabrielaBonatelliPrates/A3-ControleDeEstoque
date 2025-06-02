@@ -475,7 +475,7 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_JBReajustarEstoqueActionPerformed
 
     private void jTableGerenciaProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableGerenciaProdutosMouseClicked
-        if (this.jTableGerenciaProdutos.getSelectedRow() != -1) {
+       /*  if (this.jTableGerenciaProdutos.getSelectedRow() != -1) {
             String nome = this.jTableGerenciaProdutos.getValueAt(this.jTableGerenciaProdutos.getSelectedRow(), 1).toString();
             String precoUnit = this.jTableGerenciaProdutos.getValueAt(this.jTableGerenciaProdutos.getSelectedRow(), 2).toString();
             String unidadeProduto = this.jTableGerenciaProdutos.getValueAt(this.jTableGerenciaProdutos.getSelectedRow(), 3).toString();
@@ -495,11 +495,11 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
             this.JTFNomeCategoria.setText(nomeCategoria);
             this.JTFTamanho.setText(tamanho);
             this.JTFEmbalagem.setText(embalagem);
-        }
+        } */
     }//GEN-LAST:event_jTableGerenciaProdutosMouseClicked
 
     private void JBAtualizarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAtualizarProdutoActionPerformed
-        try {
+       /* try {
             int idProduto = 0;
             String nomeProduto = "";
             double precoUnit = 0.00;
@@ -624,10 +624,11 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
         finally {
             mostrarTabela();
         }
+        */
     }//GEN-LAST:event_JBAtualizarProdutoActionPerformed
 
     private void JBExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBExcluirProdutoActionPerformed
-        try {
+      /*  try {
             int idProduto = 0; // variável para armazenar o ID excluído
 
             //Para garantir que tenha um produto selecionado na hora de alterar os dados
@@ -663,7 +664,7 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
                         }
                 finally {
             mostrarTabela();
-        }
+        } */
     }//GEN-LAST:event_JBExcluirProdutoActionPerformed
 
     /**

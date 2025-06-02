@@ -14,6 +14,7 @@ import model.Produto;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import model.Categoria;
 
 public class ProdutoDAO {
 
@@ -58,7 +59,7 @@ public class ProdutoDAO {
             ResultSet resultSet = statement.getGeneratedKeys(); //devolve o id (gerado automaticamente pelo sql - posteriormente vamos substituir por um método (dicas do professor))
             if (resultSet.next()) {
                 int idGerado = resultSet.getInt(1); //vai ler o id gerado
-                insereLista(nomeProduto, idGerado, precoUnit, unidadeProduto, quantidadeEstoque, estoqueMinimo, estoqueMaximo, nomeCategoria); //adiciona o produto na lista
+             //   insereLista(nomeProduto, idGerado, precoUnit, unidadeProduto, quantidadeEstoque, estoqueMinimo, estoqueMaximo, nomeCategoria); //adiciona o produto na lista
                 String strIdGerado = String.format("Id do produto %s: %d", nomeProduto, idGerado);
                 JOptionPane.showMessageDialog(null, strIdGerado); //exibe o id gerado pro usuário (já que era a informação que ele não entregou)
             }
@@ -115,7 +116,8 @@ public class ProdutoDAO {
     //carrega um produto pelo nome
     public static Produto buscarPorNome(String nomePesquisado) { //busca um produto específico no banco através do nome dele
         Connection connection = Conexao.conectar();
-        Produto objeto = null; //inicializa o objeto que será retornado
+         Produto produto = null; //inicializa o objeto que será retornado
+        Categoria categoria = null; //inicializa o objeto que será retornado
 
         String sql = "SELECT id, nome, preco_unitario, unidade, estoque_atual, estoque_minimo, estoque_maximo, nome_categoria, tamanho, embalagem FROM produtos WHERE nome= ?"; //query para buscar produto pelo nome
 
@@ -126,27 +128,28 @@ public class ProdutoDAO {
             ResultSet resultSet = statement.executeQuery(); //executa a consulta
 
             if (resultSet.next()) {
-                objeto = new Produto();
-                objeto.setIdProduto(resultSet.getInt("id"));
-                objeto.setNomeProduto(resultSet.getString("nome"));
-                objeto.setPrecoUnit(resultSet.getDouble("preco_unitario"));
-                objeto.setUnidadeProduto(resultSet.getString("unidade"));
-                objeto.setQuantidadeEstoque(resultSet.getInt("estoque_atual"));
-                objeto.setEstoqueMinimo(resultSet.getInt("estoque_minimo"));
-                objeto.setEstoqueMaximo(resultSet.getInt("estoque_maximo"));
-                objeto.setNomeCategoria(resultSet.getString("nome_categoria"));
-                //objeto.setTamanho(resultSet.getString("tamanho")); //vai definir o tamanho
-                // objeto.setEmbalagem(resultSet.getString("embalagem")); //vai definir a embalagem
+                produto = new Produto();
+                categoria = new Categoria();
+                produto.setIdProduto(resultSet.getInt("id"));
+                produto.setNomeProduto(resultSet.getString("nome"));
+                produto.setPrecoUnit(resultSet.getDouble("preco_unitario"));
+                produto.setUnidadeProduto(resultSet.getString("unidade"));
+                produto.setQuantidadeEstoque(resultSet.getInt("estoque_atual"));
+                produto.setEstoqueMinimo(resultSet.getInt("estoque_minimo"));
+                produto.setEstoqueMaximo(resultSet.getInt("estoque_maximo"));
+                categoria.setNome(resultSet.getString("nome_categoria"));
+                categoria.setTamanho(resultSet.getString("tamanho")); //vai definir o tamanho
+                 categoria.setEmbalagem(resultSet.getString("embalagem")); //vai definir a embalagem
             }
 
         } catch (SQLException erro) { //em caso de erro na consulta
             System.out.println("Erro: " + erro.getMessage()); //imprime mensagem de erro
         }
 
-        return objeto; //retorna o produto encontrado ou null
+        return produto; //retorna o produto encontrado ou null
     }
 
-
+/*
     public boolean atualizarProduto(Produto produto) {
         String sql = "UPDATE produtos set nome = ? , preco_unitario = ? ,unidade = ? ,estoque_atual = ? ,estoque_minimo = ? ,estoque_maximo = ? , nome_categoria = ? ,tamanho = ? ,embalagem = ? WHERE id = ?";
         try {
@@ -196,13 +199,14 @@ public class ProdutoDAO {
         produtos.add(produto); //adiciona o objeto criado à lista produtos 
         return produtos; //retorna a lista atualizada
     }
-
+*/
    
 
     //carrega um produto pelo id
     public static Produto buscarPorId(int idPesquisado) { //busca um produto específico no banco através do id
         Connection connection = Conexao.conectar();
-        Produto objeto = null; //inicializa o objeto que será retornado
+        Produto produto = null; //inicializa o objeto que será retornado
+        Categoria categoria = null; //inicializa o objeto que será retornado
 
         String sql = "SELECT id, nome, preco_unitario, unidade, estoque_atual, estoque_minimo, estoque_maximo, nome_categoria, tamanho, embalagem FROM produtos WHERE id = ?"; //query para buscar produto por id
 
@@ -213,24 +217,25 @@ public class ProdutoDAO {
             ResultSet resultSet = statement.executeQuery(); //executa a consulta
 
             if (resultSet.next()) {
-                objeto = new Produto();
-                objeto.setIdProduto(resultSet.getInt("id"));
-                objeto.setNomeProduto(resultSet.getString("nome"));
-                objeto.setPrecoUnit(resultSet.getDouble("preco_unitario"));
-                objeto.setUnidadeProduto(resultSet.getString("unidade"));
-                objeto.setQuantidadeEstoque(resultSet.getInt("estoque_atual"));
-                objeto.setEstoqueMinimo(resultSet.getInt("estoque_minimo"));
-                objeto.setEstoqueMaximo(resultSet.getInt("estoque_maximo"));
-                objeto.setNomeCategoria(resultSet.getString("nome_categoria"));
-                //objeto.setTamanho(resultSet.getString("tamanho")); //vai definir o tamanho
-                // objeto.setEmbalagem(resultSet.getString("embalagem")); //vai definir a embalagem
+                produto = new Produto();
+                categoria = new Categoria();
+                produto.setIdProduto(resultSet.getInt("id"));
+                produto.setNomeProduto(resultSet.getString("nome"));
+                produto.setPrecoUnit(resultSet.getDouble("preco_unitario"));
+                produto.setUnidadeProduto(resultSet.getString("unidade"));
+                produto.setQuantidadeEstoque(resultSet.getInt("estoque_atual"));
+                produto.setEstoqueMinimo(resultSet.getInt("estoque_minimo"));
+                produto.setEstoqueMaximo(resultSet.getInt("estoque_maximo"));
+                categoria.setNome(resultSet.getString("nome_categoria"));
+                categoria.setTamanho(resultSet.getString("tamanho")); //vai definir o tamanho
+                 categoria.setEmbalagem(resultSet.getString("embalagem")); //vai definir a embalagem
             }
 
         } catch (SQLException erro) { //em caso de erro na consulta
             System.out.println("Erro: " + erro.getMessage()); //imprime mensagem de erro
         }
 
-        return objeto; //retorna o produto encontrado ou null
+        return produto; //retorna o produto encontrado ou null
     }
 
     //cria a ficha do produto
@@ -255,7 +260,7 @@ public class ProdutoDAO {
                 produtoPesquisado.getQuantidadeEstoque(),
                 produtoPesquisado.getEstoqueMinimo(),
                 produtoPesquisado.getEstoqueMaximo(),
-                produtoPesquisado.getNomeCategoria()
+                produtoPesquisado.getCategoria()
         );
 
         return fichaProduto; //retorna a ficha do produto
@@ -302,7 +307,7 @@ public class ProdutoDAO {
                 objeto.setQuantidadeEstoque(resultSet.getInt("estoque_atual"));
                 objeto.setEstoqueMinimo(resultSet.getInt("estoque_minimo"));
                 objeto.setEstoqueMaximo(resultSet.getInt("estoque_maximo"));
-                objeto.setNomeCategoria(resultSet.getString("nome_categoria"));
+              //  objeto.setCategoria.setNome(resultSet.getString("nome_categoria"));
                 
                 produtos.add(objeto);
             }
