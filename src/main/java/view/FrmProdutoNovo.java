@@ -379,8 +379,11 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
             this.JTFQuantidadeMinimaProduto.setText("");
             this.JTFQuantidadeMaximaProduto.setText("");
             this.JTFCategoria.setText("");
+            
+            
+            Categoria categoria = 
 
-            //Produto produto = new Produto(nome, id, valorUnitario, unidade, quantidadeEstoque, quantidadeEstoqueMinima, quantidadeEstoqueMaxima, nomeCategoria);
+            Produto produto = new Produto(nome, id, valorUnitario, unidade, quantidadeEstoque, quantidadeEstoqueMinima, quantidadeEstoqueMaxima, categoria);
             String tamanho = "tamanho";
             String embalagem = "embalgem";
             ProdutoDAO.inserirProduto(nome, valorUnitario, unidade, quantidadeEstoque, quantidadeEstoqueMinima, quantidadeEstoqueMaxima, nomeCategoria, tamanho, embalagem);

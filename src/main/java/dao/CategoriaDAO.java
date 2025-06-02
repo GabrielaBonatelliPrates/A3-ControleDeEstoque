@@ -26,7 +26,7 @@ public class CategoriaDAO {
 
     //método para colocar a categoria no banco de dados
     public static void inserirCategoria(String nome, String tamanho, String embalagem) throws SQLException {
-
+        Categoria categoria = new Categoria ();
         String sql = "INSERT INTO categorias (nome, tamanho, embalagem) VALUES (?, ?, ?)"; //insere os dados na tabela
 
         try (
@@ -151,4 +151,28 @@ public class CategoriaDAO {
     }
 
     //criar metodo pra devolver o status da categoria
+    
+     public List<Categoria> devolveCategorias(String nome) {
+        
+        String sql = "SELECT nome, tamanho, embalagem FROM produtos WHERE id = nome";
+        
+        try (Connection connection = Conexao.conectar();
+             PreparedStatement stmt = connection.prepareStatement(sql);
+             ResultSet resultSet = stmt.executeQuery()) {
+
+            while (resultSet.next()) {
+                Categoria objeto = new Categoria();
+                objeto.setNome(resultSet.getString("nome"));
+                objeto.setTamanho(resultSet.getString("tamanho"));
+                objeto.setEmbalagem(resultSet.getString("embalagem"));
+                
+                categorias.add(objeto);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return categorias;
+    }
+     
 }

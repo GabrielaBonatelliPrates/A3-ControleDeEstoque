@@ -333,7 +333,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
                             produtoProcurado.getQuantidadeEstoque(),
                             produtoProcurado.getEstoqueMinimo(),
                             produtoProcurado.getEstoqueMaximo(),
-                            produtoProcurado.getNomeCategoria());
+                            produtoProcurado.getCategoria());
                     encontrado = true;
                     break;
                 }
