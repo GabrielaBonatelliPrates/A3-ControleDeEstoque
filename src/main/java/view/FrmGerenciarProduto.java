@@ -7,6 +7,7 @@ import dao.ProdutoDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
 import controller.ProdutoController;
+import javax.swing.ButtonGroup;
 
 public class FrmGerenciarProduto extends javax.swing.JFrame {
 
@@ -32,19 +33,22 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
                 p.getUnidadeProduto(),
                 p.getQuantidadeEstoque(),
                 p.getEstoqueMinimo(),
-                p.getEstoqueMaximo(),
-                p.getNomeCategoria(), 
-                //p.getTamanho(),
-                //p.getEmbalagem()
+                p.getEstoqueMaximo(), // p.getNomeCategoria(), 
+            //p.getTamanho(),
+            //p.getEmbalagem()
             });
         }
     }
+
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jFrame1 = new javax.swing.JFrame();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableGerenciaProdutos = new javax.swing.JTable();
@@ -77,16 +81,16 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
         JTFAumentoPercentualProduto = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        JDBAumento = new javax.swing.JCheckBox();
-        JCBDesconto = new javax.swing.JCheckBox();
+        JRBAumento = new javax.swing.JRadioButton();
+        JRBDesconto = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
         JBReajustarEstoque = new javax.swing.JButton();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         JTFAumentoPercentualEstoque = new javax.swing.JTextField();
-        JDBAumento1 = new javax.swing.JCheckBox();
-        JCBDesconto1 = new javax.swing.JCheckBox();
+        JRBAumento1 = new javax.swing.JRadioButton();
+        JRBDesconto1 = new javax.swing.JRadioButton();
         jLabel12 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
@@ -191,9 +195,11 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("Produto:");
 
-        JDBAumento.setText("Aumento");
+        buttonGroup1.add(JRBAumento);
+        JRBAumento.setText("Aumento");
 
-        JCBDesconto.setText("Desconto");
+        buttonGroup1.add(JRBDesconto);
+        JRBDesconto.setText("Desconto");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -215,11 +221,11 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel14))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(JDBAumento)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(JRBAumento)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(JCBDesconto))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(JRBDesconto))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel15)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(JTFProdutoNovoPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -242,11 +248,11 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
                     .addComponent(jLabel13)
                     .addComponent(JTFAumentoPercentualProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JDBAumento)
-                    .addComponent(JCBDesconto))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(JRBAumento, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(JRBDesconto, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JBReajustarProduto)
                 .addGap(32, 32, 32))
         );
@@ -271,9 +277,11 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
         jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setText("Reajuste de preços do estoque:");
 
-        JDBAumento1.setText("Aumento");
+        buttonGroup2.add(JRBAumento1);
+        JRBAumento1.setText("Aumento");
 
-        JCBDesconto1.setText("Desconto");
+        buttonGroup2.add(JRBDesconto1);
+        JRBDesconto1.setText("Desconto");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -284,14 +292,9 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
                 .addComponent(JBReajustarEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(79, 79, 79))
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(JDBAumento1)
-                        .addGap(88, 88, 88)
-                        .addComponent(JCBDesconto1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -301,8 +304,13 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
                                         .addComponent(jLabel20))
                                     .addComponent(jLabel19))
                                 .addGap(65, 65, 65))
-                            .addComponent(jLabel16))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                            .addComponent(jLabel16))
+                        .addContainerGap(46, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(JRBAumento1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JRBDesconto1)
+                        .addGap(32, 32, 32))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,11 +323,11 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(JTFAumentoPercentualEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JDBAumento1)
-                    .addComponent(JCBDesconto1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                    .addComponent(JRBAumento1)
+                    .addComponent(JRBDesconto1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JBReajustarEstoque)
                 .addGap(45, 45, 45))
         );
@@ -467,15 +475,50 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_JTFUnidadeProdutoActionPerformed
 
     private void JBReajustarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBReajustarProdutoActionPerformed
-        // TODO add your handling code here:
+     
+        try {
+            double precoAtual = Double.parseDouble(JTFProdutoNovoPreco.getText());
+            double percentual = Double.parseDouble(JTFAumentoPercentualProduto.getText());
+
+            double precoNovo;
+
+            if (JRBAumento.isSelected()) {
+                precoNovo = precoAtual * (1 + percentual / 100);
+            } else if (JRBDesconto.isSelected()) {
+                precoNovo = precoAtual * (1 - percentual / 100);
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecione o reajuste a ser efetivado.");
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Digite valores válidos.");
+
+        }
+    
     }//GEN-LAST:event_JBReajustarProdutoActionPerformed
 
     private void JBReajustarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBReajustarEstoqueActionPerformed
-        // TODO add your handling code here:
+
+        try {
+            double precoAtual = Double.parseDouble(JTFProdutoNovoPreco.getText());
+            double percentual = Double.parseDouble(JTFAumentoPercentualProduto.getText());
+
+            double precoNovo;
+
+            if (JRBAumento.isSelected()) {
+                precoNovo = precoAtual * (1 + percentual / 100);
+            } else if (JRBDesconto.isSelected()) {
+                precoNovo = precoAtual * (1 - percentual / 100);
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecione o reajuste a ser efetivado.");
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Digite valores válidos.");
+
+        }
     }//GEN-LAST:event_JBReajustarEstoqueActionPerformed
 
     private void jTableGerenciaProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableGerenciaProdutosMouseClicked
-       /*  if (this.jTableGerenciaProdutos.getSelectedRow() != -1) {
+        /*  if (this.jTableGerenciaProdutos.getSelectedRow() != -1) {
             String nome = this.jTableGerenciaProdutos.getValueAt(this.jTableGerenciaProdutos.getSelectedRow(), 1).toString();
             String precoUnit = this.jTableGerenciaProdutos.getValueAt(this.jTableGerenciaProdutos.getSelectedRow(), 2).toString();
             String unidadeProduto = this.jTableGerenciaProdutos.getValueAt(this.jTableGerenciaProdutos.getSelectedRow(), 3).toString();
@@ -499,7 +542,7 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jTableGerenciaProdutosMouseClicked
 
     private void JBAtualizarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAtualizarProdutoActionPerformed
-       /* try {
+        /* try {
             int idProduto = 0;
             String nomeProduto = "";
             double precoUnit = 0.00;
@@ -624,11 +667,11 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
         finally {
             mostrarTabela();
         }
-        */
+         */
     }//GEN-LAST:event_JBAtualizarProdutoActionPerformed
 
     private void JBExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBExcluirProdutoActionPerformed
-      /*  try {
+        /*  try {
             int idProduto = 0; // variável para armazenar o ID excluído
 
             //Para garantir que tenha um produto selecionado na hora de alterar os dados
@@ -668,8 +711,8 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_JBExcluirProdutoActionPerformed
 
     /**
-         * @param args the command line arguments
-         */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -708,10 +751,10 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
     private javax.swing.JButton JBReajustarEstoque;
     private javax.swing.JButton JBReajustarProduto;
     private javax.swing.JButton JBVoltar;
-    private javax.swing.JCheckBox JCBDesconto;
-    private javax.swing.JCheckBox JCBDesconto1;
-    private javax.swing.JCheckBox JDBAumento;
-    private javax.swing.JCheckBox JDBAumento1;
+    private javax.swing.JRadioButton JRBAumento;
+    private javax.swing.JRadioButton JRBAumento1;
+    private javax.swing.JRadioButton JRBDesconto;
+    private javax.swing.JRadioButton JRBDesconto1;
     private javax.swing.JTextField JTFAumentoPercentualEstoque;
     private javax.swing.JTextField JTFAumentoPercentualProduto;
     private javax.swing.JTextField JTFEmbalagem;
@@ -724,6 +767,8 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
     private javax.swing.JTextField JTFQuantidadeEstoque;
     private javax.swing.JTextField JTFTamanho;
     private javax.swing.JTextField JTFUnidadeProduto;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
