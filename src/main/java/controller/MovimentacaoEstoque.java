@@ -1,13 +1,13 @@
 package controller;
 
-import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import model.Produto;
 
 public class MovimentacaoEstoque extends ControleEstoque {
 
-    private Instant data; //se possivel implementar a data
+    private Date data; //se possivel implementar a data
     private String tipoMovimentacao;
     private int quantidadeMovimentada;
     private String nomeProduto;
@@ -45,11 +45,11 @@ public class MovimentacaoEstoque extends ControleEstoque {
         this.tipoMovimentacao = tipoMovimentacao;
     }
 
-    public Instant getData() {
+    public Date getData() {
         return data;
     }
 
-    public void setData(Instant data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
