@@ -1,6 +1,8 @@
 package controller;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import model.Produto;
 
 public class MovimentacaoEstoque extends ControleEstoque {
@@ -9,6 +11,7 @@ public class MovimentacaoEstoque extends ControleEstoque {
     private String tipoMovimentacao;
     private int quantidadeMovimentada;
     private String nomeProduto;
+    public List<MovimentacaoEstoque> movimentacoes = new ArrayList<>(); //Cria uma lista para armazenar as moviemntações
 
     public MovimentacaoEstoque(int quantidadeMovimentada, String nomeProduto) {
         this.quantidadeMovimentada = quantidadeMovimentada;

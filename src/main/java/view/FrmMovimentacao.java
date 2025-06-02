@@ -231,6 +231,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 novaMov.setData(Instant.now());
                 novaMov.setNomeProduto(nomeProduto);
                 novaMov.setQuantidadeMovimentada(quantidade);
+                movEst.movimentacoes.add(novaMov);
 
                 produto.verificaMediaAbaixo();
                 produto.verificaMediaAcima();
