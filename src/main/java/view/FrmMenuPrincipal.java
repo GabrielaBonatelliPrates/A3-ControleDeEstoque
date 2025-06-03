@@ -17,6 +17,12 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     FrmGerenciarProduto telaGerenciar = new FrmGerenciarProduto();
     FrmMovimentacao telaMovimentacao = new FrmMovimentacao();
     FrmBalancoFinanceiro balancoFinanceiro = new FrmBalancoFinanceiro();
+    FrmEstoqueMaximo telaEstoqueMaximo = new FrmEstoqueMaximo();
+    FrmEstoqueMinimo telaEstoqueMinimo = new FrmEstoqueMinimo();
+    FrmListaPrecos telaListaDePreco = new FrmListaPrecos();
+    FrmRelatorios telaRelatorio = new FrmRelatorios();
+    
+    
 
     /**
      * Creates new form FrmMenuPrincipal.
@@ -193,10 +199,20 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         jMenuProdutosPorCategoria.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
         jMenuProdutosPorCategoria.setText("Produto por categoria");
+        jMenuProdutosPorCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuProdutosPorCategoriaActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuProdutosPorCategoria);
 
         jMenuAbaixoDaMinima.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
         jMenuAbaixoDaMinima.setText("Produtos abaixo da quantidade mínima");
+        jMenuAbaixoDaMinima.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuAbaixoDaMinimaActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuAbaixoDaMinima);
 
         jMenuAcimaDaMaxima.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
@@ -292,7 +308,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         telaGerenciar.setVisible(true);    }//GEN-LAST:event_jMenuGerenciarProdutoActionPerformed
 
     private void jMenuAcimaDaMaximaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAcimaDaMaximaActionPerformed
-        // TODO add your handling code here:
+        telaEstoqueMaximo.setVisible(true);
     }//GEN-LAST:event_jMenuAcimaDaMaximaActionPerformed
 
     private void jMenuListarProecosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListarProecosActionPerformed
@@ -351,6 +367,14 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private void itmProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmProdutosActionPerformed
         produtos.setVisible(true);
     }//GEN-LAST:event_itmProdutosActionPerformed
+
+    private void jMenuAbaixoDaMinimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAbaixoDaMinimaActionPerformed
+        telaEstoqueMinimo.setVisible(true);
+    }//GEN-LAST:event_jMenuAbaixoDaMinimaActionPerformed
+
+    private void jMenuProdutosPorCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProdutosPorCategoriaActionPerformed
+        
+    }//GEN-LAST:event_jMenuProdutosPorCategoriaActionPerformed
 
     /**
      * @param args the command line arguments

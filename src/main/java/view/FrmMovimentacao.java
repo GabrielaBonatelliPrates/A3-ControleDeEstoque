@@ -192,7 +192,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
 
             //validando os dados.
             boolean acesso = false;
-            while (acesso = false) {
+            while (acesso == false) {
                 for (int i = 0; i < produtos.size(); i++) {
                     
                     //Pegando o nome do Produto na Lista "produtos"
@@ -200,12 +200,12 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                     String y = x.getNomeProduto();
 
                     if (this.JTFProdutoMovimentacao.getText().equalsIgnoreCase(y.trim())) {
-                        codigo = i;
+                        codigo = x.getIdProduto();
                         this.JLCodigoMovimentacao.setText(String.valueOf(codigo));
                         acesso = true;
                     }
                 }
-                if (acesso = false) {
+                if (acesso == false) {
                     throw new Mensagem("Insira um produto ja existente");
                 }
             }
@@ -280,7 +280,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
 
             //validando os dados.
             boolean acesso = false;
-            while (acesso = false) {
+            while (acesso == false) {
                 for (int i = 0; i < contEst.tamanhoLista(); i++) {
                     
                     //Pegando o nome do Produto na Lista "produtos"
@@ -288,12 +288,12 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                     String y = x.getNomeProduto();
 
                     if (this.JTFProdutoMovimentacao.getText().equalsIgnoreCase(y.trim())) {
-                        codigo = i;
+                        codigo = x.getIdProduto();
                         this.JLCodigoMovimentacao.setText(String.valueOf(codigo));
                         acesso = true;
                     }
                 }
-                if (acesso = false) {
+                if (acesso == false) {
                     throw new Mensagem("Nome do produto deve conter ao menos 2 caracteres.");
 
                 }
