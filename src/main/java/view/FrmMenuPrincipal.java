@@ -53,20 +53,25 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu4 = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuSobre = new javax.swing.JMenuItem();
+        jMenuSair = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
         jMenuNovoProduto = new javax.swing.JMenuItem();
         jMenuGerenciarProduto = new javax.swing.JMenuItem();
-        jMenuMovimentarEstoque = new javax.swing.JMenuItem();
-        itmProdutos = new javax.swing.JMenuItem();
+        jMenuProdutos = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuAdicionarCategoria = new javax.swing.JMenuItem();
+        jMenuGerenciaCategoria = new javax.swing.JMenuItem();
+        jMenuVerCategorias = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuMovimentacao = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuListarProecos = new javax.swing.JMenuItem();
         jMenuBalancoFinanceiro = new javax.swing.JMenuItem();
         jMenuProdutosPorCategoria = new javax.swing.JMenuItem();
         jMenuAbaixoDaMinima = new javax.swing.JMenuItem();
         jMenuAcimaDaMaxima = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuSobre = new javax.swing.JMenuItem();
-        jMenuSair = new javax.swing.JMenuItem();
 
         jMenu3.setText("jMenu3");
 
@@ -130,46 +135,117 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuBar1.setOpaque(true);
         jMenuBar1.setPreferredSize(new java.awt.Dimension(400, 50));
 
-        jMenu4.setForeground(new java.awt.Color(255, 255, 255));
-        jMenu4.setText("Controle");
-        jMenu4.setFont(new java.awt.Font("Inter 18pt Medium", 0, 14)); // NOI18N
+        jMenu1.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu1.setText("Arquivo");
+        jMenu1.setFont(new java.awt.Font("Inter 18pt Medium", 0, 14)); // NOI18N
+        jMenu1.setPreferredSize(new java.awt.Dimension(80, 40));
+
+        jMenuSobre.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
+        jMenuSobre.setText("Sobre");
+        jMenuSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSobreActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuSobre);
+
+        jMenuSair.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
+        jMenuSair.setText("Sair");
+        jMenuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuSairActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuSair);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu2.setText("Produtos");
+        jMenu2.setFont(new java.awt.Font("Inter 18pt Medium", 0, 14)); // NOI18N
+        jMenu2.setPreferredSize(new java.awt.Dimension(80, 40));
 
         jMenuNovoProduto.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
-        jMenuNovoProduto.setText("Cadastro produto");
+        jMenuNovoProduto.setText("Adicionar Produto");
         jMenuNovoProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuNovoProdutoActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuNovoProduto);
+        jMenu2.add(jMenuNovoProduto);
 
         jMenuGerenciarProduto.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
-        jMenuGerenciarProduto.setText("Gerencia produto");
+        jMenuGerenciarProduto.setText("Gerenciar Produto");
         jMenuGerenciarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuGerenciarProdutoActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuGerenciarProduto);
+        jMenu2.add(jMenuGerenciarProduto);
 
-        jMenuMovimentarEstoque.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
-        jMenuMovimentarEstoque.setText("Movimentação");
-        jMenuMovimentarEstoque.setToolTipText("");
-        jMenuMovimentarEstoque.addActionListener(new java.awt.event.ActionListener() {
+        jMenuProdutos.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
+        jMenuProdutos.setText("Ver Produtos");
+        jMenuProdutos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuMovimentarEstoqueActionPerformed(evt);
+                jMenuProdutosActionPerformed(evt);
             }
         });
-        jMenu4.add(jMenuMovimentarEstoque);
+        jMenu2.add(jMenuProdutos);
 
-        itmProdutos.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
-        itmProdutos.setText("Ver Produtos");
-        itmProdutos.addActionListener(new java.awt.event.ActionListener() {
+        jMenuBar1.add(jMenu2);
+
+        jMenu6.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu6.setText("Categorias");
+        jMenu6.setFont(new java.awt.Font("Inter 18pt Medium", 0, 14)); // NOI18N
+        jMenu6.setMaximumSize(new java.awt.Dimension(100, 40));
+        jMenu6.setMinimumSize(new java.awt.Dimension(100, 40));
+        jMenu6.setPreferredSize(new java.awt.Dimension(80, 40));
+
+        jMenuAdicionarCategoria.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
+        jMenuAdicionarCategoria.setText("Adicionar Categoria");
+        jMenuAdicionarCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itmProdutosActionPerformed(evt);
+                jMenuAdicionarCategoriaActionPerformed(evt);
             }
         });
-        jMenu4.add(itmProdutos);
+        jMenu6.add(jMenuAdicionarCategoria);
+
+        jMenuGerenciaCategoria.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
+        jMenuGerenciaCategoria.setText("Gerenciar Categoria");
+        jMenuGerenciaCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuGerenciaCategoriaActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuGerenciaCategoria);
+
+        jMenuVerCategorias.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
+        jMenuVerCategorias.setText("Ver Categorias");
+        jMenuVerCategorias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuVerCategoriasActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuVerCategorias);
+
+        jMenuBar1.add(jMenu6);
+
+        jMenu4.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu4.setText("Estoque");
+        jMenu4.setFont(new java.awt.Font("Inter 18pt Medium", 0, 14)); // NOI18N
+        jMenu4.setMaximumSize(new java.awt.Dimension(80, 40));
+        jMenu4.setMinimumSize(new java.awt.Dimension(80, 40));
+        jMenu4.setPreferredSize(new java.awt.Dimension(80, 40));
+
+        jMenuMovimentacao.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
+        jMenuMovimentacao.setText("Adicionar Movimentação");
+        jMenuMovimentacao.setToolTipText("");
+        jMenuMovimentacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuMovimentacaoActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuMovimentacao);
 
         jMenuBar1.add(jMenu4);
 
@@ -225,31 +301,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenu5.add(jMenuAcimaDaMaxima);
 
         jMenuBar1.add(jMenu5);
-
-        jMenu1.setForeground(new java.awt.Color(255, 255, 255));
-        jMenu1.setText("Arquivo");
-        jMenu1.setFont(new java.awt.Font("Inter 18pt Medium", 0, 14)); // NOI18N
-        jMenu1.setPreferredSize(new java.awt.Dimension(80, 40));
-
-        jMenuSobre.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
-        jMenuSobre.setText("Sobre");
-        jMenuSobre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuSobreActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuSobre);
-
-        jMenuSair.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
-        jMenuSair.setText("Sair");
-        jMenuSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuSairActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuSair);
-
-        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -312,11 +363,12 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuAcimaDaMaximaActionPerformed
 
     private void jMenuListarProecosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListarProecosActionPerformed
-        categorias.setVisible(true);
+        
     }//GEN-LAST:event_jMenuListarProecosActionPerformed
 
     private void jMenuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSobreActionPerformed
-        telaCategoria.setVisible(true);
+        //vai ter o sobre
+        
     }//GEN-LAST:event_jMenuSobreActionPerformed
 
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
@@ -329,10 +381,10 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jMenuNovoProdutoActionPerformed
 
-    private void jMenuMovimentarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuMovimentarEstoqueActionPerformed
+    private void jMenuMovimentacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuMovimentacaoActionPerformed
         telaMovimentacao.setVisible(true);
         //Ativação da tela de movimentação de estoque
-    }//GEN-LAST:event_jMenuMovimentarEstoqueActionPerformed
+    }//GEN-LAST:event_jMenuMovimentacaoActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
 
@@ -364,9 +416,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         balancoFinanceiro.setVisible(true);
     }//GEN-LAST:event_jMenuBalancoFinanceiroActionPerformed
 
-    private void itmProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itmProdutosActionPerformed
+    private void jMenuProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProdutosActionPerformed
         produtos.setVisible(true);
-    }//GEN-LAST:event_itmProdutosActionPerformed
+    }//GEN-LAST:event_jMenuProdutosActionPerformed
 
     private void jMenuAbaixoDaMinimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAbaixoDaMinimaActionPerformed
         telaEstoqueMinimo.setVisible(true);
@@ -376,35 +428,52 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jMenuProdutosPorCategoriaActionPerformed
 
+    private void jMenuAdicionarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAdicionarCategoriaActionPerformed
+       telaCategoria.setVisible(true);
+    }//GEN-LAST:event_jMenuAdicionarCategoriaActionPerformed
+
+    private void jMenuGerenciaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGerenciaCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuGerenciaCategoriaActionPerformed
+
+    private void jMenuVerCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuVerCategoriasActionPerformed
+        categorias.setVisible(true);
+    }//GEN-LAST:event_jMenuVerCategoriasActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPesquisar;
-    private javax.swing.JMenuItem itmProdutos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private static final javax.swing.JLabel jLabel3 = new javax.swing.JLabel();
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuItem jMenuAbaixoDaMinima;
     private javax.swing.JMenuItem jMenuAcimaDaMaxima;
+    private javax.swing.JMenuItem jMenuAdicionarCategoria;
     private javax.swing.JMenuItem jMenuBalancoFinanceiro;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuGerenciaCategoria;
     private javax.swing.JMenuItem jMenuGerenciarProduto;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuListarProecos;
-    private javax.swing.JMenuItem jMenuMovimentarEstoque;
+    private javax.swing.JMenuItem jMenuMovimentacao;
     private javax.swing.JMenuItem jMenuNovoProduto;
+    private javax.swing.JMenuItem jMenuProdutos;
     private javax.swing.JMenuItem jMenuProdutosPorCategoria;
     private javax.swing.JMenuItem jMenuSair;
     private javax.swing.JMenuItem jMenuSobre;
+    private javax.swing.JMenuItem jMenuVerCategorias;
     private javax.swing.JTextField txtCampoPesquisa;
     private java.awt.TextArea txtFicha;
     // End of variables declaration//GEN-END:variables
