@@ -424,6 +424,27 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
 
     }//GEN-LAST:event_JBAdicionarProdutoActionPerformed
 
+     private double somaTotalEstoque = 0;
+
+      public void somaTotal() {
+      try{
+      
+      double valorProduto = Double.parseDouble(JTFValorProduto.getText());
+      double quantidadeProduto = Double.parseDouble(JTFQuantidadeProduto.getText());
+      double valorTotalProduto = valorProduto * quantidadeProduto;
+      somaTotalEstoque += valorTotalProduto;
+      }
+      catch (NumberFormatException e){
+          JOptionPane.showMessageDialog(null, "Insira dados válidos.");
+      }
+      
+    }                                                  
+
+      public double getSomaTotalEstoque(){
+          return somaTotalEstoque;
+      }
+
+    
     private void JBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBVoltarActionPerformed
         this.dispose();
     }//GEN-LAST:event_JBVoltarActionPerformed
