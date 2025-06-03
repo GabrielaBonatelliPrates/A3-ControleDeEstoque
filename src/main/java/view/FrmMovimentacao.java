@@ -193,7 +193,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
             //validando os dados.
             boolean acesso = false;
             while (acesso = false) {
-                for (int i = 0; i >= produtos.size(); i++) {
+                for (int i = 0; i < produtos.size(); i++) {
                     
                     //Pegando o nome do Produto na Lista "produtos"
                     Produto x = produtos.get(i);
@@ -281,7 +281,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
             //validando os dados.
             boolean acesso = false;
             while (acesso = false) {
-                for (int i = 0; i >= contEst.tamanhoLista(); i++) {
+                for (int i = 0; i < contEst.tamanhoLista(); i++) {
                     
                     //Pegando o nome do Produto na Lista "produtos"
                     Produto x = produtos.get(i);
