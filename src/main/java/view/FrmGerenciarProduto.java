@@ -12,7 +12,7 @@ import javax.swing.ButtonGroup;
 public class FrmGerenciarProduto extends javax.swing.JFrame {
 
     private ProdutoController objetoProduto;
-
+    FrmProdutoNovo somaProdutos = new FrmProdutoNovo();
     public FrmGerenciarProduto() {
         initComponents();
         this.objetoProduto = new ProdutoController();
@@ -499,15 +499,15 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
     private void JBReajustarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBReajustarEstoqueActionPerformed
 
         try {
-            double precoAtual = Double.parseDouble(JTFProdutoNovoPreco.getText());
+            double totalEstoque = somaProdutos.getSomaTotalEstoque();
             double percentual = Double.parseDouble(JTFAumentoPercentualProduto.getText());
 
             double precoNovo;
 
             if (JRBAumento.isSelected()) {
-                precoNovo = precoAtual * (1 + percentual / 100);
+                precoNovo = totalEstoque * (1 + percentual / 100);
             } else if (JRBDesconto.isSelected()) {
-                precoNovo = precoAtual * (1 - percentual / 100);
+                precoNovo = totalEstoque * (1 - percentual / 100);
             } else {
                 JOptionPane.showMessageDialog(this, "Selecione o reajuste a ser efetivado.");
             }
