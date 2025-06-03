@@ -194,8 +194,8 @@ public class ProdutoDAO {
         }
     }
 
-    public static List insereLista(String nomeProduto, int id, double precoUnit, String unidadeProduto, int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo, String nomeCategoria) {
-        Produto produto = new Produto(nomeProduto, id, precoUnit, unidadeProduto, quantidadeEstoque, estoqueMinimo, estoqueMaximo, nomeCategoria);
+    public static List insereLista(String nomeProduto, int id, double precoUnit, String unidadeProduto, int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo, Categoria categoria) {
+        Produto produto = new Produto(nomeProduto, id, precoUnit, unidadeProduto, quantidadeEstoque, estoqueMinimo, estoqueMaximo, categoria);
         produtos.add(produto); //adiciona o objeto criado à lista produtos 
         return produtos; //retorna a lista atualizada
     }
@@ -318,7 +318,7 @@ public class ProdutoDAO {
         return produtos;
     }
     
-    public List<Produto> pegarProdutosAcimaMaximo() {
+    public static List<Produto> pegarProdutosAcimaMaximo() {
         List<Produto> produtosAcima = new ArrayList<>();
         for(Produto a : produtos){
             if(a.getQuantidadeEstoque() >= a.getEstoqueMaximo()){
@@ -328,7 +328,7 @@ public class ProdutoDAO {
             return produtosAcima;
     }
     
-    public List<Produto> pegarProdutosAbaixoMinimo() {
+    public static List<Produto> pegarProdutosAbaixoMinimo() {
         List<Produto> produtosAbaixo = new ArrayList<>();
         for(Produto a : produtos){
             if(a.getQuantidadeEstoque() <= a.getEstoqueMaximo()){

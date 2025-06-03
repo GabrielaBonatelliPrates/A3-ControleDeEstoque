@@ -18,7 +18,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     FrmMovimentacao telaMovimentacao = new FrmMovimentacao();
     FrmBalancoFinanceiro balancoFinanceiro = new FrmBalancoFinanceiro();
     FrmEstoqueMaximo telaEstoqueMaximo = new FrmEstoqueMaximo();
-    FrmEstoqueMinimo telaEstoqueMinimo = new FrmEstoqueMinimo();
+   FrmEstoqueMinimo telaEstoqueMinimo = new FrmEstoqueMinimo();
     FrmListaPrecos telaListaDePreco = new FrmListaPrecos();
     FrmRelatorios telaRelatorio = new FrmRelatorios();
     

@@ -15,22 +15,24 @@ import model.Produto;
  * @author daviw
  */
 public class FrmEstoqueMinimo extends javax.swing.JFrame {
-
+private DefaultTableModel modelo;
     /**
      * Creates new form FrmEstoqueMinimo
      */
     public FrmEstoqueMinimo() {
-        this.carregaTabela();
         initComponents();
+        this.carregaTabela();
     }
     
     public void carregaTabela() {
-        ProdutoDAO prod = new ProdutoDAO();
         
-        DefaultTableModel modelo = (DefaultTableModel) this.JTEstoqueMinimo.getModel();
+        
+        modelo = new DefaultTableModel(new Object[]{"ID", "Nome", "Qtd", "Mínimo"}, 0);
+        //DefaultTableModel modelo = (DefaultTableModel) this.JTEstoqueMinimo.getModel();
+        JTEstoqueMinimo.setModel(modelo);
         modelo.setNumRows(0); //Posiciona na primeira linha da tabela
 
-        List<Produto> abaixoMedia = prod.pegarProdutosAbaixoMinimo();
+        List<Produto> abaixoMedia = ProdutoDAO.pegarProdutosAbaixoMinimo();
         for (Produto a : abaixoMedia) {
             modelo.addRow(new Object[]{
                 a.getIdProduto(),
@@ -39,6 +41,7 @@ public class FrmEstoqueMinimo extends javax.swing.JFrame {
                 a.getEstoqueMinimo(),
             });
         }
+         JTEstoqueMinimo.setModel(modelo);
     }
 
     /**
