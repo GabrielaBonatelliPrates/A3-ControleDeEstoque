@@ -27,8 +27,8 @@ public class Categoria {
         return nomeCategoria;
     }
 
-    public void setNomeCategoria(String nome) {
-        this.nomeCategoria = nome;
+    public void setNomeCategoria(String nomeCategoria) {
+        this.nomeCategoria = nomeCategoria;
     }
 
     public String getTamanho() {
@@ -45,6 +45,11 @@ public class Categoria {
 
     public void setEmbalagem(String embalagem) {
         this.embalagem = embalagem;
+    }    
+    
+    @Override
+    public String toString() {
+        return nomeCategoria + " / " + tamanho + " / " + embalagem;
     }
 
     //Pedir e armazenar dados nos atributos da classe
