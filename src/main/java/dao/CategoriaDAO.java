@@ -20,12 +20,12 @@ public class CategoriaDAO {
     public CategoriaDAO() {
     }
 
-    public void cadastrarCategoria(String nome, String tamanho, String embalagem) { //vai servir pra cadastrar a categoria
-
+    public void cadastrarCategoria(String nomeCategoria, String tamanho, String embalagem) throws SQLException { //vai servir pra cadastrar a categoria
+        inserirCategoria(nomeCategoria, tamanho, embalagem);
     }
 
     //método para colocar a categoria no banco de dados
-    public static void inserirCategoria(String nome, String tamanho, String embalagem) throws SQLException {
+    public static void inserirCategoria(String nomeCategoria, String tamanho, String embalagem) throws SQLException {
         Categoria categoria = new Categoria ();
         String sql = "INSERT INTO categorias (nome, tamanho, embalagem) VALUES (?, ?, ?)"; //insere os dados na tabela
 
@@ -34,7 +34,7 @@ public class CategoriaDAO {
                  PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS) //prepara o caminho para receber os dados e devolver a chave gerada
                 ) {
             //preenche os parâmetros da query com os dados recebidos
-            statement.setString(1, nome);
+            statement.setString(1, nomeCategoria);
             statement.setString(2, tamanho);
             statement.setString(3, embalagem);
 
@@ -55,16 +55,20 @@ public class CategoriaDAO {
         }
     }
     
-       public ArrayList<String> mostrarCategorias() { //método que retorna os nomes das categorias do banco
-           ArrayList<String> mostrarCategorias = new ArrayList();
-        String sql = "SELECT nome FROM categorias"; //consulta sql que seleciona o nome da categoria na tabela categorias
+       public ArrayList<Categoria> mostrarCategorias() { //método que retorna os nomes das categorias do banco
+           ArrayList<Categoria> mostrarCategorias = new ArrayList();
+        String sql = "SELECT * FROM categorias"; //consulta sql que seleciona o nome da categoria na tabela categorias
         try {
             Connection connection = Conexao.conectar();
             PreparedStatement statement = connection.prepareStatement(sql); 
             ResultSet resultSet = statement.executeQuery();
             
             while(resultSet.next()){
-                mostrarCategorias.add(resultSet.getString("nome")); //retorna o nome de todas as categorias que estão cadastradas no banco de dados
+                String nomeCategoria = resultSet.getString("nome");
+                String tamanho = resultSet.getString("tamanho");
+                String embalagem = resultSet.getString("embalagem");
+                                
+                mostrarCategorias.add(new Categoria(nomeCategoria, tamanho, embalagem)); //retorna os dados de todas as categorias que estão cadastradas no banco de dados
             }
             
             resultSet.close();
@@ -73,7 +77,6 @@ public class CategoriaDAO {
 
         } catch (SQLException ex) { //em caso de erro
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex); 
-            return null; //retorna nulo caso dê erro
         }
         return mostrarCategorias;
        }
@@ -153,7 +156,7 @@ public class CategoriaDAO {
     }
 
     //metodo pra verificar se a categoria ja existe antes de adicionar
-    public static boolean verificaCategoria(String nome, String tamanho, String embalagem) throws SQLException {
+    public static boolean verificaCategoria(String nomeCategoria, String tamanho, String embalagem) throws SQLException {
         String sql = "SELECT 1 FROM categorias WHERE nome= ? AND tamanho = ? AND embalagem = ?"; //query para buscar se existe alguma categoria com esses atributos (se achar uma para)
 
         try (
@@ -161,7 +164,7 @@ public class CategoriaDAO {
                  PreparedStatement statement = connection.prepareStatement(sql) //prepara o caminho para receber os dados e devolver a chave gerada
                 ) {
             //preenche os parâmetros da query com os dados recebidos
-            statement.setString(1, nome);
+            statement.setString(1, nomeCategoria);
             statement.setString(2, tamanho);
             statement.setString(3, embalagem);
 
@@ -176,7 +179,7 @@ public class CategoriaDAO {
 
     //criar metodo pra devolver o status da categoria
     
-     public List<Categoria> devolveCategorias(String nome) {
+     public List<Categoria> devolveCategorias(String nomeCategoria) {
         
         String sql = "SELECT nome, tamanho, embalagem FROM produtos WHERE id = nome";
         
