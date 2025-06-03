@@ -20,14 +20,14 @@ public class CategoriaDAO {
     public CategoriaDAO() {
     }
 
-    public void cadastrarCategoria(String nomeCategoria, String tamanho, String embalagem) throws SQLException { //vai servir pra cadastrar a categoria
-        inserirCategoria(nomeCategoria, tamanho, embalagem);
+    public void cadastrarCategoria(int idCategoria, String nomeCategoria, String tamanho, String embalagem) throws SQLException { //vai servir pra cadastrar a categoria
+        inserirCategoria(idCategoria, nomeCategoria, tamanho, embalagem);
     }
 
     //método para colocar a categoria no banco de dados
-    public static void inserirCategoria(String nomeCategoria, String tamanho, String embalagem) throws SQLException {
+    public static void inserirCategoria(int idCategoria, String nomeCategoria, String tamanho, String embalagem) throws SQLException {
         Categoria categoria = new Categoria ();
-        String sql = "INSERT INTO categorias (nome, tamanho, embalagem) VALUES (?, ?, ?)"; //insere os dados na tabela
+        String sql = "INSERT INTO categorias (idCategoria, nomeCategoria, tamanho, embalagem) VALUES (?, ?, ?)"; //insere os dados na tabela
 
         try (
                 Connection connection = Conexao.conectar(); //atribui a conexão à classe que faz a conexão com o banco de dados
@@ -64,11 +64,12 @@ public class CategoriaDAO {
             ResultSet resultSet = statement.executeQuery();
             
             while(resultSet.next()){
-                String nomeCategoria = resultSet.getString("nome");
+                int idCategoria = resultSet.getInt("idCategoria");
+                String nomeCategoria = resultSet.getString("nomeCategoria");
                 String tamanho = resultSet.getString("tamanho");
                 String embalagem = resultSet.getString("embalagem");
                                 
-                mostrarCategorias.add(new Categoria(nomeCategoria, tamanho, embalagem)); //retorna os dados de todas as categorias que estão cadastradas no banco de dados
+                mostrarCategorias.add(new Categoria(idCategoria, nomeCategoria, tamanho, embalagem)); //retorna os dados de todas as categorias que estão cadastradas no banco de dados
             }
             
             resultSet.close();
@@ -115,7 +116,7 @@ public class CategoriaDAO {
         Connection connection = Conexao.conectar();
         Categoria objeto = null; //inicializa o objeto que será retornado
 
-        String sql = "SELECT nome, tamanho, embalagem FROM categorias WHERE nome= ?"; //query para buscar categoria pelo nome
+        String sql = "SELECT idCategoria, nomeCategoria, tamanho, embalagem FROM categorias WHERE nomeCategoria= ?"; //query para buscar categoria pelo nome
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql); //prepara a query
@@ -125,7 +126,7 @@ public class CategoriaDAO {
 
             if (resultSet.next()) {
                 objeto = new Categoria();
-                objeto.setNomeCategoria(resultSet.getString("nome"));
+                objeto.setNomeCategoria(resultSet.getString("nomeCategoria"));
                 objeto.setTamanho(resultSet.getString("tamanho"));
                 objeto.setEmbalagem(resultSet.getString("embalagem"));
             }
@@ -157,7 +158,7 @@ public class CategoriaDAO {
 
     //metodo pra verificar se a categoria ja existe antes de adicionar
     public static boolean verificaCategoria(String nomeCategoria, String tamanho, String embalagem) throws SQLException {
-        String sql = "SELECT 1 FROM categorias WHERE nome= ? AND tamanho = ? AND embalagem = ?"; //query para buscar se existe alguma categoria com esses atributos (se achar uma para)
+        String sql = "SELECT 1 FROM categorias WHERE nomeCategoria= ? AND tamanho = ? AND embalagem = ?"; //query para buscar se existe alguma categoria com esses atributos (se achar uma para)
 
         try (
                 Connection connection = Conexao.conectar(); //atribui a conexão à classe que faz a conexão com o banco de dados
@@ -181,7 +182,7 @@ public class CategoriaDAO {
     
      public List<Categoria> devolveCategorias(String nomeCategoria) {
         
-        String sql = "SELECT nome, tamanho, embalagem FROM produtos WHERE id = nome";
+        String sql = "SELECT idCategoria, nomeCategoria, tamanho, embalagem FROM produtos WHERE idCategoria = nomeCategoria";
         
         try (Connection connection = Conexao.conectar();
              PreparedStatement stmt = connection.prepareStatement(sql);
@@ -189,7 +190,8 @@ public class CategoriaDAO {
 
             while (resultSet.next()) {
                 Categoria objeto = new Categoria();
-                objeto.setNomeCategoria(resultSet.getString("nome"));
+                objeto.setIdCategoria(resultSet.getInt("idCategoria"));
+                objeto.setNomeCategoria(resultSet.getString("nomeCategoria"));
                 objeto.setTamanho(resultSet.getString("tamanho"));
                 objeto.setEmbalagem(resultSet.getString("embalagem"));
                 
