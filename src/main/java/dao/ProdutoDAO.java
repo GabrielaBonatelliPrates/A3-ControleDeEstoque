@@ -19,21 +19,16 @@ import model.Categoria;
 public class ProdutoDAO {
 
     protected static final List<Produto> produtos = new ArrayList<>(); //cria lista que vai armazenar os produtos da sessão (caso haja algum problema no banco de dados)
-   protected static final List<Produto> listaAtualizada = new ArrayList<>(); //cria lista que vai armazenar os produtos a partir do banco de dados
-
-    public ProdutoDAO() {
-    }
+    protected static final List<Produto> listaAtualizada = new ArrayList<>(); //cria lista que vai armazenar os produtos a partir do banco de dados
 
     public static void cadastrarProduto(String nomeProduto, double precoUnit, String unidadeProduto,
             int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo,
             String nomeCategoria, String tamanho, String embalagem) { //vai servir pra cadastrar produtos com quando a classe categoria tiver implementada certinho
-            
-            
-            
+
         //método para colocar o produto no banco de dados
         inserirProduto(nomeProduto, precoUnit, unidadeProduto, quantidadeEstoque,
-               estoqueMinimo, estoqueMaximo, nomeCategoria, tamanho, embalagem);
-  }
+                estoqueMinimo, estoqueMaximo, nomeCategoria, tamanho, embalagem);
+    }
 
     public static void inserirProduto(String nomeProduto, double precoUnit, String unidadeProduto, int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo, String nomeCategoria, String tamanho, String embalagem) {
 
@@ -60,13 +55,13 @@ public class ProdutoDAO {
             ResultSet resultSet = statement.getGeneratedKeys(); //devolve o id (gerado automaticamente pelo sql - posteriormente vamos substituir por um método (dicas do professor))
             if (resultSet.next()) {
                 int idGerado = resultSet.getInt(1); //vai ler o id gerado
-                
-                Categoria categoria = new Categoria ();
+
+                Categoria categoria = new Categoria();
                 categoria.setNomeCategoria(nomeCategoria);
                 categoria.setTamanho(tamanho);
                 categoria.setEmbalagem(embalagem);
-                
-                 insereLista(nomeProduto, idGerado, precoUnit, unidadeProduto, quantidadeEstoque, estoqueMinimo, estoqueMaximo, categoria); //adiciona o produto na lista
+
+                insereLista(nomeProduto, idGerado, precoUnit, unidadeProduto, quantidadeEstoque, estoqueMinimo, estoqueMaximo, categoria); //adiciona o produto na lista
                 String strIdGerado = String.format("Id do produto %s: %d", nomeProduto, idGerado);
                 JOptionPane.showMessageDialog(null, strIdGerado); //exibe o id gerado pro usuário (já que era a informação que ele não entregou)
             }
@@ -75,8 +70,8 @@ public class ProdutoDAO {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex); //registra o erro no log
         }
     }
-    
-     public static List emiteLista() {
+
+    public static List emiteLista() {
         return produtos; //retorna a lista 
     }
 
@@ -91,8 +86,8 @@ public class ProdutoDAO {
             return null; //retorna nulo se ocorrer falha
         }
     }
-    
-    public static DefaultTableModel tabelaAtualizada() throws SQLException{
+
+    public static DefaultTableModel tabelaAtualizada() throws SQLException {
         ResultSet resultSet = listarProdutos(); //todos os produtos do banco
         DefaultTableModel model = montarTabela(resultSet);
         return model;
@@ -119,14 +114,14 @@ public class ProdutoDAO {
 
         return model; //retorna o modelo completo certinho
     }
-    
+
     //carrega um produto pelo nome
     public static Produto buscarPorNome(String nomePesquisado) { //busca um produto específico no banco através do nome dele
         Connection connection = Conexao.conectar();
-         Produto produto = null; //inicializa o objeto que será retornado
+        Produto produto = null; //inicializa o objeto que será retornado
         Categoria categoria = null; //inicializa o objeto que será retornado
 
-        String sql = "SELECT id, nome, preco_unitario, unidade, estoque_atual, estoque_minimo, estoque_maximo, nome_categoria, tamanho, embalagem FROM produtos WHERE nome= ?"; //query para buscar produto pelo nome
+        String sql = "SELECT idProduto, nome, preco_unitario, unidade, estoque_atual, estoque_minimo, estoque_maximo, nome_categoria, tamanho, embalagem FROM produtos WHERE nome= ?"; //query para buscar produto pelo nome
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql); //prepara a query
@@ -146,9 +141,9 @@ public class ProdutoDAO {
                 produto.setEstoqueMaximo(resultSet.getInt("estoque_maximo"));
                 categoria.setNomeCategoria(resultSet.getString("nome_categoria"));
                 categoria.setTamanho(resultSet.getString("tamanho")); //vai definir o tamanho
-                 categoria.setEmbalagem(resultSet.getString("embalagem")); //vai definir a embalagem
-                 
-                 produto.setCategoria(categoria);
+                categoria.setEmbalagem(resultSet.getString("embalagem")); //vai definir a embalagem
+
+                produto.setCategoria(categoria);
             }
 
         } catch (SQLException erro) { //em caso de erro na consulta
@@ -158,9 +153,8 @@ public class ProdutoDAO {
         return produto; //retorna o produto encontrado ou null
     }
 
-
     public boolean atualizarProduto(Produto produto, Categoria categoria) {
-        String sql = "UPDATE produtos set nome = ? , preco_unitario = ? ,unidade = ? ,estoque_atual = ? ,estoque_minimo = ? ,estoque_maximo = ? , nome_categoria = ? ,tamanho = ? ,embalagem = ? WHERE id = ?";
+        String sql = "UPDATE produtos set nome = ? , preco_unitario = ? ,unidade = ? ,estoque_atual = ? ,estoque_minimo = ? ,estoque_maximo = ? , nome_categoria = ? ,tamanho = ? ,embalagem = ? WHERE idProduto = ?";
         try {
             Connection connection = Conexao.conectar();
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -186,7 +180,7 @@ public class ProdutoDAO {
     }
 
     public boolean deletarProduto(int idProduto) {
-        String sql = "DELETE FROM produtos WHERE id = ?";
+        String sql = "DELETE FROM produtos WHERE idProduto = ?";
         try {
             Connection connection = Conexao.conectar();
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -203,13 +197,11 @@ public class ProdutoDAO {
         }
     }
 
-    public static List <Produto> insereLista(String nomeProduto, int id, double precoUnit, String unidadeProduto, int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo, Categoria categoria) {
+    public static List<Produto> insereLista(String nomeProduto, int id, double precoUnit, String unidadeProduto, int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo, Categoria categoria) {
         Produto produto = new Produto(nomeProduto, id, precoUnit, unidadeProduto, quantidadeEstoque, estoqueMinimo, estoqueMaximo, categoria);
         produtos.add(produto); //adiciona o objeto criado à lista produtos 
         return produtos; //retorna a lista atualizada
     }
-
-   
 
     //carrega um produto pelo id
     public static Produto buscarPorId(int idPesquisado) { //busca um produto específico no banco através do id
@@ -217,7 +209,7 @@ public class ProdutoDAO {
         Produto produto = null; //inicializa o objeto que será retornado
         Categoria categoria = null; //inicializa o objeto que será retornado
 
-        String sql = "SELECT id, nome, preco_unitario, unidade, estoque_atual, estoque_minimo, estoque_maximo, nome_categoria, tamanho, embalagem FROM produtos WHERE id = ?"; //query para buscar produto por id
+        String sql = "SELECT idProduto, nome, preco_unitario, unidade, estoque_atual, estoque_minimo, estoque_maximo, nome_categoria, tamanho, embalagem FROM produtos WHERE idProduto = ?"; //query para buscar produto por id
 
         try {
             PreparedStatement statement = connection.prepareStatement(sql); //prepara a query
@@ -237,9 +229,9 @@ public class ProdutoDAO {
                 produto.setEstoqueMaximo(resultSet.getInt("estoque_maximo"));
                 categoria.setNomeCategoria(resultSet.getString("nome_categoria"));
                 categoria.setTamanho(resultSet.getString("tamanho")); //vai definir o tamanho
-                 categoria.setEmbalagem(resultSet.getString("embalagem")); //vai definir a embalagem
-                 
-                 produto.setCategoria(categoria);
+                categoria.setEmbalagem(resultSet.getString("embalagem")); //vai definir a embalagem
+
+                produto.setCategoria(categoria);
             }
 
         } catch (SQLException erro) { //em caso de erro na consulta
@@ -308,15 +300,13 @@ public class ProdutoDAO {
 
         return statusProduto; //retorna o status do produto
     }
-    
+
     public static List<Produto> pegarProdutos() {
         listaAtualizada.clear();
-        
+
         String sql = "SELECT idProduto, nome, preco_unitario, unidade, estoque_atual, estoque_minimo, estoque_maximo, nome_categoria, tamanho, embalagem FROM produtos";
-        
-        try (Connection connection = Conexao.conectar();
-             PreparedStatement stmt = connection.prepareStatement(sql);
-             ResultSet resultSet = stmt.executeQuery()) {
+
+        try (Connection connection = Conexao.conectar(); PreparedStatement stmt = connection.prepareStatement(sql); ResultSet resultSet = stmt.executeQuery()) {
 
             while (resultSet.next()) {
                 Produto objeto = new Produto();
@@ -327,15 +317,13 @@ public class ProdutoDAO {
                 objeto.setQuantidadeEstoque(resultSet.getInt("estoque_atual"));
                 objeto.setEstoqueMinimo(resultSet.getInt("estoque_minimo"));
                 objeto.setEstoqueMaximo(resultSet.getInt("estoque_maximo"));
-                
+
                 Categoria categoria = new Categoria();
                 categoria.setNomeCategoria(resultSet.getString("nome_categoria"));
                 categoria.setTamanho(resultSet.getString("tamanho"));
                 categoria.setEmbalagem(resultSet.getString("embalagem"));
                 objeto.setCategoria(categoria);
 
-
-                
                 listaAtualizada.add(objeto);
             }
 
@@ -344,26 +332,26 @@ public class ProdutoDAO {
         }
         return listaAtualizada;
     }
-    
+
     public static List<Produto> pegarProdutosAcimaMaximo() {
         List<Produto> verificarProdutos = pegarProdutos();
         List<Produto> produtosAcima = new ArrayList<>();
-        for(Produto produto : verificarProdutos){
-            if(produto.getQuantidadeEstoque() > produto.getEstoqueMaximo()){
+        for (Produto produto : verificarProdutos) {
+            if (produto.getQuantidadeEstoque() > produto.getEstoqueMaximo()) {
                 produtosAcima.add(produto);
             }
-        }   
-            return produtosAcima;
+        }
+        return produtosAcima;
     }
-    
+
     public static List<Produto> pegarProdutosAbaixoMinimo() {
         List<Produto> verificarProdutos = pegarProdutos();
         List<Produto> produtosAbaixo = new ArrayList<>();
-        for(Produto produto : verificarProdutos){
-            if(produto.getQuantidadeEstoque() < produto.getEstoqueMinimo()){
+        for (Produto produto : verificarProdutos) {
+            if (produto.getQuantidadeEstoque() < produto.getEstoqueMinimo()) {
                 produtosAbaixo.add(produto);
             }
-        }   
-            return produtosAbaixo;
+        }
+        return produtosAbaixo;
     }
 }
