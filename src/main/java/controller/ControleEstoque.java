@@ -20,16 +20,16 @@ public class ControleEstoque {
         produto.setEstoqueMinimo(estoqueMinimo);
         produto.setEstoqueMaximo(estoqueMaximo);
         produto.setIdProduto(idProduto);
-       // produto.setNomeCategoria(nomeCategoria); //le os dados do produto
+        // produto.setNomeCategoria(nomeCategoria); //le os dados do produto
         produtos.add(produto); //adiciona o objeto criado à lista produtos
     }
 
     public boolean movimentacaoEstoqueReducao(String nomeProduto, int atualizacao) {
         for (int i = 0; i < produtos.size(); i++) {
-                    
-                    //Pegando o nome do Produto na Lista "produtos"
-                    Produto x = produtos.get(i);
-                    String y = x.getNomeProduto();
+
+            //Pegando o nome do Produto na Lista "produtos"
+            Produto x = produtos.get(i);
+            String y = x.getNomeProduto();
 
             if (nomeProduto.equalsIgnoreCase(y.trim())) {
                 int novaQuantidade = x.getQuantidadeEstoque() + atualizacao;
@@ -51,10 +51,10 @@ public class ControleEstoque {
 
     public boolean movimentacaoEstoqueAdicao(String nomeProduto, int atualizacao) {
         for (int i = 0; i < produtos.size(); i++) {
-                    
-                    //Pegando o nome do Produto na Lista "produtos"
-                    Produto x = produtos.get(i);
-                    String y = x.getNomeProduto();
+
+            //Pegando o nome do Produto na Lista "produtos"
+            Produto x = produtos.get(i);
+            String y = x.getNomeProduto();
 
             if (nomeProduto.equalsIgnoreCase(y.trim())) {
                 int novaQuantidade = x.getQuantidadeEstoque() + atualizacao;
@@ -117,7 +117,7 @@ public class ControleEstoque {
                     produtoPesquisado.getQuantidadeEstoque(),
                     produtoPesquisado.getEstoqueMinimo(),
                     produtoPesquisado.getEstoqueMaximo());
-                    //produtoPesquisado.getNomeCategoria());
+            //produtoPesquisado.getNomeCategoria());
             System.out.println(informacoes);
         }
     }
@@ -157,71 +157,38 @@ public class ControleEstoque {
 
         String nomeId = "";
         int contador = 0;
-/**
-        if (!produtos.isEmpty()) {
-            for (Produto p : produtos) { //procura por produtos que tem a categoria correspondente a que o usuario deseja
-                if (p.getNomeCategoria().equalsIgnoreCase(categoriaDigitada.trim())) { //se for correspondente é adicionada à saída
-                    nomeId += "ID: " + p.getIdProduto()
-                            + " | Nome: " + p.getNomeProduto() + "\n";
-                    contador++; //conta quantos produtos existem com a categoria correspondente
-                }
-            }
-            if (contador > 0) { //se houver pelo menos algum produto com a categoria correspondente
-                System.out.println("\nLista de Produtos da Categoria: " + categoriaDigitada);
-                System.out.println(nomeId); //imprime todos os produtos da categoria
-                System.out.println("Total de produtos distintos na categoria \"" + categoriaDigitada + "\": " + contador); //imprime o total de produtos distintos presentes na categoria
-            } else { //se não houver nenhum produto com a categoria correspondente
-                System.out.println("Nenhum produto encontrado na categoria \"" + categoriaDigitada + "\".");
-            }
-        } else { //se não houver produtos cadastrados na lista
-            System.out.println("Nenhum produto cadastrado.");
-        }
+        /**
+         * if (!produtos.isEmpty()) { for (Produto p : produtos) { //procura por
+         * produtos que tem a categoria correspondente a que o usuario deseja if
+         * (p.getNomeCategoria().equalsIgnoreCase(categoriaDigitada.trim())) {
+         * //se for correspondente é adicionada à saída nomeId += "ID: " +
+         * p.getIdProduto() + " | Nome: " + p.getNomeProduto() + "\n";
+         * contador++; //conta quantos produtos existem com a categoria
+         * correspondente } } if (contador > 0) { //se houver pelo menos algum
+         * produto com a categoria correspondente System.out.println("\nLista de
+         * Produtos da Categoria: " + categoriaDigitada);
+         * System.out.println(nomeId); //imprime todos os produtos da categoria
+         * System.out.println("Total de produtos distintos na categoria \"" +
+         * categoriaDigitada + "\": " + contador); //imprime o total de produtos
+         * distintos presentes na categoria } else { //se não houver nenhum
+         * produto com a categoria correspondente System.out.println("Nenhum
+         * produto encontrado na categoria \"" + categoriaDigitada + "\"."); } }
+         * else { //se não houver produtos cadastrados na lista
+         * System.out.println("Nenhum produto cadastrado."); } }
+         */
+
+        /**
+         * public void reajusteDePreco(double novoPreco) { //Tendo em vista que
+         * terá um "consultarProduto" antes de ter um reajuste de preço
+         *
+         * Produto produto = new Produto();
+         *
+         * System.out.print("Insira a nova quantidade do produto"); //Pedindo o
+         * novo preço novoPreco = input.nextDouble(); //Pegando o novo preço
+         *
+         * for (int i = 0; i < produtos.size(); i++) { if (i ==
+         * consultaProduto()) { //Indo até o produto selecionado
+         * produto.setPrecoUnit(novoPreco); //Alterando o preço } } }
+         */
     }
-    */
-/**
-    public void listaDePrecos() {
-        if (produtos.isEmpty()) {
-            System.out.println("O estoque está sem produtos");
-            return;
-        }
-
-        ArrayList<String> nomeProdutos = new ArrayList<>();
-        for (Produto p : produtos) {
-            nomeProdutos.add(p.getNomeProduto());
-        }
-
-        Collections.sort(nomeProdutos); //para organizar em ordem alfabética
-
-        String listaDePrecos = "Lista de preços:\n";
-        for (String nome : nomeProdutos) {
-            for (Produto p : produtos) {
-                if (p.getNomeProduto().equals(nome)) {
-                    listaDePrecos += String.format("Nome: %s\nPreço: R$ %.2f \nUnidade de medida: %s\nCategoria: %s\n\n",
-                            p.getNomeProduto(),
-                            p.getPrecoUnit(),
-                            p.getUnidadeProduto(),
-                            p.getNomeCategoria());
-                }
-            }
-        }
-        
-
-        System.out.println(listaDePrecos);
-*/
-    }
-/**
-    public void reajusteDePreco(double novoPreco) {             //Tendo em vista que terá um "consultarProduto" antes de ter um reajuste de preço
-
-        Produto produto = new Produto();
-
-        System.out.print("Insira a nova quantidade do produto"); //Pedindo o novo preço
-        novoPreco = input.nextDouble();                          //Pegando o novo preço
-
-        for (int i = 0; i < produtos.size(); i++) {
-            if (i == consultaProduto()) {                        //Indo até o produto selecionado
-                produto.setPrecoUnit(novoPreco);                 //Alterando o preço
-            }
-        }
-    }
-    */
 }
