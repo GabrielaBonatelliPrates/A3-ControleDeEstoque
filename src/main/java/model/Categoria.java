@@ -1,10 +1,14 @@
 package model;
 
+import controller.ControleEstoque;
+import dao.CategoriaDAO;
 import java.util.Scanner;
+import java.util.Random;
 
 public class Categoria {
 
     Scanner sc = new Scanner(System.in);
+    Random random = new Random();
 
     //Declaração das variáveis de instância
     private int idCategoria;
@@ -19,6 +23,12 @@ public class Categoria {
     //Construtor com parâmetros
     public Categoria(int idCategoria, String nomeCategoria, String tamanho, String embalagem) {
         this.idCategoria = idCategoria;
+        this.nomeCategoria = nomeCategoria;
+        this.tamanho = tamanho;
+        this.embalagem = embalagem;
+    }
+
+    public Categoria(String nomeCategoria, String tamanho, String embalagem) {
         this.nomeCategoria = nomeCategoria;
         this.tamanho = tamanho;
         this.embalagem = embalagem;
@@ -82,5 +92,39 @@ public class Categoria {
 
         sc.nextLine();//Limpa a linha
 
+    }
+    
+    //Método para deixar o Id aleatório
+    public void randomId(String nomeCategoria) {
+        CategoriaDAO catDao = new CategoriaDAO();
+
+        //Um for que passa por todos os itens da Lista
+        for (int i = 0; i < catDao.categorias.size(); i++) {
+            
+            //Pegando o nome da Categoria na Lista "categorias"
+            Categoria x = catDao.categorias.get(i);
+            
+            if (nomeCategoria.equalsIgnoreCase(x.getNomeCategoria().trim())) {
+
+                int novoIdCategoria;
+                boolean idUnico;
+
+                do {
+                    novoIdCategoria = random.nextInt(9999); // de 0 até 9998
+                    idUnico = true;
+
+                    // Verifica se esse ID já existe na lista
+                    for (int z = 0; z < catDao.categorias.size(); z++) {
+                        Categoria a = catDao.categorias.get(z);
+                        
+                        if (a.getIdCategoria()== novoIdCategoria) {
+                            idUnico = false;
+                            break;
+                        }
+                    }
+                } while (!idUnico);
+                this.idCategoria = novoIdCategoria;
+            }
+        }
     }
 }

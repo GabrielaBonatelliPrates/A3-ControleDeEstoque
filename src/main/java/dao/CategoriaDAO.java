@@ -15,7 +15,7 @@ import model.Categoria;
 
 public class CategoriaDAO {
 
-    protected static final List<Categoria> categorias = new ArrayList<>(); //cria lista que vai armazenar os produtos
+    public static final List<Categoria> categorias = new ArrayList<>(); //cria lista que vai armazenar os produtos
 
     public CategoriaDAO() {
     }
