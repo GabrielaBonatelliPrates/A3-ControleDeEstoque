@@ -4,17 +4,46 @@
  */
 package view;
 
+import dao.ProdutoDAO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.Produto;
+
 /**
  *
  * @author User
  */
 public class FrmBalancoFinanceiro extends javax.swing.JFrame {
+    private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Produto", "Quantidade", "Preço Unitário", "Preço Total"}, 0);
+    private double valorTotalEstoque;
 
     /**
      * Creates new form BalancoFinanceiro
      */
     public FrmBalancoFinanceiro() {
         initComponents();
+        mostraTabela();
+    }
+    
+    public void mostraTabela(){
+           
+        modelo.setRowCount(0); //limpa a tabela
+        modelo.setNumRows(0); //posiciona na primeira linha da tabela
+
+        List<Produto> todosProdutos = ProdutoDAO.pegarProdutos(); //acha os produtos acima do máximo
+        
+        for (Produto produto : todosProdutos) { //adiciona à tabela
+            modelo.addRow(new Object[]{
+                produto.getIdProduto(),
+                produto.getNomeProduto(),
+                produto.getQuantidadeEstoque(),
+                produto.getPrecoUnit(),
+                (produto.getPrecoUnit() * produto.getQuantidadeEstoque()),});
+        }
+        valorTotalEstoque = ProdutoDAO.valorTotal();
+        String strValorTotal = String.valueOf(valorTotalEstoque);
+        JLValorTotalEstoque.setText(strValorTotal);
+        JTBalancoFinanceiro.setModel(modelo); //atualiza a tabela
     }
 
     /**
@@ -33,6 +62,14 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Balanco Financeiro");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         JTBalancoFinanceiro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -78,6 +115,14 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        mostraTabela();
+    }//GEN-LAST:event_formWindowActivated
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        mostraTabela();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

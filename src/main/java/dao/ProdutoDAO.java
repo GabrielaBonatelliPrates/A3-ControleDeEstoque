@@ -354,4 +354,13 @@ public class ProdutoDAO {
         }
         return produtosAbaixo;
     }
+
+    public static double valorTotal() {
+        double valorTotalEstoque = 0;
+        List<Produto> todosProdutos = pegarProdutos();
+        for (Produto produto : todosProdutos) {
+            valorTotalEstoque += (produto.getPrecoUnit() * produto.getQuantidadeEstoque());
+        }
+        return valorTotalEstoque;
+    }
 }
