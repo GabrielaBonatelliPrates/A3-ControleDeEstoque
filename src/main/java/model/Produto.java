@@ -176,41 +176,4 @@ public class Produto {
             }
         }
     }
-/*
-    //le os dados dos produtos
-    public void lerDados() {
-
-        System.out.print("Digite o ID do produto: ");
-        this.idProduto = sc.nextInt();
-
-        sc.nextLine(); //limpa a linha
-
-        System.out.print("Digite o nome do produto: ");
-        this.nomeProduto = sc.nextLine();
-
-        System.out.print("Digite o preço unitário do produto: ");
-        this.precoUnit = sc.nextDouble();
-
-        sc.nextLine(); //limpa a linha
-
-        System.out.print("Digite a unidade do produto: ");
-        this.unidadeProduto = sc.nextLine();
-
-        System.out.print("Digite a quantidade em estoque: ");
-        this.quantidadeEstoque = sc.nextInt();
-
-        System.out.print("Digite a quantidade mínima permitida em estoque: ");
-        this.estoqueMinimo = sc.nextInt();
-
-        System.out.print("Digite a quantidade máxima permitida em estoque: ");
-        this.estoqueMaximo = sc.nextInt();
-
-        sc.nextLine(); //limpa a linha
-
-        Categoria cat = new Categoria();
-        cat.lerDados();
-        setNomeCategoria(cat.getNome());
-
-    }
-*/
 }
