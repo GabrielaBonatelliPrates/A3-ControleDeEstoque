@@ -27,7 +27,7 @@ public class CategoriaDAO {
     //método para colocar a categoria no banco de dados
     public static void inserirCategoria(int idCategoria, String nomeCategoria, String tamanho, String embalagem) throws SQLException {
         Categoria categoria = new Categoria ();
-        String sql = "INSERT INTO categorias (idCategoria, nomeCategoria, tamanho, embalagem) VALUES (?, ?, ?)"; //insere os dados na tabela
+        String sql = "INSERT INTO categorias (nomeCategoria, tamanho, embalagem) VALUES (?, ?, ?)"; //insere os dados na tabela
 
         try (
                 Connection connection = Conexao.conectar(); //atribui a conexão à classe que faz a conexão com o banco de dados
@@ -55,8 +55,8 @@ public class CategoriaDAO {
         }
     }
     
-       public ArrayList<Categoria> mostrarCategorias() { //método que retorna os nomes das categorias do banco
-           ArrayList<Categoria> mostrarCategorias = new ArrayList();
+       public static List<Categoria> mostrarCategorias() { //método que retorna os nomes das categorias do banco
+           List<Categoria> mostrarCategorias = new ArrayList();
         String sql = "SELECT * FROM categorias"; //consulta sql que seleciona o nome da categoria na tabela categorias
         try {
             Connection connection = Conexao.conectar();

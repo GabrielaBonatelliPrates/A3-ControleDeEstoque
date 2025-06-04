@@ -31,7 +31,7 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         JLValorTotalEstoque = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Balanco Financeiro");
 
         JTBalancoFinanceiro.setModel(new javax.swing.table.DefaultTableModel(

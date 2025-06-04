@@ -15,8 +15,8 @@ public class MovimentacaoDAO {
 
     public MovimentacaoDAO() {
     }
-
-    public void inserirMovimentacao(Date data, int quantidadeMovimentada, String nomeProduto, String tipoMovimentacao) throws SQLException {
+//public void inserirMovimentacao(Date data, int quantidadeMovimentada, String nomeProduto, String tipoMovimentacao) throws SQLException {
+    public static void inserirMovimentacao(Date data, int quantidadeMovimentada, String nomeProduto, String tipoMovimentacao) throws SQLException {
         
         MovimentacaoEstoque movimentacao = new MovimentacaoEstoque();
         

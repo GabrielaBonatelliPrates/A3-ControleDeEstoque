@@ -163,6 +163,7 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
             this.JTFNomeCategoria.setText("");
             this.JTFTamanho.setText("");
             this.JTFEmbalagem.setText("");
+            
 
             //Verifica se a categoria já existe
             boolean existe = verificaCategoria(nomeCategoria, tamanho, embalagem);
@@ -173,7 +174,7 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
             }           
             
             //Criar categoria nova e mostrar possiível erro
-            CategoriaDAO.inserirCategoria(nomeCategoria, tamanho, embalagem);
+            CategoriaDAO.inserirCategoria(1, nomeCategoria, tamanho, embalagem);
             boolean criou = verificaCategoria(nomeCategoria, tamanho, embalagem);
             if (criou) {
                 JOptionPane.showMessageDialog(this, "Categoria criada com sucesso!");

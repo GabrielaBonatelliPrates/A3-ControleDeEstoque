@@ -12,20 +12,19 @@ import javax.swing.JComboBox;
 
 public class FrmProdutoNovo extends javax.swing.JFrame {
     
-    public List<Produto> produtos = new ArrayList();
+
     
     public FrmProdutoNovo() {
         initComponents();
-        mostrarCategorias();
-        jComboBoxCategoria = new JComboBox<>();
+       mostrarCategorias();
     }
     
     public void mostrarCategorias(){
-        CategoriaDAO catDAO = new CategoriaDAO();
         //Cria um ArrayList para mostrar os nomes das categorias cadastrados no banco de dados
-        List<Categoria> mostrarCategorias = catDAO.mostrarCategorias(); 
+        List<Categoria> mostrarCategorias = CategoriaDAO.mostrarCategorias(); 
+        //int id = 1;
         if(mostrarCategorias.isEmpty()){ //Caso não tenha nenhuma categoria cadastrada
-            jComboBoxCategoria.addItem(new Categoria("", "", ""));
+            jComboBoxCategoria.addItem(new Categoria( 0, "", "", ""));
             jComboBoxCategoria.setEnabled(false);
             JOptionPane.showMessageDialog(null, "Nenhuma categoria cadastrada");
         } else{
@@ -104,6 +103,14 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Novo Produto");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Novo Produto");
@@ -320,35 +327,36 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
     private void JBAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAdicionarProdutoActionPerformed
 
         try {
-            String nome = "";
+            String nomeProduto= "";
             int id = 0;
             double valorUnitario = 0;
             String unidade = "";
             int quantidadeEstoque = 0;
             int quantidadeEstoqueMinima = 0;
             int quantidadeEstoqueMaxima = 0;
-            String nomeCategoria = "";
+            //String nomeCategoria = "";
 
             //Nome do Produto
             if (this.JTFNomeProduto.getText().length() < 2) {
                 throw new Mensagem(" O nome do produto deve conter ao menos 2 caracteres. ");
             } else {
-                nome = this.JTFNomeProduto.getText();
+                nomeProduto = this.JTFNomeProduto.getText();
             }
 
             //Id do Produto
-            int x = Integer.parseInt(this.JTFIdProduto.getText());
-            if (x <= 0) {
-                throw new Mensagem("O Id do produto deve ser número e maior que zero. ");
-            }
-            if (this.JTFIdProduto.getText().length() <= 0) {
-                throw new Mensagem("O Id do produto deve ser número e maior que zero. ");
-            } else {
-                id = Integer.parseInt(this.JTFIdProduto.getText());
-            }
+          //  int x = Integer.parseInt(this.JTFIdProduto.getText());
+           // if (x <= 0) {
+           //     throw new Mensagem("O Id do produto deve ser número e maior que zero. ");
+          //  }
+          
+        //   if (this.JTFIdProduto.getText().length() <= 0) {
+        //        throw new Mensagem("O Id do produto deve ser número e maior que zero. ");
+        //    } else {
+         //       id = Integer.parseInt(this.JTFIdProduto.getText());
+         // }
 
             //Valor do produto
-            x = (int) Double.parseDouble(this.JTFValorProduto.getText());
+            int x = (int) Double.parseDouble(this.JTFValorProduto.getText());
             if (x <= 0) {
                 throw new Mensagem("O Id do produto deve ser número e maior que zero. ");
             }
@@ -381,33 +389,49 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
             if (x <= 0) {
                 throw new Mensagem("O Id do produto deve ser número e maior que zero. ");
             }
+            else{
+                quantidadeEstoqueMinima = x;
+            }
+            /*
             if (this.JTFQuantidadeMinimaProduto.getText().length() <= 0) {
                 throw new Mensagem("A quantidade mínima do produto deve ser número e maior que zero. ");
             } else {
-                int idMinimo = Integer.parseInt(this.JTFQuantidadeMinimaProduto.getText());
+                int quantidadeMinima = Integer.parseInt(this.JTFQuantidadeMinimaProduto.getText());
             }
-
+*/
             //Quantidade Máxima do produto
             x = Integer.parseInt(this.JTFQuantidadeMaximaProduto.getText());
             if (x <= 0) {
                 throw new Mensagem("O Id do produto deve ser número e maior que zero. ");
             }
+            else{
+                quantidadeEstoqueMaxima = x;
+            }
+            /*
             if (this.JTFQuantidadeMaximaProduto.getText().length() <= 0) {
                 throw new Mensagem("A quantidade máxima do produto deve ser número e maior que zero. ");
             } else {
-                int idMaximo = Integer.parseInt(this.JTFQuantidadeMaximaProduto.getText());
+                int quantidadeMaxima = Integer.parseInt(this.JTFQuantidadeMaximaProduto.getText());
             }
-
+*/
             // limpa campos da interface
             this.JTFNomeProduto.setText("");
-            this.JTFIdProduto.setText("");
+           // this.JTFIdProduto.setText("");
             this.JTFValorProduto.setText("");
             this.JTFUniProduto.setText("");
             this.JTFQuantidadeProduto.setText("");
             this.JTFQuantidadeMinimaProduto.setText("");
             this.JTFQuantidadeMaximaProduto.setText("");
+           
 
+            
             Categoria categoriaSelecionada = (Categoria) jComboBoxCategoria.getSelectedItem();
+            String nomeCategoria = categoriaSelecionada.getNomeCategoria();
+            String tamanho = categoriaSelecionada.getTamanho();
+            String embalagem = categoriaSelecionada.getEmbalagem();
+            
+            ProdutoDAO.cadastrarProduto(nomeProduto, valorUnitario, unidade, quantidadeEstoque,
+               quantidadeEstoqueMinima, quantidadeEstoqueMaxima, nomeCategoria, tamanho, embalagem);
             
             JOptionPane.showMessageDialog(this, "Produto adicionado com sucesso!");
         } catch (Mensagem e) {
@@ -458,6 +482,14 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jComboBoxCategoriaActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+       mostrarCategorias();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        mostrarCategorias();
+    }//GEN-LAST:event_formWindowActivated
+
     /**
      * @param args the command line arguments
      */
@@ -478,7 +510,7 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
-    private javax.swing.JComboBox<Categoria> jComboBoxCategoria;
+    private static javax.swing.JComboBox<Categoria> jComboBoxCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

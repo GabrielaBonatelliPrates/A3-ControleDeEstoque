@@ -11,7 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import controller.ControleEstoque;
+import dao.ProdutoDAO;
+import java.sql.SQLException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Produto;
 
 /**
@@ -23,7 +27,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
     private Produto produto;
     private MovimentacaoDAO movEst;
     private ControleEstoque contEst;
-    private List<Produto> produtos;
+    private static List <Produto> produtos = ProdutoDAO.pegarProdutos();
 
     /**
      * Creates new form FrmMovimentacao
@@ -31,9 +35,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
     public FrmMovimentacao() {
         initComponents();
         this.produto = new Produto();
-        movEst = new MovimentacaoDAO();
-        contEst = new ControleEstoque();
-        produtos = new ArrayList();
+        
     }
 
     /**
@@ -233,7 +235,14 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 novaMov.setData(Date.from(Instant.now()));
                 novaMov.setNomeProduto(nomeProduto);
                 novaMov.setQuantidadeMovimentada(quantidade);
-                movEst.movimentacoes.add(novaMov);
+                String tipo = "tipo";
+                Date date = new Date();
+            try {
+                //MovimentacaoEstoque.movimentacoes.add(novaMov);
+                MovimentacaoDAO.inserirMovimentacao(date ,quantidade, nomeProduto, tipo);
+            } catch (SQLException ex) {
+                Logger.getLogger(FrmMovimentacao.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
                 produto.verificaMediaAbaixo();
                 produto.verificaMediaAcima();
@@ -270,6 +279,8 @@ public class FrmMovimentacao extends javax.swing.JFrame {
     private void JBRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBRemoverActionPerformed
         MovimentacaoEstoque novaMov = new MovimentacaoEstoque();
         novaMov.setTipoMovimentacao("Baixa");
+        
+        
 
 // criando variaveis para receber os valores/nomes da interface gráfica
         String nomeProduto = "";

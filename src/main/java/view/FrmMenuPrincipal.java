@@ -387,7 +387,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuMovimentacaoActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-
+/*
         String nomeProduto = txtCampoPesquisa.getText();
         String dadosProduto = "";
         if (!telaCadastro.produtos.isEmpty()) {
@@ -409,7 +409,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
                 }
             }
             txtFicha.setText(dadosProduto);
-        }
+        } */
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void jMenuBalancoFinanceiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBalancoFinanceiroActionPerformed

@@ -34,8 +34,6 @@ public class Produto {
         this.estoqueMinimo = estoqueMinimo;
         this.estoqueMaximo = estoqueMaximo;
         this.categoria = categoria;
-        this.acimaMedia = acimaMedia;
-        this.abaixoMedia = abaixoMedia;
     }
 
     //getters e setters
