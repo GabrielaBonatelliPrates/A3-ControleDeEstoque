@@ -23,10 +23,12 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
         //Cria um ArrayList para mostrar os nomes das categorias cadastrados no banco de dados
         List<Categoria> mostrarCategorias = CategoriaDAO.mostrarCategorias(); 
         //int id = 1;
-        if(mostrarCategorias.isEmpty()){ //Caso não tenha nenhuma categoria cadastrada
-            jComboBoxCategoria.addItem(new Categoria( 0, "", "", ""));
+        
+        jComboBoxCategoria.removeAllItems(); //limpa itens anteriores para evitar erros
+        
+        if(mostrarCategorias.isEmpty()){ //Caso não tenha nenhuma categoria cadastrada vai criar uma categoria informativa
+            jComboBoxCategoria.addItem(new Categoria( 0, "Nenhuma categoria cadastrada", "", ""));
             jComboBoxCategoria.setEnabled(false);
-            JOptionPane.showMessageDialog(null, "Nenhuma categoria cadastrada");
         } else{
         for (Categoria categoria : mostrarCategorias) {
             jComboBoxCategoria.addItem(categoria); //Adiciona na ComboBox as categorias já cadastradas
@@ -483,11 +485,11 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxCategoriaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-       mostrarCategorias();
+     mostrarCategorias();
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        mostrarCategorias();
+     mostrarCategorias();
     }//GEN-LAST:event_formWindowActivated
 
     /**
