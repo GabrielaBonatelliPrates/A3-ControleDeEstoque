@@ -6,7 +6,7 @@ import javax.swing.table.DefaultTableModel;
 import model.Produto;
 
 public class FrmEstoqueMaximo extends javax.swing.JFrame {
-private DefaultTableModel modelo;
+private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nome", "Estoque Atual", "Estoque Máximo"}, 0);
     /**
      * Creates new form FrmEstoqueMaximo
      */
@@ -18,21 +18,19 @@ private DefaultTableModel modelo;
 
     public void carregaTabela() {
         
+        modelo.setRowCount(0); //limpa a tabela
+        modelo.setNumRows(0); //posiciona na primeira linha da tabela
 
-        modelo = new DefaultTableModel(new Object[]{"ID", "Nome", "Qtd", "Máximo"}, 0);
-        //DefaultTableModel modelo = (DefaultTableModel) this.JTEstoqueMaximo.getModel();
-        JTEstoqueMaximo.setModel(modelo);
-        modelo.setNumRows(0); //Posiciona na primeira linha da tabela
-
-        List<Produto> acimaMedia = ProdutoDAO.pegarProdutosAcimaMaximo();
-        for (Produto a : acimaMedia) {
+        List<Produto> acimaMaximo = ProdutoDAO.pegarProdutosAcimaMaximo(); //acha os produtos acima do máximo
+        
+        for (Produto produto : acimaMaximo) { //adiciona à tabela
             modelo.addRow(new Object[]{
-                a.getIdProduto(),
-                a.getNomeProduto(),
-                a.getQuantidadeEstoque(),
-                a.getEstoqueMaximo(),});
+                produto.getIdProduto(),
+                produto.getNomeProduto(),
+                produto.getQuantidadeEstoque(),
+                produto.getEstoqueMaximo(),});
         }
-        JTEstoqueMaximo.setModel(modelo);
+        JTEstoqueMaximo.setModel(modelo); //atualiza a tabela
     }
 
     /**

@@ -15,7 +15,7 @@ import model.Produto;
  * @author daviw
  */
 public class FrmEstoqueMinimo extends javax.swing.JFrame {
-private DefaultTableModel modelo;
+private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nome", "Estoque Atual", "Estoque Mínimo"}, 0);
     /**
      * Creates new form FrmEstoqueMinimo
      */
@@ -25,20 +25,20 @@ private DefaultTableModel modelo;
     }
     
     public void carregaTabela() {
+         modelo.setRowCount(0); //limpa a tabela
+        modelo.setNumRows(0); //posiciona na primeira linha da tabela
         
-        
-        modelo = new DefaultTableModel(new Object[]{"ID", "Nome", "Qtd", "Mínimo"}, 0);
+       //modelo = new DefaultTableModel(new Object[]{"ID", "Nome", "Qtd", "Mínimo"}, 0);
         //DefaultTableModel modelo = (DefaultTableModel) this.JTEstoqueMinimo.getModel();
-        JTEstoqueMinimo.setModel(modelo);
-        modelo.setNumRows(0); //Posiciona na primeira linha da tabela
-
-        List<Produto> abaixoMedia = ProdutoDAO.pegarProdutosAbaixoMinimo();
-        for (Produto a : abaixoMedia) {
+        
+        List<Produto> abaixoMinimo = ProdutoDAO.pegarProdutosAbaixoMinimo();
+        
+        for (Produto produto : abaixoMinimo) {
             modelo.addRow(new Object[]{
-                a.getIdProduto(),
-                a.getNomeProduto(),
-                a.getQuantidadeEstoque(),
-                a.getEstoqueMinimo(),
+                produto.getIdProduto(),
+                produto.getNomeProduto(),
+                produto.getQuantidadeEstoque(),
+                produto.getEstoqueMinimo(),
             });
         }
          JTEstoqueMinimo.setModel(modelo);
@@ -67,7 +67,7 @@ private DefaultTableModel modelo;
         });
 
         JLEstoqueMinimo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        JLEstoqueMinimo.setText("Acima do Estoque Máximo");
+        JLEstoqueMinimo.setText("Acima do Estoque Mínimo");
 
         JTEstoqueMinimo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

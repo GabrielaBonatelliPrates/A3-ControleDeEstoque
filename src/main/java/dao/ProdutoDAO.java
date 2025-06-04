@@ -18,7 +18,8 @@ import model.Categoria;
 
 public class ProdutoDAO {
 
-    protected static final List<Produto> produtos = new ArrayList<>(); //cria lista que vai armazenar os produtos
+    protected static final List<Produto> produtos = new ArrayList<>(); //cria lista que vai armazenar os produtos da sessão (caso haja algum problema no banco de dados)
+   protected static final List<Produto> listaAtualizada = new ArrayList<>(); //cria lista que vai armazenar os produtos a partir do banco de dados
 
     public ProdutoDAO() {
     }
@@ -26,7 +27,9 @@ public class ProdutoDAO {
     public static void cadastrarProduto(String nomeProduto, double precoUnit, String unidadeProduto,
             int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo,
             String nomeCategoria, String tamanho, String embalagem) { //vai servir pra cadastrar produtos com quando a classe categoria tiver implementada certinho
-
+            
+            
+            
         //método para colocar o produto no banco de dados
         inserirProduto(nomeProduto, precoUnit, unidadeProduto, quantidadeEstoque,
                estoqueMinimo, estoqueMaximo, nomeCategoria, tamanho, embalagem);
@@ -57,7 +60,13 @@ public class ProdutoDAO {
             ResultSet resultSet = statement.getGeneratedKeys(); //devolve o id (gerado automaticamente pelo sql - posteriormente vamos substituir por um método (dicas do professor))
             if (resultSet.next()) {
                 int idGerado = resultSet.getInt(1); //vai ler o id gerado
-             //   insereLista(nomeProduto, idGerado, precoUnit, unidadeProduto, quantidadeEstoque, estoqueMinimo, estoqueMaximo, nomeCategoria); //adiciona o produto na lista
+                
+                Categoria categoria = new Categoria ();
+                categoria.setNomeCategoria(nomeCategoria);
+                categoria.setTamanho(tamanho);
+                categoria.setEmbalagem(embalagem);
+                
+                 insereLista(nomeProduto, idGerado, precoUnit, unidadeProduto, quantidadeEstoque, estoqueMinimo, estoqueMaximo, categoria); //adiciona o produto na lista
                 String strIdGerado = String.format("Id do produto %s: %d", nomeProduto, idGerado);
                 JOptionPane.showMessageDialog(null, strIdGerado); //exibe o id gerado pro usuário (já que era a informação que ele não entregou)
             }
@@ -128,7 +137,7 @@ public class ProdutoDAO {
             if (resultSet.next()) {
                 produto = new Produto();
                 categoria = new Categoria();
-                produto.setIdProduto(resultSet.getInt("id"));
+                produto.setIdProduto(resultSet.getInt("idProduto"));
                 produto.setNomeProduto(resultSet.getString("nome"));
                 produto.setPrecoUnit(resultSet.getDouble("preco_unitario"));
                 produto.setUnidadeProduto(resultSet.getString("unidade"));
@@ -219,7 +228,7 @@ public class ProdutoDAO {
             if (resultSet.next()) {
                 produto = new Produto();
                 categoria = new Categoria();
-                produto.setIdProduto(resultSet.getInt("id"));
+                produto.setIdProduto(resultSet.getInt("idProduto"));
                 produto.setNomeProduto(resultSet.getString("nome"));
                 produto.setPrecoUnit(resultSet.getDouble("preco_unitario"));
                 produto.setUnidadeProduto(resultSet.getString("unidade"));
@@ -301,8 +310,9 @@ public class ProdutoDAO {
     }
     
     public static List<Produto> pegarProdutos() {
+        listaAtualizada.clear();
         
-        String sql = "SELECT id, nome, preco_unitario, unidade, estoque_atual, estoque_minimo, estoque_maximo, nome_categoria, tamanho, embalagem FROM produtos";
+        String sql = "SELECT idProduto, nome, preco_unitario, unidade, estoque_atual, estoque_minimo, estoque_maximo, nome_categoria, tamanho, embalagem FROM produtos";
         
         try (Connection connection = Conexao.conectar();
              PreparedStatement stmt = connection.prepareStatement(sql);
@@ -310,7 +320,7 @@ public class ProdutoDAO {
 
             while (resultSet.next()) {
                 Produto objeto = new Produto();
-                objeto.setIdProduto(resultSet.getInt("id"));
+                objeto.setIdProduto(resultSet.getInt("idProduto"));
                 objeto.setNomeProduto(resultSet.getString("nome"));
                 objeto.setPrecoUnit(resultSet.getDouble("preco_unitario"));
                 objeto.setUnidadeProduto(resultSet.getString("unidade"));
@@ -326,30 +336,32 @@ public class ProdutoDAO {
 
 
                 
-                produtos.add(objeto);
+                listaAtualizada.add(objeto);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return produtos;
+        return listaAtualizada;
     }
     
     public static List<Produto> pegarProdutosAcimaMaximo() {
+        List<Produto> verificarProdutos = pegarProdutos();
         List<Produto> produtosAcima = new ArrayList<>();
-        for(Produto a : produtos){
-            if(a.getQuantidadeEstoque() >= a.getEstoqueMaximo()){
-                produtosAcima.add(a);
+        for(Produto produto : verificarProdutos){
+            if(produto.getQuantidadeEstoque() > produto.getEstoqueMaximo()){
+                produtosAcima.add(produto);
             }
         }   
             return produtosAcima;
     }
     
     public static List<Produto> pegarProdutosAbaixoMinimo() {
+        List<Produto> verificarProdutos = pegarProdutos();
         List<Produto> produtosAbaixo = new ArrayList<>();
-        for(Produto a : produtos){
-            if(a.getQuantidadeEstoque() <= a.getEstoqueMaximo()){
-                produtosAbaixo.add(a);
+        for(Produto produto : verificarProdutos){
+            if(produto.getQuantidadeEstoque() < produto.getEstoqueMinimo()){
+                produtosAbaixo.add(produto);
             }
         }   
             return produtosAbaixo;
