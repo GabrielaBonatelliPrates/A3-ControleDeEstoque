@@ -13,6 +13,7 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
 
     private ProdutoController objetoProduto;
     FrmProdutoNovo somaProdutos = new FrmProdutoNovo();
+
     public FrmGerenciarProduto() {
         initComponents();
         this.objetoProduto = new ProdutoController();
@@ -24,7 +25,7 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
     public void mostrarTabela() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTableGerenciaProdutos.getModel(); // para manipular a tabela 
         modelo.setNumRows(0);
-        List<Produto> listaProdutos = prodDAO.emiteLista();
+        List<Produto> listaProdutos = prodDAO.pegarProdutos();
         for (Produto p : listaProdutos) {
             modelo.addRow(new Object[]{
                 p.getIdProduto(),
@@ -33,14 +34,13 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
                 p.getUnidadeProduto(),
                 p.getQuantidadeEstoque(),
                 p.getEstoqueMinimo(),
-                p.getEstoqueMaximo(), // p.getNomeCategoria(), 
-            //p.getTamanho(),
-            //p.getEmbalagem()
+                p.getEstoqueMaximo(),
+                p.getCategoria().getNomeCategoria(),
+                p.getCategoria().getTamanho(),
+                p.getCategoria().getEmbalagem()
             });
         }
     }
-
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -105,9 +105,17 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel3.setText("Gerenciar Produtos");
+        jLabel3.setText("Gerenciar Produto");
 
         jTableGerenciaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -175,7 +183,6 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(146, 110, 80));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Reajuste de preços por produto:");
 
         JBReajustarProduto.setText("Reajustar");
@@ -185,14 +192,11 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
             }
         });
 
-        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Reajuste percentual de:");
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("%");
 
-        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("Produto:");
 
         buttonGroup1.add(JRBAumento);
@@ -266,15 +270,12 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
             }
         });
 
-        jLabel19.setForeground(new java.awt.Color(0, 0, 0));
         jLabel19.setText("Reajuste percentual de:");
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(0, 0, 0));
         jLabel20.setText("%");
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setText("Reajuste de preços do estoque:");
 
         buttonGroup2.add(JRBAumento1);
@@ -475,7 +476,7 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_JTFUnidadeProdutoActionPerformed
 
     private void JBReajustarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBReajustarProdutoActionPerformed
-     
+
         try {
             double precoAtual = Double.parseDouble(JTFProdutoNovoPreco.getText());
             double percentual = Double.parseDouble(JTFAumentoPercentualProduto.getText());
@@ -493,16 +494,16 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Digite valores válidos.");
 
         }
-    
+
     }//GEN-LAST:event_JBReajustarProdutoActionPerformed
 
     private void JBReajustarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBReajustarEstoqueActionPerformed
 
-       
+
     }//GEN-LAST:event_JBReajustarEstoqueActionPerformed
 
     private void jTableGerenciaProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableGerenciaProdutosMouseClicked
-        /*  if (this.jTableGerenciaProdutos.getSelectedRow() != -1) {
+        if (this.jTableGerenciaProdutos.getSelectedRow() != -1) {
             String nome = this.jTableGerenciaProdutos.getValueAt(this.jTableGerenciaProdutos.getSelectedRow(), 1).toString();
             String precoUnit = this.jTableGerenciaProdutos.getValueAt(this.jTableGerenciaProdutos.getSelectedRow(), 2).toString();
             String unidadeProduto = this.jTableGerenciaProdutos.getValueAt(this.jTableGerenciaProdutos.getSelectedRow(), 3).toString();
@@ -522,11 +523,11 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
             this.JTFNomeCategoria.setText(nomeCategoria);
             this.JTFTamanho.setText(tamanho);
             this.JTFEmbalagem.setText(embalagem);
-        } */
+        }
     }//GEN-LAST:event_jTableGerenciaProdutosMouseClicked
 
     private void JBAtualizarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAtualizarProdutoActionPerformed
-        /* try {
+        try {
             int idProduto = 0;
             String nomeProduto = "";
             double precoUnit = 0.00;
@@ -578,6 +579,8 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
             y = Integer.parseInt(this.JTFEstoqueMinimo.getText());
             if (y <= 0) {
                 throw new Mensagem(" A quantidade mínima de produto em estoque deve ser maior que zero.");
+            } else {
+                estoqueMinimo = y;
             }
             if (this.JTFEstoqueMinimo.getText().length() <= 0) {
                 throw new Mensagem(" A quantidade mínima de produto em estoque deve ser maior que zero.");
@@ -589,7 +592,10 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
             y = Integer.parseInt(this.JTFEstoqueMaximo.getText());
             if (y <= 0) {
                 throw new Mensagem(" A quantidade máxima de produto em estoque deve ser maior que zero.");
+            } else {
+                estoqueMaximo = y;
             }
+
             if (this.JTFEstoqueMaximo.getText().length() <= 0) {
                 throw new Mensagem(" A quantidade máxima de produto em estoque deve ser maior que zero.");
             } else {
@@ -646,16 +652,15 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Erro ao converter número: " + e.getMessage());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro inesperado: " + e.getMessage());
-        } 
-            //Vai atualizar a tabela
+        } //Vai atualizar a tabela
         finally {
             mostrarTabela();
         }
-         */
+
     }//GEN-LAST:event_JBAtualizarProdutoActionPerformed
 
     private void JBExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBExcluirProdutoActionPerformed
-        /*  try {
+        try {
             int idProduto = 0; // variável para armazenar o ID excluído
 
             //Para garantir que tenha um produto selecionado na hora de alterar os dados
@@ -667,7 +672,7 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
 
             //Garantir que o usuário quer apagar o produto
             String[] confirmacao = {"Sim", "Não"};
-            int resposta = JOptionPane.showOptionDialog(null, "Quer excluir o produto?","Confirmação",
+            int resposta = JOptionPane.showOptionDialog(null, "Quer excluir o produto?", "Confirmação",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, confirmacao, confirmacao[0]);
 
             //Limpar os campos caso o usuário aperte sim
@@ -685,14 +690,20 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Produto excluído");
                 }
             }
-}
-                catch (Mensagem e){
-                 JOptionPane.showMessageDialog(this, e.getMessage());
-                        }
-                finally {
+        } catch (Mensagem e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } finally {
             mostrarTabela();
-        } */
+        }
     }//GEN-LAST:event_JBExcluirProdutoActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        this.mostrarTabela();
+    }//GEN-LAST:event_formWindowActivated
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.mostrarTabela();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
