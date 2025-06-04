@@ -235,11 +235,10 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 novaMov.setData(Date.from(Instant.now()));
                 novaMov.setNomeProduto(nomeProduto);
                 novaMov.setQuantidadeMovimentada(quantidade);
-                String tipo = "tipo";
-                Date date = new Date();
+                
             try {
                 //MovimentacaoEstoque.movimentacoes.add(novaMov);
-                MovimentacaoDAO.inserirMovimentacao(date ,quantidade, nomeProduto, tipo);
+                MovimentacaoDAO.inserirMovimentacao(novaMov.getData() ,novaMov.getQuantidadeMovimentada(), novaMov.getNomeProduto(), novaMov.getTipoMovimentacao());
             } catch (SQLException ex) {
                 Logger.getLogger(FrmMovimentacao.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -337,6 +336,13 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 novaMov.setData(Date.from(Instant.now()));
                 novaMov.setNomeProduto(nomeProduto);
                 novaMov.setQuantidadeMovimentada(quantidade);
+                
+                try {
+                //MovimentacaoEstoque.movimentacoes.add(novaMov);
+                MovimentacaoDAO.inserirMovimentacao(novaMov.getData() ,novaMov.getQuantidadeMovimentada(), novaMov.getNomeProduto(), novaMov.getTipoMovimentacao());
+            } catch (SQLException ex) {
+                Logger.getLogger(FrmMovimentacao.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
                 produto.verificaMediaAbaixo();
                 produto.verificaMediaAcima();
