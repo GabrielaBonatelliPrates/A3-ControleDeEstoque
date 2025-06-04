@@ -36,6 +36,16 @@ public class Produto {
         this.categoria = categoria;
     }
 
+    public Produto(String nomeProduto, double precoUnit, String unidadeProduto, int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo, Categoria categoria) {
+        this.nomeProduto = nomeProduto;
+        this.precoUnit = precoUnit;
+        this.unidadeProduto = unidadeProduto;
+        this.quantidadeEstoque = quantidadeEstoque;
+        this.estoqueMinimo = estoqueMinimo;
+        this.estoqueMaximo = estoqueMaximo;
+        this.categoria = categoria;
+    }
+
     //getters e setters
     public String getNomeProduto() {
         return nomeProduto;
