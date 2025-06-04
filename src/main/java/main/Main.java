@@ -17,6 +17,5 @@ public class Main {
     public static void main(String[] args) {
         menuPrincipal.setVisible(true);
         Connection conexao = Conexao.conectar();
-        //comentario para realizar commit;
     }
 }

@@ -59,6 +59,7 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
         JTBalancoFinanceiro = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         JLValorTotalEstoque = new javax.swing.JLabel();
+        JBVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Balanco Financeiro");
@@ -90,6 +91,13 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
         JLValorTotalEstoque.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         JLValorTotalEstoque.setText("0,00");
 
+        JBVoltar.setText("Voltar");
+        JBVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,6 +109,10 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(JLValorTotalEstoque)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JBVoltar)
+                .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,7 +122,9 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(JLValorTotalEstoque))
-                .addGap(73, 73, 73))
+                .addGap(32, 32, 32)
+                .addComponent(JBVoltar)
+                .addGap(14, 14, 14))
         );
 
         pack();
@@ -123,6 +137,10 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         mostraTabela();
     }//GEN-LAST:event_formWindowOpened
+
+    private void JBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBVoltarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_JBVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,6 +179,7 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBVoltar;
     private javax.swing.JLabel JLValorTotalEstoque;
     private javax.swing.JTable JTBalancoFinanceiro;
     private javax.swing.JLabel jLabel1;
