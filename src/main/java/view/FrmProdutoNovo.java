@@ -492,10 +492,6 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
      mostrarCategorias();
     }//GEN-LAST:event_formWindowActivated
 
-    /**
-     * @param args the command line arguments
-     */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBAdicionarProduto;
     private javax.swing.JButton JBVoltar;
