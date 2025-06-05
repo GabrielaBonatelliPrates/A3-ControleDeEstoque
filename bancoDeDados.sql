@@ -34,5 +34,5 @@ CREATE TABLE IF NOT EXISTS movimentacao (
 		ADD FOREIGN KEY (idProduto) REFERENCES produtos (idProduto);
 
 SELECT nome_categoria, COUNT(*) AS total_produtos
-FROM produto
+FROM produtos
 GROUP BY nome_categoria;
