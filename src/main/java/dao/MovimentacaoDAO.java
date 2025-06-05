@@ -29,7 +29,7 @@ public class MovimentacaoDAO {
             statement.setString(1, nomeProduto);
             statement.setString(2, tipoMovimentacao);
             statement.setInt(3, quantidadeMovimentada);
-            statement.setDate(4, (java.sql.Date) data);
+            statement.setDate(4, new java.sql.Date(data.getTime()));  //Troca do java.util.Date para java.sql.Date
 
             //executa a query para armazenar os dados
             statement.executeUpdate();
