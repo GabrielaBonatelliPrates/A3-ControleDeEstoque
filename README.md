@@ -18,7 +18,8 @@ Este projeto foi desenvolvido como parte da disciplina de **Programação de Sol
 
 ## 🗃️ Banco de Dados
 
-O arquivo "bancoDeDados.sql" foi criado para gerar o banco de dados e suas respectivas tabelas.
+O arquivo "[bancoDeDados.sql](./bancoDeDados.sql)"
+ foi criado para gerar o banco de dados e suas respectivas tabelas.
 
 **Credenciais de acesso ao banco de dados:**
 
