@@ -3,7 +3,6 @@ package view;
 import model.Categoria;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
-import controller.ProdutoController;
 import dao.CategoriaDAO;
 
 public class FrmGerenciarCategoria extends javax.swing.JFrame {
@@ -21,7 +20,7 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
 
         DefaultTableModel preencher = (DefaultTableModel) this.JTGerenciarCategoria.getModel();
         preencher.setNumRows(0);
-        List<Categoria> buscarCategoria = catDao.mostrarCategorias();
+        List<Categoria> buscarCategoria = catDao.pegarCategorias();
         for (Categoria cat : buscarCategoria) {
             preencher.addRow(new Object[]{
                 cat.getIdCategoria(),
