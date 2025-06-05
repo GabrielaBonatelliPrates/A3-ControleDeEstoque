@@ -138,16 +138,16 @@ public class CategoriaDAO {
         return objeto; //retorna a categoria encontrada ou null
     }
 
-    public boolean atualizarCategoria(Categoria categoria) {
+    public boolean atualizarCategoria(String nomeCategoria, String tamanho, String embalagem, int idCategoria) {
         String sql = "UPDATE categorias set nomeCategoria = ? , tamanho = ? , embalagem = ? WHERE idCategoria = ?";
         try {
             Connection connection = Conexao.conectar();
             PreparedStatement statement = connection.prepareStatement(sql);
 
-            statement.setString(1, categoria.getNomeCategoria());
-            statement.setString(2, categoria.getTamanho());
-            statement.setString(3, categoria.getEmbalagem());
-            statement.setInt(4, categoria.getIdCategoria());
+            statement.setString(1, nomeCategoria);
+            statement.setString(2, tamanho);
+            statement.setString(3, embalagem);
+            statement.setInt(4, idCategoria);
 
             statement.execute();
             statement.close();
@@ -262,5 +262,6 @@ public class CategoriaDAO {
         }
         return categorias;
     }
+
 
 }

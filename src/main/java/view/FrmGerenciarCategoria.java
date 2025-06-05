@@ -212,7 +212,7 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
                 idCategoria = Integer.parseInt(this.JTGerenciarCategoria.getValueAt(this.JTGerenciarCategoria.getSelectedRow(), 0).toString());
             }
 
-            if (this.catDao.atualizarCategoriaBD(idCategoria, nomeCategoria, tamanho, embalagem)) {
+            if (this.catDao.atualizarCategoria(nomeCategoria, tamanho, embalagem, idCategoria)) {
                 this.JTFNomeCategoria.setText("");
                 this.JTFTamanho.setText("");
                 this.JTFEmbalagem.setText("");
@@ -247,7 +247,7 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
                     JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, confirma, confirma[0]);
 
             if (resposta == 0) {
-                if (this.catDao.deletarCategoriaBD(idCategoria)) {
+                if (this.catDao.deletarCategoria(idCategoria)) {
                     this.JTFNomeCategoria.setText("");
                     this.JTFTamanho.setText("");
                     this.JTFEmbalagem.setText("");
