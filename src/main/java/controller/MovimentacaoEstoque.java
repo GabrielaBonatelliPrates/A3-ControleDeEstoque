@@ -1,12 +1,17 @@
 package controller;
 
+import dao.MovimentacaoDAO;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import model.Produto;
 
 public class MovimentacaoEstoque extends ControleEstoque {
 
+    Random random = new Random();
+
+    private int id;
     private Date data; //se possivel implementar a data
     private String tipoMovimentacao;
     private int quantidadeMovimentada;
@@ -53,6 +58,38 @@ public class MovimentacaoEstoque extends ControleEstoque {
         this.data = data;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    //Método para deixar o Id aleatório
+    public int gerarIdUnico() {
+        List<MovimentacaoEstoque> movimentacoes = MovimentacaoDAO.pegarMovimentacoes();
+        Random random = new Random();
+        int novoId;
+
+        boolean idExiste;
+        do {
+            novoId = random.nextInt(9999); // de 0 a 9998
+            idExiste = false;
+
+            for (MovimentacaoEstoque movimentacao : movimentacoes) {
+                if (movimentacao.getId() == novoId) {
+                    idExiste = true;
+                    break;
+                }
+            }
+
+        } while (idExiste); // repete até encontrar um ID que não exista
+
+        return novoId;
+    }
+
+    
     public void atualizaEstoque() {
         int posicao = super.consultaProduto();
         if (!produtos.isEmpty() && posicao != -1) { //se a lista nao estiver vazia e o produto tiver sido encontrado

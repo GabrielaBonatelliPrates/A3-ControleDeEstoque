@@ -219,10 +219,11 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 novaMov.setData(Date.from(Instant.now()));
                 novaMov.setNomeProduto(nomeProduto);
                 novaMov.setQuantidadeMovimentada(quantidade);
+                novaMov.setId(novaMov.gerarIdUnico());
                 
             try {
                 //MovimentacaoEstoque.movimentacoes.add(novaMov);
-                MovimentacaoDAO.inserirMovimentacao(novaMov.getData() ,novaMov.getQuantidadeMovimentada(), novaMov.getNomeProduto(), novaMov.getTipoMovimentacao());
+                MovimentacaoDAO.inserirMovimentacao(novaMov.getId(),novaMov.getData() ,novaMov.getQuantidadeMovimentada(), novaMov.getNomeProduto(), novaMov.getTipoMovimentacao());
             } catch (SQLException ex) {
                 Logger.getLogger(FrmMovimentacao.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -320,10 +321,11 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 novaMov.setData(Date.from(Instant.now()));
                 novaMov.setNomeProduto(nomeProduto);
                 novaMov.setQuantidadeMovimentada(quantidade);
+                novaMov.setId(novaMov.gerarIdUnico());
                 
                 try {
                 //MovimentacaoEstoque.movimentacoes.add(novaMov);
-                MovimentacaoDAO.inserirMovimentacao(novaMov.getData() ,novaMov.getQuantidadeMovimentada(), novaMov.getNomeProduto(), novaMov.getTipoMovimentacao());
+                MovimentacaoDAO.inserirMovimentacao(novaMov.getId(),novaMov.getData() ,novaMov.getQuantidadeMovimentada(), novaMov.getNomeProduto(), novaMov.getTipoMovimentacao());
             } catch (SQLException ex) {
                 Logger.getLogger(FrmMovimentacao.class.getName()).log(Level.SEVERE, null, ex);
             }
