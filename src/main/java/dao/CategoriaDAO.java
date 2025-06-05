@@ -244,8 +244,7 @@ public class CategoriaDAO {
         return categorias;
     }
 
-    public boolean atualizarCategoriaBD(int idCategoria, String nomeCategoria, String tamanho, String embalagem) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
     }
 
-}
+

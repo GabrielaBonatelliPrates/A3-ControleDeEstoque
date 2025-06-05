@@ -205,7 +205,7 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
             } else {
                 embalagem = this.JTFEmbalagem.getText();
             }
-            
+
             if (this.JTGerenciarCategoria.getSelectedRow() == -1) {
                 throw new Mensagem("Você precisa selecionar uma categoria para poder alterá-la");
             } else {
@@ -233,7 +233,33 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
     }//GEN-LAST:event_JBVoltarActionPerformed
 
     private void JBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBExcluirActionPerformed
-        // TODO add your handling code here:
+        try {
+            int idCategoria = 0;
+
+            if (this.JTGerenciarCategoria.getSelectedRow() == -1) {
+                throw new Mensagem("Você precisa selecionar uma categoria para poder alterá-la");
+            } else {
+                idCategoria = Integer.parseInt(this.JTGerenciarCategoria.getValueAt(this.JTGerenciarCategoria.getSelectedRow(), 0).toString());
+            }
+
+            String[] confirma = {"Sim", "Não"};
+            int resposta = JOptionPane.showOptionDialog(null, "Quer excluir a categoria?", "Confirma",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, confirma, confirma[0]);
+
+            if (resposta == 0) {
+                if (this.catDao.deletarCategoriaBD(idCategoria)) {
+                    this.JTFNomeCategoria.setText("");
+                    this.JTFTamanho.setText("");
+                    this.JTFEmbalagem.setText("");
+                    JOptionPane.showMessageDialog(null, "Produto excluído com sucesso!");
+                }
+            }
+
+        } catch (Mensagem e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } finally {
+            novaTabela();
+        }
     }//GEN-LAST:event_JBExcluirActionPerformed
 
     public static void main(String args[]) {
