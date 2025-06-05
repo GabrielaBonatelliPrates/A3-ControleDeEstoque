@@ -26,7 +26,7 @@ public class CategoriaDAO {
 
     //método para colocar a categoria no banco de dados
     public static void inserirCategoria(int idCategoria, String nomeCategoria, String tamanho, String embalagem) throws SQLException {
-        Categoria categoria = new Categoria ();
+        Categoria categoria = new Categoria();
         String sql = "INSERT INTO categorias (nomeCategoria, tamanho, embalagem) VALUES (?, ?, ?)"; //insere os dados na tabela
 
         try (
@@ -54,34 +54,33 @@ public class CategoriaDAO {
             return null; //retorna nulo se ocorrer falha
         }
     }
-    
-       public static List<Categoria> mostrarCategorias() { //método que retorna os nomes das categorias do banco
-           List<Categoria> mostrarCategorias = new ArrayList();
+
+    public static List<Categoria> mostrarCategorias() { //método que retorna os nomes das categorias do banco
+        List<Categoria> mostrarCategorias = new ArrayList();
         String sql = "SELECT * FROM categorias"; //consulta sql que seleciona o nome da categoria na tabela categorias
         try {
             Connection connection = Conexao.conectar();
-            PreparedStatement statement = connection.prepareStatement(sql); 
+            PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
-            
-            while(resultSet.next()){
+
+            while (resultSet.next()) {
                 int idCategoria = resultSet.getInt("idCategoria");
                 String nomeCategoria = resultSet.getString("nomeCategoria");
                 String tamanho = resultSet.getString("tamanho");
                 String embalagem = resultSet.getString("embalagem");
-                                
+
                 mostrarCategorias.add(new Categoria(idCategoria, nomeCategoria, tamanho, embalagem)); //retorna os dados de todas as categorias que estão cadastradas no banco de dados
             }
-            
+
             resultSet.close();
             statement.close();
             connection.close();
 
         } catch (SQLException ex) { //em caso de erro
-            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex); 
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return mostrarCategorias;
-       }
-
+    }
 
     public static DefaultTableModel tabelaAtualizada() throws SQLException {
         ResultSet resultSet = listarCategorias(); //todas as categorias do banco
@@ -138,6 +137,27 @@ public class CategoriaDAO {
         return objeto; //retorna a categoria encontrada ou null
     }
 
+    public boolean atualizarCategoria(Categoria categoria) {
+        String sql = "UPDATE categorias set nomeCategoria = ? , tamanho = ? , embalagem = ?";
+        try {
+            Connection connection = Conexao.conectar();
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, categoria.getNomeCategoria());
+            statement.setString(2, categoria.getTamanho());
+            statement.setString(3, categoria.getEmbalagem());
+            statement.setInt(4, categoria.getIdCategoria());
+
+            statement.execute();
+            statement.close();
+            return true;
+
+        } catch (SQLException erro) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, erro);
+            return false;
+        }
+    }
+
     //cria a ficha da categoria
     public static String fichaCategoria(String nomePesquisado) {
         Categoria categoriaPesquisada = buscarPorNome(nomePesquisado); //atribui a categoria a primeira categoria encontrado a partir do nome
@@ -179,14 +199,11 @@ public class CategoriaDAO {
     }
 
     //criar metodo pra devolver o status da categoria
-    
-     public List<Categoria> devolveCategorias(String nomeCategoria) {
-        
+    public List<Categoria> devolveCategorias(String nomeCategoria) {
+
         String sql = "SELECT idCategoria, nomeCategoria, tamanho, embalagem FROM produtos WHERE idCategoria = nomeCategoria";
-        
-        try (Connection connection = Conexao.conectar();
-             PreparedStatement stmt = connection.prepareStatement(sql);
-             ResultSet resultSet = stmt.executeQuery()) {
+
+        try (Connection connection = Conexao.conectar(); PreparedStatement stmt = connection.prepareStatement(sql); ResultSet resultSet = stmt.executeQuery()) {
 
             while (resultSet.next()) {
                 Categoria objeto = new Categoria();
@@ -194,7 +211,7 @@ public class CategoriaDAO {
                 objeto.setNomeCategoria(resultSet.getString("nomeCategoria"));
                 objeto.setTamanho(resultSet.getString("tamanho"));
                 objeto.setEmbalagem(resultSet.getString("embalagem"));
-                
+
                 categorias.add(objeto);
             }
 
@@ -203,5 +220,5 @@ public class CategoriaDAO {
         }
         return categorias;
     }
-     
+
 }
