@@ -73,6 +73,11 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
             }
         ));
         JTGerenciarCategoria.setPreferredSize(new java.awt.Dimension(750, 80));
+        JTGerenciarCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTGerenciarCategoriaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(JTGerenciarCategoria);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -229,7 +234,7 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
     }//GEN-LAST:event_JBAtualizarActionPerformed
 
     private void JBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBVoltarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_JBVoltarActionPerformed
 
     private void JBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBExcluirActionPerformed
@@ -261,6 +266,18 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
             novaTabela();
         }
     }//GEN-LAST:event_JBExcluirActionPerformed
+
+    private void JTGerenciarCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTGerenciarCategoriaMouseClicked
+        if (this.JTGerenciarCategoria.getSelectedRow() != -1) {
+            String nomeCategoria = this.JTGerenciarCategoria.getValueAt(this.JTGerenciarCategoria.getSelectedRow(), 1).toString();
+            String tamanho = this.JTGerenciarCategoria.getValueAt(this.JTGerenciarCategoria.getSelectedRow(), 2).toString();
+            String embalagem = this.JTGerenciarCategoria.getValueAt(this.JTGerenciarCategoria.getSelectedRow(), 3).toString();
+            
+            this.JTFNomeCategoria.setText(nomeCategoria);
+            this.JTFTamanho.setText(tamanho);
+            this.JTFEmbalagem.setText(embalagem);
+        }
+    }//GEN-LAST:event_JTGerenciarCategoriaMouseClicked
 
     public static void main(String args[]) {
 
