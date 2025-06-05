@@ -159,6 +159,25 @@ public class CategoriaDAO {
         }
     }
 
+    public boolean deletarCategoria(int idCategoria) {
+
+        String sql = "DELETE FROM categorias WHERE idCategoria = ?";
+        try {
+            Connection connection = Conexao.conectar();
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setInt(1, idCategoria);
+            statement.executeUpdate();
+
+            statement.close();
+            return true;
+
+        } catch (SQLException e) {
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, e);
+            return false;
+        }
+    }
+
     //cria a ficha da categoria
     public static String fichaCategoria(String nomePesquisado) {
         Categoria categoriaPesquisada = buscarPorNome(nomePesquisado); //atribui a categoria a primeira categoria encontrado a partir do nome
@@ -244,7 +263,4 @@ public class CategoriaDAO {
         return categorias;
     }
 
-    
-    }
-
-
+}
