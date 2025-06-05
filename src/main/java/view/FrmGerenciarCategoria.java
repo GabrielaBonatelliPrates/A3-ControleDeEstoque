@@ -1,9 +1,36 @@
 package view;
 
+import model.Categoria;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
+import controller.ProdutoController;
+import dao.CategoriaDAO;
+
 public class FrmGerenciarCategoria extends javax.swing.JFrame {
+
+    CategoriaDAO catDao = new CategoriaDAO();
+    FrmCategoriaNova cadastraCategoria = new FrmCategoriaNova();
 
     public FrmGerenciarCategoria() {
         initComponents();
+        this.novaTabela();
+
+    }
+
+    public void novaTabela() {
+
+        DefaultTableModel preencher = (DefaultTableModel) this.JTGerenciarCategoria.getModel();
+        preencher.setNumRows(0);
+        List<Categoria> buscarCategoria = catDao.mostrarCategorias();
+        for (Categoria cat : buscarCategoria) {
+            preencher.addRow(new Object[]{
+                cat.getIdCategoria(),
+                cat.getNomeCategoria(),
+                cat.getTamanho(),
+                cat.getEmbalagem()
+            });
+
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -13,7 +40,7 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        JTGerenciarCategoria = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -34,7 +61,7 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
 
         jLabel1.setText("jLabel1");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        JTGerenciarCategoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -45,8 +72,8 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
                 "ID", "Nome", "Tamanho", "Embalagem"
             }
         ));
-        jTable1.setPreferredSize(new java.awt.Dimension(750, 80));
-        jScrollPane1.setViewportView(jTable1);
+        JTGerenciarCategoria.setPreferredSize(new java.awt.Dimension(750, 80));
+        jScrollPane1.setViewportView(JTGerenciarCategoria);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel4.setText("Atualizar categoria:");
@@ -201,6 +228,7 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
     private javax.swing.JButton JBAtualizar;
     private javax.swing.JButton JBExcluir;
     private javax.swing.JButton JBVoltar;
+    private javax.swing.JTable JTGerenciarCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -209,7 +237,6 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField4;
