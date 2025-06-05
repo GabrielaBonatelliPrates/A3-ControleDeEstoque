@@ -139,7 +139,7 @@ public class CategoriaDAO {
     }
 
     public boolean atualizarCategoria(Categoria categoria) {
-        String sql = "UPDATE categorias set nomeCategoria = ? , tamanho = ? , embalagem = ?";
+        String sql = "UPDATE categorias set nomeCategoria = ? , tamanho = ? , embalagem = ? WHERE idCategoria = ?";
         try {
             Connection connection = Conexao.conectar();
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -242,6 +242,10 @@ public class CategoriaDAO {
             e.printStackTrace();
         }
         return categorias;
+    }
+
+    public boolean atualizarCategoriaBD(int idCategoria, String nomeCategoria, String tamanho, String embalagem) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

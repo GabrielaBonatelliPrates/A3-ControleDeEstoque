@@ -45,17 +45,17 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField4" max="32767" attributes="0"/>
+                                  <Component id="JTFEmbalagem" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField2" max="32767" attributes="0"/>
+                                  <Component id="JTFTamanho" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel2" min="-2" pref="37" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jTextField1" min="-2" pref="330" max="-2" attributes="0"/>
+                                  <Component id="JTFNomeCategoria" min="-2" pref="330" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="jSeparator1" alignment="0" min="-2" pref="1571" max="-2" attributes="0"/>
@@ -91,17 +91,17 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="JTFNomeCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="JTFTamanho" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                  <Component id="jTextField4" min="-2" max="-2" attributes="0"/>
+                  <Component id="JTFEmbalagem" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="88" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -165,14 +165,14 @@
         <Property name="text" type="java.lang.String" value="Nome:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="JTFNomeCategoria">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>
         <Property name="text" type="java.lang.String" value="Tamanho:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField2">
+    <Component class="javax.swing.JTextField" name="JTFTamanho">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
@@ -181,7 +181,7 @@
     </Component>
     <Component class="javax.swing.JSeparator" name="jSeparator1">
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField4">
+    <Component class="javax.swing.JTextField" name="JTFEmbalagem">
     </Component>
     <Component class="javax.swing.JButton" name="JBAtualizar">
       <Properties>

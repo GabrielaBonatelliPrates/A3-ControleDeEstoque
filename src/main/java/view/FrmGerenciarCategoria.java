@@ -4,6 +4,7 @@ import model.Categoria;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import dao.CategoriaDAO;
+import javax.swing.JOptionPane;
 
 public class FrmGerenciarCategoria extends javax.swing.JFrame {
 
@@ -42,12 +43,12 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
         JTGerenciarCategoria = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        JTFNomeCategoria = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        JTFTamanho = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jTextField4 = new javax.swing.JTextField();
+        JTFEmbalagem = new javax.swing.JTextField();
         JBAtualizar = new javax.swing.JButton();
         JBVoltar = new javax.swing.JButton();
         JBExcluir = new javax.swing.JButton();
@@ -125,15 +126,15 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel6)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField4))
+                                    .addComponent(JTFEmbalagem))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel5)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField2))
+                                    .addComponent(JTFTamanho))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(JTFNomeCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1571, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(509, 509, 509)
@@ -160,15 +161,15 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JTFNomeCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JTFTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JTFEmbalagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBAtualizar)
@@ -181,7 +182,50 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAtualizarActionPerformed
-        // TODO add your handling code here:
+        try {
+            int idCategoria = 0;
+            String nomeCategoria = "";
+            String tamanho = "";
+            String embalagem = "";
+
+            if (this.JTFNomeCategoria.getText().length() < 2) {
+                throw new Mensagem("O nome da categoria deve conter ao menos 2 caracteres!");
+            } else {
+                nomeCategoria = this.JTFNomeCategoria.getText();
+            }
+
+            if (this.JTFTamanho.getText().length() < 1) {
+                throw new Mensagem("O tamanho deve conter ao menos 1 caractere!");
+            } else {
+                tamanho = this.JTFTamanho.getText();
+            }
+
+            if (this.JTFEmbalagem.getText().length() < 2) {
+                throw new Mensagem("A embalagem deve conter ao menos 2 caracteres!");
+            } else {
+                embalagem = this.JTFEmbalagem.getText();
+            }
+            
+            if (this.JTGerenciarCategoria.getSelectedRow() == -1) {
+                throw new Mensagem("Você precisa selecionar uma categoria para poder alterá-la");
+            } else {
+                idCategoria = Integer.parseInt(this.JTGerenciarCategoria.getValueAt(this.JTGerenciarCategoria.getSelectedRow(), 0).toString());
+            }
+
+            if (this.catDao.atualizarCategoriaBD(idCategoria, nomeCategoria, tamanho, embalagem)) {
+                this.JTFNomeCategoria.setText("");
+                this.JTFTamanho.setText("");
+                this.JTFEmbalagem.setText("");
+                JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso!");
+            }
+
+        } catch (Mensagem e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro inesperado: " + e.getMessage());
+        } finally {
+            novaTabela();
+        }
     }//GEN-LAST:event_JBAtualizarActionPerformed
 
     private void JBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBVoltarActionPerformed
@@ -227,6 +271,9 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
     private javax.swing.JButton JBAtualizar;
     private javax.swing.JButton JBExcluir;
     private javax.swing.JButton JBVoltar;
+    private javax.swing.JTextField JTFEmbalagem;
+    private javax.swing.JTextField JTFNomeCategoria;
+    private javax.swing.JTextField JTFTamanho;
     private javax.swing.JTable JTGerenciarCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -236,8 +283,5 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 }
