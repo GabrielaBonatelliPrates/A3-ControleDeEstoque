@@ -1,11 +1,36 @@
 package view;
 
+import dao.ProdutoDAO;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import model.Produto;
+
 public class FrmListaPrecos extends javax.swing.JFrame {
 
+    private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"idProduto", "nome", "preco_unitario", "unidade", "nome_categoria"}, 0);
+    
     public FrmListaPrecos() {
         initComponents();
+        jTableListaPrecos.setModel(modelo);
+        this.mostrarTabela();
     }
 
+    public void mostrarTabela(){     
+        modelo.setRowCount(0); 
+        modelo.setNumRows(0); 
+        
+        List<Produto> todosProdutos = ProdutoDAO.pegarProdutos(); 
+        for (Produto p : todosProdutos) { 
+            modelo.addRow(new Object[]{
+                p.getIdProduto(),
+                p.getNomeProduto(),
+                p.getPrecoUnit(),
+                p.getUnidadeProduto(),
+                p.getCategoria().getNomeCategoria()
+                    });
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
