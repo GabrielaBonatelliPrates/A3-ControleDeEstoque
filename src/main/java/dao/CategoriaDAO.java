@@ -16,6 +16,7 @@ import model.Categoria;
 public class CategoriaDAO {
 
     public static final List<Categoria> categorias = new ArrayList<>(); //cria lista que vai armazenar os produtos
+    public static final List<Categoria> listaAtualizada = new ArrayList<>();
 
     public CategoriaDAO() {
     }
@@ -196,6 +197,28 @@ public class CategoriaDAO {
             }
         }
         return false;
+    }
+
+    public static List<Categoria> pegarCategorias() {
+        listaAtualizada.clear();
+
+        String sql = "SELECT idCategoria, nomeCategoria, tamanho, embalagem FROM categorias ORDER BY nomeCategorias ASC";
+        try (Connection connection = Conexao.conectar(); PreparedStatement stmt = connection.prepareStatement(sql); ResultSet resultSet = stmt.executeQuery()) {
+
+            while (resultSet.next()) {
+                Categoria categoria = new Categoria();
+                categoria.setNomeCategoria(resultSet.getString("nomeCategoria"));
+                categoria.setTamanho(resultSet.getString("tamanho"));
+                categoria.setEmbalagem(resultSet.getString("embalagem"));
+
+                listaAtualizada.add(categoria);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listaAtualizada;
     }
 
     //criar metodo pra devolver o status da categoria
