@@ -185,7 +185,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                     Produto x = produtos.get(i);
                     String y = x.getNomeProduto();
 
-                    if (this.JTFProdutoMovimentacao.getText().equalsIgnoreCase(y.trim())) {
+                    if (this.JTFProdutoMovimentacao.getText().trim().equalsIgnoreCase(y.trim())) {
                         codigo = x.getIdProduto();
                         this.JLCodigoMovimentacao.setText(String.valueOf(codigo));
                         acesso = true;
@@ -281,7 +281,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                     Produto x = produtos.get(i);
                     String y = x.getNomeProduto();
 
-                    if (this.JTFProdutoMovimentacao.getText().equalsIgnoreCase(y.trim())) {
+                    if (this.JTFProdutoMovimentacao.getText().trim().equalsIgnoreCase(y.trim())) {
                         codigo = x.getIdProduto();
                         this.JLCodigoMovimentacao.setText(String.valueOf(codigo));
                         acesso = true;

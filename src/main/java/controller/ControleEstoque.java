@@ -31,7 +31,7 @@ public class ControleEstoque {
             Produto x = produtos.get(i);
             String y = x.getNomeProduto();
 
-            if (nomeProduto.equalsIgnoreCase(y.trim())) {
+            if (nomeProduto.trim().equalsIgnoreCase(y.trim())) {
                 int novaQuantidade = x.getQuantidadeEstoque() + atualizacao;
 
                 x.setQuantidadeEstoque(novaQuantidade);
@@ -56,7 +56,7 @@ public class ControleEstoque {
             Produto x = produtos.get(i);
             String y = x.getNomeProduto();
 
-            if (nomeProduto.equalsIgnoreCase(y.trim())) {
+            if (nomeProduto.trim().equalsIgnoreCase(y.trim())) {
                 int novaQuantidade = x.getQuantidadeEstoque() + atualizacao;
 
                 x.setQuantidadeEstoque(novaQuantidade);
@@ -88,7 +88,7 @@ public class ControleEstoque {
 
             for (int i = 0; i < produtos.size(); i++) { //roda a lista a procura do produto
                 Produto produtoProcurado = produtos.get(i);
-                if (produtoProcurado.getNomeProduto().equalsIgnoreCase(produtoBuscado.trim())) { //se o nome do produto da posição i for igual ao nome do produto que o usuário esta procurando
+                if (produtoProcurado.getNomeProduto().trim().equalsIgnoreCase(produtoBuscado.trim())) { //se o nome do produto da posição i for igual ao nome do produto que o usuário esta procurando
                     posicao = i;
                     encontrado = true;
                     break;
