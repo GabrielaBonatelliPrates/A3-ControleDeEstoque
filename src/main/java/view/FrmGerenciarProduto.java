@@ -476,55 +476,65 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_JTFUnidadeProdutoActionPerformed
 
     private void JBReajustarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBReajustarProdutoActionPerformed
-
+        List<Produto> listaProdutos = prodDAO.pegarProdutos();
         try {
-            double precoAtual = Double.parseDouble(JTFProdutoNovoPreco.getText());
-            double percentual = Double.parseDouble(JTFAumentoPercentualProduto.getText());
-            double precoNovo = 0;
+            for (Produto produto : listaProdutos) {
+                if (produto.getNomeProduto() == JTFProdutoNovoPreco.getText()) {
+                    double precoAtual = Double.parseDouble(JTFProdutoNovoPreco.getText());
+                    double percentual = Double.parseDouble(JTFAumentoPercentualProduto.getText());
+                    double precoNovo = 0;
 
-            if (JRBAumento.isSelected()) {
-                precoNovo = precoAtual * (1 + percentual / 100);
-            } else if (JRBDesconto.isSelected()) {
-                precoNovo = precoAtual * (1 - percentual / 100);
-            } else {
-                JOptionPane.showMessageDialog(this, "Selecione o reajuste a ser efetivado.");
+                    if (JRBAumento.isSelected()) {
+                        precoNovo = precoAtual * (1 + percentual / 100);
+                    } else if (JRBDesconto.isSelected()) {
+                        precoNovo = precoAtual * (1 - percentual / 100);
+                    } else {
+                        throw new Mensagem("Selecione o reajuste a ser efetivado.");
+                    }
+
+                    double adicao = ((precoNovo - produto.getValorTotal()) / produto.getQuantidadeEstoque());
+                    produto.setValorTotal(precoNovo);
+                    produto.setPrecoUnit(produto.getPrecoUnit() + adicao);
+                    prodDAO.atualizarPreco(produto.getNomeProduto(), produto.getPrecoUnit(), produto.getIdProduto());
+
+                }
             }
-            
-            Produto produto = new Produto();
-            produto.setValorTotal(precoNovo);
-       
-            
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Digite valores válidos.");
-
+        } catch (Mensagem erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
         }
 
     }//GEN-LAST:event_JBReajustarProdutoActionPerformed
 
     private void JBReajustarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBReajustarEstoqueActionPerformed
+        List<Produto> listaProdutos = prodDAO.pegarProdutos();
 
         try {
-            Produto produto = new Produto();
-            double estoqueAtual = produto.getEstoqueTotal();
-            double percentual = Double.parseDouble(JTFAumentoPercentualProduto.getText());
-            double precoNovo = 0;
+            for (Produto produto : listaProdutos) {
+                Double estoqueAtual = produto.getEstoqueTotal();
+                Double percentual = Double.parseDouble(JTFAumentoPercentualProduto.getText());
+                Double precoNovo = 0.0;
 
-            if (JRBAumento.isSelected()) {
-                precoNovo = estoqueAtual * (1 + percentual / 100);
-            } else if (JRBDesconto.isSelected()) {
-                precoNovo = estoqueAtual * (1 - percentual / 100);
-            } else {
-                JOptionPane.showMessageDialog(this, "Selecione o reajuste a ser efetivado.");
+                if (JRBAumento.isSelected()) {
+                    precoNovo = estoqueAtual * (1 + percentual / 100);
+                } else if (JRBDesconto.isSelected()) {
+                    precoNovo = estoqueAtual * (1 - percentual / 100);
+                } else {
+                    throw new Mensagem("Selecione o reajuste a ser efetivado.");
+                }
+
+                double adicao = ((precoNovo - produto.getEstoqueTotal()) / listaProdutos.size());
+                produto.setEstoqueTotal(precoNovo);
+                produto.setPrecoUnit(produto.getPrecoUnit() + adicao);
+                prodDAO.atualizarPreco(produto.getNomeProduto(), produto.getPrecoUnit(), produto.getIdProduto());
             }
-            
-            produto.setEstoqueTotal(precoNovo);
-       
-            
+
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Digite valores válidos.");
-
+        } catch (Mensagem erro) {
+            JOptionPane.showMessageDialog(null, erro.getMessage());
         }
-        
     }//GEN-LAST:event_JBReajustarEstoqueActionPerformed
 
     private void jTableGerenciaProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableGerenciaProdutosMouseClicked
@@ -731,7 +741,7 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     public static void main(String args[]) {
-        
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 

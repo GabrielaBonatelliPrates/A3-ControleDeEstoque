@@ -18,7 +18,6 @@ public class FrmMovimentacao extends javax.swing.JFrame {
 
     private Produto produto;
     private MovimentacaoDAO movEst;
-    private ControleEstoque contEst;
     private static List<Produto> produtos = ProdutoDAO.pegarProdutos();
 
     public FrmMovimentacao() {
@@ -278,7 +277,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
             //validando os dados.
             boolean acesso = false;
             while (acesso == false) {
-                for (int i = 0; i < contEst.tamanhoLista(); i++) {
+                for (int i = 0; i < produtos.size(); i++) {
 
                     //Pegando o nome do Produto na Lista "produtos"
                     Produto x = produtos.get(i);

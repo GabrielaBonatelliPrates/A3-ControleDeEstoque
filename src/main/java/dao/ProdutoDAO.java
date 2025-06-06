@@ -178,6 +178,26 @@ public class ProdutoDAO {
             return false;
         }
     }
+    
+    public boolean atualizarPreco(String nome, Double preco, int id) {
+        String sql = "UPDATE produtos set nome = ? , preco_unitario = ? WHERE idProduto = ?";
+        try {
+            Connection connection = Conexao.conectar();
+            PreparedStatement statement = connection.prepareStatement(sql);
+
+            statement.setString(1, nome);
+            statement.setDouble(2, preco);
+            statement.setInt(3, id);
+            
+
+            statement.execute();
+            statement.close();
+            return true;
+        } catch (SQLException erro) { //mostra erros de sql
+            Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, erro);
+            return false;
+        }
+    }
 
     public boolean deletarProduto(int idProduto) {
         String sql = "DELETE FROM produtos WHERE idProduto = ?";

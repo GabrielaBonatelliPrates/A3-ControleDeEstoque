@@ -70,9 +70,7 @@ public class ControleEstoque {
         return false;
     }
 
-    public int tamanhoLista() {
-        return produtos.size();
-    }
+    
 
     public int consultaProduto() { //metodo para procurar o produto correspondente ao nome que o usuario digitar
 
