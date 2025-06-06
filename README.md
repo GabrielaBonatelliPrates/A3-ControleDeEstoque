@@ -75,12 +75,67 @@ O arquivo "[bancoDeDados.sql](./bancoDeDados.sql)"
 - **RF09: Listar Categorias**  
   Exibe uma lista com todas as categorias cadastradas, com opção de busca e visualização de dados.
 
-- **RF10: Gerar Relatórios do Estoque**  
-  Permite visualizar relatórios detalhados do sistema, como:
+- **RF10: Gerar Relatório de Lista de Preços**
 
-  - **Lista de Preços**: mostra produtos, preço unitário, unidade e categoria.
-  - **Balanço Financeiro**: mostra preço unitário, quantidade em estoque, valor total por produto e valor total do estoque geral.
-  - **Produtos por Categoria**: mostra a quantidade de produtos agrupados por categoria.
-  - **Movimentações**: lista entradas e saídas de produtos no estoque.
+Esta função permite que o usuário visualize o relatório de preços dos produtos.  
+
+É gerada uma tabela contendo:
+
+- Nome do produto  
+- Preço unitário  
+- Unidade de medida  
+- Categoria do produto  
+
+---
+
+- **RF11: Gerar Relatório de Balanço Financeiro**
+
+Esta função permite que o usuário visualize o relatório físico/financeiro do estoque.  
+
+É gerada uma tabela contendo:
+
+- Nome do produto  
+- Preço unitário  
+- Quantidade em estoque  
+- Valor total do produto em estoque (preço unitário × quantidade)
+
+Além disso, o relatório exibe o valor total do estoque geral, proporcionando uma visão consolidada do estoque.
+
+---
+
+- **RF12: Gerar Relatório de Quantidade de Produtos por Categoria**
+
+Esta função permite que o usuário visualize quantos produtos existem em cada categoria.  
+
+É gerada uma tabela contendo:
+
+- Categoria do produto  
+- Quantidade de produtos por categoria
+
+---
+
+- **RF13: Gerar Relatório de Produtos Abaixo da Quantidade Mínima**
+
+Esta função permite que o usuário visualize os produtos com estoque abaixo do mínimo cadastrado.  
+
+É gerada uma tabela contendo:
+
+- ID do produto  
+- Nome do produto  
+- Quantidade atual em estoque  
+- Quantidade mínima cadastrada  
+
+---
+
+- **RF14: Gerar Relatório de Produtos Acima da Quantidade Máxima**
+
+Esta função permite que o usuário visualize os produtos com estoque acima do máximo cadastrado.  
+
+É gerada uma tabela contendo:
+
+- ID do produto  
+- Nome do produto  
+- Quantidade atual em estoque  
+- Quantidade máxima cadastrada  
 
 ---
