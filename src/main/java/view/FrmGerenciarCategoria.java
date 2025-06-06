@@ -242,13 +242,13 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
             int idCategoria = 0;
 
             if (this.JTGerenciarCategoria.getSelectedRow() == -1) {
-                throw new Mensagem("Você precisa selecionar uma categoria para poder alterá-la");
+                throw new Mensagem("Você precisa selecionar uma categoria para poder exclui-lá");
             } else {
                 idCategoria = Integer.parseInt(this.JTGerenciarCategoria.getValueAt(this.JTGerenciarCategoria.getSelectedRow(), 0).toString());
             }
 
             String[] confirma = {"Sim", "Não"};
-            int resposta = JOptionPane.showOptionDialog(null, "Quer excluir a categoria?", "Confirma",
+            int resposta = JOptionPane.showOptionDialog(null, "Quer mesmo excluir a categoria?", "Confirma",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, confirma, confirma[0]);
 
             if (resposta == 0) {
