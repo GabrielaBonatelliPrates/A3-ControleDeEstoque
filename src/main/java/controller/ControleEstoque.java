@@ -24,14 +24,12 @@ public class ControleEstoque {
         produtos.add(produto); //adiciona o objeto criado à lista produtos
     }
 
-    public boolean movimentacaoEstoqueReducao(String nomeProduto, int atualizacao) {
-        for (int i = 0; i < produtos.size(); i++) {
-
+    public boolean movimentacaoEstoqueReducao(int id, int atualizacao) {
+        for (Produto x : produtos) {
             //Pegando o nome do Produto na Lista "produtos"
-            Produto x = produtos.get(i);
-            String y = x.getNomeProduto();
+            int possivelId = x.getIdProduto();
 
-            if (nomeProduto.trim().equalsIgnoreCase(y.trim())) {
+            if (id == possivelId) {
                 int novaQuantidade = x.getQuantidadeEstoque() + atualizacao;
 
                 x.setQuantidadeEstoque(novaQuantidade);
@@ -49,14 +47,12 @@ public class ControleEstoque {
         return false;
     }
 
-    public boolean movimentacaoEstoqueAdicao(String nomeProduto, int atualizacao) {
-        for (int i = 0; i < produtos.size(); i++) {
-
+    public boolean movimentacaoEstoqueAdicao(int id, int atualizacao) {
+        for (Produto x : produtos) {
             //Pegando o nome do Produto na Lista "produtos"
-            Produto x = produtos.get(i);
-            String y = x.getNomeProduto();
+            int possivelId = x.getIdProduto();
 
-            if (nomeProduto.trim().equalsIgnoreCase(y.trim())) {
+            if (id == possivelId) {
                 int novaQuantidade = x.getQuantidadeEstoque() + atualizacao;
 
                 x.setQuantidadeEstoque(novaQuantidade);

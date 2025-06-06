@@ -19,12 +19,12 @@ public class FrmMovimentacao extends javax.swing.JFrame {
     private Produto produto;
     private MovimentacaoDAO movEst;
     private ControleEstoque contEst;
-    private static List <Produto> produtos = ProdutoDAO.pegarProdutos();
+    private static List<Produto> produtos = ProdutoDAO.pegarProdutos();
 
     public FrmMovimentacao() {
         initComponents();
         this.produto = new Produto();
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -180,7 +180,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
             boolean acesso = false;
             while (acesso == false) {
                 for (int i = 0; i < produtos.size(); i++) {
-                    
+
                     //Pegando o nome do Produto na Lista "produtos"
                     Produto x = produtos.get(i);
                     String y = x.getNomeProduto();
@@ -211,33 +211,37 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 quantidade = Integer.parseInt(this.JTFQuantidadeMovimentacao.getText());
             }
 
+            //Verificando quantidade minima
+            if (novaMov.movimentacaoEstoqueAdicao(codigo, quantidade) == false) {
+                throw new Mensagem("Produto nao encontrado");
+            }
             //Caso tudo estiver certo, dar baixa no estoque
-            
-                JOptionPane.showMessageDialog(null, "Adicao confirmada!");
+            novaMov.movimentacaoEstoqueAdicao(codigo, quantidade);
+            JOptionPane.showMessageDialog(null, "Baixa confirmada!");
 
-                //Pegando as informações da movimentação
-                novaMov.setData(Date.from(Instant.now()));
-                novaMov.setNomeProduto(nomeProduto);
-                novaMov.setQuantidadeMovimentada(quantidade);
-                novaMov.setId(novaMov.gerarIdUnico());
-                
+            //Pegando as informações da movimentação
+            novaMov.setData(Date.from(Instant.now()));
+            novaMov.setNomeProduto(nomeProduto);
+            novaMov.setQuantidadeMovimentada(quantidade);
+            novaMov.setId(novaMov.gerarIdUnico());
+            
+            movEst.adicionarQuantidade(codigo, quantidade);
+
             try {
                 //MovimentacaoEstoque.movimentacoes.add(novaMov);
-                MovimentacaoDAO.inserirMovimentacao(novaMov.getId(),novaMov.getData() ,novaMov.getQuantidadeMovimentada(), novaMov.getNomeProduto(), novaMov.getTipoMovimentacao());
+                MovimentacaoDAO.inserirMovimentacao(novaMov.getId(), novaMov.getData(), novaMov.getQuantidadeMovimentada(), novaMov.getNomeProduto(), novaMov.getTipoMovimentacao());
             } catch (SQLException ex) {
                 Logger.getLogger(FrmMovimentacao.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-                produto.verificaMediaAbaixo();
-                produto.verificaMediaAcima();
-                if (produto.isAbaixoMedia() == true) {
-                    JOptionPane.showMessageDialog(null, "O produto esta abaixo da média");
-                }
-                if (produto.isAcimaMedia() == true) {
-                    JOptionPane.showMessageDialog(null, "O produto esta acima da média");
-                }
-
-            
+            produto.verificaMediaAbaixo();
+            produto.verificaMediaAcima();
+            if (produto.isAbaixoMedia()) {
+                JOptionPane.showMessageDialog(null, "O produto esta abaixo da média");
+            }
+            if (produto.isAcimaMedia()) {
+                JOptionPane.showMessageDialog(null, "O produto esta acima da média");
+            }
 
         } catch (Mensagem erro) {
             JOptionPane.showMessageDialog(null, erro.getMessage());
@@ -263,8 +267,6 @@ public class FrmMovimentacao extends javax.swing.JFrame {
     private void JBRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBRemoverActionPerformed
         MovimentacaoEstoque novaMov = new MovimentacaoEstoque();
         novaMov.setTipoMovimentacao("Baixa");
-        
-        
 
 // criando variaveis para receber os valores/nomes da interface gráfica
         String nomeProduto = "";
@@ -277,7 +279,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
             boolean acesso = false;
             while (acesso == false) {
                 for (int i = 0; i < contEst.tamanhoLista(); i++) {
-                    
+
                     //Pegando o nome do Produto na Lista "produtos"
                     Produto x = produtos.get(i);
                     String y = x.getNomeProduto();
@@ -310,11 +312,11 @@ public class FrmMovimentacao extends javax.swing.JFrame {
             }
 
             //Verificando quantidade minima
-            if (novaMov.movimentacaoEstoqueReducao(nomeProduto, quantidade) == false) {
-                throw new Mensagem("Estoque abaixo de zero");
+            if (novaMov.movimentacaoEstoqueReducao(codigo, quantidade) == false) {
+                throw new Mensagem("Produto nao encontrado");
             }
             //Caso tudo estiver certo, dar baixa no estoque
-            if (novaMov.movimentacaoEstoqueReducao(nomeProduto, quantidade) == true) {
+            if (novaMov.movimentacaoEstoqueReducao(codigo, quantidade) == true) {
                 JOptionPane.showMessageDialog(null, "Baixa confirmada!");
 
                 //Pegando as informações da movimentação
@@ -323,12 +325,14 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 novaMov.setQuantidadeMovimentada(quantidade);
                 novaMov.setId(novaMov.gerarIdUnico());
                 
+                movEst.retirarQuantidade(codigo, quantidade);
+
                 try {
-                //MovimentacaoEstoque.movimentacoes.add(novaMov);
-                MovimentacaoDAO.inserirMovimentacao(novaMov.getId(),novaMov.getData() ,novaMov.getQuantidadeMovimentada(), novaMov.getNomeProduto(), novaMov.getTipoMovimentacao());
-            } catch (SQLException ex) {
-                Logger.getLogger(FrmMovimentacao.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                    //MovimentacaoEstoque.movimentacoes.add(novaMov);
+                    MovimentacaoDAO.inserirMovimentacao(novaMov.getId(), novaMov.getData(), novaMov.getQuantidadeMovimentada(), novaMov.getNomeProduto(), novaMov.getTipoMovimentacao());
+                } catch (SQLException ex) {
+                    Logger.getLogger(FrmMovimentacao.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
                 produto.verificaMediaAbaixo();
                 produto.verificaMediaAcima();
@@ -348,7 +352,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
     }//GEN-LAST:event_JBRemoverActionPerformed
 
     public static void main(String args[]) {
-        
+
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -370,7 +374,6 @@ public class FrmMovimentacao extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FrmMovimentacao.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

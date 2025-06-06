@@ -11,7 +11,7 @@ public class MovimentacaoEstoque extends ControleEstoque {
 
     Random random = new Random();
 
-    private int id;
+    private Integer id;
     private Date data; //se possivel implementar a data
     private String tipoMovimentacao;
     private int quantidadeMovimentada;
@@ -58,12 +58,23 @@ public class MovimentacaoEstoque extends ControleEstoque {
         this.data = data;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void verificarId() {
+        List<MovimentacaoEstoque> movimentacoes = MovimentacaoDAO.pegarMovimentacoes();
+        Random random = new Random();
+        
+        for(MovimentacaoEstoque movimento : movimentacoes){
+            if(movimento.getId() == null){
+                movimento.setId(random.nextInt(9999));
+            }
+        } 
     }
 
     //Método para deixar o Id aleatório
@@ -89,7 +100,6 @@ public class MovimentacaoEstoque extends ControleEstoque {
         return novoId;
     }
 
-    
     public void atualizaEstoque() {
         int posicao = super.consultaProduto();
         if (!produtos.isEmpty() && posicao != -1) { //se a lista nao estiver vazia e o produto tiver sido encontrado

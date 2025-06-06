@@ -20,9 +20,7 @@ public class MovimentacaoDAO {
 //public void inserirMovimentacao(Date data, int quantidadeMovimentada, String nomeProduto, String tipoMovimentacao) throws SQLException {
     public static void inserirMovimentacao(int id, Date data, int quantidadeMovimentada, String nomeProduto, String tipoMovimentacao) throws SQLException {
         
-        MovimentacaoEstoque movimentacao = new MovimentacaoEstoque();
-        
-        String sql = "INSERT INTO movimentacao (id, nome, tipo, quantidade, data) VALUES (?,?, ?, ?, ?)"; //insere os dados na tabela
+        String sql = "INSERT INTO movimentacao (id, nome, tipo, quantidade, data) VALUES (?,?,?,?,?)"; //insere os dados na tabela
         try (
                 Connection connection = Conexao.conectar(); //atribui a conexão à classe que faz a conexão com o banco de dados
                  PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS) //prepara o caminho para receber os dados e devolver a chave gerada
@@ -66,6 +64,38 @@ public class MovimentacaoDAO {
             e.printStackTrace();
         }
         return listaAtualizada;
+    }
+    
+    public void adicionarQuantidade(int idProduto, int quantidadeAdicionar) {
+        String sql = "UPDATE produtos SET estoque_atual = estoque_atual + ? WHERE id = ?";
+
+        try (Connection connection = Conexao.conectar(); PreparedStatement stmt = connection.prepareStatement(sql); ResultSet resultSet = stmt.executeQuery()) {
+
+            stmt.setInt(1, quantidadeAdicionar); // quantidade a adicionar
+            stmt.setInt(2, idProduto);           // id do produto
+
+            //executa a query para armazenar os dados
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void retirarQuantidade(int idProduto, int quantidadeRetirada) {
+        String sql = "UPDATE produtos SET estoque_atual = estoque_atual - ? WHERE id = ?";
+
+        try (Connection connection = Conexao.conectar(); PreparedStatement stmt = connection.prepareStatement(sql); ResultSet resultSet = stmt.executeQuery()) {
+
+            stmt.setInt(1, quantidadeRetirada); // quantidade a adicionar
+            stmt.setInt(2, idProduto);           // id do produto
+
+            //executa a query para armazenar os dados
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

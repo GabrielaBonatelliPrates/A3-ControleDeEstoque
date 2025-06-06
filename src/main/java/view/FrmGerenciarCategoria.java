@@ -57,7 +57,7 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1920, 1080));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel3.setText("Gerenciar Categorias");
+        jLabel3.setText("Gerenciamento de Categorias");
 
         jLabel1.setText("jLabel1");
 
@@ -124,7 +124,7 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addGap(528, 528, 528)
+                                .addGap(476, 476, 476)
                                 .addComponent(jLabel3))
                             .addComponent(jLabel4)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -242,13 +242,13 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
             int idCategoria = 0;
 
             if (this.JTGerenciarCategoria.getSelectedRow() == -1) {
-                throw new Mensagem("Você precisa selecionar uma categoria para poder alterá-la");
+                throw new Mensagem("Você precisa selecionar uma categoria para poder exclui-lá");
             } else {
                 idCategoria = Integer.parseInt(this.JTGerenciarCategoria.getValueAt(this.JTGerenciarCategoria.getSelectedRow(), 0).toString());
             }
 
             String[] confirma = {"Sim", "Não"};
-            int resposta = JOptionPane.showOptionDialog(null, "Quer excluir a categoria?", "Confirma",
+            int resposta = JOptionPane.showOptionDialog(null, "Quer mesmo excluir a categoria?", "Confirma",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, confirma, confirma[0]);
 
             if (resposta == 0) {

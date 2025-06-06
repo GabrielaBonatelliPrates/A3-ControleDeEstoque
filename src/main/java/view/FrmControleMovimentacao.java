@@ -4,6 +4,7 @@
  */
 package view;
 
+import controller.ControleEstoque;
 import javax.swing.table.DefaultTableModel;
 import dao.MovimentacaoDAO;
 import controller.MovimentacaoEstoque;
@@ -15,12 +16,14 @@ import java.util.List;
  */
 public class FrmControleMovimentacao extends javax.swing.JFrame {
     private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Tipo", "Quantidade", "Data"}, 0);
+    private MovimentacaoEstoque movEst = new MovimentacaoEstoque();
     
     /**
      * Creates new form FrmControleMovimentacao
      */
     public FrmControleMovimentacao() {
         initComponents();
+        movEst.verificarId();
         this.carregaTabela();
     }
     
