@@ -48,7 +48,7 @@ O arquivo "[bancoDeDados.sql](./bancoDeDados.sql)"
   - Estoque mínimo e máximo
   - Categoria do produto
 
-    ---
+---
 
 - **RF02: Atualizar Produto**  
   Permite que o usuário altere os dados anteriormente cadastrados de um produto.
