@@ -480,8 +480,7 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
         try {
             double precoAtual = Double.parseDouble(JTFProdutoNovoPreco.getText());
             double percentual = Double.parseDouble(JTFAumentoPercentualProduto.getText());
-
-            double precoNovo;
+            double precoNovo = 0;
 
             if (JRBAumento.isSelected()) {
                 precoNovo = precoAtual * (1 + percentual / 100);
@@ -490,6 +489,11 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this, "Selecione o reajuste a ser efetivado.");
             }
+            
+            Produto produto = new Produto();
+            produto.setValorTotal(precoNovo);
+       
+            
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Digite valores válidos.");
 
@@ -499,7 +503,28 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
 
     private void JBReajustarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBReajustarEstoqueActionPerformed
 
+        try {
+            Produto produto = new Produto();
+            double estoqueAtual = produto.getEstoqueTotal();
+            double percentual = Double.parseDouble(JTFAumentoPercentualProduto.getText());
+            double precoNovo = 0;
 
+            if (JRBAumento.isSelected()) {
+                precoNovo = estoqueAtual * (1 + percentual / 100);
+            } else if (JRBDesconto.isSelected()) {
+                precoNovo = estoqueAtual * (1 - percentual / 100);
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecione o reajuste a ser efetivado.");
+            }
+            
+            produto.setEstoqueTotal(precoNovo);
+       
+            
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Digite valores válidos.");
+
+        }
+        
     }//GEN-LAST:event_JBReajustarEstoqueActionPerformed
 
     private void jTableGerenciaProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableGerenciaProdutosMouseClicked

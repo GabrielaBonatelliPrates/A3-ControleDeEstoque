@@ -20,7 +20,11 @@ public class Produto {
     private Categoria categoria;
     private boolean acimaMedia;
     private boolean abaixoMedia;
+    private double valorTotal = precoUnit * quantidadeEstoque;
+    private double estoqueTotal;
 
+
+    
     //construtores
     public Produto() {
     }
@@ -127,6 +131,23 @@ public class Produto {
         this.abaixoMedia = abaixoMedia;
     }
 
+    public double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public double getEstoqueTotal() {
+        return estoqueTotal;
+    }
+
+    public void setEstoqueTotal(double estoqueTotal) {
+        this.estoqueTotal += valorTotal;
+    }
+    
+    
     public void verificaMediaAcima() {
         if (getQuantidadeEstoque() >= getEstoqueMaximo()) {
             setAcimaMedia(true);
@@ -142,7 +163,7 @@ public class Produto {
             setAbaixoMedia(false);
         }
     }
-
+    
     //Método para deixar o Id aleatório
     public void randomId(String nomeProduto) {
         ControleEstoque con = new ControleEstoque();
@@ -175,5 +196,5 @@ public class Produto {
                 this.idProduto = novoIdProduto;
             }
         }
-    }
+    }    
 }

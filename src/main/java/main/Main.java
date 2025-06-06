@@ -12,10 +12,10 @@ import view.FrmMenuPrincipal;
 
 public class Main {
 
-    private static final FrmMenuPrincipal menuPrincipal = new FrmMenuPrincipal();
-
     public static void main(String[] args) {
+        
+        FrmMenuPrincipal menuPrincipal = new FrmMenuPrincipal();
         menuPrincipal.setVisible(true);
-        Connection conexao = Conexao.conectar();
+        
     }
 }
