@@ -57,7 +57,7 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1920, 1080));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel3.setText("Gerenciar Categorias");
+        jLabel3.setText("Gerenciamento de Categorias");
 
         jLabel1.setText("jLabel1");
 
@@ -124,7 +124,7 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
-                                .addGap(528, 528, 528)
+                                .addGap(476, 476, 476)
                                 .addComponent(jLabel3))
                             .addComponent(jLabel4)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
