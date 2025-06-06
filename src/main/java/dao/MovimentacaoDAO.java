@@ -22,7 +22,7 @@ public class MovimentacaoDAO {
         
         MovimentacaoEstoque movimentacao = new MovimentacaoEstoque();
         
-        String sql = "INSERT INTO movimentacao (id, nome, tipo, quantidade, data) VALUES (?,?, ?, ?, ?)"; //insere os dados na tabela
+        String sql = "INSERT INTO movimentacao (id, nome, tipo, quantidade, data) VALUES (?,?,?,?,?)"; //insere os dados na tabela
         try (
                 Connection connection = Conexao.conectar(); //atribui a conexão à classe que faz a conexão com o banco de dados
                  PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS) //prepara o caminho para receber os dados e devolver a chave gerada

@@ -211,9 +211,13 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 quantidade = Integer.parseInt(this.JTFQuantidadeMovimentacao.getText());
             }
 
+            //Verificando quantidade minima
+            if (novaMov.movimentacaoEstoqueAdicao(nomeProduto, quantidade) == false) {
+                throw new Mensagem("Estoque abaixo de zero");
+            }
             //Caso tudo estiver certo, dar baixa no estoque
-            
-                JOptionPane.showMessageDialog(null, "Adicao confirmada!");
+            if (novaMov.movimentacaoEstoqueAdicao(nomeProduto, quantidade) == true) {
+                JOptionPane.showMessageDialog(null, "Baixa confirmada!");
 
                 //Pegando as informações da movimentação
                 novaMov.setData(Date.from(Instant.now()));
@@ -221,7 +225,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 novaMov.setQuantidadeMovimentada(quantidade);
                 novaMov.setId(novaMov.gerarIdUnico());
                 
-            try {
+                try {
                 //MovimentacaoEstoque.movimentacoes.add(novaMov);
                 MovimentacaoDAO.inserirMovimentacao(novaMov.getId(),novaMov.getData() ,novaMov.getQuantidadeMovimentada(), novaMov.getNomeProduto(), novaMov.getTipoMovimentacao());
             } catch (SQLException ex) {
@@ -230,12 +234,13 @@ public class FrmMovimentacao extends javax.swing.JFrame {
 
                 produto.verificaMediaAbaixo();
                 produto.verificaMediaAcima();
-                if (produto.isAbaixoMedia() == true) {
+                if (produto.isAbaixoMedia()) {
                     JOptionPane.showMessageDialog(null, "O produto esta abaixo da média");
                 }
-                if (produto.isAcimaMedia() == true) {
+                if (produto.isAcimaMedia()) {
                     JOptionPane.showMessageDialog(null, "O produto esta acima da média");
                 }
+            }
 
             
 
