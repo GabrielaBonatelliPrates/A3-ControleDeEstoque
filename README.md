@@ -31,9 +31,10 @@ O arquivo "[bancoDeDados.sql](./bancoDeDados.sql)"
 ## 🛠️ Tecnologias Utilizadas
 
 - **Java Development Kit (JDK)**: 23.0.2  
-- **MySQL Server**: 9.3  
 - **SQL Workbench**: 8.0  
 - **IDE**: Apache NetBeans 25
+- **Versão do driver JDBC (MySQL Connector/J)**: 9.3.0
+- **Versão de Maven**: 4.0.0
 
 ---
 
