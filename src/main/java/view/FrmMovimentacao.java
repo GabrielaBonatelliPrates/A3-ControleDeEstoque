@@ -224,6 +224,8 @@ public class FrmMovimentacao extends javax.swing.JFrame {
             novaMov.setNomeProduto(nomeProduto);
             novaMov.setQuantidadeMovimentada(quantidade);
             novaMov.setId(novaMov.gerarIdUnico());
+            
+            movEst.adicionarQuantidade(codigo, quantidade);
 
             try {
                 //MovimentacaoEstoque.movimentacoes.add(novaMov);
@@ -322,6 +324,8 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 novaMov.setNomeProduto(nomeProduto);
                 novaMov.setQuantidadeMovimentada(quantidade);
                 novaMov.setId(novaMov.gerarIdUnico());
+                
+                movEst.retirarQuantidade(codigo, quantidade);
 
                 try {
                     //MovimentacaoEstoque.movimentacoes.add(novaMov);
