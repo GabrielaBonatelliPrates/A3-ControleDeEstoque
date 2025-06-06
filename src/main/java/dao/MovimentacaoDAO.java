@@ -67,7 +67,7 @@ public class MovimentacaoDAO {
     }
     
     public void adicionarQuantidade(int idProduto, int quantidadeAdicionar) {
-        String sql = "UPDATE produtos SET quantidade = quantidade + ? FROM produto WHERE id = ?";
+        String sql = "UPDATE produtos SET estoque_atual = estoque_atual + ? WHERE id = ?";
 
         try (Connection connection = Conexao.conectar(); PreparedStatement stmt = connection.prepareStatement(sql); ResultSet resultSet = stmt.executeQuery()) {
 
@@ -83,7 +83,7 @@ public class MovimentacaoDAO {
     }
     
     public void retirarQuantidade(int idProduto, int quantidadeRetirada) {
-        String sql = "UPDATE produtos SET quantidade = quantidade - ? FROM produto WHERE id = ?";
+        String sql = "UPDATE produtos SET estoque_atual = estoque_atual - ? WHERE id = ?";
 
         try (Connection connection = Conexao.conectar(); PreparedStatement stmt = connection.prepareStatement(sql); ResultSet resultSet = stmt.executeQuery()) {
 
