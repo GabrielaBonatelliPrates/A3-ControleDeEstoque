@@ -4,6 +4,7 @@ import model.Categoria;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import dao.CategoriaDAO;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 public class FrmGerenciarCategoria extends javax.swing.JFrame {
@@ -17,19 +18,13 @@ private CategoriaDAO categoriaDAO;
     }
 
     public void novaTabela() {
-
-        DefaultTableModel preencher = (DefaultTableModel) this.JTGerenciarCategoria.getModel();
-        preencher.setNumRows(0);
-        List<Categoria> buscarCategoria = categoriaDAO.pegarCategorias();
-        for (Categoria cat : buscarCategoria) {
-            preencher.addRow(new Object[]{
-                cat.getIdCategoria(),
-                cat.getNomeCategoria(),
-                cat.getTamanho(),
-                cat.getEmbalagem()
-            });
-
-        }
+        //sempre atualizar a tabela quando abrir a janela
+       try {
+            DefaultTableModel model = categoriaDAO.tabelaAtualizada();
+            JTGerenciarCategoria.setModel(model); //atualiza a exibição
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }    
     }
 
     @SuppressWarnings("unchecked")
@@ -62,15 +57,13 @@ private CategoriaDAO categoriaDAO;
 
         JTGerenciarCategoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
                 "ID", "Nome", "Tamanho", "Embalagem"
             }
         ));
+        JTGerenciarCategoria.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         JTGerenciarCategoria.setPreferredSize(new java.awt.Dimension(750, 80));
         JTGerenciarCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -116,9 +109,6 @@ private CategoriaDAO categoriaDAO;
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(243, 243, 243)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 985, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -146,7 +136,10 @@ private CategoriaDAO categoriaDAO;
                         .addGap(40, 40, 40)
                         .addComponent(JBAtualizar)
                         .addGap(37, 37, 37)
-                        .addComponent(JBExcluir)))
+                        .addComponent(JBExcluir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(243, 243, 243)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1015, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -157,8 +150,8 @@ private CategoriaDAO categoriaDAO;
                     .addComponent(jLabel1)
                     .addComponent(jLabel3))
                 .addGap(43, 43, 43)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
@@ -271,7 +264,7 @@ private CategoriaDAO categoriaDAO;
             String nomeCategoria = this.JTGerenciarCategoria.getValueAt(this.JTGerenciarCategoria.getSelectedRow(), 1).toString();
             String tamanho = this.JTGerenciarCategoria.getValueAt(this.JTGerenciarCategoria.getSelectedRow(), 2).toString();
             String embalagem = this.JTGerenciarCategoria.getValueAt(this.JTGerenciarCategoria.getSelectedRow(), 3).toString();
-            
+
             this.JTFNomeCategoria.setText(nomeCategoria);
             this.JTFTamanho.setText(tamanho);
             this.JTFEmbalagem.setText(embalagem);

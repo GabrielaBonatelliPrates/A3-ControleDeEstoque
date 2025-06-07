@@ -179,7 +179,7 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
             }           
             
             //Criar categoria nova e mostrar possiível erro
-            CategoriaDAO.inserirCategoria(1, nomeCategoria, tamanho, embalagem);
+            categoriaDAO.inserirCategoria(1, nomeCategoria, tamanho, embalagem);
             boolean criou = categoriaDAO.verificaCategoria(nomeCategoria, tamanho, embalagem);
             if (criou) {
                 JOptionPane.showMessageDialog(this, "Categoria criada com sucesso!");

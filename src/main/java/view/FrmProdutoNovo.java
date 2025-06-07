@@ -15,8 +15,9 @@ private ProdutoDAO produtoDAO;
 private CategoriaDAO categoriaDAO;
 
     
-    public FrmProdutoNovo(ProdutoDAO produtoDAO) {
+    public FrmProdutoNovo(ProdutoDAO produtoDAO, CategoriaDAO categoriaDAO) {
         this.produtoDAO = produtoDAO;
+        this.categoriaDAO = categoriaDAO;
         initComponents();
        mostrarCategorias();
     }

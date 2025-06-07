@@ -22,6 +22,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
        setSize(1920, 1080);
        setExtendedState(FrmMenuPrincipal.MAXIMIZED_BOTH);
        this.produtoDAO = produtoDAO;
+       this.categoriaDAO = categoriaDAO;
     }
 
     @SuppressWarnings("unchecked")
@@ -366,7 +367,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuSairActionPerformed
 
     private void jMenuNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuNovoProdutoActionPerformed
-       FrmProdutoNovo telaCadastro = new FrmProdutoNovo(produtoDAO);
+       FrmProdutoNovo telaCadastro = new FrmProdutoNovo(produtoDAO, categoriaDAO);
         telaCadastro.setVisible(true);
         //Ativação da tela de cadastro de Produto
 

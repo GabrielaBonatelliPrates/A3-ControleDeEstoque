@@ -26,7 +26,7 @@ public class CategoriaDAO {
     }
 
     //método para colocar a categoria no banco de dados
-    public static void inserirCategoria(int idCategoria, String nomeCategoria, String tamanho, String embalagem) throws SQLException {
+    public void inserirCategoria(int idCategoria, String nomeCategoria, String tamanho, String embalagem) throws SQLException {
         Categoria categoria = new Categoria();
         String sql = "INSERT INTO categorias (nomeCategoria, tamanho, embalagem) VALUES (?, ?, ?)"; //insere os dados na tabela
 
@@ -44,7 +44,7 @@ public class CategoriaDAO {
         }
     }
 
-    public static ResultSet listarCategorias() { //método que retorna todos as categorias do banco
+    public ResultSet listarCategorias() { //método que retorna todos as categorias do banco
         String sql = "SELECT * FROM categorias"; //consulta sql que seleciona tudo da tabela categorias
         try {
             Connection connection = Conexao.conectar();
@@ -56,7 +56,7 @@ public class CategoriaDAO {
         }
     }
 
-    public static List<Categoria> mostrarCategorias() { //método que retorna os nomes das categorias do banco
+    public List<Categoria> mostrarCategorias() { //método que retorna os nomes das categorias do banco
         List<Categoria> mostrarCategorias = new ArrayList();
         String sql = "SELECT * FROM categorias"; //consulta sql que seleciona o nome da categoria na tabela categorias
         try {
@@ -83,13 +83,13 @@ public class CategoriaDAO {
         return mostrarCategorias;
     }
 
-    public static DefaultTableModel tabelaAtualizada() throws SQLException {
+    public DefaultTableModel tabelaAtualizada() throws SQLException {
         ResultSet resultSet = listarCategorias(); //todas as categorias do banco
         DefaultTableModel model = montarTabela(resultSet);
         return model;
     }
 
-    public static DefaultTableModel montarTabela(ResultSet resultSet) throws SQLException { //constroi um modelo de tabela com base no ResultSet
+    public DefaultTableModel montarTabela(ResultSet resultSet) throws SQLException { //constroi um modelo de tabela com base no ResultSet
         DefaultTableModel model = new DefaultTableModel(); //cria um novo modelo de tabela
         ResultSetMetaData metaData = resultSet.getMetaData(); //pega os metadados do resultado
         int columnCount = metaData.getColumnCount(); //conta o numero de colunas
@@ -112,7 +112,7 @@ public class CategoriaDAO {
     }
 
     //carrega uma categoria pelo nome
-    public static Categoria buscarPorNome(String nomePesquisado) { //busca uma categoria específica no banco através do nome dele
+    public Categoria buscarPorNome(String nomePesquisado) { //busca uma categoria específica no banco através do nome dele
         Connection connection = Conexao.conectar();
         Categoria objeto = null; //inicializa o objeto que será retornado
 
@@ -179,7 +179,7 @@ public class CategoriaDAO {
     }
 
     //cria a ficha da categoria
-    public static String fichaCategoria(String nomePesquisado) {
+    public String fichaCategoria(String nomePesquisado) {
         Categoria categoriaPesquisada = buscarPorNome(nomePesquisado); //atribui a categoria a primeira categoria encontrado a partir do nome
 
         //cria a string que vai enviar os dados
@@ -197,7 +197,7 @@ public class CategoriaDAO {
     }
 
     //metodo pra verificar se a categoria ja existe antes de adicionar
-    public static boolean verificaCategoria(String nomeCategoria, String tamanho, String embalagem) throws SQLException {
+    public boolean verificaCategoria(String nomeCategoria, String tamanho, String embalagem) throws SQLException {
         String sql = "SELECT 1 FROM categorias WHERE nomeCategoria= ? AND tamanho = ? AND embalagem = ?"; //query para buscar se existe alguma categoria com esses atributos (se achar uma para)
 
         try (
@@ -218,7 +218,7 @@ public class CategoriaDAO {
         return false;
     }
 
-    public static List<Categoria> pegarCategorias() {
+    public List<Categoria> pegarCategorias() {
         listaAtualizada.clear();
 
         String sql = "SELECT idCategoria, nomeCategoria, tamanho, embalagem FROM categorias ORDER BY nomeCategorias ASC";

@@ -325,7 +325,7 @@ public class ProdutoDAO {
     public List<Produto> pegarProdutos() {
         listaAtualizada.clear();
 
-        String sql = "SELECT idProduto, nome, preco_unitario, unidade, estoque_atual, estoque_minimo, estoque_maximo, nome_categoria, tamanho, embalagem FROM produtos ORDER BY nome  ASC";
+        String sql = "SELECT idProduto, nome, preco_unitario, unidade, estoque_atual, estoque_minimo, estoque_maximo, nome_categoria, tamanho, embalagem FROM produtos";
 
         try (Connection connection = Conexao.conectar(); PreparedStatement stmt = connection.prepareStatement(sql); ResultSet resultSet = stmt.executeQuery()) {
 

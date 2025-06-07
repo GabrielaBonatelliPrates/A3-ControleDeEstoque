@@ -22,6 +22,13 @@ private CategoriaDAO categoriaDAO;
     public FrmCategorias(CategoriaDAO categoriaDAO) {
         initComponents();
         this.categoriaDAO = categoriaDAO;
+        //sempre atualizar a tabela quando abrir a janela
+       try {
+            DefaultTableModel model = categoriaDAO.tabelaAtualizada();
+            jTableCategorias.setModel(model); //atualiza a exibição
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }    
     }
 
     @SuppressWarnings("unchecked")
@@ -151,7 +158,7 @@ private CategoriaDAO categoriaDAO;
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         String nomeCategoria = txtCampoPesquisa.getText();
 
-        String fichaCategoria = CategoriaDAO.fichaCategoria(nomeCategoria); //pesquisa os dados armazenados do produto a partir do nome dele
+        String fichaCategoria = categoriaDAO.fichaCategoria(nomeCategoria); //pesquisa os dados armazenados do produto a partir do nome dele
        // String statusCategoria = CategoriaDAO.verificaCategoria(statusCategoria); //pesquisa os dados armazenados da categoria a partir do nome dela (adicionar)
 
 
@@ -167,7 +174,7 @@ private CategoriaDAO categoriaDAO;
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
          //sempre atualizar a tabela quando abrir a janela
        try {
-            DefaultTableModel model = CategoriaDAO.tabelaAtualizada();
+            DefaultTableModel model = categoriaDAO.tabelaAtualizada();
             jTableCategorias.setModel(model); //atualiza a exibição
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -177,7 +184,7 @@ private CategoriaDAO categoriaDAO;
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
        //sempre atualizar a tabela quando abrir a janela
       try {
-            DefaultTableModel model = CategoriaDAO.tabelaAtualizada();
+            DefaultTableModel model = categoriaDAO.tabelaAtualizada();
             jTableCategorias.setModel(model); //atualiza a exibição
         } catch (SQLException ex) {
             ex.printStackTrace();
