@@ -11,17 +11,19 @@ import java.sql.ResultSet;
 import javax.swing.JComboBox;
 
 public class FrmProdutoNovo extends javax.swing.JFrame {
-    
+private ProdutoDAO produtoDAO;
+private CategoriaDAO categoriaDAO;
 
     
-    public FrmProdutoNovo() {
+    public FrmProdutoNovo(ProdutoDAO produtoDAO) {
+        this.produtoDAO = produtoDAO;
         initComponents();
        mostrarCategorias();
     }
     
     public void mostrarCategorias(){
         //Cria um ArrayList para mostrar os nomes das categorias cadastrados no banco de dados
-        List<Categoria> mostrarCategorias = CategoriaDAO.mostrarCategorias(); 
+        List<Categoria> mostrarCategorias = categoriaDAO.mostrarCategorias(); 
         //int id = 1;
         
         jComboBoxCategoria.removeAllItems(); //limpa itens anteriores para evitar erros
@@ -432,7 +434,7 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
             String tamanho = categoriaSelecionada.getTamanho();
             String embalagem = categoriaSelecionada.getEmbalagem();
             
-            ProdutoDAO.cadastrarProduto(nomeProduto, valorUnitario, unidade, quantidadeEstoque,
+            produtoDAO.cadastrarProduto(nomeProduto, valorUnitario, unidade, quantidadeEstoque,
                quantidadeEstoqueMinima, quantidadeEstoqueMaxima, nomeCategoria, tamanho, embalagem);
             
             JOptionPane.showMessageDialog(this, "Produto adicionado com sucesso!");

@@ -7,26 +7,21 @@ import javax.swing.ImageIcon;
 import java.util.List;
 import model.Produto;
 import java.util.ArrayList;
+import dao.ProdutoDAO;
+import dao.CategoriaDAO;
 
 public class FrmMenuPrincipal extends javax.swing.JFrame {
-
-    FrmProdutoNovo telaCadastro = new FrmProdutoNovo();
-    FrmProdutos produtos = new FrmProdutos();
-    FrmCategorias categorias = new FrmCategorias();
-    FrmCategoriaNova telaCategoria = new FrmCategoriaNova();
-    FrmGerenciarProduto telaGerenciar = new FrmGerenciarProduto();
-    FrmMovimentacao telaMovimentacao = new FrmMovimentacao();
-    FrmBalancoFinanceiro balancoFinanceiro = new FrmBalancoFinanceiro();
-    FrmEstoqueMaximo telaEstoqueMaximo = new FrmEstoqueMaximo();
-   FrmEstoqueMinimo telaEstoqueMinimo = new FrmEstoqueMinimo();
-    FrmListaPrecos telaListaDePreco = new FrmListaPrecos();
-    FrmRelatorios telaRelatorio = new FrmRelatorios();
-    FrmSobre telaSobre = new FrmSobre();
     
-    public FrmMenuPrincipal() {
+    ProdutoDAO produtoDAO;
+    CategoriaDAO categoriaDAO;
+    
+    FrmRelatorios telaRelatorio = new FrmRelatorios(produtoDAO); //ainda vai adicionar implementação
+    
+    public FrmMenuPrincipal(ProdutoDAO produtoDAO, CategoriaDAO categoriaDAO) {
         initComponents();
        setSize(1920, 1080);
        setExtendedState(FrmMenuPrincipal.MAXIMIZED_BOTH);
+       this.produtoDAO = produtoDAO;
     }
 
     @SuppressWarnings("unchecked")
@@ -165,7 +160,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuNovoProduto);
 
-        jMenuGerenciarProduto.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
         jMenuGerenciarProduto.setText("Gerenciar Produto");
         jMenuGerenciarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -346,33 +340,40 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuGerenciarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGerenciarProdutoActionPerformed
-        telaGerenciar.setVisible(true);    }//GEN-LAST:event_jMenuGerenciarProdutoActionPerformed
-
     private void jMenuAcimaDaMaximaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAcimaDaMaximaActionPerformed
+        //instancia a interface gráfica do relatório
+        FrmEstoqueMaximo telaEstoqueMaximo = new FrmEstoqueMaximo(produtoDAO);
+        //deixa ela vísível
         telaEstoqueMaximo.setVisible(true);
     }//GEN-LAST:event_jMenuAcimaDaMaximaActionPerformed
 
     private void jMenuListarProecosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListarProecosActionPerformed
-        
+       //instancia a interface gráfica do relatório
+        FrmListaPrecos telaListaDePreco = new FrmListaPrecos(produtoDAO);
     }//GEN-LAST:event_jMenuListarProecosActionPerformed
 
     private void jMenuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSobreActionPerformed
+        //instancia a interface gráfica do sobre
+        FrmSobre telaSobre = new FrmSobre();
+        //deixa ela vísível
         telaSobre.setVisible(true);
         
     }//GEN-LAST:event_jMenuSobreActionPerformed
 
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
+        //encerra o programa
         System.exit(0);
     }//GEN-LAST:event_jMenuSairActionPerformed
 
     private void jMenuNovoProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuNovoProdutoActionPerformed
+       FrmProdutoNovo telaCadastro = new FrmProdutoNovo(produtoDAO);
         telaCadastro.setVisible(true);
         //Ativação da tela de cadastro de Produto
 
     }//GEN-LAST:event_jMenuNovoProdutoActionPerformed
 
     private void jMenuMovimentacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuMovimentacaoActionPerformed
+        FrmMovimentacao telaMovimentacao = new FrmMovimentacao(produtoDAO);
         telaMovimentacao.setVisible(true);
         //Ativação da tela de movimentação de estoque
     }//GEN-LAST:event_jMenuMovimentacaoActionPerformed
@@ -404,15 +405,25 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void jMenuBalancoFinanceiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBalancoFinanceiroActionPerformed
+       //instancia a interface gráfica do balanço financeiro
+        FrmBalancoFinanceiro balancoFinanceiro = new FrmBalancoFinanceiro(produtoDAO);
+        //deixa ela vísível
         balancoFinanceiro.setVisible(true);
     }//GEN-LAST:event_jMenuBalancoFinanceiroActionPerformed
 
     private void jMenuProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProdutosActionPerformed
+        //instancia a interface gráfica dos produtos
+        FrmProdutos produtos = new FrmProdutos(produtoDAO);
+         //deixa ela vísível
         produtos.setVisible(true);
     }//GEN-LAST:event_jMenuProdutosActionPerformed
 
     private void jMenuAbaixoDaMinimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAbaixoDaMinimaActionPerformed
+         //instancia a interface gráfica do relatório
+        FrmEstoqueMinimo telaEstoqueMinimo = new FrmEstoqueMinimo(produtoDAO);
+        //deixa ela vísível
         telaEstoqueMinimo.setVisible(true);
+       
     }//GEN-LAST:event_jMenuAbaixoDaMinimaActionPerformed
 
     private void jMenuProdutosPorCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProdutosPorCategoriaActionPerformed
@@ -420,16 +431,32 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuProdutosPorCategoriaActionPerformed
 
     private void jMenuAdicionarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAdicionarCategoriaActionPerformed
+       //instancia a interface gráfica do cadastro de categoria
+        FrmCategoriaNova telaCategoria = new FrmCategoriaNova(produtoDAO, categoriaDAO);
+        //deixa ela vísível
        telaCategoria.setVisible(true);
     }//GEN-LAST:event_jMenuAdicionarCategoriaActionPerformed
 
     private void jMenuGerenciaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGerenciaCategoriaActionPerformed
-        // TODO add your handling code here:
+        //instancia a interface gráfica para gerenciar as categorias
+        FrmGerenciarCategoria categoriaGerenciar = new FrmGerenciarCategoria(categoriaDAO);
+        //deixa ela vísível
+        categoriaGerenciar.setVisible(true);
     }//GEN-LAST:event_jMenuGerenciaCategoriaActionPerformed
 
     private void jMenuVerCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuVerCategoriasActionPerformed
+       //instancia a interface gráfica das categorias
+        FrmCategorias categorias = new FrmCategorias(categoriaDAO);
+        //deixa ela vísível
         categorias.setVisible(true);
     }//GEN-LAST:event_jMenuVerCategoriasActionPerformed
+
+    private void jMenuGerenciarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGerenciarProdutoActionPerformed
+        //instancia a interface gráfica do gerenciamento de  produto
+        FrmGerenciarProduto telaGerenciar = new FrmGerenciarProduto();
+        //deixa ela vísível
+        telaGerenciar.setVisible(true);
+    }//GEN-LAST:event_jMenuGerenciarProdutoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLEstampa;

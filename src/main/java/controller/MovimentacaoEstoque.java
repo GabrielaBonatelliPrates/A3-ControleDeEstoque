@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 import model.Produto;
 
-public class MovimentacaoEstoque extends ControleEstoque {
+public class MovimentacaoEstoque extends ExControleEstoque {
 
     Random random = new Random();
 

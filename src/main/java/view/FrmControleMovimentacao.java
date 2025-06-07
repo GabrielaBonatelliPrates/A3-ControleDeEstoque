@@ -4,7 +4,7 @@
  */
 package view;
 
-import controller.ControleEstoque;
+import controller.ExControleEstoque;
 import javax.swing.table.DefaultTableModel;
 import dao.MovimentacaoDAO;
 import controller.MovimentacaoEstoque;

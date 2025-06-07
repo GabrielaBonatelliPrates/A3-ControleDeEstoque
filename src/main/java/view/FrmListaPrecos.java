@@ -6,20 +6,22 @@ import javax.swing.table.DefaultTableModel;
 import model.Produto;
 
 public class FrmListaPrecos extends javax.swing.JFrame {
+private ProdutoDAO produtoDAO;
 
     private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"idProduto", "nome", "preco_unitario", "unidade", "nome_categoria"}, 0);
     
-    public FrmListaPrecos() {
+    public FrmListaPrecos(ProdutoDAO produtoDAO) {
         initComponents();
         jTableListaPrecos.setModel(modelo);
         this.mostrarTabela();
+        this.produtoDAO = produtoDAO;
     }
 
     public void mostrarTabela(){     
         modelo.setRowCount(0); 
         modelo.setNumRows(0); 
         
-        List<Produto> todosProdutos = ProdutoDAO.pegarProdutos(); 
+        List<Produto> todosProdutos = produtoDAO.pegarProdutos(); 
         for (Produto p : todosProdutos) { 
             modelo.addRow(new Object[]{
                 p.getIdProduto(),
@@ -143,7 +145,8 @@ public class FrmListaPrecos extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmListaPrecos().setVisible(true);
+                ProdutoDAO produtoDAO = null;
+                new FrmListaPrecos(produtoDAO).setVisible(true);
             }
         });
     }

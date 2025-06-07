@@ -6,7 +6,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import controller.ControleEstoque;
+import controller.ExControleEstoque;
 import dao.ProdutoDAO;
 import java.sql.SQLException;
 import java.util.Date;
@@ -15,14 +15,15 @@ import java.util.logging.Logger;
 import model.Produto;
 
 public class FrmMovimentacao extends javax.swing.JFrame {
-
+    private ProdutoDAO produtoDAO;
     private Produto produto;
     private MovimentacaoDAO movEst;
-    private static List<Produto> produtos = ProdutoDAO.pegarProdutos();
+    private List<Produto> produtos = produtoDAO.pegarProdutos();
 
-    public FrmMovimentacao() {
+    public FrmMovimentacao(ProdutoDAO produtoDAO) {
         initComponents();
         this.produto = new Produto();
+        this.produtoDAO = produtoDAO;
 
     }
 
@@ -376,7 +377,8 @@ public class FrmMovimentacao extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmMovimentacao().setVisible(true);
+                ProdutoDAO produtoDAO = null;
+                new FrmMovimentacao(produtoDAO).setVisible(true);
             }
         });
     }

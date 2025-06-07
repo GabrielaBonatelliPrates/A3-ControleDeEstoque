@@ -9,13 +9,15 @@ import java.util.Scanner;
 import model.Produto;
 import model.Categoria;
 import view.FrmMenuPrincipal;
+import controller.ControleEstoque;
 
 public class Main {
 
     public static void main(String[] args) {
         
-        FrmMenuPrincipal menuPrincipal = new FrmMenuPrincipal();
-        menuPrincipal.setVisible(true);
-        
+        //instancia a classe "ControleEstoque"
+        ControleEstoque controleEstoque = new ControleEstoque();
+        //inicia a aplicação
+        controleEstoque.iniciaAplicação();
     }
 }

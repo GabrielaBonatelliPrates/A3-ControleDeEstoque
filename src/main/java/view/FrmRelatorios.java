@@ -1,9 +1,11 @@
 package view;
-
+import dao.ProdutoDAO;
 public class FrmRelatorios extends javax.swing.JFrame {
+private ProdutoDAO produtoDAO;
 
-    public FrmRelatorios() {
+    public FrmRelatorios(ProdutoDAO produtoDAO) {
         initComponents();
+        this.produtoDAO = produtoDAO;
     }
 
     @SuppressWarnings("unchecked")
@@ -121,24 +123,24 @@ public class FrmRelatorios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBProdutosActionPerformed
-        new FrmProdutos().setVisible(true);
+        new FrmProdutos(produtoDAO).setVisible(true);
     }//GEN-LAST:event_JBProdutosActionPerformed
 
     private void JBBalancoFinanceiroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBBalancoFinanceiroMouseClicked
-        new FrmBalancoFinanceiro().setVisible(true);
+        new FrmBalancoFinanceiro(produtoDAO).setVisible(true);
     }//GEN-LAST:event_JBBalancoFinanceiroMouseClicked
 
     private void JBAcimaMaximoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBAcimaMaximoMouseClicked
-                new FrmEstoqueMaximo().setVisible(true);
+                new FrmEstoqueMaximo(produtoDAO).setVisible(true);
 
     }//GEN-LAST:event_JBAcimaMaximoMouseClicked
 
     private void JBListaDePrecosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBListaDePrecosMouseClicked
-                new FrmListaPrecos().setVisible(true);
+                new FrmListaPrecos(produtoDAO).setVisible(true);
     }//GEN-LAST:event_JBListaDePrecosMouseClicked
 
     private void JBProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBProdutosMouseClicked
-                new FrmProdutos().setVisible(true);
+                new FrmProdutos(produtoDAO).setVisible(true);
     }//GEN-LAST:event_JBProdutosMouseClicked
 
     public static void main(String args[]) {
@@ -170,7 +172,8 @@ public class FrmRelatorios extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmRelatorios().setVisible(true);
+                ProdutoDAO produtoDAO = null;
+                new FrmRelatorios(produtoDAO).setVisible(true);
             }
         });
     }

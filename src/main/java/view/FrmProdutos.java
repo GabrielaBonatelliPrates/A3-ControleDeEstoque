@@ -18,9 +18,17 @@ import java.util.List;
 import dao.ProdutoDAO;
 
 public class FrmProdutos extends javax.swing.JFrame {
+    private ProdutoDAO produtoDAO;
 
-    public FrmProdutos() {
+    public FrmProdutos(ProdutoDAO produtoDAO) {
+        this.produtoDAO = produtoDAO;
         initComponents();
+        try {
+            DefaultTableModel model = produtoDAO.tabelaAtualizada();
+            jTableProdutos.setModel(model); //atualiza a exibição
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -150,7 +158,7 @@ public class FrmProdutos extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            DefaultTableModel model = ProdutoDAO.tabelaAtualizada();
+            DefaultTableModel model = produtoDAO.tabelaAtualizada();
             jTableProdutos.setModel(model); //atualiza a exibição
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -160,8 +168,8 @@ public class FrmProdutos extends javax.swing.JFrame {
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         String nomeProduto = txtCampoPesquisa.getText();
 
-        String fichaProduto = ProdutoDAO.fichaProduto(nomeProduto); //pesquisa os dados armazenados do produto a partir do nome dele
-        String statusProduto = ProdutoDAO.verificaProduto(nomeProduto); //pesquisa os dados armazenados do produto a partir do nome dele
+        String fichaProduto = produtoDAO.fichaProduto(nomeProduto); //pesquisa os dados armazenados do produto a partir do nome dele
+        String statusProduto = produtoDAO.verificaProduto(nomeProduto); //pesquisa os dados armazenados do produto a partir do nome dele
 
         String dadosProduto = statusProduto + fichaProduto;
 
@@ -176,7 +184,7 @@ public class FrmProdutos extends javax.swing.JFrame {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
        try {
-            DefaultTableModel model = ProdutoDAO.tabelaAtualizada();
+            DefaultTableModel model = produtoDAO.tabelaAtualizada();
             jTableProdutos.setModel(model); //atualiza a exibição
         } catch (SQLException ex) {
             ex.printStackTrace();

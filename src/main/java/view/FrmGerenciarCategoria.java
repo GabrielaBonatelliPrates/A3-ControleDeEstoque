@@ -7,11 +7,10 @@ import dao.CategoriaDAO;
 import javax.swing.JOptionPane;
 
 public class FrmGerenciarCategoria extends javax.swing.JFrame {
+private CategoriaDAO categoriaDAO;
 
-    CategoriaDAO catDao = new CategoriaDAO();
-    FrmCategoriaNova cadastraCategoria = new FrmCategoriaNova();
-
-    public FrmGerenciarCategoria() {
+    public FrmGerenciarCategoria(CategoriaDAO categoriaDAO) {
+        this.categoriaDAO = categoriaDAO;
         initComponents();
         this.novaTabela();
 
@@ -21,7 +20,7 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
 
         DefaultTableModel preencher = (DefaultTableModel) this.JTGerenciarCategoria.getModel();
         preencher.setNumRows(0);
-        List<Categoria> buscarCategoria = catDao.pegarCategorias();
+        List<Categoria> buscarCategoria = categoriaDAO.pegarCategorias();
         for (Categoria cat : buscarCategoria) {
             preencher.addRow(new Object[]{
                 cat.getIdCategoria(),
@@ -217,7 +216,7 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
                 idCategoria = Integer.parseInt(this.JTGerenciarCategoria.getValueAt(this.JTGerenciarCategoria.getSelectedRow(), 0).toString());
             }
 
-            if (this.catDao.atualizarCategoria(nomeCategoria, tamanho, embalagem, idCategoria)) {
+            if (this.categoriaDAO.atualizarCategoria(nomeCategoria, tamanho, embalagem, idCategoria)) {
                 this.JTFNomeCategoria.setText("");
                 this.JTFTamanho.setText("");
                 this.JTFEmbalagem.setText("");
@@ -252,7 +251,7 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
                     JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, confirma, confirma[0]);
 
             if (resposta == 0) {
-                if (this.catDao.deletarCategoria(idCategoria)) {
+                if (this.categoriaDAO.deletarCategoria(idCategoria)) {
                     this.JTFNomeCategoria.setText("");
                     this.JTFTamanho.setText("");
                     this.JTFEmbalagem.setText("");
@@ -305,7 +304,8 @@ public class FrmGerenciarCategoria extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmGerenciarCategoria().setVisible(true);
+                CategoriaDAO categoriaDAO = null;
+                new FrmGerenciarCategoria(categoriaDAO).setVisible(true);
             }
         });
     }

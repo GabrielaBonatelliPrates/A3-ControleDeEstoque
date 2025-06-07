@@ -6,12 +6,14 @@ import javax.swing.table.DefaultTableModel;
 import model.Produto;
 
 public class FrmBalancoFinanceiro extends javax.swing.JFrame {
+    private ProdutoDAO produtoDAO;
     private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Produto", "Quantidade", "Preço Unitário", "Preço Total"}, 0);
     private double valorTotalEstoque;
 
-    public FrmBalancoFinanceiro() {
+    public FrmBalancoFinanceiro(ProdutoDAO produtoDAO) {
         initComponents();
         mostraTabela();
+        this.produtoDAO = produtoDAO;
     }
     
     public void mostraTabela(){
@@ -19,7 +21,7 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
         modelo.setRowCount(0); //limpa a tabela
         modelo.setNumRows(0); //posiciona na primeira linha da tabela
 
-        List<Produto> todosProdutos = ProdutoDAO.pegarProdutos(); //acha os produtos acima do máximo
+        List<Produto> todosProdutos = produtoDAO.pegarProdutos(); //acha os produtos acima do máximo
         
         for (Produto produto : todosProdutos) { //adiciona à tabela
             modelo.addRow(new Object[]{
@@ -29,7 +31,7 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
                 produto.getPrecoUnit(),
                 (produto.getPrecoUnit() * produto.getQuantidadeEstoque()),});
         }
-        valorTotalEstoque = ProdutoDAO.valorTotal();
+        valorTotalEstoque = produtoDAO.valorTotal();
         String strValorTotal = String.valueOf(valorTotalEstoque);
         JLValorTotalEstoque.setText(strValorTotal);
         JTBalancoFinanceiro.setModel(modelo); //atualiza a tabela
@@ -154,7 +156,8 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmBalancoFinanceiro().setVisible(true);
+                ProdutoDAO produtoDAO = null;
+                new FrmBalancoFinanceiro(produtoDAO).setVisible(true);
             }
         });
     }

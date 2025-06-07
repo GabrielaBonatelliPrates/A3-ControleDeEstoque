@@ -7,11 +7,12 @@ import model.Produto;
 
 public class FrmEstoqueMaximo extends javax.swing.JFrame {
 private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nome", "Estoque Atual", "Estoque Máximo"}, 0);
+private ProdutoDAO produtoDAO = new ProdutoDAO();
 
-    public FrmEstoqueMaximo() {
+    public FrmEstoqueMaximo(ProdutoDAO produtoDAO) {
+        this.produtoDAO = produtoDAO;
         initComponents();
         this.carregaTabela();
-
     }
 
     public void carregaTabela() {
@@ -19,7 +20,7 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
         modelo.setRowCount(0); //limpa a tabela
         modelo.setNumRows(0); //posiciona na primeira linha da tabela
 
-        List<Produto> acimaMaximo = ProdutoDAO.pegarProdutosAcimaMaximo(); //acha os produtos acima do máximo
+        List<Produto> acimaMaximo = produtoDAO.pegarProdutosAcimaMaximo(); //acha os produtos acima do máximo
         
         for (Produto produto : acimaMaximo) { //adiciona à tabela
             modelo.addRow(new Object[]{
@@ -138,7 +139,8 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmEstoqueMaximo().setVisible(true);
+                ProdutoDAO produtoDAO = null;
+                new FrmEstoqueMaximo(produtoDAO).setVisible(true);
             }
         });
     }

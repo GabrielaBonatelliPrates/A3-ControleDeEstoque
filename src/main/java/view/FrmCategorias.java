@@ -18,9 +18,10 @@ import java.util.List;
 import dao.ProdutoDAO;
 
 public class FrmCategorias extends javax.swing.JFrame {
-
-    public FrmCategorias() {
+private CategoriaDAO categoriaDAO;
+    public FrmCategorias(CategoriaDAO categoriaDAO) {
         initComponents();
+        this.categoriaDAO = categoriaDAO;
     }
 
     @SuppressWarnings("unchecked")
@@ -209,7 +210,8 @@ public class FrmCategorias extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmCategorias().setVisible(true);
+                CategoriaDAO categoriaDAO = null;
+                new FrmCategorias(categoriaDAO).setVisible(true);
             }
         });
     }

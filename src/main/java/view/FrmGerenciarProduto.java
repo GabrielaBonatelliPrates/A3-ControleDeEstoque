@@ -12,7 +12,7 @@ import javax.swing.ButtonGroup;
 public class FrmGerenciarProduto extends javax.swing.JFrame {
 
     private ProdutoController objetoProduto;
-    FrmProdutoNovo somaProdutos = new FrmProdutoNovo();
+    //FrmProdutoNovo somaProdutos = new FrmProdutoNovo();
 
     public FrmGerenciarProduto() {
         initComponents();

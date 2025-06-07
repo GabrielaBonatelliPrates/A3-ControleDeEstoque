@@ -7,11 +7,13 @@ import javax.swing.table.DefaultTableModel;
 import model.Produto;
 
 public class FrmEstoqueMinimo extends javax.swing.JFrame {
+private ProdutoDAO produtoDAO;
 private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nome", "Estoque Atual", "Estoque Mínimo"}, 0);
  
-    public FrmEstoqueMinimo() {
+    public FrmEstoqueMinimo(ProdutoDAO produtoDAO) {
+        this.produtoDAO = produtoDAO;
         initComponents();
-        this.carregaTabela();
+        this.carregaTabela();    
     }
     
     public void carregaTabela() {
@@ -21,7 +23,7 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
        //modelo = new DefaultTableModel(new Object[]{"ID", "Nome", "Qtd", "Mínimo"}, 0);
         //DefaultTableModel modelo = (DefaultTableModel) this.JTEstoqueMinimo.getModel();
         
-        List<Produto> abaixoMinimo = ProdutoDAO.pegarProdutosAbaixoMinimo();
+        List<Produto> abaixoMinimo = produtoDAO.pegarProdutosAbaixoMinimo();
         
         for (Produto produto : abaixoMinimo) {
             modelo.addRow(new Object[]{
@@ -150,7 +152,8 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmEstoqueMinimo().setVisible(true);
+                ProdutoDAO produtoDAO = null;
+                new FrmEstoqueMinimo(produtoDAO).setVisible(true);
             }
         });
     }

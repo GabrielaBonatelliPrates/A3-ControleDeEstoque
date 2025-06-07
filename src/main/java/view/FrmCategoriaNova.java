@@ -5,14 +5,19 @@ import java.util.List;
 import java.util.ArrayList;
 import model.Categoria;
 import dao.CategoriaDAO;
-import static dao.CategoriaDAO.verificaCategoria;
+import dao.ProdutoDAO;
+import dao.CategoriaDAO;
 
 public class FrmCategoriaNova extends javax.swing.JFrame {
+    private ProdutoDAO produtoDAO;
+    private CategoriaDAO categoriaDAO;
 
     public List<Categoria> categorias = new ArrayList();
     
 
-    public FrmCategoriaNova() {
+    public FrmCategoriaNova(ProdutoDAO produtoDAO, CategoriaDAO categoriaDAO) {
+        this.produtoDAO = produtoDAO;
+        this.categoriaDAO = categoriaDAO;
         initComponents();
     }
 
@@ -166,7 +171,7 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
             
 
             //Verifica se a categoria já existe
-            boolean existe = verificaCategoria(nomeCategoria, tamanho, embalagem);
+            boolean existe = categoriaDAO.verificaCategoria(nomeCategoria, tamanho, embalagem);
             if (existe) {
                 JOptionPane.showMessageDialog(this, "Categoria já cadastrada anteriormente!");
             } else {
@@ -175,7 +180,7 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
             
             //Criar categoria nova e mostrar possiível erro
             CategoriaDAO.inserirCategoria(1, nomeCategoria, tamanho, embalagem);
-            boolean criou = verificaCategoria(nomeCategoria, tamanho, embalagem);
+            boolean criou = categoriaDAO.verificaCategoria(nomeCategoria, tamanho, embalagem);
             if (criou) {
                 JOptionPane.showMessageDialog(this, "Categoria criada com sucesso!");
             } else {
@@ -213,7 +218,9 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
         //</editor-fold>
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmCategoriaNova().setVisible(true);
+                ProdutoDAO produtoDAO = null;
+                CategoriaDAO categoriaDAO = null;
+                new FrmCategoriaNova(produtoDAO, categoriaDAO).setVisible(true);
             }
         });
     }
