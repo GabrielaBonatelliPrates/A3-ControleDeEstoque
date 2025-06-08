@@ -109,18 +109,6 @@ public class ExControleEstoque {
 
     
 
-        /**
-         * public void reajusteDePreco(double novoPreco) { //Tendo em vista que
-         * terá um "consultarProduto" antes de ter um reajuste de preço
-         *
-         * Produto produto = new Produto();
-         *
-         * System.out.print("Insira a nova quantidade do produto"); //Pedindo o
-         * novo preço novoPreco = input.nextDouble(); //Pegando o novo preço
-         *
-         * for (int i = 0; i < produtos.size(); i++) { if (i ==
-         * consultaProduto()) { //Indo até o produto selecionado
-         * produto.setPrecoUnit(novoPreco); //Alterando o preço } } }
-         */
+
     }
 }
