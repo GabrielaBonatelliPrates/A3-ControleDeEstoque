@@ -66,22 +66,6 @@ public class ExControleEstoque {
 
     
 
-    public void pesquisaProduto() {
-        int posicao = consultaProduto();
-        if (!produtos.isEmpty() && posicao != -1) { //se a lista não estiver vazia e o prodito tiver sido encontrado, então pega as informações dele
-            Produto produtoPesquisado = produtos.get(posicao); // transforma o produto pesquisado naquele que foi buscado
-            String informacoes = String.format("Nome: %s\nID: %s\nPreço unitário: %s\nUnidade de medida: %s\nQuantidades em estoque: %s\nQuantidade mínima: %s\nQuantidade máxima: %s\n",
-                    produtoPesquisado.getNomeProduto(),
-                    produtoPesquisado.getIdProduto(),
-                    produtoPesquisado.getPrecoUnit(),
-                    produtoPesquisado.getUnidadeProduto(),
-                    produtoPesquisado.getQuantidadeEstoque(),
-                    produtoPesquisado.getEstoqueMinimo(),
-                    produtoPesquisado.getEstoqueMaximo());
-            //produtoPesquisado.getNomeCategoria());
-            System.out.println(informacoes);
-        }
-    }
 
     public void movimentacaoEstoque() { //metodo para chamar a classe MovimentacaoEstoque quando houver uma movimentacao
         MovimentacaoEstoque atualizacao = new MovimentacaoEstoque();
