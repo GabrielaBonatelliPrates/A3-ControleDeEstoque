@@ -1,3 +1,4 @@
+
 package dao;
 
 import java.sql.Connection;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.Categoria;
+
 
 public class ProdutoDAO {
     
@@ -353,11 +355,39 @@ public class ProdutoDAO {
         }
         return listaAtualizada;
     }
-    /**
-    public List<Produto> listarPorCategorias(){
-        
-    }*/
 
+    public List<Produto> ProdutosOrdemAlfabética() {
+        listaAtualizada.clear();
+
+        String sql = "SELECT idProduto, nome, preco_unitario, unidade, estoque_atual, estoque_minimo, estoque_maximo, nome_categoria, tamanho, embalagem FROM produtos ORDER BY nome ASC";
+
+        try (Connection connection = Conexao.conectar(); PreparedStatement stmt = connection.prepareStatement(sql); ResultSet resultSet = stmt.executeQuery()) {
+
+            while (resultSet.next()) {
+                Produto objeto = new Produto();
+                objeto.setIdProduto(resultSet.getInt("idProduto"));
+                objeto.setNomeProduto(resultSet.getString("nome"));
+                objeto.setPrecoUnit(resultSet.getDouble("preco_unitario"));
+                objeto.setUnidadeProduto(resultSet.getString("unidade"));
+                objeto.setQuantidadeEstoque(resultSet.getInt("estoque_atual"));
+                objeto.setEstoqueMinimo(resultSet.getInt("estoque_minimo"));
+                objeto.setEstoqueMaximo(resultSet.getInt("estoque_maximo"));
+
+                Categoria categoria = new Categoria();
+                categoria.setNomeCategoria(resultSet.getString("nome_categoria"));
+                categoria.setTamanho(resultSet.getString("tamanho"));
+                categoria.setEmbalagem(resultSet.getString("embalagem"));
+                objeto.setCategoria(categoria);
+
+                listaAtualizada.add(objeto);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaAtualizada;
+    }
+    
     public List<Produto> pegarProdutosAcimaMaximo() {
         List<Produto> verificarProdutos = pegarProdutos();
         List<Produto> produtosAcima = new ArrayList<>();

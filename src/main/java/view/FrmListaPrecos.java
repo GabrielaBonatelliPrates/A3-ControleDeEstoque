@@ -21,7 +21,7 @@ private ProdutoDAO produtoDAO;
         modelo.setRowCount(0); 
         modelo.setNumRows(0); 
         
-        List<Produto> todosProdutos = produtoDAO.pegarProdutos(); 
+        List<Produto> todosProdutos = produtoDAO.ProdutosOrdemAlfabética(); 
         for (Produto p : todosProdutos) { 
             modelo.addRow(new Object[]{
                 p.getIdProduto(),
