@@ -162,7 +162,7 @@ public class ProdutoDAO {
             Connection connection = Conexao.conectar();
             PreparedStatement statement = connection.prepareStatement(sql);
 
-            statement.setString(1, produto.getNomeProduto());
+             statement.setString(1, produto.getNomeProduto());
             statement.setDouble(2, produto.getPrecoUnit());
             statement.setString(3, produto.getUnidadeProduto());
             statement.setInt(4, produto.getQuantidadeEstoque());
@@ -180,6 +180,16 @@ public class ProdutoDAO {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, erro);
             return false;
         }
+    }
+    
+    public boolean atualizarProdutoBD(int idProduto, String nomeProduto, double precoUnit, String unidadeProduto, int quantidadeEstoque,
+            int estoqueMinimo, int estoqueMaximo, String nomeCategoria, String tamanho, String embalagem) {
+        Categoria categoria = new Categoria(nomeCategoria, tamanho, embalagem);
+
+        Produto produto = new Produto(nomeProduto, idProduto, precoUnit, unidadeProduto, quantidadeEstoque, estoqueMinimo,
+                estoqueMaximo, categoria); 
+        atualizarProduto(produto, categoria );
+        return true;
     }
     
     public boolean atualizarPreco(String nome, Double preco, int id) {
@@ -200,6 +210,11 @@ public class ProdutoDAO {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, erro);
             return false;
         }
+    }
+    
+     public boolean deletarProdutoBD(int idProduto) {
+        deletarProduto(idProduto);
+        return true;
     }
 
     public boolean deletarProduto(int idProduto) {
