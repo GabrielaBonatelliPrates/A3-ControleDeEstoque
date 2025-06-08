@@ -6,7 +6,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import controller.ExControleEstoque;
+import controller.ControleEstoque;
 import dao.ProdutoDAO;
 import java.sql.SQLException;
 import java.util.Date;

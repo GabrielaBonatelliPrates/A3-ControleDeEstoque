@@ -1,6 +1,5 @@
 package model;
 
-import controller.ExControleEstoque;
 import dao.CategoriaDAO;
 import java.util.Scanner;
 import java.util.Random;

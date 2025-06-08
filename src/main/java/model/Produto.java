@@ -1,6 +1,6 @@
 package model;
 
-import controller.ExControleEstoque;
+import controller.ControleEstoque;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -166,7 +166,7 @@ public class Produto {
     
     //Método para deixar o Id aleatório
     public void randomId(String nomeProduto) {
-        ExControleEstoque con = new ExControleEstoque();
+        ControleEstoque con = new ControleEstoque();
 
         //Um for que passa por todos os itens da Lista
         for (int i = 0; i < con.produtos.size(); i++) {

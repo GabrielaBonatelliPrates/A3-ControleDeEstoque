@@ -4,7 +4,6 @@ import javax.swing.JOptionPane;
 import java.util.List;
 import java.util.ArrayList;
 import model.Categoria;
-import dao.CategoriaDAO;
 import dao.ProdutoDAO;
 import dao.CategoriaDAO;
 

@@ -10,7 +10,6 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import dao.Conexao;
 import model.Produto;
 import java.util.ArrayList;
 import java.util.List;

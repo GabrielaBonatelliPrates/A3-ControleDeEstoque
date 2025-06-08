@@ -5,9 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
-import model.Produto;
 
-public class MovimentacaoEstoque extends ExControleEstoque {
+public class MovimentacaoEstoque extends ControleEstoque {
 
     Random random = new Random();
 

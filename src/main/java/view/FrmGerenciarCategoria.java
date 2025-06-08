@@ -1,8 +1,6 @@
 package view;
 
-import model.Categoria;
 import javax.swing.table.DefaultTableModel;
-import java.util.List;
 import dao.CategoriaDAO;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
