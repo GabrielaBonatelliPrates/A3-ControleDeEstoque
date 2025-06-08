@@ -5,8 +5,7 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class Categoria {
-
-    Scanner sc = new Scanner(System.in);
+    
     Random random = new Random();
 
     //Declaração das variáveis de instância
@@ -69,28 +68,6 @@ public class Categoria {
     @Override
     public String toString() {
         return nomeCategoria + " / " + tamanho + " / " + embalagem;
-    }
-
-    //Pedir e armazenar dados nos atributos da classe
-    public void lerDados() {
-
-        //Declarando o nome de categoria
-        System.out.print("Digite o nome da categoria: ");
-        this.nomeCategoria = sc.nextLine();
-
-        sc.nextLine();
-
-        // Declarando o tamanho da categoria
-        System.out.println("Digite o tamanho:");
-        this.tamanho = sc.nextLine();
-
-        sc.nextLine();
-
-        //Declarando o tipo de embalagem da categoria
-        System.out.println("Digite o tipo de embalagem:");
-
-        sc.nextLine();//Limpa a linha
-
     }
     
     //Método para deixar o Id aleatório
