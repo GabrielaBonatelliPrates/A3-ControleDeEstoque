@@ -1,5 +1,6 @@
 package view;
 
+import controller.EmiteRelatorio;
 import dao.ProdutoDAO;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -68,6 +69,7 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
         JLValorTotalEstoque = new javax.swing.JLabel();
         JBVoltar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        JBEmitirRelatorio = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Balanco Financeiro");
@@ -112,6 +114,13 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Inter 18pt Light", 0, 29)); // NOI18N
         jLabel2.setText("Balanço Financeiro");
 
+        JBEmitirRelatorio.setText("Exportar Tabela");
+        JBEmitirRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBEmitirRelatorioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,9 +129,7 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JBVoltar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 1304, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1304, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2))
@@ -132,6 +139,15 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(JLValorTotalEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 826, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(88, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(JBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(1195, Short.MAX_VALUE)
+                    .addComponent(JBEmitirRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(78, 78, 78)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,9 +160,14 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(JLValorTotalEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
                 .addComponent(JBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addGap(101, 101, 101))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(737, Short.MAX_VALUE)
+                    .addComponent(JBEmitirRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(181, 181, 181)))
         );
 
         pack();
@@ -163,6 +184,11 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
     private void JBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBVoltarActionPerformed
         this.dispose();
     }//GEN-LAST:event_JBVoltarActionPerformed
+
+    private void JBEmitirRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEmitirRelatorioActionPerformed
+        EmiteRelatorio emiteRelatorio = new EmiteRelatorio();
+        emiteRelatorio.exportaArquivo(JTBalancoFinanceiro);
+    }//GEN-LAST:event_JBEmitirRelatorioActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -199,6 +225,7 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBEmitirRelatorio;
     private javax.swing.JButton JBVoltar;
     private javax.swing.JLabel JLValorTotalEstoque;
     private javax.swing.JTable JTBalancoFinanceiro;
