@@ -294,7 +294,7 @@ public class CategoriaDAO {
     public List<Categoria> pegarCategorias() {
         listaAtualizada.clear();
 
-        String sql = "SELECT idCategoria, nomeCategoria, tamanho, embalagem FROM categorias ORDER BY nomeCategorias ASC";
+        String sql = "SELECT idCategoria, nomeCategoria, tamanho, embalagem FROM categorias";
         try (Connection connection = Conexao.conectar(); PreparedStatement stmt = connection.prepareStatement(sql); ResultSet resultSet = stmt.executeQuery()) {
 
             while (resultSet.next()) {

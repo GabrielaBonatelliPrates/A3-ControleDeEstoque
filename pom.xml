@@ -10,7 +10,6 @@
         <maven.compiler.release>23</maven.compiler.release>
         <exec.mainClass>com.mycompany.a3.controledeestoque.A3ControleDeEstoque</exec.mainClass>
     </properties>
-    
     <dependencies>
         <dependency>
             <groupId>com.mysql</groupId>
@@ -22,12 +21,12 @@
             <artifactId>poi-ooxml</artifactId>
             <version>5.2.3</version> 
         </dependency>
-<dependency>
-    <groupId>com.itextpdf</groupId>
-    <artifactId>itextpdf</artifactId>
-    <version>5.5.13.4</version>
-    <type>jar</type>
-</dependency>
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.13.4</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     <name>A3-ControleDeEstoque</name>
 </project>

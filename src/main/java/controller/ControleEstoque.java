@@ -1,4 +1,3 @@
-
 package controller;
 
 
@@ -10,7 +9,7 @@ import view.FrmMenuPrincipal;
 public class ControleEstoque {
     //instancia os DAO
     protected CategoriaDAO categoriaDAO = new CategoriaDAO();
-     protected ProdutoDAO produtoDAO = new ProdutoDAO();
+     protected ProdutoDAO produtoDAO = new ProdutoDAO(categoriaDAO);
     protected MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO(produtoDAO);
          
     //inicia a aplicação
@@ -20,7 +19,5 @@ public class ControleEstoque {
          //deixa ele visível
          telaMenu.setVisible(true);
     }
-   
-    
-    
+
 }

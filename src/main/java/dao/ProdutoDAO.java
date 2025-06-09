@@ -19,10 +19,16 @@ import model.Categoria;
 
 public class ProdutoDAO {
     
-
+    protected CategoriaDAO categoriaDAO;
     protected List<Produto> produtos = new ArrayList<>(); //cria lista que vai armazenar os produtos da sessão (caso haja algum problema no banco de dados)
     protected List<Produto> listaAtualizada = new ArrayList<>(); //cria lista que vai armazenar os produtos a partir do banco de dados
 
+    public ProdutoDAO(CategoriaDAO categoriaDAO) {
+        this.categoriaDAO = categoriaDAO;
+    }
+
+    
+    
     public void cadastrarProduto(String nomeProduto, double precoUnit, String unidadeProduto,
             int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo,
             String nomeCategoria, String tamanho, String embalagem) { //vai servir pra cadastrar produtos com quando a classe categoria tiver implementada certinho
@@ -369,8 +375,31 @@ public class ProdutoDAO {
         }
         return listaAtualizada;
     }
+    
+    //metodo para pegar lista de produtos numa categoria especifica
+  public List<Produto> produtosCategoria(Categoria categoriaPesquisada) {
+    List<Produto> todosProdutos = pegarProdutos(); //lista com todos os produtos
+    List<Produto> produtoCategoria = new ArrayList<>(); //arraylist que vai contem os produtos numa mesma categoria (p posteriormente pegar o tamanho dessa lista)
 
-    public List<Produto> ProdutosOrdemAlfabética() {
+    for (Produto produto : todosProdutos) {
+        Categoria categoria = produto.getCategoria(); //pega o atributo categoria de cada produto
+
+        //boolean para verificar se é a mesma categoria
+        boolean mesmaCategoria = 
+            categoria.getNomeCategoria().equals(categoriaPesquisada.getNomeCategoria()) &&
+            categoria.getTamanho().equals(categoriaPesquisada.getTamanho()) &&
+            categoria.getEmbalagem().equals(categoriaPesquisada.getEmbalagem());
+
+        if (mesmaCategoria && !produtoCategoria.contains(produto)) {
+            produtoCategoria.add(produto);
+        }
+    }
+
+    return produtoCategoria; //lista com produtos únicos dessa categoria
+}
+
+
+    public List<Produto> produtosOrdemAlfabética() {
         listaAtualizada.clear();
 
         String sql = "SELECT idProduto, nome, preco_unitario, unidade, estoque_atual, estoque_minimo, estoque_maximo, nome_categoria, tamanho, embalagem FROM produtos ORDER BY nome ASC";

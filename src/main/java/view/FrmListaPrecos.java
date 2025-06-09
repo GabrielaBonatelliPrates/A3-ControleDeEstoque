@@ -11,17 +11,16 @@ private ProdutoDAO produtoDAO;
     private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"idProduto", "nome", "preco_unitario", "unidade", "nome_categoria"}, 0);
     
     public FrmListaPrecos(ProdutoDAO produtoDAO) {
-        initComponents();
-        jTableListaPrecos.setModel(modelo);
-        this.mostrarTabela();
         this.produtoDAO = produtoDAO;
+        initComponents();
+        this.mostrarTabela();
     }
 
     public void mostrarTabela(){     
         modelo.setRowCount(0); 
         modelo.setNumRows(0); 
         
-        List<Produto> todosProdutos = produtoDAO.ProdutosOrdemAlfabética(); 
+        List<Produto> todosProdutos = produtoDAO.produtosOrdemAlfabética(); 
         for (Produto p : todosProdutos) { 
             modelo.addRow(new Object[]{
                 p.getIdProduto(),
@@ -31,6 +30,7 @@ private ProdutoDAO produtoDAO;
                 p.getCategoria().getNomeCategoria()
                     });
         }
+           jTableListaPrecos.setModel(modelo);
     }
     
     @SuppressWarnings("unchecked")

@@ -58,7 +58,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuMovimentacao = new javax.swing.JMenuItem();
         jMenuMovimentacoes = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
-        jMenuListarProecos = new javax.swing.JMenuItem();
+        jMenuListarPrecos = new javax.swing.JMenuItem();
         jMenuBalancoFinanceiro = new javax.swing.JMenuItem();
         jMenuProdutosPorCategoria = new javax.swing.JMenuItem();
         jMenuAbaixoDaMinima = new javax.swing.JMenuItem();
@@ -255,15 +255,15 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenu5.setFont(new java.awt.Font("Inter 18pt Medium", 0, 14)); // NOI18N
         jMenu5.setMinimumSize(new java.awt.Dimension(80, 40));
 
-        jMenuListarProecos.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
-        jMenuListarProecos.setText("Lista de preços");
-        jMenuListarProecos.setToolTipText("");
-        jMenuListarProecos.addActionListener(new java.awt.event.ActionListener() {
+        jMenuListarPrecos.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
+        jMenuListarPrecos.setText("Lista de preços");
+        jMenuListarPrecos.setToolTipText("");
+        jMenuListarPrecos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuListarProecosActionPerformed(evt);
+                jMenuListarPrecosActionPerformed(evt);
             }
         });
-        jMenu5.add(jMenuListarProecos);
+        jMenu5.add(jMenuListarPrecos);
 
         jMenuBalancoFinanceiro.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
         jMenuBalancoFinanceiro.setText("Balanço financeiro");
@@ -363,10 +363,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         telaEstoqueMaximo.setVisible(true);
     }//GEN-LAST:event_jMenuAcimaDaMaximaActionPerformed
 
-    private void jMenuListarProecosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListarProecosActionPerformed
+    private void jMenuListarPrecosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuListarPrecosActionPerformed
        //instancia a interface gráfica do relatório
         FrmListaPrecos telaListaDePreco = new FrmListaPrecos(produtoDAO);
-    }//GEN-LAST:event_jMenuListarProecosActionPerformed
+        telaListaDePreco.setVisible(true);
+    }//GEN-LAST:event_jMenuListarPrecosActionPerformed
 
     private void jMenuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSobreActionPerformed
         //instancia a interface gráfica do sobre
@@ -443,7 +444,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuAbaixoDaMinimaActionPerformed
 
     private void jMenuProdutosPorCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuProdutosPorCategoriaActionPerformed
-        
+        FrmProdutoCategoria telaProdutoCategoria = new FrmProdutoCategoria(produtoDAO, categoriaDAO);
+          telaProdutoCategoria.setVisible(true);      
     }//GEN-LAST:event_jMenuProdutosPorCategoriaActionPerformed
 
     private void jMenuAdicionarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuAdicionarCategoriaActionPerformed
@@ -501,7 +503,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuGerenciarProduto;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuListarProecos;
+    private javax.swing.JMenuItem jMenuListarPrecos;
     private javax.swing.JMenuItem jMenuMovimentacao;
     private javax.swing.JMenuItem jMenuMovimentacoes;
     private javax.swing.JMenuItem jMenuNovoProduto;
