@@ -21,6 +21,7 @@ public class FrmCategorias extends javax.swing.JFrame {
 private CategoriaDAO categoriaDAO;
     public FrmCategorias(CategoriaDAO categoriaDAO) {
         initComponents();
+        setExtendedState(FrmCategorias.MAXIMIZED_BOTH);
         this.categoriaDAO = categoriaDAO;
         //sempre atualizar a tabela quando abrir a janela
        try {
@@ -49,6 +50,8 @@ private CategoriaDAO categoriaDAO;
         jFormattedTextField1.setText("jFormattedTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1436, 955));
+        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -130,7 +133,7 @@ private CategoriaDAO categoriaDAO;
                         .addComponent(txtCampoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

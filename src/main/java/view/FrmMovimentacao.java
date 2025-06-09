@@ -26,6 +26,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
         this.produtoDAO = produtoDAO;
         this.movimentacaoDAO = movimentacaoDAO;
         this.produtos = produtoDAO.pegarProdutos(); 
+        setExtendedState(FrmMovimentacao.MAXIMIZED_BOTH);
     }
 
 
@@ -46,8 +47,10 @@ public class FrmMovimentacao extends javax.swing.JFrame {
         JTFQuantidadeMovimentacao = new javax.swing.JTextField();
         JLCodigoMovimentacao = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Movimentação de Estoque");
+        setMinimumSize(new java.awt.Dimension(1436, 955));
+        setUndecorated(true);
 
         JLMovimentacao.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         JLMovimentacao.setText("Movimentação");
@@ -126,7 +129,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                                 .addComponent(JBRemover)
                                 .addGap(18, 18, 18)
                                 .addComponent(JBSair)))))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(1018, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,7 +154,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                     .addComponent(JBRemover)
                     .addComponent(JBSair)
                     .addComponent(JBLimpar))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(710, Short.MAX_VALUE))
         );
 
         pack();

@@ -20,6 +20,7 @@ private CategoriaDAO categoriaDAO;
         this.categoriaDAO = categoriaDAO;
         initComponents();
        mostrarCategorias();
+       setExtendedState(FrmProdutoNovo.MAXIMIZED_BOTH);
     }
     
     public void mostrarCategorias(){
@@ -106,8 +107,9 @@ private CategoriaDAO categoriaDAO;
 
         jLabel4.setText("ID:");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Novo Produto");
+        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -244,7 +246,7 @@ private CategoriaDAO categoriaDAO;
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(207, 207, 207)
                                 .addComponent(jLabel1)))
-                        .addGap(0, 15, Short.MAX_VALUE)))
+                        .addGap(0, 667, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -282,7 +284,7 @@ private CategoriaDAO categoriaDAO;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 591, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(JBVoltar)

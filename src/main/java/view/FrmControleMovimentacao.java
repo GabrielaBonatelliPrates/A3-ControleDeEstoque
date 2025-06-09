@@ -24,6 +24,7 @@ public class FrmControleMovimentacao extends javax.swing.JFrame {
         this.movimentacaoDAO = movimentacaoDAO;
         initComponents();
         carregaTabela();
+        setExtendedState(FrmControleMovimentacao.MAXIMIZED_BOTH);
     }
     
 public void carregaTabela() {
@@ -63,7 +64,9 @@ public void carregaTabela() {
         jLabel1 = new javax.swing.JLabel();
         JLControleMovimentacao = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1436, 955));
+        setUndecorated(true);
 
         JBVoltar.setText("Voltar");
         JBVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -114,7 +117,7 @@ public void carregaTabela() {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(JLControleMovimentacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1178, Short.MAX_VALUE)))))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addContainerGap(229, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,7 +128,7 @@ public void carregaTabela() {
                 .addComponent(JLControleMovimentacao)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 324, Short.MAX_VALUE)
                 .addComponent(JBVoltar)
                 .addGap(56, 56, 56))
         );

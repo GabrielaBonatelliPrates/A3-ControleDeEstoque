@@ -30,6 +30,7 @@ public class FrmProdutos extends javax.swing.JFrame {
     public FrmProdutos(ProdutoDAO produtoDAO) {
         this.produtoDAO = produtoDAO;
         initComponents();
+        setExtendedState(FrmProdutos.MAXIMIZED_BOTH);
         try {
             DefaultTableModel model = produtoDAO.tabelaAtualizada();
             jTableProdutos.setModel(model); //atualiza a exibição
@@ -57,6 +58,7 @@ public class FrmProdutos extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Produtos");
         setMinimumSize(new java.awt.Dimension(1436, 955));
+        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
@@ -133,7 +135,7 @@ public class FrmProdutos extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 1327, Short.MAX_VALUE)
+                .addGap(0, 1306, Short.MAX_VALUE)
                 .addComponent(btnVoltar)
                 .addGap(58, 58, 58))
             .addGroup(layout.createSequentialGroup()

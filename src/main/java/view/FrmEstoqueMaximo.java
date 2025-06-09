@@ -13,6 +13,7 @@ private ProdutoDAO produtoDAO;
         this.produtoDAO = produtoDAO;
         initComponents();
         this.carregaTabela();
+        setExtendedState(FrmEstoqueMaximo.MAXIMIZED_BOTH);
     }
 
     public void carregaTabela() {
@@ -44,6 +45,8 @@ private ProdutoDAO produtoDAO;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Estoque Maximo");
+        setMinimumSize(new java.awt.Dimension(1436, 955));
+        setUndecorated(true);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Acima do Estoque Máximo");
@@ -87,7 +90,7 @@ private ProdutoDAO produtoDAO;
                     .addGroup(layout.createSequentialGroup()
                         .addGap(279, 279, 279)
                         .addComponent(JBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(774, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,7 +106,7 @@ private ProdutoDAO produtoDAO;
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(JBVoltar)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(480, Short.MAX_VALUE))
         );
 
         pack();

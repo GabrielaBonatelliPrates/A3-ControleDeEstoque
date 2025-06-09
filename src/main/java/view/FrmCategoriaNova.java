@@ -18,6 +18,7 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
         this.produtoDAO = produtoDAO;
         this.categoriaDAO = categoriaDAO;
         initComponents();
+        setExtendedState(FrmCategoriaNova.MAXIMIZED_BOTH);
     }
 
 
@@ -35,8 +36,10 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
         JTFTamanho = new javax.swing.JTextField();
         JTFEmbalagem = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("telaNovaCategoria");
+        setMinimumSize(new java.awt.Dimension(1436, 955));
+        setUndecorated(true);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Nova Categoria");
@@ -93,12 +96,11 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(JTFTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(218, 218, 218)
-                        .addComponent(JBCadastrar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
+                        .addGap(126, 126, 126)
+                        .addComponent(JBCadastrar)
+                        .addGap(46, 46, 46)
                         .addComponent(JBVoltar)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(946, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,11 +119,11 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(JTFEmbalagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
-                .addComponent(JBCadastrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(JBVoltar)
-                .addGap(16, 16, 16))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JBCadastrar)
+                    .addComponent(JBVoltar))
+                .addContainerGap(720, Short.MAX_VALUE))
         );
 
         pack();

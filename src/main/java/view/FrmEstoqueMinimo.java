@@ -14,6 +14,7 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
         this.produtoDAO = produtoDAO;
         initComponents();
         this.carregaTabela();    
+        setExtendedState(FrmEstoqueMinimo.MAXIMIZED_BOTH);
     }
     
     public void carregaTabela() {
@@ -47,6 +48,8 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1436, 955));
+        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -54,7 +57,7 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
         });
 
         JLEstoqueMinimo.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        JLEstoqueMinimo.setText("Acima do Estoque Mínimo");
+        JLEstoqueMinimo.setText("Abaixo do Estoque Mínimo");
 
         JTEstoqueMinimo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -96,7 +99,7 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
                     .addGroup(layout.createSequentialGroup()
                         .addGap(279, 279, 279)
                         .addComponent(JBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(774, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,7 +115,7 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(JBVoltar)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(480, Short.MAX_VALUE))
         );
 
         pack();

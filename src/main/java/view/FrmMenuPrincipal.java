@@ -79,6 +79,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         setForeground(java.awt.Color.white);
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(1436, 955));
+        setUndecorated(true);
 
         jLabel3.setToolTipText("");
         jLabel3.setName(""); // NOI18N

@@ -8,12 +8,13 @@ import model.Produto;
 public class FrmListaPrecos extends javax.swing.JFrame {
 private ProdutoDAO produtoDAO;
 
-    private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"idProduto", "nome", "preco_unitario", "unidade", "nome_categoria"}, 0);
+    private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id do Produto", "Nome do Produto", "Preço Unitário", "Unidade de Medida", "Categoria"}, 0);
     
     public FrmListaPrecos(ProdutoDAO produtoDAO) {
         this.produtoDAO = produtoDAO;
         initComponents();
         this.mostrarTabela();
+        setExtendedState(FrmListaPrecos.MAXIMIZED_BOTH);
     }
 
     public void mostrarTabela(){     
@@ -50,7 +51,9 @@ private ProdutoDAO produtoDAO;
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1436, 955));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setText("Lista de Preços");
@@ -91,7 +94,7 @@ private ProdutoDAO produtoDAO;
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(196, 196, 196)
                         .addComponent(jLabel3)
-                        .addGap(0, 293, Short.MAX_VALUE)))
+                        .addGap(0, 961, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(311, 311, 311)
@@ -109,7 +112,7 @@ private ProdutoDAO produtoDAO;
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(JBVoltar)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(570, Short.MAX_VALUE))
         );
 
         pack();

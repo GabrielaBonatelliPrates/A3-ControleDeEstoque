@@ -21,7 +21,7 @@ private ProdutoDAO produtoDAO;
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         JBListaDePrecos.setText("Lista de preços");
         JBListaDePrecos.addMouseListener(new java.awt.event.MouseAdapter() {

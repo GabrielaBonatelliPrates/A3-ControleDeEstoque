@@ -17,6 +17,7 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
         this.categoriaDAO = categoriaDAO;
         initComponents();
         carregaTabela();
+        setExtendedState(FrmProdutoCategoria.MAXIMIZED_BOTH);
     }
     
     public void carregaTabela() {
@@ -49,7 +50,9 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
         jTableProdCategoria = new javax.swing.JTable();
         jBtnVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1436, 955));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Quantidade de produtos por categoria");
@@ -88,7 +91,7 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46)
                         .addComponent(jLabel1)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(724, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jBtnVoltar)
@@ -105,7 +108,7 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(jBtnVoltar)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(495, Short.MAX_VALUE))
         );
 
         pack();
