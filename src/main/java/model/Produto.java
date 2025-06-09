@@ -1,13 +1,9 @@
 package model;
 
 import controller.ControleEstoque;
-import java.util.Random;
-import java.util.Scanner;
-
 public class Produto {
 
-    Scanner sc = new Scanner(System.in);
-    Random random = new Random();
+
 
     //variaveis de intancia
     private String nomeProduto;
@@ -24,7 +20,6 @@ public class Produto {
     private double estoqueTotal;
 
 
-    
     //construtores
     public Produto() {
     }
@@ -163,38 +158,5 @@ public class Produto {
             setAbaixoMedia(false);
         }
     }
-    
-    //Método para deixar o Id aleatório
-    public void randomId(String nomeProduto) {
-        ControleEstoque con = new ControleEstoque();
 
-        //Um for que passa por todos os itens da Lista
-        for (int i = 0; i < con.produtos.size(); i++) {
-            
-            //Pegando o nome do Produto na Lista "produtos"
-            Produto x = con.produtos.get(i);
-            
-            if (nomeProduto.equalsIgnoreCase(x.getNomeProduto().trim())) {
-
-                int novoIdProduto;
-                boolean idUnico;
-
-                do {
-                    novoIdProduto = random.nextInt(9999); // de 0 até 9998
-                    idUnico = true;
-
-                    // Verifica se esse ID já existe na lista
-                    for (int z = 0; z < con.produtos.size(); z++) {
-                        Produto a = con.produtos.get(z);
-                        
-                        if (a.getIdProduto() == novoIdProduto) {
-                            idUnico = false;
-                            break;
-                        }
-                    }
-                } while (!idUnico);
-                this.idProduto = novoIdProduto;
-            }
-        }
-    }    
 }

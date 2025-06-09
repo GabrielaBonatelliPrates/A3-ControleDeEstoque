@@ -110,6 +110,31 @@ public class CategoriaDAO {
 
         return model; //retorna o modelo completo certinho
     }
+    
+    public Categoria buscarCategoriaPorId(int idCategoria) {
+        String sql = "SELECT nomeCategoria, tamanho, embalagem FROM categorias WHERE idCategoria = ?";
+        Categoria categoria = null;
+        
+        try (Connection connection = Conexao.conectar();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+            
+            statement.setInt(1, idCategoria);
+            ResultSet resultSet = statement.executeQuery();
+            
+            if (resultSet.next()) {
+                categoria = new Categoria();
+                categoria.setIdCategoria(idCategoria);
+                categoria.setNomeCategoria(resultSet.getString("nomeCategoria"));
+                categoria.setTamanho(resultSet.getString("tamanho"));
+                categoria.setEmbalagem(resultSet.getString("embalagem"));
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return categoria;
+    }
 
     //carrega uma categoria pelo nome
     public Categoria buscarPorNome(String nomePesquisado) { //busca uma categoria específica no banco através do nome dele
@@ -137,6 +162,7 @@ public class CategoriaDAO {
 
         return objeto; //retorna a categoria encontrada ou null
     }
+  
 
     public boolean atualizarCategoria(String nomeCategoria, String tamanho, String embalagem, int idCategoria) {
         String sql = "UPDATE categorias set nomeCategoria = ? , tamanho = ? , embalagem = ? WHERE idCategoria = ?";
@@ -194,6 +220,53 @@ public class CategoriaDAO {
         );
 
         return fichaCategoria; //retorna a ficha do produto
+    }
+    
+    //busca ID da categoria
+    public int buscarIdCategoria(Categoria categoria) {
+        String sql = "SELECT idCategoria FROM categorias WHERE nomeCategoria = ? "
+                + "AND tamanho = ? AND embalagem = ?";
+
+        try (Connection connection = Conexao.conectar(); PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, categoria.getNomeCategoria());
+            statement.setString(2, categoria.getTamanho());
+            statement.setString(3, categoria.getEmbalagem());
+
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("idCategoria");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+
+//busca categoria completa
+    public Categoria buscarCategoria(String nomeCategoria, String tamanho, String embalagem) {
+        String sql = "SELECT idCategoria, nomeCategoria, tamanho, embalagem FROM categorias "
+                + "WHERE nomeCategoria = ? AND tamanho = ? AND embalagem = ?";
+
+        try (Connection connection = Conexao.conectar(); PreparedStatement statement = connection.prepareStatement(sql)) {
+
+            statement.setString(1, nomeCategoria);
+            statement.setString(2, tamanho);
+            statement.setString(3, embalagem);
+
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                Categoria categoria = new Categoria();
+                categoria.setIdCategoria(rs.getInt("idCategoria"));
+                categoria.setNomeCategoria(rs.getString("nomeCategoria"));
+                categoria.setTamanho(rs.getString("tamanho"));
+                categoria.setEmbalagem(rs.getString("embalagem"));
+                return categoria;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     //metodo pra verificar se a categoria ja existe antes de adicionar

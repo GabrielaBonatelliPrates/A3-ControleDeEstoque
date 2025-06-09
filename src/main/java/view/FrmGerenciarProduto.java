@@ -6,26 +6,23 @@ import model.Produto;
 import dao.ProdutoDAO;
 import java.util.List;
 import javax.swing.JOptionPane;
-import controller.ProdutoController;
 import javax.swing.ButtonGroup;
 
 public class FrmGerenciarProduto extends javax.swing.JFrame {
 
-    private ProdutoController objetoProduto;
-    //FrmProdutoNovo somaProdutos = new FrmProdutoNovo();
+    private ProdutoDAO produtoDAO;
 
-    public FrmGerenciarProduto() {
+
+    public FrmGerenciarProduto(ProdutoDAO produtoDAO) {
+        this.produtoDAO = produtoDAO;
         initComponents();
-        this.objetoProduto = new ProdutoController();
         this.mostrarTabela();
     }
-
-    ProdutoDAO prodDAO = new ProdutoDAO();
 
     public void mostrarTabela() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTableGerenciaProdutos.getModel(); // para manipular a tabela 
         modelo.setNumRows(0);
-        List<Produto> listaProdutos = prodDAO.pegarProdutos();
+        List<Produto> listaProdutos = produtoDAO.pegarProdutos();
         for (Produto p : listaProdutos) {
             modelo.addRow(new Object[]{
                 p.getIdProduto(),
@@ -476,7 +473,7 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_JTFUnidadeProdutoActionPerformed
 
     private void JBReajustarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBReajustarProdutoActionPerformed
-        List<Produto> listaProdutos = prodDAO.pegarProdutos();
+        List<Produto> listaProdutos = produtoDAO.pegarProdutos();
         try {
             for (Produto produto : listaProdutos) {
                 if (produto.getNomeProduto() == JTFProdutoNovoPreco.getText()) {
@@ -495,7 +492,7 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
                     double adicao = ((precoNovo - produto.getValorTotal()) / produto.getQuantidadeEstoque());
                     produto.setValorTotal(precoNovo);
                     produto.setPrecoUnit(produto.getPrecoUnit() + adicao);
-                    prodDAO.atualizarPreco(produto.getNomeProduto(), produto.getPrecoUnit(), produto.getIdProduto());
+                    produtoDAO.atualizarPreco(produto.getNomeProduto(), produto.getPrecoUnit(), produto.getIdProduto());
 
                 }
             }
@@ -508,7 +505,7 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_JBReajustarProdutoActionPerformed
 
     private void JBReajustarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBReajustarEstoqueActionPerformed
-        List<Produto> listaProdutos = prodDAO.pegarProdutos();
+        List<Produto> listaProdutos = produtoDAO.pegarProdutos();
 
         try {
             for (Produto produto : listaProdutos) {
@@ -527,7 +524,7 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
                 double adicao = ((precoNovo - produto.getEstoqueTotal()) / listaProdutos.size());
                 produto.setEstoqueTotal(precoNovo);
                 produto.setPrecoUnit(produto.getPrecoUnit() + adicao);
-                prodDAO.atualizarPreco(produto.getNomeProduto(), produto.getPrecoUnit(), produto.getIdProduto());
+                produtoDAO.atualizarPreco(produto.getNomeProduto(), produto.getPrecoUnit(), produto.getIdProduto());
             }
 
         } catch (NumberFormatException ex) {
@@ -666,7 +663,7 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
             }
 
             //Atualiza o produto e limpa os campos
-            if (this.objetoProduto.atualizarProdutoBD(idProduto, nomeProduto, precoUnit, unidadeProduto, quantidadeEstoque, estoqueMinimo,
+            if (produtoDAO.atualizarProdutoBD(idProduto, nomeProduto, precoUnit, unidadeProduto, quantidadeEstoque, estoqueMinimo,
                     estoqueMaximo, nomeCategoria, tamanho, embalagem)) {
                 this.JTFNomeProduto.setText("");
                 this.JTFPrecoUnit.setText("");
@@ -712,7 +709,7 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
 
             //Limpar os campos caso o usuário aperte sim
             if (resposta == 0) {
-                if (this.objetoProduto.deletarProdutoBD(idProduto)) {
+                if (produtoDAO.deletarProdutoBD(idProduto)) {
                     this.JTFNomeProduto.setText("");
                     this.JTFPrecoUnit.setText("");
                     this.JTFUnidadeProduto.setText("");
@@ -766,7 +763,8 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmGerenciarProduto().setVisible(true);
+                ProdutoDAO produtoDAO = null;
+                new FrmGerenciarProduto(produtoDAO).setVisible(true);
             }
         });
     }

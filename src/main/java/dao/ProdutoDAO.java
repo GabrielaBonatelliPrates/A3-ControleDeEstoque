@@ -432,4 +432,38 @@ public class ProdutoDAO {
         }
         return valorTotalEstoque;
     }
+     //metodo para aumentar quantidade ao estoque do produto
+    public void adicionarQuantidade(int idProduto, int quantidadeAdicionar) {
+        String sql = "UPDATE produtos SET estoque_atual = estoque_atual + ? WHERE idProduto = ?";
+
+        try (
+            Connection connection = Conexao.conectar();
+            PreparedStatement stmt = connection.prepareStatement(sql)
+        ) {
+            stmt.setInt(1, quantidadeAdicionar);
+            stmt.setInt(2, idProduto);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //metodo para diminuir quantidade do estoque do produto
+    public void retirarQuantidade(int idProduto, int quantidadeRetirar) {
+        String sql = "UPDATE produtos SET estoque_atual = estoque_atual - ? WHERE idProduto = ?";
+
+        try (
+            Connection connection = Conexao.conectar();
+            PreparedStatement stmt = connection.prepareStatement(sql)
+        ) {
+            stmt.setInt(1, quantidadeRetirar);
+            stmt.setInt(2, idProduto);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    
+    
 }

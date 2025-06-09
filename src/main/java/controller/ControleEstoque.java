@@ -9,14 +9,14 @@ import view.FrmMenuPrincipal;
 
 public class ControleEstoque {
     //instancia os DAO
-    protected ProdutoDAO produtoDAO = new ProdutoDAO();
     protected CategoriaDAO categoriaDAO = new CategoriaDAO();
-    protected MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO();
+     protected ProdutoDAO produtoDAO = new ProdutoDAO();
+    protected MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO(produtoDAO);
          
     //inicia a aplicação
     public void iniciaAplicação(){
         //instancia a interface gráfica do menu principal
-         FrmMenuPrincipal telaMenu = new FrmMenuPrincipal(produtoDAO, categoriaDAO);
+         FrmMenuPrincipal telaMenu = new FrmMenuPrincipal(produtoDAO, categoriaDAO, movimentacaoDAO);
          //deixa ele visível
          telaMenu.setVisible(true);
     }

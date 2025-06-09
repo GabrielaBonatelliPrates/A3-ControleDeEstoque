@@ -1,6 +1,6 @@
 package view;
 
-import controller.MovimentacaoEstoque;
+import model.MovimentacaoEstoque;
 import dao.MovimentacaoDAO;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -17,15 +17,18 @@ import model.Produto;
 public class FrmMovimentacao extends javax.swing.JFrame {
     private ProdutoDAO produtoDAO;
     private Produto produto;
-    private MovimentacaoDAO movEst;
-    private List<Produto> produtos = produtoDAO.pegarProdutos();
+    private MovimentacaoDAO movimentacaoDAO;
+    private List<Produto> produtos;
 
-    public FrmMovimentacao(ProdutoDAO produtoDAO) {
+    public FrmMovimentacao(ProdutoDAO produtoDAO, MovimentacaoDAO movimentacaoDAO) {
         initComponents();
         this.produto = new Produto();
         this.produtoDAO = produtoDAO;
-
+        this.movimentacaoDAO = movimentacaoDAO;
+        this.produtos = produtoDAO.pegarProdutos(); 
     }
+
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -51,7 +54,7 @@ public class FrmMovimentacao extends javax.swing.JFrame {
 
         JLProdutoMovimentacao.setText("Produto:");
 
-        jLabel3.setText("Codigo:");
+        jLabel3.setText("Id:");
 
         jLabel4.setText("Quantidade:");
 
@@ -96,55 +99,45 @@ public class FrmMovimentacao extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JTFQuantidadeMovimentacao)
-                        .addGap(97, 97, 97))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(JLProdutoMovimentacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(JTFProdutoMovimentacao, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(JLCodigoMovimentacao)))))
-                .addGap(24, 24, 24))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addComponent(JBLimpar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(JBSair)
-                .addGap(47, 47, 47))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(JBAdicionar)
-                        .addGap(26, 26, 26)
-                        .addComponent(JBRemover))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(114, 114, 114)
-                        .addComponent(JLMovimentacao)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(JLMovimentacao))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(JLProdutoMovimentacao, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(JTFProdutoMovimentacao, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(JLCodigoMovimentacao, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(JTFQuantidadeMovimentacao, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(JBLimpar)
+                                .addGap(18, 18, 18)
+                                .addComponent(JBAdicionar)
+                                .addGap(26, 26, 26)
+                                .addComponent(JBRemover)
+                                .addGap(18, 18, 18)
+                                .addComponent(JBSair)))))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(34, 34, 34)
                 .addComponent(JLMovimentacao)
-                .addGap(32, 32, 32)
+                .addGap(43, 43, 43)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JLProdutoMovimentacao)
                     .addComponent(JTFProdutoMovimentacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(JLCodigoMovimentacao))
@@ -155,98 +148,50 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(JBAdicionar)
-                    .addComponent(JBRemover))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(JBLimpar)
-                    .addComponent(JBSair))
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .addComponent(JBRemover)
+                    .addComponent(JBSair)
+                    .addComponent(JBLimpar))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAdicionarActionPerformed
-        MovimentacaoEstoque novaMov = new MovimentacaoEstoque();
-        novaMov.setTipoMovimentacao("Adicao");
-// criando variaveis para receber os valores/nomes da interface gráfica
-        String nomeProduto = "";
-        int codigo = 0;
-        int quantidade = 0;
-
-        try {
-
-            //validando os dados.
-            boolean acesso = false;
-            while (acesso == false) {
-                for (int i = 0; i < produtos.size(); i++) {
-
-                    //Pegando o nome do Produto na Lista "produtos"
-                    Produto x = produtos.get(i);
-                    String y = x.getNomeProduto();
-
-                    if (this.JTFProdutoMovimentacao.getText().trim().equalsIgnoreCase(y.trim())) {
-                        codigo = x.getIdProduto();
-                        this.JLCodigoMovimentacao.setText(String.valueOf(codigo));
-                        acesso = true;
-                    }
-                }
-                if (acesso == false) {
-                    throw new Mensagem("Insira um produto ja existente");
-                }
+ try {
+            String nomeProduto = JTFProdutoMovimentacao.getText().trim();
+            if (nomeProduto.isEmpty()) {
+                throw new IllegalArgumentException("Informe o nome do produto.");
             }
 
-            //Nome do produto
-            if (this.JTFProdutoMovimentacao.getText().length() < 2) {
-                throw new Mensagem("Nome do produto deve conter ao menos 2 caracteres.");
-            } else {
-                nomeProduto = this.JTFProdutoMovimentacao.getText();
+            Produto produto = produtoDAO.buscarPorNome(nomeProduto);
+            if (produto == null) {
+                throw new IllegalArgumentException("Produto não encontrado.");
             }
 
-            //Quantidade a ser alterada
-            int x = Integer.parseInt(this.JTFQuantidadeMovimentacao.getText());
-            if (x < 0) {
-                throw new Mensagem("Quantidade deve ser um numero e maior que zero.");
-            } else {
-                quantidade = Integer.parseInt(this.JTFQuantidadeMovimentacao.getText());
+            int quantidade = Integer.parseInt(JTFQuantidadeMovimentacao.getText().trim());
+            if (quantidade <= 0) {
+                throw new IllegalArgumentException("A quantidade deve ser maior que zero.");
             }
 
-            //Verificando quantidade minima
-            if (novaMov.movimentacaoEstoqueAdicao(codigo, quantidade) == false) {
-                throw new Mensagem("Produto nao encontrado");
-            }
-            //Caso tudo estiver certo, dar baixa no estoque
-            novaMov.movimentacaoEstoqueAdicao(codigo, quantidade);
-            JOptionPane.showMessageDialog(null, "Baixa confirmada!");
+            int idProduto = produto.getIdProduto();
+            Date data = Date.from(Instant.now());
+            String tipoMovimentacao = "entrada";
+            MovimentacaoEstoque movimentacao = new MovimentacaoEstoque();
+            movimentacao.setNomeProduto(nomeProduto);
+            movimentacao.setIdProduto(idProduto);
+            movimentacao.setDataMovimentacao(data);
+            movimentacao.setQuantidadeMovimentada(quantidade);
+            movimentacao.setTipoMovimentacao(tipoMovimentacao);
+            movimentacaoDAO.cadastraMovimentacao(movimentacao);
+            //movimentacaoDAO.inserirMovimentacao(idProduto, data, quantidade, nomeProduto, tipoMovimentacao);
 
-            //Pegando as informações da movimentação
-            novaMov.setData(Date.from(Instant.now()));
-            novaMov.setNomeProduto(nomeProduto);
-            novaMov.setQuantidadeMovimentada(quantidade);
-            novaMov.setId(novaMov.gerarIdUnico());
-            
-            movEst.adicionarQuantidade(codigo, quantidade);
+            JOptionPane.showMessageDialog(null, "Movimentação de entrada registrada com sucesso!");
 
-            try {
-                //MovimentacaoEstoque.movimentacoes.add(novaMov);
-                MovimentacaoDAO.inserirMovimentacao(novaMov.getId(), novaMov.getData(), novaMov.getQuantidadeMovimentada(), novaMov.getNomeProduto(), novaMov.getTipoMovimentacao());
-            } catch (SQLException ex) {
-                Logger.getLogger(FrmMovimentacao.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            produto.verificaMediaAbaixo();
-            produto.verificaMediaAcima();
-            if (produto.isAbaixoMedia()) {
-                JOptionPane.showMessageDialog(null, "O produto esta abaixo da média");
-            }
-            if (produto.isAcimaMedia()) {
-                JOptionPane.showMessageDialog(null, "O produto esta acima da média");
-            }
-
-        } catch (Mensagem erro) {
-            JOptionPane.showMessageDialog(null, erro.getMessage());
-        } catch (NumberFormatException erro2) {
-            JOptionPane.showMessageDialog(null, "Informe um número válido.");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Informe uma quantidade válida.");
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_JBAdicionarActionPerformed
 
@@ -265,89 +210,40 @@ public class FrmMovimentacao extends javax.swing.JFrame {
     }//GEN-LAST:event_JTFQuantidadeMovimentacaoActionPerformed
 
     private void JBRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBRemoverActionPerformed
-        MovimentacaoEstoque novaMov = new MovimentacaoEstoque();
-        novaMov.setTipoMovimentacao("Baixa");
-
-// criando variaveis para receber os valores/nomes da interface gráfica
-        String nomeProduto = "";
-        int codigo = 0;
-        int quantidade = 0;
-
-        try {
-
-            //validando os dados.
-            boolean acesso = false;
-            while (acesso == false) {
-                for (int i = 0; i < produtos.size(); i++) {
-
-                    //Pegando o nome do Produto na Lista "produtos"
-                    Produto x = produtos.get(i);
-                    String y = x.getNomeProduto();
-
-                    if (this.JTFProdutoMovimentacao.getText().trim().equalsIgnoreCase(y.trim())) {
-                        codigo = x.getIdProduto();
-                        this.JLCodigoMovimentacao.setText(String.valueOf(codigo));
-                        acesso = true;
-                    }
-                }
-                if (acesso == false) {
-                    throw new Mensagem("Nome do produto deve conter ao menos 2 caracteres.");
-
-                }
+         try {
+            String nomeProduto = JTFProdutoMovimentacao.getText().trim();
+            if (nomeProduto.isEmpty()) {
+                throw new IllegalArgumentException("Informe o nome do produto.");
             }
 
-            //Nome do produto
-            if (this.JTFProdutoMovimentacao.getText().length() < 2) {
-                throw new Mensagem("Nome do produto deve conter ao menos 2 caracteres.");
-            } else {
-                nomeProduto = this.JTFProdutoMovimentacao.getText();
+            Produto produto = produtoDAO.buscarPorNome(nomeProduto);
+            if (produto == null) {
+                throw new IllegalArgumentException("Produto não encontrado.");
             }
 
-            //Quantidade a ser alterada
-            int x = Integer.parseInt(this.JTFQuantidadeMovimentacao.getText());
-            if (x < 0) {
-                throw new Mensagem("Quantidade deve ser um numero e maior que zero.");
-            } else {
-                quantidade = Integer.parseInt(this.JTFQuantidadeMovimentacao.getText());
+            int quantidade = Integer.parseInt(JTFQuantidadeMovimentacao.getText().trim());
+            if (quantidade <= 0) {
+                throw new IllegalArgumentException("A quantidade deve ser maior que zero.");
             }
 
-            //Verificando quantidade minima
-            if (novaMov.movimentacaoEstoqueReducao(codigo, quantidade) == false) {
-                throw new Mensagem("Produto nao encontrado");
-            }
-            //Caso tudo estiver certo, dar baixa no estoque
-            if (novaMov.movimentacaoEstoqueReducao(codigo, quantidade) == true) {
-                JOptionPane.showMessageDialog(null, "Baixa confirmada!");
+            int idProduto = produto.getIdProduto();
+            Date data = Date.from(Instant.now());
+            String tipoMovimentacao = "saida";
+            MovimentacaoEstoque movimentacao = new MovimentacaoEstoque();
+            movimentacao.setNomeProduto(nomeProduto);
+            movimentacao.setIdProduto(idProduto);
+            movimentacao.setDataMovimentacao(data);
+            movimentacao.setQuantidadeMovimentada(quantidade);
+            movimentacao.setTipoMovimentacao(tipoMovimentacao);
+            movimentacaoDAO.cadastraMovimentacao(movimentacao);
+            //movimentacaoDAO.inserirMovimentacao(idProduto, data, quantidade, nomeProduto, tipoMovimentacao);
 
-                //Pegando as informações da movimentação
-                novaMov.setData(Date.from(Instant.now()));
-                novaMov.setNomeProduto(nomeProduto);
-                novaMov.setQuantidadeMovimentada(quantidade);
-                novaMov.setId(novaMov.gerarIdUnico());
-                
-                movEst.retirarQuantidade(codigo, quantidade);
+            JOptionPane.showMessageDialog(null, "Movimentação de entrada registrada com sucesso!");
 
-                try {
-                    //MovimentacaoEstoque.movimentacoes.add(novaMov);
-                    MovimentacaoDAO.inserirMovimentacao(novaMov.getId(), novaMov.getData(), novaMov.getQuantidadeMovimentada(), novaMov.getNomeProduto(), novaMov.getTipoMovimentacao());
-                } catch (SQLException ex) {
-                    Logger.getLogger(FrmMovimentacao.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-                produto.verificaMediaAbaixo();
-                produto.verificaMediaAcima();
-                if (produto.isAbaixoMedia()) {
-                    JOptionPane.showMessageDialog(null, "O produto esta abaixo da média");
-                }
-                if (produto.isAcimaMedia()) {
-                    JOptionPane.showMessageDialog(null, "O produto esta acima da média");
-                }
-            }
-
-        } catch (Mensagem erro) {
-            JOptionPane.showMessageDialog(null, erro.getMessage());
-        } catch (NumberFormatException erro2) {
-            JOptionPane.showMessageDialog(null, "Informe um número válido.");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Informe uma quantidade válida.");
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_JBRemoverActionPerformed
 
@@ -378,7 +274,8 @@ public class FrmMovimentacao extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ProdutoDAO produtoDAO = null;
-                new FrmMovimentacao(produtoDAO).setVisible(true);
+                MovimentacaoDAO movimentacaoDAO = null;
+                new FrmMovimentacao(produtoDAO, movimentacaoDAO).setVisible(true);
             }
         });
     }

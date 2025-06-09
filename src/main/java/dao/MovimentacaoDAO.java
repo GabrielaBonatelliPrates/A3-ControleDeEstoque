@@ -1,6 +1,5 @@
 package dao;
 
-import controller.MovimentacaoEstoque;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,93 +8,89 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.MovimentacaoEstoque;
 
 public class MovimentacaoDAO {
 
-    public static final List<MovimentacaoEstoque> movimentacoes = new ArrayList<>(); //cria lista que vai armazenar as movimentações
-    protected static final List<MovimentacaoEstoque> listaAtualizada = new ArrayList<>();//cria lista que vai armazenar as movimentações a partir do banco de dados
+    public List<MovimentacaoEstoque> movimentacoes = new ArrayList<>();
+    protected List<MovimentacaoEstoque> listaAtualizada = new ArrayList<>();
+    private ProdutoDAO produtoDAO;
 
-    public MovimentacaoDAO() {
+    public MovimentacaoDAO(ProdutoDAO produtoDAO) {
+        this.produtoDAO = produtoDAO;
     }
-//public void inserirMovimentacao(Date data, int quantidadeMovimentada, String nomeProduto, String tipoMovimentacao) throws SQLException {
-    public static void inserirMovimentacao(int id, Date data, int quantidadeMovimentada, String nomeProduto, String tipoMovimentacao) throws SQLException {
-        
-        String sql = "INSERT INTO movimentacao (id, nome, tipo, quantidade, data) VALUES (?,?,?,?,?)"; //insere os dados na tabela
+
+    public void cadastraMovimentacao(MovimentacaoEstoque movimentacao) {
+        int idProduto = movimentacao.getIdProduto();
+        Date data = movimentacao.getDataMovimentacao();
+        int quantidadeMovimentada = movimentacao.getQuantidadeMovimentada();
+        String nomeProduto = movimentacao.getNomeProduto();
+        String tipoMovimentacao = movimentacao.getTipoMovimentacao();
+
+        //atualiza o estoque com base no tipo de movimentação
+        if (tipoMovimentacao.equalsIgnoreCase("entrada")) {
+            adicionarQuantidade(idProduto, quantidadeMovimentada);
+        } else if (tipoMovimentacao.equalsIgnoreCase("saida")) {
+            retirarQuantidade(idProduto, quantidadeMovimentada);
+        }
+
+        try {
+            inserirMovimentacao(idProduto, data, quantidadeMovimentada, nomeProduto, tipoMovimentacao);
+        } catch (SQLException ex) {
+            Logger.getLogger(MovimentacaoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    //add movimentacao
+    public void inserirMovimentacao(int idProduto, Date data, int quantidadeMovimentada, String nomeProduto, String tipoMovimentacao) throws SQLException {
+        try (Connection connection = Conexao.conectar()) {
+            String sql = "INSERT INTO movimentacao_estoque (tipoMovimentacao, idProduto, nomeProduto, quantidadeMovimentada, dataMovimentacao) "
+                    + "VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, tipoMovimentacao);
+            stmt.setInt(2, idProduto);
+            stmt.setString(3, nomeProduto);
+            stmt.setInt(4, quantidadeMovimentada);
+            stmt.setDate(5, new java.sql.Date(data.getTime())); //coloca a data ?
+            stmt.executeUpdate();
+        }
+    }
+
+    //pra retornar a lista de movimentações da tabela movimentacao
+    public List<MovimentacaoEstoque> listarProdutosMovimentados() {
+        List<MovimentacaoEstoque> lista = new ArrayList<>();
+
+        String sql = "SELECT * FROM movimentacao_estoque";
+
         try (
-                Connection connection = Conexao.conectar(); //atribui a conexão à classe que faz a conexão com o banco de dados
-                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS) //prepara o caminho para receber os dados e devolver a chave gerada
-                ) {
-            //preenche os parâmetros da query com os dados recebidos
-            
-            statement.setInt(1, id);
-            statement.setString(2, nomeProduto);
-            statement.setString(3, tipoMovimentacao);
-            statement.setInt(4, quantidadeMovimentada);
-            statement.setDate(5, new java.sql.Date(data.getTime()));  //Troca do java.util.Date para java.sql.Date
-
-            //executa a query para armazenar os dados
-            statement.executeUpdate();
-        }
-    }
-
-    public void cadastrarMovimentacao() {
-
-    }
-    
-    public static List<MovimentacaoEstoque> pegarMovimentacoes() {
-        listaAtualizada.clear();
-
-        String sql = "SELECT id, nome, tipo, quantidade, data FROM movimentacao"; //caso queiram botar o "ORDER BY"
-
-        try (Connection connection = Conexao.conectar(); PreparedStatement stmt = connection.prepareStatement(sql); ResultSet resultSet = stmt.executeQuery()) {
-
-            while (resultSet.next()) {
-                MovimentacaoEstoque objeto = new MovimentacaoEstoque();
-                objeto.setId(resultSet.getInt("id"));
-                objeto.setNomeProduto(resultSet.getString("nome"));
-                objeto.setTipoMovimentacao(resultSet.getString("tipo"));
-                objeto.setQuantidadeMovimentada(resultSet.getInt("quantidade"));
-                objeto.setData(resultSet.getDate("data"));
-
-                listaAtualizada.add(objeto);
+                Connection connection = Conexao.conectar(); PreparedStatement stmt = connection.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                MovimentacaoEstoque mov = new MovimentacaoEstoque();
+                mov.setIdMovimentacao(rs.getInt("idMovimentacao"));
+                mov.setTipoMovimentacao(rs.getString("tipoMovimentacao"));
+                mov.setIdProduto(rs.getInt("idProduto"));
+                mov.setNomeProduto(rs.getString("nomeProduto"));
+                mov.setQuantidadeMovimentada(rs.getInt("quantidadeMovimentada"));
+                mov.setDataMovimentacao(rs.getDate("dataMovimentacao"));
+                lista.add(mov);
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return listaAtualizada;
+
+        return lista;
     }
-    
+
+    //metodo p adicionar ao estoque usando ProdutoDAO
     public void adicionarQuantidade(int idProduto, int quantidadeAdicionar) {
-        String sql = "UPDATE produtos SET estoque_atual = estoque_atual + ? WHERE id = ?";
-
-        try (Connection connection = Conexao.conectar(); PreparedStatement stmt = connection.prepareStatement(sql); ResultSet resultSet = stmt.executeQuery()) {
-
-            stmt.setInt(1, quantidadeAdicionar); // quantidade a adicionar
-            stmt.setInt(2, idProduto);           // id do produto
-
-            //executa a query para armazenar os dados
-            stmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-    
-    public void retirarQuantidade(int idProduto, int quantidadeRetirada) {
-        String sql = "UPDATE produtos SET estoque_atual = estoque_atual - ? WHERE id = ?";
-
-        try (Connection connection = Conexao.conectar(); PreparedStatement stmt = connection.prepareStatement(sql); ResultSet resultSet = stmt.executeQuery()) {
-
-            stmt.setInt(1, quantidadeRetirada); // quantidade a adicionar
-            stmt.setInt(2, idProduto);           // id do produto
-
-            //executa a query para armazenar os dados
-            stmt.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        produtoDAO.adicionarQuantidade(idProduto, quantidadeAdicionar); // repassa a chamada
     }
 
+    //metodo p retirar do estoque usando ProdutoDAO
+    public void retirarQuantidade(int idProduto, int quantidadeRetirar) {
+        produtoDAO.retirarQuantidade(idProduto, quantidadeRetirar); // repassa a chamada
+    }
 }

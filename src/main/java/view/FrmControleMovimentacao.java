@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package view;
 
 import javax.swing.table.DefaultTableModel;
 import dao.MovimentacaoDAO;
-import controller.MovimentacaoEstoque;
+import java.util.ArrayList;
+import java.util.Date;
+import model.MovimentacaoEstoque;
 import java.util.List;
 
 /**
@@ -14,38 +12,41 @@ import java.util.List;
  * @author daviw
  */
 public class FrmControleMovimentacao extends javax.swing.JFrame {
-    private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Tipo", "Quantidade", "Data"}, 0);
-    private MovimentacaoEstoque movEst = new MovimentacaoEstoque();
+        private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Tipo", "Quantidade", "Produto", "Data"}, 0);
+    private MovimentacaoEstoque movimentacaoEstoque = new MovimentacaoEstoque();
+    private MovimentacaoDAO movimentacaoDAO;
+
     
     /**
      * Creates new form FrmControleMovimentacao
      */
-    public FrmControleMovimentacao() {
+    public FrmControleMovimentacao(MovimentacaoDAO movimentacaoDAO) {
+        this.movimentacaoDAO = movimentacaoDAO;
         initComponents();
-        movEst.verificarId();
-        this.carregaTabela();
+        carregaTabela();
     }
     
-    public void carregaTabela() {
-         modelo.setRowCount(0); //limpa a tabela
-        modelo.setNumRows(0); //posiciona na primeira linha da tabela
-        
-       //modelo = new DefaultTableModel(new Object[]{"ID", "Nome", "Qtd", "Mínimo"}, 0);
-        //DefaultTableModel modelo = (DefaultTableModel) this.JTEstoqueMinimo.getModel();
-        
-        List<MovimentacaoEstoque> movimentacoes = MovimentacaoDAO.pegarMovimentacoes();
-        
-        for (MovimentacaoEstoque movimentacao : movimentacoes) {
-            modelo.addRow(new Object[]{
-                movimentacao.getId(),
-                movimentacao.getNomeProduto(),
-                movimentacao.getTipoMovimentacao(),
-                movimentacao.getQuantidadeMovimentada(),
-                movimentacao.getData()
-            });
-        }
-         JTMovimentações.setModel(modelo);
+public void carregaTabela() {
+    
+    modelo.setRowCount(0); //limpa a tabela
+
+    List<MovimentacaoEstoque> movimentacoes = movimentacaoDAO.listarProdutosMovimentados();
+
+    for (MovimentacaoEstoque movimentacao : movimentacoes) {
+        modelo.addRow(new Object[]{
+            movimentacao.getIdMovimentacao(),           //id da movimentação
+            movimentacao.getTipoMovimentacao(),         //tipo (entrada/saída)
+            movimentacao.getQuantidadeMovimentada(),    //quantidade movimentada
+            movimentacao.getNomeProduto(),              //nome do produto
+            movimentacao.getDataMovimentacao()          //data da movimentação
+        });
     }
+    JTMovimentacoes.setModel(modelo);
+}
+
+
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,7 +59,7 @@ public class FrmControleMovimentacao extends javax.swing.JFrame {
 
         JBVoltar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        JTMovimentações = new javax.swing.JTable();
+        JTMovimentacoes = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         JLControleMovimentacao = new javax.swing.JLabel();
 
@@ -71,7 +72,7 @@ public class FrmControleMovimentacao extends javax.swing.JFrame {
             }
         });
 
-        JTMovimentações.setModel(new javax.swing.table.DefaultTableModel(
+        JTMovimentacoes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -90,7 +91,7 @@ public class FrmControleMovimentacao extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(JTMovimentações);
+        jScrollPane1.setViewportView(JTMovimentacoes);
 
         jLabel1.setText("Estampa");
 
@@ -101,34 +102,32 @@ public class FrmControleMovimentacao extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(100, 100, 100)
-                        .addComponent(JLControleMovimentacao))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(JBVoltar)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(51, 51, 51))
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(JBVoltar)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(JLControleMovimentacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1178, Short.MAX_VALUE)))))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(JLControleMovimentacao, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(JLControleMovimentacao)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                 .addComponent(JBVoltar)
-                .addGap(29, 29, 29))
+                .addGap(56, 56, 56))
         );
 
         pack();
@@ -168,7 +167,8 @@ public class FrmControleMovimentacao extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmControleMovimentacao().setVisible(true);
+                MovimentacaoDAO movimentacaoDAO = null;
+                new FrmControleMovimentacao(movimentacaoDAO).setVisible(true);
             }
         });
     }
@@ -176,7 +176,7 @@ public class FrmControleMovimentacao extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBVoltar;
     private javax.swing.JLabel JLControleMovimentacao;
-    private javax.swing.JTable JTMovimentações;
+    private javax.swing.JTable JTMovimentacoes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

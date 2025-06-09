@@ -7,7 +7,7 @@ import model.Produto;
 
 public class FrmEstoqueMaximo extends javax.swing.JFrame {
 private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nome", "Estoque Atual", "Estoque Máximo"}, 0);
-private ProdutoDAO produtoDAO = new ProdutoDAO();
+private ProdutoDAO produtoDAO;
 
     public FrmEstoqueMaximo(ProdutoDAO produtoDAO) {
         this.produtoDAO = produtoDAO;
