@@ -1,5 +1,6 @@
 package view;
 
+import controller.EmiteRelatorio;
 import dao.ProdutoDAO;
 import java.sql.SQLException;
 import java.util.List;
@@ -46,6 +47,7 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
         JTEstoqueMinimo = new javax.swing.JTable();
         JBVoltar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        JBExportarRelatorio = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1436, 955));
@@ -83,6 +85,14 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
 
         jLabel2.setText("jLabel2");
 
+        JBExportarRelatorio.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        JBExportarRelatorio.setText("Exportar relatório");
+        JBExportarRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBExportarRelatorioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,8 +112,10 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
                         .addGap(43, 43, 43)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(493, 493, 493)
-                        .addComponent(JBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(442, 442, 442)
+                        .addComponent(JBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(JBExportarRelatorio)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -115,8 +127,10 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
                 .addComponent(JLEstoqueMinimo)
                 .addGap(91, 91, 91)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 241, Short.MAX_VALUE)
-                .addComponent(JBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 240, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JBExportarRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(136, 136, 136))
         );
 
@@ -130,6 +144,11 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
     }//GEN-LAST:event_formWindowOpened
+
+    private void JBExportarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBExportarRelatorioActionPerformed
+        EmiteRelatorio emiteRelatorio = new EmiteRelatorio();
+        emiteRelatorio.exportaArquivo(JTEstoqueMinimo);
+    }//GEN-LAST:event_JBExportarRelatorioActionPerformed
 
     public static void main(String args[]) {
 
@@ -164,6 +183,7 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBExportarRelatorio;
     private javax.swing.JButton JBVoltar;
     private javax.swing.JLabel JLEstoqueMinimo;
     private javax.swing.JTable JTEstoqueMinimo;

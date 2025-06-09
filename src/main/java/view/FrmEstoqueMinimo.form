@@ -50,8 +50,10 @@
                       <Component id="jLabel2" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="493" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="442" max="-2" attributes="0"/>
                       <Component id="JBVoltar" min="-2" pref="157" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                      <Component id="JBExportarRelatorio" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -67,8 +69,11 @@
               <Component id="JLEstoqueMinimo" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="300" max="-2" attributes="0"/>
-              <EmptySpace pref="241" max="32767" attributes="0"/>
-              <Component id="JBVoltar" min="-2" pref="43" max="-2" attributes="0"/>
+              <EmptySpace pref="240" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="JBVoltar" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                  <Component id="JBExportarRelatorio" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="136" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -146,6 +151,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="jLabel2"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="JBExportarRelatorio">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="sansserif" size="18" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Exportar relat&#xf3;rio"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBExportarRelatorioActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
