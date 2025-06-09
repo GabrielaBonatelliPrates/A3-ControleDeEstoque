@@ -1,6 +1,5 @@
 package model;
 
-import controller.ControleEstoque;
 public class Produto {
 
 

@@ -15,9 +15,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import model.Categoria;
 
-
 public class ProdutoDAO {
-    
+
     protected CategoriaDAO categoriaDAO;
     protected List<Produto> produtos = new ArrayList<>(); //cria lista que vai armazenar os produtos da sessão (caso haja algum problema no banco de dados)
     protected List<Produto> listaAtualizada = new ArrayList<>(); //cria lista que vai armazenar os produtos a partir do banco de dados
@@ -26,8 +25,6 @@ public class ProdutoDAO {
         this.categoriaDAO = categoriaDAO;
     }
 
-    
-    
     public void cadastrarProduto(String nomeProduto, double precoUnit, String unidadeProduto,
             int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo,
             String nomeCategoria, String tamanho, String embalagem) { //vai servir pra cadastrar produtos com quando a classe categoria tiver implementada certinho
@@ -166,7 +163,7 @@ public class ProdutoDAO {
             Connection connection = Conexao.conectar();
             PreparedStatement statement = connection.prepareStatement(sql);
 
-             statement.setString(1, produto.getNomeProduto());
+            statement.setString(1, produto.getNomeProduto());
             statement.setDouble(2, produto.getPrecoUnit());
             statement.setString(3, produto.getUnidadeProduto());
             statement.setInt(4, produto.getQuantidadeEstoque());
@@ -185,38 +182,35 @@ public class ProdutoDAO {
             return false;
         }
     }
-    
+
     public boolean atualizarProdutoBD(int idProduto, String nomeProduto, double precoUnit, String unidadeProduto, int quantidadeEstoque,
             int estoqueMinimo, int estoqueMaximo, String nomeCategoria, String tamanho, String embalagem) {
         Categoria categoria = new Categoria(nomeCategoria, tamanho, embalagem);
 
         Produto produto = new Produto(nomeProduto, idProduto, precoUnit, unidadeProduto, quantidadeEstoque, estoqueMinimo,
-                estoqueMaximo, categoria); 
-        atualizarProduto(produto, categoria );
+                estoqueMaximo, categoria);
+        atualizarProduto(produto, categoria);
         return true;
     }
-    
+
     public boolean atualizarPreco(String nome, Double preco, int id) {
-        String sql = "UPDATE produtos set nome = ? , preco_unitario = ? WHERE idProduto = ?";
-        try {
-            Connection connection = Conexao.conectar();
-            PreparedStatement statement = connection.prepareStatement(sql);
+        String sql = "UPDATE produtos set nome = ?, preco_unitario = ? WHERE idProduto = ?";
+        try (Connection connection = Conexao.conectar(); PreparedStatement statement = connection.prepareStatement(sql)) {
 
             statement.setString(1, nome);
             statement.setDouble(2, preco);
             statement.setInt(3, id);
-            
 
-            statement.execute();
-            statement.close();
-            return true;
-        } catch (SQLException erro) { //mostra erros de sql
+            int linhasAfetadas = statement.executeUpdate();
+            return linhasAfetadas > 0;
+
+        } catch (SQLException erro) {
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, erro);
             return false;
         }
     }
-    
-     public boolean deletarProdutoBD(int idProduto) {
+
+    public boolean deletarProdutoBD(int idProduto) {
         deletarProduto(idProduto);
         return true;
     }
@@ -374,29 +368,28 @@ public class ProdutoDAO {
         }
         return listaAtualizada;
     }
-    
+
     //metodo para pegar lista de produtos numa categoria especifica
-  public List<Produto> produtosCategoria(Categoria categoriaPesquisada) {
-    List<Produto> todosProdutos = pegarProdutos(); //lista com todos os produtos
-    List<Produto> produtoCategoria = new ArrayList<>(); //arraylist que vai contem os produtos numa mesma categoria (p posteriormente pegar o tamanho dessa lista)
+    public List<Produto> produtosCategoria(Categoria categoriaPesquisada) {
+        List<Produto> todosProdutos = pegarProdutos(); //lista com todos os produtos
+        List<Produto> produtoCategoria = new ArrayList<>(); //arraylist que vai contem os produtos numa mesma categoria (p posteriormente pegar o tamanho dessa lista)
 
-    for (Produto produto : todosProdutos) {
-        Categoria categoria = produto.getCategoria(); //pega o atributo categoria de cada produto
+        for (Produto produto : todosProdutos) {
+            Categoria categoria = produto.getCategoria(); //pega o atributo categoria de cada produto
 
-        //boolean para verificar se é a mesma categoria
-        boolean mesmaCategoria = 
-            categoria.getNomeCategoria().equals(categoriaPesquisada.getNomeCategoria()) &&
-            categoria.getTamanho().equals(categoriaPesquisada.getTamanho()) &&
-            categoria.getEmbalagem().equals(categoriaPesquisada.getEmbalagem());
+            //boolean para verificar se é a mesma categoria
+            boolean mesmaCategoria
+                    = categoria.getNomeCategoria().equals(categoriaPesquisada.getNomeCategoria())
+                    && categoria.getTamanho().equals(categoriaPesquisada.getTamanho())
+                    && categoria.getEmbalagem().equals(categoriaPesquisada.getEmbalagem());
 
-        if (mesmaCategoria && !produtoCategoria.contains(produto)) {
-            produtoCategoria.add(produto);
+            if (mesmaCategoria && !produtoCategoria.contains(produto)) {
+                produtoCategoria.add(produto);
+            }
         }
+
+        return produtoCategoria; //lista com produtos únicos dessa categoria
     }
-
-    return produtoCategoria; //lista com produtos únicos dessa categoria
-}
-
 
     public List<Produto> produtosOrdemAlfabética() {
         listaAtualizada.clear();
@@ -429,7 +422,7 @@ public class ProdutoDAO {
         }
         return listaAtualizada;
     }
-    
+
     public List<Produto> pegarProdutosAcimaMaximo() {
         List<Produto> verificarProdutos = pegarProdutos();
         List<Produto> produtosAcima = new ArrayList<>();
@@ -460,14 +453,13 @@ public class ProdutoDAO {
         }
         return valorTotalEstoque;
     }
-     //metodo para aumentar quantidade ao estoque do produto
+    //metodo para aumentar quantidade ao estoque do produto
+
     public void adicionarQuantidade(int idProduto, int quantidadeAdicionar) {
         String sql = "UPDATE produtos SET estoque_atual = estoque_atual + ? WHERE idProduto = ?";
 
         try (
-            Connection connection = Conexao.conectar();
-            PreparedStatement stmt = connection.prepareStatement(sql)
-        ) {
+                Connection connection = Conexao.conectar(); PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, quantidadeAdicionar);
             stmt.setInt(2, idProduto);
             stmt.executeUpdate();
@@ -481,9 +473,7 @@ public class ProdutoDAO {
         String sql = "UPDATE produtos SET estoque_atual = estoque_atual - ? WHERE idProduto = ?";
 
         try (
-            Connection connection = Conexao.conectar();
-            PreparedStatement stmt = connection.prepareStatement(sql)
-        ) {
+                Connection connection = Conexao.conectar(); PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, quantidadeRetirar);
             stmt.setInt(2, idProduto);
             stmt.executeUpdate();
@@ -492,6 +482,4 @@ public class ProdutoDAO {
         }
     }
 
-    
-    
 }
