@@ -74,7 +74,7 @@ O arquivo "[bancoDeDados.sql](./bancoDeDados.sql)"
 
 ---
 
-- **RF06: Excluir Categoria**  
+- **RF06: Excluir Categoria**
   Permite excluir uma categoria cadastrada.
 
 ---
@@ -163,32 +163,32 @@ Esta função permite que o usuário visualize os produtos com estoque acima do 
 
 
 - **RNF01: Estética padronizada**
-A interface deve apresentar um padrão visual consistente entre os frames, como botões e fontes padronizadas, assim como uma paleta de cores visualmente agradável e manter um padrão visual entre os frames, incluindo a logo do sistema de controle de estoque.
+  A interface deve apresentar um padrão visual consistente entre os frames, como botões e fontes padronizadas, assim como uma paleta de cores visualmente agradável e manter um padrão visual entre os frames, incluindo a logo do sistema de controle de estoque.
 
 ---
 
 - **RNF02: Conexão sistema X usuário**
-O sistema precisa reagir a qualquer interação do usuário o mais rápido possível.
+  O sistema precisa reagir a qualquer interação do usuário o mais rápido possível.
 
 ---
 
 - **RNF03: Disponibilidade de uso**
-O sistema deve estar disponível 99% do tempo, exceto durante manutenções programadas.
+  O sistema deve estar disponível 99% do tempo, exceto durante manutenções programadas.
 
 ---
 
 - **RNF04: Simplicidade de utilização**
-A interface deve ser intuitiva e acessível para usuários sem conhecimentos técnicos.
+  A interface deve ser intuitiva e acessível para usuários sem conhecimentos técnicos.
 
 ---
 
 - **RNF05: Segurança de dados**
-O sistema deve proteger os dados em casos de falhas ou quedas.
+  O sistema deve proteger os dados em casos de falhas ou quedas.
 
 ---
 
 - **RNF06: Compatibilidade com Softwares externos**
-O sistema deve ser totalmente compatível com o banco de dados MySQL.
+  O sistema deve ser totalmente compatível com o banco de dados MySQL.
 
 ---
 
