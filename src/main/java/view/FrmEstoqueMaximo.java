@@ -4,6 +4,7 @@ import dao.ProdutoDAO;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.Produto;
+import controller.EmiteRelatorio;
 
 public class FrmEstoqueMaximo extends javax.swing.JFrame {
 private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nome", "Estoque Atual", "Estoque Máximo"}, 0);
@@ -42,6 +43,7 @@ private ProdutoDAO produtoDAO;
         JTEstoqueMaximo = new javax.swing.JTable();
         JBVoltar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        JBExportarTabela = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Estoque Maximo");
@@ -74,6 +76,14 @@ private ProdutoDAO produtoDAO;
 
         jLabel2.setText("jLabel2");
 
+        JBExportarTabela.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        JBExportarTabela.setText("Exportar relatório");
+        JBExportarTabela.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBExportarTabelaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,9 +103,11 @@ private ProdutoDAO produtoDAO;
                         .addGap(43, 43, 43)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(482, 482, 482)
-                        .addComponent(JBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(452, 452, 452)
+                        .addComponent(JBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57)
+                        .addComponent(JBExportarTabela)))
+                .addContainerGap(592, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,9 +120,11 @@ private ProdutoDAO produtoDAO;
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(370, 370, 370)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
-                .addComponent(JBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(148, 148, 148))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 241, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(JBVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(JBExportarTabela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(149, 149, 149))
         );
 
         pack();
@@ -119,6 +133,11 @@ private ProdutoDAO produtoDAO;
     private void JBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBVoltarActionPerformed
         this.dispose();
     }//GEN-LAST:event_JBVoltarActionPerformed
+
+    private void JBExportarTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBExportarTabelaActionPerformed
+        EmiteRelatorio emiteRelatorio = new EmiteRelatorio();
+        emiteRelatorio.exportaArquivo(JTEstoqueMaximo);
+    }//GEN-LAST:event_JBExportarTabelaActionPerformed
 
     public static void main(String args[]) {
 
@@ -153,6 +172,7 @@ private ProdutoDAO produtoDAO;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBExportarTabela;
     private javax.swing.JButton JBVoltar;
     private javax.swing.JTable JTEstoqueMaximo;
     private javax.swing.JLabel jLabel1;
