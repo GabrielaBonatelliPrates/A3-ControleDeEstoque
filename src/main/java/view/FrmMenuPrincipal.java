@@ -9,20 +9,23 @@ import model.Produto;
 import java.util.ArrayList;
 import dao.ProdutoDAO;
 import dao.CategoriaDAO;
+import dao.MovimentacaoDAO;
 
 public class FrmMenuPrincipal extends javax.swing.JFrame {
     
-    ProdutoDAO produtoDAO;
-    CategoriaDAO categoriaDAO;
+    private ProdutoDAO produtoDAO;
+    private CategoriaDAO categoriaDAO;
+    private MovimentacaoDAO movimentacaoDAO;
     
     FrmRelatorios telaRelatorio = new FrmRelatorios(produtoDAO); //ainda vai adicionar implementação
     
-    public FrmMenuPrincipal(ProdutoDAO produtoDAO, CategoriaDAO categoriaDAO) {
+    public FrmMenuPrincipal(ProdutoDAO produtoDAO, CategoriaDAO categoriaDAO, MovimentacaoDAO movimentacaoDAO) {
         initComponents();
        setSize(1920, 1080);
        setExtendedState(FrmMenuPrincipal.MAXIMIZED_BOTH);
        this.produtoDAO = produtoDAO;
        this.categoriaDAO = categoriaDAO;
+       this.movimentacaoDAO = movimentacaoDAO;
     }
 
     @SuppressWarnings("unchecked")
@@ -53,6 +56,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuVerCategorias = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuMovimentacao = new javax.swing.JMenuItem();
+        jMenuMovimentacoes = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuListarProecos = new javax.swing.JMenuItem();
         jMenuBalancoFinanceiro = new javax.swing.JMenuItem();
@@ -161,6 +165,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuNovoProduto);
 
+        jMenuGerenciarProduto.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
         jMenuGerenciarProduto.setText("Gerenciar Produto");
         jMenuGerenciarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,6 +237,16 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuMovimentacao);
+
+        jMenuMovimentacoes.setFont(new java.awt.Font("Inter 18pt", 0, 12)); // NOI18N
+        jMenuMovimentacoes.setText("Ver Movimentações");
+        jMenuMovimentacoes.setToolTipText("");
+        jMenuMovimentacoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuMovimentacoesActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuMovimentacoes);
 
         jMenuBar1.add(jMenu4);
 
@@ -374,7 +389,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuNovoProdutoActionPerformed
 
     private void jMenuMovimentacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuMovimentacaoActionPerformed
-        FrmMovimentacao telaMovimentacao = new FrmMovimentacao(produtoDAO);
+       FrmMovimentacao telaMovimentacao = new FrmMovimentacao(produtoDAO, movimentacaoDAO);
         telaMovimentacao.setVisible(true);
         //Ativação da tela de movimentação de estoque
     }//GEN-LAST:event_jMenuMovimentacaoActionPerformed
@@ -454,10 +469,15 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuGerenciarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuGerenciarProdutoActionPerformed
         //instancia a interface gráfica do gerenciamento de  produto
-        FrmGerenciarProduto telaGerenciar = new FrmGerenciarProduto();
+        FrmGerenciarProduto telaGerenciar = new FrmGerenciarProduto(produtoDAO);
         //deixa ela vísível
         telaGerenciar.setVisible(true);
     }//GEN-LAST:event_jMenuGerenciarProdutoActionPerformed
+
+    private void jMenuMovimentacoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuMovimentacoesActionPerformed
+        FrmControleMovimentacao movimentacoes = new FrmControleMovimentacao(movimentacaoDAO);
+         movimentacoes.setVisible(true);
+    }//GEN-LAST:event_jMenuMovimentacoesActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLEstampa;
@@ -483,6 +503,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuListarProecos;
     private javax.swing.JMenuItem jMenuMovimentacao;
+    private javax.swing.JMenuItem jMenuMovimentacoes;
     private javax.swing.JMenuItem jMenuNovoProduto;
     private javax.swing.JMenuItem jMenuProdutos;
     private javax.swing.JMenuItem jMenuProdutosPorCategoria;

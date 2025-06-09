@@ -4,37 +4,56 @@ import dao.ProdutoDAO;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.Produto;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class FrmBalancoFinanceiro extends javax.swing.JFrame {
     private ProdutoDAO produtoDAO;
-    private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Produto", "Quantidade", "Preço Unitário", "Preço Total"}, 0);
+    private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Produto", "Quantidade", "Preço Unitário (R$)", "Preço Total Produto (R$)", "Preço Total Estoque (R$)"}, 0);
     private double valorTotalEstoque;
 
     public FrmBalancoFinanceiro(ProdutoDAO produtoDAO) {
+        this.produtoDAO = produtoDAO;
         initComponents();
         mostraTabela();
-        this.produtoDAO = produtoDAO;
     }
     
-    public void mostraTabela(){
-           
+    public void mostraTabela() {
+
         modelo.setRowCount(0); //limpa a tabela
         modelo.setNumRows(0); //posiciona na primeira linha da tabela
 
         List<Produto> todosProdutos = produtoDAO.pegarProdutos(); //acha os produtos acima do máximo
-        
-        for (Produto produto : todosProdutos) { //adiciona à tabela
-            modelo.addRow(new Object[]{
-                produto.getIdProduto(),
-                produto.getNomeProduto(),
-                produto.getQuantidadeEstoque(),
-                produto.getPrecoUnit(),
-                (produto.getPrecoUnit() * produto.getQuantidadeEstoque()),});
-        }
+
+   //formata para moeda braseira
+    NumberFormat formatoMoeda = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+
+ for (Produto produto : todosProdutos) { //adiciona à tabela
+        modelo.addRow(new Object[]{
+            produto.getIdProduto(),
+            produto.getNomeProduto(),
+            produto.getQuantidadeEstoque(),
+           produto.getPrecoUnit(),
+            produto.getPrecoUnit() * produto.getQuantidadeEstoque(),
+            null
+        });
+    }
+        //a coluna do preço total do estoque inteiro fica vazia nas linhas dos produtos
         valorTotalEstoque = produtoDAO.valorTotal();
-        String strValorTotal = String.valueOf(valorTotalEstoque);
-        JLValorTotalEstoque.setText(strValorTotal);
-        JTBalancoFinanceiro.setModel(modelo); //atualiza a tabela
+        //adiciona info do valor total do estoque na ultima linha de todas
+        modelo.addRow(new Object[]{
+            null,
+            null,
+            null,
+            null,
+            null,
+            valorTotalEstoque
+        });
+        
+         
+         JLValorTotalEstoque.setText("Total: " + formatoMoeda.format(valorTotalEstoque)); //manda o valor total do estoque formatado pra moeda br
+         JTBalancoFinanceiro.setModel(modelo);
+    
     }
 
     @SuppressWarnings("unchecked")
@@ -46,6 +65,7 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         JLValorTotalEstoque = new javax.swing.JLabel();
         JBVoltar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Balanco Financeiro");
@@ -60,21 +80,21 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
 
         JTBalancoFinanceiro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Produto", "Quantidade", "Preço Unitário", "Preço Total"
+                "Produto", "Quantidade", "Preço Unitário", "Preço Total", "Preço Total Estoque"
             }
         ));
         jScrollPane1.setViewportView(JTBalancoFinanceiro);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Inter 18pt Light", 0, 25)); // NOI18N
         jLabel1.setText("Valor total do Estoque (R$):");
 
-        JLValorTotalEstoque.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        JLValorTotalEstoque.setFont(new java.awt.Font("Inter 18pt", 0, 25)); // NOI18N
         JLValorTotalEstoque.setText("0,00");
 
         JBVoltar.setText("Voltar");
@@ -84,33 +104,42 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Inter 18pt Light", 0, 29)); // NOI18N
+        jLabel2.setText("Balanço Financeiro");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(JLValorTotalEstoque)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(JBVoltar)
-                .addGap(14, 14, 14))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(JBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(52, 52, 52))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(JLValorTotalEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 826, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1410, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addContainerGap(41, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(31, 31, 31)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(JLValorTotalEstoque))
-                .addGap(32, 32, 32)
-                .addComponent(JBVoltar)
-                .addGap(14, 14, 14))
+                    .addComponent(JLValorTotalEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(76, 76, 76)
+                .addComponent(JBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64))
         );
 
         pack();
@@ -167,6 +196,7 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
     private javax.swing.JLabel JLValorTotalEstoque;
     private javax.swing.JTable JTBalancoFinanceiro;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
