@@ -162,7 +162,7 @@ Esta função permite que o usuário visualize os produtos com estoque acima do 
 ## ✅ Requisitos não Funcionais
 
 
--- **RNF01**: Estética padronizada
+- **RNF01**: Estética padronizada
 A interface deve apresentar um padrão visual consistente entre os frames, como botões e fontes padronizadas, assim como uma paleta de cores visualmente agradável e manter um padrão visual entre os frames, incluindo a logo do sistema de controle de estoque.
 
 ---
