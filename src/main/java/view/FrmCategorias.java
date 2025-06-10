@@ -25,8 +25,7 @@ public class FrmCategorias extends javax.swing.JFrame {
 private CategoriaDAO categoriaDAO;
 
     /**
-     *
-     * @param categoriaDAO
+     * @param categoriaDAO valor inicial de categoriaDAO
      */
     public FrmCategorias(CategoriaDAO categoriaDAO) {
         initComponents();
@@ -210,7 +209,7 @@ private CategoriaDAO categoriaDAO;
 
     /**
      *
-     * @param args
+     * @param args método principal de FrmCategorias
      */
     public static void main(String args[]) {
 
