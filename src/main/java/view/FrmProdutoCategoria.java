@@ -7,11 +7,20 @@ import javax.swing.table.DefaultTableModel;
 import model.Produto;
 import model.Categoria;
 
+/** FrmProdutoCategoria é um JFrame para mostrar o relatório de quantidade de produtos por categoria
+ *
+ * @author GabrielaBonatelliPrates
+ */
 public class FrmProdutoCategoria extends javax.swing.JFrame {
 private ProdutoDAO produtoDAO;
 private CategoriaDAO categoriaDAO;
 private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nome", "Quantidade de Produtos"}, 0);
 
+    /**
+     *
+     * @param produtoDAO valor inicial de produtoDAO
+     * @param categoriaDAO valor inicial de categoriaDAO
+     */
     public FrmProdutoCategoria(ProdutoDAO produtoDAO, CategoriaDAO categoriaDAO) {
         this.produtoDAO = produtoDAO;
         this.categoriaDAO = categoriaDAO;
@@ -20,6 +29,11 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
         setExtendedState(FrmProdutoCategoria.MAXIMIZED_BOTH);
     }
     
+    /**
+     * @author laispaivaportela
+     * 
+     * @param carregaTabela Método para carregar na table os dados para o relatório
+     */
     public void carregaTabela() {
         modelo.setRowCount(0); //limpa a tabela
         modelo.setNumRows(0); //posiciona na primeira linha da tabela
@@ -71,7 +85,7 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
         ));
         jScrollPane1.setViewportView(jTableProdCategoria);
 
-        jBtnVoltar.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jBtnVoltar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jBtnVoltar.setText("Voltar");
         jBtnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,13 +98,15 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(237, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 860, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
-                        .addComponent(jLabel1))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 860, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)))
                 .addGap(336, 336, 336))
             .addGroup(layout.createSequentialGroup()
                 .addGap(582, 582, 582)
@@ -100,27 +116,30 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(88, 88, 88)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
+                        .addGap(17, 17, 17)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(52, 52, 52)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
-                .addComponent(jBtnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addComponent(jBtnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(161, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnVoltarActionPerformed
-        this.dispose();        // TODO add your handling code here:
+        this.dispose();  //fechar esse frame
     }//GEN-LAST:event_jBtnVoltarActionPerformed
 
+    /**
+     *
+     * @param args método principal de FrmProdutoCategoria
+     */
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
