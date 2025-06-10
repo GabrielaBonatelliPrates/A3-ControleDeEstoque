@@ -1,15 +1,16 @@
 package view;
 
+import controller.EmiteRelatorio;
 import dao.ProdutoDAO;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.Produto;
 
 public class FrmListaPrecos extends javax.swing.JFrame {
-private ProdutoDAO produtoDAO;
 
+    private ProdutoDAO produtoDAO;
     private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id do Produto", "Nome do Produto", "Preço Unitário", "Unidade de Medida", "Categoria"}, 0);
-    
+
     public FrmListaPrecos(ProdutoDAO produtoDAO) {
         this.produtoDAO = produtoDAO;
         initComponents();
@@ -17,23 +18,24 @@ private ProdutoDAO produtoDAO;
         setExtendedState(FrmListaPrecos.MAXIMIZED_BOTH);
     }
 
-    public void mostrarTabela(){     
-        modelo.setRowCount(0); 
-        modelo.setNumRows(0); 
-        
-        List<Produto> todosProdutos = produtoDAO.produtosOrdemAlfabética(); 
-        for (Produto p : todosProdutos) { 
+    //Para mostrar na tabela de relatório os dados solicitados
+    public void mostrarTabela() {
+        modelo.setRowCount(0);
+        modelo.setNumRows(0);
+
+        List<Produto> todosProdutos = produtoDAO.produtosOrdemAlfabética(); //puxa a lista de todos os produtos em ordem alfabética
+        for (Produto p : todosProdutos) { //percorre toda a lista de produtos adicionando nas colunas os dados requeridos
             modelo.addRow(new Object[]{
                 p.getIdProduto(),
                 p.getNomeProduto(),
                 p.getPrecoUnit(),
                 p.getUnidadeProduto(),
                 p.getCategoria().getNomeCategoria()
-                    });
+            });
         }
-           jTableListaPrecos.setModel(modelo);
+        jTableListaPrecos.setModel(modelo); //atualiza a tabela
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -45,6 +47,7 @@ private ProdutoDAO produtoDAO;
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableListaPrecos = new javax.swing.JTable();
         JBVoltar = new javax.swing.JButton();
+        JBExportarRelatorio = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Nova Categoria");
@@ -53,13 +56,13 @@ private ProdutoDAO produtoDAO;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1436, 955));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel3.setText("Lista de Preços");
 
         jLabel2.setText("jLabel2");
 
+        jTableListaPrecos.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jTableListaPrecos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -73,10 +76,19 @@ private ProdutoDAO produtoDAO;
         ));
         jScrollPane1.setViewportView(jTableListaPrecos);
 
+        JBVoltar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         JBVoltar.setText("Voltar");
         JBVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JBVoltarActionPerformed(evt);
+            }
+        });
+
+        JBExportarRelatorio.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        JBExportarRelatorio.setText("Exportar Relatórtio");
+        JBExportarRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBExportarRelatorioActionPerformed(evt);
             }
         });
 
@@ -85,34 +97,36 @@ private ProdutoDAO produtoDAO;
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(196, 196, 196)
-                        .addComponent(jLabel3)
-                        .addGap(0, 961, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(309, 345, Short.MAX_VALUE)
+                .addComponent(JBExportarRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(205, 205, 205)
+                .addComponent(JBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(346, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(311, 311, 311)
-                .addComponent(JBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(379, 379, 379)
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1327, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(JBVoltar)
-                .addContainerGap(570, Short.MAX_VALUE))
+                    .addComponent(JBExportarRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         pack();
@@ -121,6 +135,12 @@ private ProdutoDAO produtoDAO;
     private void JBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBVoltarActionPerformed
         this.dispose();
     }//GEN-LAST:event_JBVoltarActionPerformed
+
+    private void JBExportarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBExportarRelatorioActionPerformed
+        // Vai exportar um arquivo excel com os dados da tabela
+        EmiteRelatorio emiteRelatorio = new EmiteRelatorio();
+        emiteRelatorio.exportaArquivo(jTableListaPrecos); //Exporta a tabela
+    }//GEN-LAST:event_JBExportarRelatorioActionPerformed
 
     public static void main(String args[]) {
 
@@ -155,6 +175,7 @@ private ProdutoDAO produtoDAO;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBExportarRelatorio;
     private javax.swing.JButton JBVoltar;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
