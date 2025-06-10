@@ -63,6 +63,10 @@
                       <EmptySpace min="-2" pref="558" max="-2" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                      <Component id="jLabel5" min="-2" pref="85" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace pref="377" max="32767" attributes="0"/>
           </Group>
@@ -71,7 +75,9 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" pref="126" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+              <Component id="jLabel5" min="-2" pref="85" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -88,7 +94,7 @@
                   <Component id="JTFEmbalagem" min="-2" pref="32" max="-2" attributes="0"/>
                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="289" max="32767" attributes="0"/>
+              <EmptySpace pref="283" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="JBCadastrar" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                   <Component id="JBVoltar" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
@@ -183,6 +189,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JTFEmbalagemActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel5">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel3"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

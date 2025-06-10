@@ -38,24 +38,21 @@
               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="391" max="-2" attributes="0"/>
-                      <Component id="txtCampoPesquisa" min="-2" pref="732" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnPesquisar" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="BtnExportarTabela" min="-2" pref="200" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel1" alignment="0" min="-2" pref="339" max="-2" attributes="0"/>
-                              <Component id="jScrollPane3" alignment="0" min="-2" pref="485" max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" alignment="0" min="-2" pref="1329" max="-2" attributes="0"/>
-                          </Group>
+              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="BtnExportarTabela" min="-2" pref="200" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jLabel1" alignment="0" min="-2" pref="339" max="-2" attributes="0"/>
+                      <Component id="jScrollPane3" alignment="0" min="-2" pref="485" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" alignment="0" min="-2" pref="1329" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
+                          <Component id="txtCampoPesquisa" min="-2" pref="732" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="btnPesquisar" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="jLabel3" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -65,13 +62,16 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="-2" pref="67" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="btnPesquisar" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtCampoPesquisa" min="-2" pref="48" max="-2" attributes="0"/>
-              </Group>
+              <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+              <Component id="jLabel3" min="-2" pref="85" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtCampoPesquisa" alignment="3" min="-2" pref="48" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="btnPesquisar" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane3" min="-2" pref="127" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -80,7 +80,7 @@
               <Component id="jScrollPane1" min="-2" pref="294" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Component id="BtnExportarTabela" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="103" max="32767" attributes="0"/>
+              <EmptySpace pref="85" max="32767" attributes="0"/>
               <Component id="btnVoltar" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
           </Group>
@@ -97,9 +97,6 @@
       <SubComponents>
         <Component class="javax.swing.JTable" name="jTableProdutos">
           <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Microsoft Sans Serif" size="12" style="0"/>
-            </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="4">
                 <Column editable="true" title="Title 1" type="java.lang.Object"/>
@@ -115,7 +112,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Inter 18pt" size="30" style="0"/>
+          <Font name="Segoe UI" size="30" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Produtos"/>
       </Properties>
@@ -143,7 +140,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Inter 18pt" size="30" style="0"/>
+          <Font name="Segoe UI" size="30" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Ficha do Produto"/>
       </Properties>
@@ -188,6 +185,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnExportarTabelaActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel3"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -27,8 +27,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="154" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" pref="139" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="456" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="85" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="510" max="-2" attributes="0"/>
                       <Component id="JLSobre" min="-2" pref="400" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -45,12 +45,12 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" pref="77" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="JLSobre" min="-2" pref="300" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                      <Component id="jLabel1" min="-2" pref="85" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
