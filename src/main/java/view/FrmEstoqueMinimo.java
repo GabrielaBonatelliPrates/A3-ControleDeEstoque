@@ -29,7 +29,7 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
     }
     
     /**
-     *author Davi-Wolff
+     *@author Davi-Wolff
      */
     public void carregaTabela() {
          modelo.setRowCount(0); //limpa a tabela
