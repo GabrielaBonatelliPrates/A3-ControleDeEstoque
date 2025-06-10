@@ -1,43 +1,39 @@
 package view;
 
 import dao.CategoriaDAO;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import model.Categoria;
-import model.Produto;
 import dao.ProdutoDAO;
-import java.sql.ResultSet;
-import javax.swing.JComboBox;
 
 public class FrmProdutoNovo extends javax.swing.JFrame {
-private ProdutoDAO produtoDAO;
-private CategoriaDAO categoriaDAO;
 
-    
+    private ProdutoDAO produtoDAO;
+    private CategoriaDAO categoriaDAO;
+
     public FrmProdutoNovo(ProdutoDAO produtoDAO, CategoriaDAO categoriaDAO) {
         this.produtoDAO = produtoDAO;
         this.categoriaDAO = categoriaDAO;
         initComponents();
-       mostrarCategorias();
-       setExtendedState(FrmProdutoNovo.MAXIMIZED_BOTH);
+        mostrarCategorias();
+        setExtendedState(FrmProdutoNovo.MAXIMIZED_BOTH);
     }
-    
-    public void mostrarCategorias(){
+
+    //método para mostrar as categorias na combo box
+    public void mostrarCategorias() {
         //Cria um ArrayList para mostrar os nomes das categorias cadastrados no banco de dados
-        List<Categoria> mostrarCategorias = categoriaDAO.mostrarCategorias(); 
-        //int id = 1;
-        
+        List<Categoria> mostrarCategorias = categoriaDAO.mostrarCategorias();
+
         jComboBoxCategoria.removeAllItems(); //limpa itens anteriores para evitar erros
-        
-        if(mostrarCategorias.isEmpty()){ //Caso não tenha nenhuma categoria cadastrada vai criar uma categoria informativa
-            jComboBoxCategoria.addItem(new Categoria( 0, "Nenhuma categoria cadastrada", "", ""));
+
+        if (mostrarCategorias.isEmpty()) { //Caso não tenha nenhuma categoria cadastrada vai criar uma categoria informativa
+            jComboBoxCategoria.addItem(new Categoria(0, "Nenhuma categoria cadastrada", "", ""));
             jComboBoxCategoria.setEnabled(false);
-        } else{
-        for (Categoria categoria : mostrarCategorias) {
-            jComboBoxCategoria.addItem(categoria); //Adiciona na ComboBox as categorias já cadastradas
-        }
-        jComboBoxCategoria.setEnabled(true);
+        } else {
+            for (Categoria categoria : mostrarCategorias) {
+                jComboBoxCategoria.addItem(categoria); //Adiciona na ComboBox as categorias já cadastradas
+            }
+            jComboBoxCategoria.setEnabled(true); //ativa a combo box
         }
     }
 
@@ -119,21 +115,28 @@ private CategoriaDAO categoriaDAO;
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
         jLabel1.setText("Novo Produto");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel2.setText("Nome:");
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel5.setText("Valor Unitário:");
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel6.setText("Quantidade máxima em estoque:");
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel7.setText("Unidade:");
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel8.setText("Quantidade em estoque:");
 
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel9.setText("Quantidade mínima em estoque:");
 
+        JBAdicionarProduto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         JBAdicionarProduto.setText("Adicionar novo produto");
         JBAdicionarProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,6 +144,7 @@ private CategoriaDAO categoriaDAO;
             }
         });
 
+        JBVoltar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         JBVoltar.setText("Voltar");
         JBVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -189,6 +193,7 @@ private CategoriaDAO categoriaDAO;
             }
         });
 
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel11.setText("Categoria:");
 
         jComboBoxCategoria.addActionListener(new java.awt.event.ActionListener() {
@@ -204,101 +209,99 @@ private CategoriaDAO categoriaDAO;
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(JBAdicionarProduto)
-                        .addGap(235, 235, 235)
-                        .addComponent(JBVoltar))
+                .addGap(75, 75, 75)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(400, 400, 400)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 240, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JTFQuantidadeMaximaProduto))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JTFQuantidadeMinimaProduto))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JTFNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 895, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(JTFQuantidadeProduto))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JTFValorProduto))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JTFUniProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 871, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(JTFQuantidadeMaximaProduto))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel9)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(JTFQuantidadeMinimaProduto))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(JTFQuantidadeProduto))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(JTFUniProduto))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(JTFValorProduto))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel11)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(JTFNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(207, 207, 207)
-                                .addComponent(jLabel1)))
-                        .addGap(0, 667, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(JBAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(232, 232, 232)
+                                .addComponent(JBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(229, 229, 229))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(JTFNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jLabel1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(71, 71, 71)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JTFNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(JTFValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(JTFValorProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(JTFUniProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(JTFUniProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(JTFQuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(JTFQuantidadeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(JTFQuantidadeMinimaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(JTFQuantidadeMinimaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(JTFQuantidadeMaximaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(JTFQuantidadeMaximaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 591, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(JBVoltar)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(JBAdicionarProduto)
-                        .addGap(15, 15, 15))))
+                    .addComponent(jComboBoxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(96, 96, 96)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JBAdicionarProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JBVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(188, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void JBVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBVoltarMouseClicked
-        this.dispose();
+        this.dispose(); //fecha esse frame
     }//GEN-LAST:event_JBVoltarMouseClicked
 
     private void JTFNomeProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFNomeProdutoActionPerformed
@@ -332,16 +335,15 @@ private CategoriaDAO categoriaDAO;
     }//GEN-LAST:event_JTFCategoriaActionPerformed
 
     private void JBAdicionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAdicionarProdutoActionPerformed
-
+        //Para poder adicionar os produtos no controle de estoque
         try {
-            String nomeProduto= "";
+            String nomeProduto = "";
             int id = 0;
             double valorUnitario = 0;
             String unidade = "";
             int quantidadeEstoque = 0;
             int quantidadeEstoqueMinima = 0;
             int quantidadeEstoqueMaxima = 0;
-            //String nomeCategoria = "";
 
             //Nome do Produto
             if (this.JTFNomeProduto.getText().length() < 2) {
@@ -349,23 +351,11 @@ private CategoriaDAO categoriaDAO;
             } else {
                 nomeProduto = this.JTFNomeProduto.getText();
             }
-
-            //Id do Produto
-          //  int x = Integer.parseInt(this.JTFIdProduto.getText());
-           // if (x <= 0) {
-           //     throw new Mensagem("O Id do produto deve ser número e maior que zero. ");
-          //  }
-          
-        //   if (this.JTFIdProduto.getText().length() <= 0) {
-        //        throw new Mensagem("O Id do produto deve ser número e maior que zero. ");
-        //    } else {
-         //       id = Integer.parseInt(this.JTFIdProduto.getText());
-         // }
-
+            
             //Valor do produto
             int x = (int) Double.parseDouble(this.JTFValorProduto.getText());
             if (x <= 0) {
-                throw new Mensagem("O Id do produto deve ser número e maior que zero. ");
+                throw new Mensagem("O valor do produto deve ser número e maior que zero. ");
             }
             if (this.JTFValorProduto.getText().length() <= 0) {
                 throw new Mensagem("O valor do produto deve ser número e maior que zero. ");
@@ -383,10 +373,10 @@ private CategoriaDAO categoriaDAO;
             //Quantidade do produto
             x = Integer.parseInt(this.JTFQuantidadeProduto.getText());
             if (x <= 0) {
-                throw new Mensagem("O Id do produto deve ser número e maior que zero. ");
+                throw new Mensagem("A quantidade em estoque do produto deve ser número e maior que zero. ");
             }
             if (this.JTFQuantidadeProduto.getText().length() <= 0) {
-                throw new Mensagem("Insira uma quantidade válida. ");
+                throw new Mensagem("Insira uma quantidade válida.");
             } else {
                 quantidadeEstoque = Integer.parseInt(this.JTFQuantidadeProduto.getText());
             }
@@ -394,52 +384,47 @@ private CategoriaDAO categoriaDAO;
             //Quantidade Mínima do produto
             x = Integer.parseInt(this.JTFQuantidadeMinimaProduto.getText());
             if (x <= 0) {
-                throw new Mensagem("O Id do produto deve ser número e maior que zero. ");
-            }
-            else{
+                throw new Mensagem("A quantidade mínima do produto deve ser número e maior que zero. ");
+            } else {
                 quantidadeEstoqueMinima = x;
             }
-            /*
             if (this.JTFQuantidadeMinimaProduto.getText().length() <= 0) {
-                throw new Mensagem("A quantidade mínima do produto deve ser número e maior que zero. ");
+                throw new Mensagem("Insira uma quantidade válida.");
             } else {
                 int quantidadeMinima = Integer.parseInt(this.JTFQuantidadeMinimaProduto.getText());
             }
-*/
+             
             //Quantidade Máxima do produto
             x = Integer.parseInt(this.JTFQuantidadeMaximaProduto.getText());
             if (x <= 0) {
-                throw new Mensagem("O Id do produto deve ser número e maior que zero. ");
-            }
-            else{
+                throw new Mensagem("A quantidade máxima do produto deve ser número e maior que zero. ");
+            } else {
                 quantidadeEstoqueMaxima = x;
             }
-            /*
             if (this.JTFQuantidadeMaximaProduto.getText().length() <= 0) {
-                throw new Mensagem("A quantidade máxima do produto deve ser número e maior que zero. ");
+                throw new Mensagem("Insira uma quantidade válida.");
             } else {
                 int quantidadeMaxima = Integer.parseInt(this.JTFQuantidadeMaximaProduto.getText());
             }
-*/
+             
             // limpa campos da interface
             this.JTFNomeProduto.setText("");
-           // this.JTFIdProduto.setText("");
             this.JTFValorProduto.setText("");
             this.JTFUniProduto.setText("");
             this.JTFQuantidadeProduto.setText("");
             this.JTFQuantidadeMinimaProduto.setText("");
             this.JTFQuantidadeMaximaProduto.setText("");
-           
-
             
-            Categoria categoriaSelecionada = (Categoria) jComboBoxCategoria.getSelectedItem();
+            //Para pegar os dados da categoria selecionada na combo box
+            Categoria categoriaSelecionada = (Categoria) jComboBoxCategoria.getSelectedItem(); 
             String nomeCategoria = categoriaSelecionada.getNomeCategoria();
             String tamanho = categoriaSelecionada.getTamanho();
             String embalagem = categoriaSelecionada.getEmbalagem();
             
+            // Para utilizar o método de cadastrar os produtos e colocar as informações no banco de dados
             produtoDAO.cadastrarProduto(nomeProduto, valorUnitario, unidade, quantidadeEstoque,
-               quantidadeEstoqueMinima, quantidadeEstoqueMaxima, nomeCategoria, tamanho, embalagem);
-            
+                    quantidadeEstoqueMinima, quantidadeEstoqueMaxima, nomeCategoria, tamanho, embalagem);
+
             JOptionPane.showMessageDialog(this, "Produto adicionado com sucesso!");
         } catch (Mensagem e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -448,41 +433,35 @@ private CategoriaDAO categoriaDAO;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro inesperado: " + e.getMessage());
         }
-
-
     }//GEN-LAST:event_JBAdicionarProdutoActionPerformed
 
-     private double somaTotalEstoque = 0;
+    private double somaTotalEstoque = 0;
 
-      public void somaTotal() {
-      try{
-      
-      double valorProduto = Double.parseDouble(JTFValorProduto.getText());
-      double quantidadeProduto = Double.parseDouble(JTFQuantidadeProduto.getText());
-      double valorTotalProduto = valorProduto * quantidadeProduto;
-      somaTotalEstoque += valorTotalProduto;
-      }
-      catch (NumberFormatException e){
-          JOptionPane.showMessageDialog(null, "Insira dados válidos.");
-      }
-      
-    }                                                  
+    public void somaTotal() {
+        try {
 
-      public double getSomaTotalEstoque(){
-          return somaTotalEstoque;
-      }
+            double valorProduto = Double.parseDouble(JTFValorProduto.getText());
+            double quantidadeProduto = Double.parseDouble(JTFQuantidadeProduto.getText());
+            double valorTotalProduto = valorProduto * quantidadeProduto;
+            somaTotalEstoque += valorTotalProduto;
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Insira dados válidos.");
+        }
 
-    
+    }
+
+    public double getSomaTotalEstoque() {
+        return somaTotalEstoque;
+    }
+
     private void JBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBVoltarActionPerformed
-        this.dispose();
+        this.dispose(); //Para fechar esse frame
     }//GEN-LAST:event_JBVoltarActionPerformed
 
     private void JTFUniProduto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFUniProduto1ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_JTFUniProduto1ActionPerformed
 
     private void JTFUniProduto2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTFUniProduto2ActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_JTFUniProduto2ActionPerformed
 
     private void jComboBoxCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCategoriaActionPerformed
@@ -490,11 +469,11 @@ private CategoriaDAO categoriaDAO;
     }//GEN-LAST:event_jComboBoxCategoriaActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-     mostrarCategorias();
+        mostrarCategorias(); //para atualizar a tabela quando abrir o frame
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-     mostrarCategorias();
+        mostrarCategorias(); //para atualizar a tabela quando abrir o frame
     }//GEN-LAST:event_formWindowActivated
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
