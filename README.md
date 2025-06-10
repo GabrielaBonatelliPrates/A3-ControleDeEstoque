@@ -16,6 +16,14 @@ Este projeto foi desenvolvido como parte da disciplina de **Programação de Sol
 
 ---
 
+## 📐 Diagrama de Entidade e Relacionamento
+
+Representação visual usada para a identificação das relações entre os elementos do banco de dados.
+
+<img src="https://github.com/user-attachments/assets/218dbe25-2f87-41a9-8f2a-60dd2b9a0c3b" width="90%">
+
+---
+
 ## 🗃️ Banco de Dados
 
 O arquivo "[bancoDeDados.sql](./bancoDeDados.sql)"
