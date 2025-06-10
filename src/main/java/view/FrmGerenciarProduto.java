@@ -8,11 +8,19 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import model.Categoria;
 
+/**
+ *
+ * @author Davi - Wolff
+ */
 public class FrmGerenciarProduto extends javax.swing.JFrame {
 
     private ProdutoDAO produtoDAO;
     private CategoriaDAO categoriaDAO;
 
+    /**
+     *
+     * @param produtoDAO valor inicial do produtoDAO
+     */
     public FrmGerenciarProduto(ProdutoDAO produtoDAO) {
         this.produtoDAO = produtoDAO;
         this.categoriaDAO = new CategoriaDAO();
@@ -22,6 +30,9 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
         setExtendedState(FrmGerenciarProduto.MAXIMIZED_BOTH);
     }
 
+    /**
+     *
+     */
     public void mostrarTabela() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTableGerenciaProdutos.getModel(); // para manipular a tabela 
         modelo.setNumRows(0); //limpa as linhas do modelo da tabela
@@ -42,6 +53,9 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
         }
     }
 
+    /**
+     *
+     */
     public void mostrarCategorias() {
         //Cria um ArrayList para mostrar os nomes das categorias cadastrados no banco de dados
         List<Categoria> mostrarCategorias = categoriaDAO.mostrarCategorias();
@@ -753,6 +767,10 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
         this.JTFEstoqueMaximo.setText("");
     }//GEN-LAST:event_JBLimparActionPerformed
 
+    /**
+     *
+     * @param args metodo principal do FrmGerenciarProduto
+     */
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

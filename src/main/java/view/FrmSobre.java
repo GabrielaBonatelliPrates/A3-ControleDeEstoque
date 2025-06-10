@@ -2,9 +2,15 @@ package view;
 
 import javax.swing.JOptionPane;
 
-
+/** FrmSobre é um JFrame o qual explica sobre a equipe e o projeto
+ *
+ * @author Davi-Wolff
+ */
 public class FrmSobre extends javax.swing.JFrame {
 
+    /**
+     *author Davi-Wolff
+     */
     public FrmSobre() {
         initComponents();
     }
@@ -73,6 +79,12 @@ public class FrmSobre extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    /**
+     * metodo para mandar aparecer um "pop-up" com um coração
+     * 
+     *author Davi-Wolff
+     */
     private void JTASobreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTASobreMouseClicked
         JOptionPane.showMessageDialog(null, """
                                             \u2500\u2500\u2500\u2500(\u2665)(\u2665)(\u2665)\u2500\u2500\u2500\u2500(\u2665)(\u2665)(\u2665)
@@ -87,6 +99,10 @@ public class FrmSobre extends javax.swing.JFrame {
                                             \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500(\u2665)""");
     }//GEN-LAST:event_JTASobreMouseClicked
 
+    /**
+     *
+     * @param args metodo inicializador
+     */
     public static void main(String args[]) {
  
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
