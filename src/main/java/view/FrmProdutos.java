@@ -218,11 +218,9 @@ public class FrmProdutos extends javax.swing.JFrame {
 
     private void BtnExportarTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExportarTabelaActionPerformed
         //vai exportar um arquivo excel com os dados da table
-        EmiteRelatorio emiteRelatorio = new EmiteRelatorio();
-        emiteRelatorio.exportaArquivo(jTableProdutos);
+        EmiteRelatorio emiteRelatorio = new EmiteRelatorio(); 
+        emiteRelatorio.exportaArquivo(jTableProdutos); //exporta a table
         
-    //    JTable table = this.jTableProdutos; //atribui a variavel table à table de produtos
-     //  exportaTabelaParaExcel(table); //chama o metodo para passar a  table pro 
     }//GEN-LAST:event_BtnExportarTabelaActionPerformed
  
    
