@@ -36,7 +36,7 @@ public class ProdutoDAO {
         this.categoriaDAO = categoriaDAO;
     }
 
-    /**@param cadastrarProduto metodo para cadastrar novo produto 
+    /**Metodo para cadastrar novo produto 
      *
      * @param nomeProduto atributo requerido para atribuir o nome a um produto
      * @param precoUnit atributo requerido para atribuir o preço unitario a um produto
@@ -58,8 +58,8 @@ public class ProdutoDAO {
     }
 
     /**
+     * Metodo para inserir novo produto ao banco de dados
      * 
-     * @param inserirProduto metodo para inserir novo produto ao banco de dados
      * @param nomeProduto atributo requerido para atribuir o nome a um produto no banco de dados
      * @param precoUnit atributo requerido para atribuir o preço unitario a um produto no banco de dados
      * @param unidadeProduto atributo requerido para atribuir uma unidade de medida a um produto no banco de dados
@@ -121,7 +121,7 @@ public class ProdutoDAO {
 
     /**
      *
-     * @return statement.executeQuery() executa a consulta e retorna o resultado
+     * @return statement.executeQuery() executa a consulta e retorna a lista de produtos
      */
     public ResultSet listarProdutos() { //método que retorna todos os produtos do banco
         String sql = "SELECT * FROM produtos"; //consulta sql que seleciona tudo da tabela produtos
@@ -172,10 +172,8 @@ public class ProdutoDAO {
 
         return model; //retorna o modelo completo certinho
     }
-
-    //carrega um produto pelo nome
-
-    /**
+    
+    /** Método para carregar um produto pelo nome
      *
      * @param buscarPorNome metodo que busca um produto pelo nome 
      * @param nomePesquisado parametro para funcionamento correto do metodo
@@ -218,8 +216,9 @@ public class ProdutoDAO {
         return produto; //retorna o produto encontrado ou null
     }
 
-    /**
-     *
+    /** Método para atualizar produto no banco de dados
+     * 
+     * @author GabrielaBonatelliPrates
      * @param produto parametro para atualizar um objeto instanciado do tipo produto
      * @param categoria parametro para atualizar um objeto instanciado do tipo categoria
      */
@@ -249,8 +248,8 @@ public class ProdutoDAO {
         }
     }
 
-    /**
-     *
+    /** Método para atualizar produto
+     * @author GabrielaBonatelliPrates
      * @param atualizarProdutoBD metodo para atualizar produto do banco de dados
      * @param nomeProduto atributo requerido para atualizar o nome de um produto no banco de dados
      * @param precoUnit atributo requerido para atualizar o preço unitario de um produto no banco de dados
@@ -273,9 +272,7 @@ public class ProdutoDAO {
         return true;
     }
 
-    /**
-     *
-     * @param atualizarPreco metodo que atualiza o preço de um produto no banco de dados
+    /** Método que atualiza o preço de um produto no banco de dados
      * @param nome atributo requerido para a atualização de um preço
      * @param preco atributo requerido para a atualização de um preço
      * @param id atributo requerido para a atualização de um preço
@@ -297,8 +294,8 @@ public class ProdutoDAO {
         }
     }
 
-    /**
-     *
+    /** Método para deletar produto 
+     * @author GabrielaBonatelliPrates
      * @param idProduto atributo necessario para apagar um produto do banco de dados
      * @return retorna o delete de um produto efetivamente
      */
@@ -307,8 +304,8 @@ public class ProdutoDAO {
         return true;
     }
 
-    /**
-     *
+    /** Método para deletar produto do banco de dados
+     * @author GabrielaBonatelliPrates
      * @param idProduto atributo necessario para apagar um produto
      */
     public boolean deletarProduto(int idProduto) {
@@ -346,10 +343,8 @@ public class ProdutoDAO {
         produtos.add(produto); //adiciona o objeto criado à lista produtos 
         return produtos; //retorna a lista atualizada
     }
-
-    //carrega um produto pelo id
-
-    /**
+    
+    /** Método que carrega um produto pelo id
      *
      * @param idPesquisado parametro necessario para buscar um produto pelo id
      * @return retorna o produto buscado
@@ -391,9 +386,7 @@ public class ProdutoDAO {
         return produto; //retorna o produto encontrado ou null
     }
 
-    //cria a ficha do produto
-
-    /**
+    /** Método que cria a ficha do produto
      *
      * @param nomePesquisado parametro necessario para mostrar a ficha de um produto quando este é pesquisado
      * @return retorna o produto e todas as suas atribuições
@@ -432,10 +425,8 @@ public class ProdutoDAO {
 
         return fichaProduto; //retorna a ficha do produto
     }
-
-    //verifica o status do estoque do produto
-
-    /**
+    
+    /** Método que verifica o status do estoque do produto
      *
      * @param nomePesquisado parametro necessario para verificar a situação de um produto
      * @return retorna o status do produto 
@@ -463,7 +454,7 @@ public class ProdutoDAO {
         return statusProduto; //retorna o status do produto
     }
 
-    /**
+    /** Método para pegar a lista de todos os produtos
      *
      * @return retorna uma lista atualizada dos produtos
      */
@@ -499,9 +490,7 @@ public class ProdutoDAO {
         return listaAtualizada;
     }
 
-    //metodo para pegar lista de produtos numa categoria especifica
-
-    /**
+    /**Método para pegar lista de produtos numa categoria especifica
      *
      * @param categoriaPesquisada parametro para efetivar o metodo produtosCategoria
      * @return retorna os produtos cuja categoria é comum entre eles
@@ -527,8 +516,8 @@ public class ProdutoDAO {
         return produtoCategoria; //lista com produtos únicos dessa categoria
     }
 
-    /**
-     *
+    /**  Método para pegar a lista de todos os produtos em ordem alfabética
+     * @author GabrielaBonatelliPrates
      * @return retorna uma lista de produtos atualizada e organizada em ordem alfabetica
      */
     public List<Produto> produtosOrdemAlfabética() {
@@ -563,7 +552,7 @@ public class ProdutoDAO {
         return listaAtualizada;
     }
 
-    /**
+    /** 
      *
      * @return retorna produtos cuja quantidade em estoque esteja acima do maximo permitido
      */

@@ -13,9 +13,16 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import model.Categoria;
 
+/**CategoriaDAO é uma classe que faz a ligação de Categoria com o banco de dados
+ *
+ * @author laispaivaportela
+ */
 public class CategoriaDAO {
 
-    public static final List<Categoria> categorias = new ArrayList<>(); //cria lista que vai armazenar os produtos
+    /**
+     * Cria lista que vai armazenar os produtos
+     */
+    public static final List<Categoria> categorias = new ArrayList<>(); 
 
     /**
      * Lista criada para armazenar novas categorias a partir do banco de dados.
@@ -23,14 +30,27 @@ public class CategoriaDAO {
      */
     public static final List<Categoria> listaAtualizada = new ArrayList<>();
 
-    public CategoriaDAO() {
-    }
-
+    /** @param cadastrarCategoria para cadastrar uma nova categoria
+     *
+     * @param idCategoria atributo requerido para atribuir o id a uma categoria
+     * @param nomeCategoria atributo requerido para atribuir o nome a uma categoria
+     * @param tamanho atributo requerido para atribuir o tamanho a uma categoria
+     * @param embalagem atributo requerido para atribuir a embalagem de uma categoria
+     * @throws SQLException detecta erros de conexão com SQL
+     */
     public void cadastrarCategoria(int idCategoria, String nomeCategoria, String tamanho, String embalagem) throws SQLException { //vai servir pra cadastrar a categoria
         inserirCategoria(idCategoria, nomeCategoria, tamanho, embalagem);
     }
 
-    //método para colocar a categoria no banco de dados
+
+    /** @param inserirCategoria para colocar a nova categoria no banco de dados
+     *
+     * @param idCategoria atributo requerido para atribuir o id a uma categoria no banco de dados
+     * @param nomeCategoria atributo requerido para atribuir o nome a uma categoria no banco de dados
+     * @param tamanho atributo requerido para atribuir o tamanho a uma categoria no banco de dados
+     * @param embalagem atributo requerido para atribuir a embalagem de uma categoria no banco de dados
+     * @throws SQLException detecta erros de conexão com SQL
+     */
     public void inserirCategoria(int idCategoria, String nomeCategoria, String tamanho, String embalagem) throws SQLException {
         Categoria categoria = new Categoria();
         String sql = "INSERT INTO categorias (nomeCategoria, tamanho, embalagem) VALUES (?, ?, ?)"; //insere os dados na tabela
@@ -49,6 +69,10 @@ public class CategoriaDAO {
         }
     }
 
+    /** lista as categorias
+     *
+     * @return statement.executeQuery executa a consulta e retorna a lista de categorias
+     */
     public ResultSet listarCategorias() { //método que retorna todos as categorias do banco
         String sql = "SELECT * FROM categorias"; //consulta sql que seleciona tudo da tabela categorias
         try {
@@ -61,6 +85,10 @@ public class CategoriaDAO {
         }
     }
 
+    /**
+     *
+     * @return mostrarCategorias método que retorna os dados das categorias
+     */
     public List<Categoria> mostrarCategorias() { //método que retorna os nomes das categorias do banco
         List<Categoria> mostrarCategorias = new ArrayList();
         String sql = "SELECT * FROM categorias"; //consulta sql que seleciona o nome da categoria na tabela categorias
@@ -88,12 +116,23 @@ public class CategoriaDAO {
         return mostrarCategorias;
     }
 
+    /**
+     *
+     * @return odel retorna um novo modelo de tabela
+     * @throws SQLException detecta erros de conexão com o banco SQL
+     */
     public DefaultTableModel tabelaAtualizada() throws SQLException {
         ResultSet resultSet = listarCategorias(); //todas as categorias do banco
         DefaultTableModel model = montarTabela(resultSet);
         return model;
     }
 
+    /**
+     *
+     * @param resultSet serve como base para construir um modelo de tabela
+     * @return model retorna um novo modelo de tabela
+     * @throws SQLException detecta erros de conexão com o banco SQL
+     */
     public DefaultTableModel montarTabela(ResultSet resultSet) throws SQLException { //constroi um modelo de tabela com base no ResultSet
         DefaultTableModel model = new DefaultTableModel(); //cria um novo modelo de tabela
         ResultSetMetaData metaData = resultSet.getMetaData(); //pega os metadados do resultado
@@ -116,6 +155,11 @@ public class CategoriaDAO {
         return model; //retorna o modelo completo certinho
     }
     
+    /** método que busca categoria pelo id
+     *
+     * @param idCategoria parametro necessario para buscar uma categoria pelo id
+     * @return retorna a categoria buscada
+     */
     public Categoria buscarCategoriaPorId(int idCategoria) {
         String sql = "SELECT nomeCategoria, tamanho, embalagem FROM categorias WHERE idCategoria = ?";
         Categoria categoria = null;
@@ -141,7 +185,11 @@ public class CategoriaDAO {
         return categoria;
     }
 
-    //carrega uma categoria pelo nome
+    /** metodo que busca um produto pelo nome 
+     * 
+     * @param nomePesquisado parametro para funcionamento correto do metodo
+     * @return retorna a categoria pesquisada
+     */
     public Categoria buscarPorNome(String nomePesquisado) { //busca uma categoria específica no banco através do nome dele
         Connection connection = Conexao.conectar();
         Categoria objeto = null; //inicializa o objeto que será retornado
@@ -199,8 +247,7 @@ public class CategoriaDAO {
         }
     }
 
-    /**
-     * Deleta uma categoria do banco de dados com base no ID.
+    /** Deleta uma categoria do banco de dados com base no ID.
      *
      * @author Estermrn
      * @param idCategoria identificador da categoria que será deletada.
@@ -225,7 +272,11 @@ public class CategoriaDAO {
         }
     }
 
-    //cria a ficha da categoria
+    /** cria a ficha da categoria
+     * 
+     * @param nomePesquisado parametro necessario para mostrar a ficha de uma categoria quando este é pesquisado
+     * @return retorna a categoria e todas as suas atribuições
+     */
     public String fichaCategoria(String nomePesquisado) {
         Categoria categoriaPesquisada = buscarPorNome(nomePesquisado); //atribui a categoria a primeira categoria encontrado a partir do nome
 
@@ -243,7 +294,11 @@ public class CategoriaDAO {
         return fichaCategoria; //retorna a ficha do produto
     }
     
-    //busca ID da categoria
+    /** busca ID da categoria
+     * 
+     * @param categoria parametro necessario para buscar o id de uma categoria
+     * @return retorna o que foi encontrado com a pesquisa
+     */
     public int buscarIdCategoria(Categoria categoria) {
         String sql = "SELECT idCategoria FROM categorias WHERE nomeCategoria = ? "
                 + "AND tamanho = ? AND embalagem = ?";
@@ -264,7 +319,15 @@ public class CategoriaDAO {
         return -1;
     }
 
-//busca categoria completa
+
+
+    /** busca a categoria completa
+     *
+     * @param nomeCategoria parâmetro necessário para buscar os dados da categoria
+     * @param tamanho parâmetro necessário para buscar os dados da categoria
+     * @param embalagem parâmetro necessário para buscar os dados da categoria
+     * @return retorna os dados da categoria procurada
+     */
     public Categoria buscarCategoria(String nomeCategoria, String tamanho, String embalagem) {
         String sql = "SELECT idCategoria, nomeCategoria, tamanho, embalagem FROM categorias "
                 + "WHERE nomeCategoria = ? AND tamanho = ? AND embalagem = ?";
@@ -290,7 +353,14 @@ public class CategoriaDAO {
         return null;
     }
 
-    //metodo pra verificar se a categoria ja existe antes de adicionar
+    /** Metodo pra verificar se a categoria ja existe antes de adicionar
+     *
+     * @param nomeCategoria atributo necessário para execução do método
+     * @param tamanho atributo necessário para execução do método
+     * @param embalagem atributo necessário para execução do método
+     * @return retorna se a categoria já existe ou não
+     * @throws SQLException detecta erros de conexão com o banco SQL
+     */
     public boolean verificaCategoria(String nomeCategoria, String tamanho, String embalagem) throws SQLException {
         String sql = "SELECT 1 FROM categorias WHERE nomeCategoria= ? AND tamanho = ? AND embalagem = ?"; //query para buscar se existe alguma categoria com esses atributos (se achar uma para)
 
@@ -340,7 +410,11 @@ public class CategoriaDAO {
         return listaAtualizada;
     }
 
-    //criar metodo pra devolver o status da categoria
+    /**
+     *
+     * @param nomeCategoria necessário para buscar as categorias
+     * @return retorna a lista das categorias
+     */
     public List<Categoria> devolveCategorias(String nomeCategoria) {
 
         String sql = "SELECT idCategoria, nomeCategoria, tamanho, embalagem FROM produtos WHERE idCategoria = nomeCategoria";
