@@ -5,9 +5,18 @@ import dao.CategoriaDAO;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
+/**
+ * FrmGerenciarCategoria é um JFrame para atualizar e excluir categorias.
+ *
+ * @author Estermrn
+ */
 public class FrmGerenciarCategoria extends javax.swing.JFrame {
 private CategoriaDAO categoriaDAO;
 
+    /**
+     *
+     * @param categoriaDAO valor inicial de categoriaDAO
+     */
     public FrmGerenciarCategoria(CategoriaDAO categoriaDAO) {
         this.categoriaDAO = categoriaDAO;
         initComponents();
@@ -16,11 +25,13 @@ private CategoriaDAO categoriaDAO;
 
     }
 
+    /**
+     * Atualiza a tabela sempre que a janela for aberta.
+     */
     public void novaTabela() {
-        //sempre atualizar a tabela quando abrir a janela
        try {
             DefaultTableModel model = categoriaDAO.tabelaAtualizada();
-            JTGerenciarCategoria.setModel(model); //atualiza a exibição
+            JTGerenciarCategoria.setModel(model);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }    
@@ -288,6 +299,10 @@ private CategoriaDAO categoriaDAO;
         }
     }//GEN-LAST:event_JTGerenciarCategoriaMouseClicked
 
+    /**
+     *
+     * @param args método principal de FrmGerenciarCategoria
+     */
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
