@@ -23,10 +23,15 @@ import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import java.io.FileOutputStream;
 
-
+/** FrmProdutos é um JFrame para mostrar as informações e o status dos produtos
+ * @author laispaivaportela
+ */
 public class FrmProdutos extends javax.swing.JFrame {
     private ProdutoDAO produtoDAO;
 
+    /**
+     * @param produtoDAO valor inicial de produtoDAO
+     */
     public FrmProdutos(ProdutoDAO produtoDAO) {
         this.produtoDAO = produtoDAO;
         initComponents();
@@ -226,12 +231,6 @@ public class FrmProdutos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_BtnExportarTabelaActionPerformed
  
-   
-
-
-
-
-
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnExportarTabela;

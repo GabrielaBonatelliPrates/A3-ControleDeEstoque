@@ -17,8 +17,17 @@ import java.util.Scanner;
 import java.util.List;
 import dao.ProdutoDAO;
 
+/** FrmCategorias é um JFrame para mostrar as informações das categorias
+ *
+ * @author laispaivaportela
+ */
 public class FrmCategorias extends javax.swing.JFrame {
 private CategoriaDAO categoriaDAO;
+
+    /**
+     *
+     * @param categoriaDAO
+     */
     public FrmCategorias(CategoriaDAO categoriaDAO) {
         initComponents();
         setExtendedState(FrmCategorias.MAXIMIZED_BOTH);
@@ -199,6 +208,10 @@ private CategoriaDAO categoriaDAO;
         }             
     }//GEN-LAST:event_formWindowActivated
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
