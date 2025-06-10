@@ -265,7 +265,8 @@ public class Produto {
     }
     
     /**
-     *
+     *author Davi-Wolff
+     * metodo para checar se o produto esta acima/abaixo da media
      */
     public void verificaMediaAcima() {
         if (getQuantidadeEstoque() >= getEstoqueMaximo()) {
@@ -276,7 +277,8 @@ public class Produto {
     }
 
     /**
-     *
+     *author Davi-Wolff
+     * metodo para checar se o produto esta acima/abaixo da media
      */
     public void verificaMediaAbaixo() {
         if (getQuantidadeEstoque() <= getEstoqueMinimo()) {

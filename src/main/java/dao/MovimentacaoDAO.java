@@ -12,16 +12,35 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.MovimentacaoEstoque;
 
+/**
+ *
+ * @author Davi-Wolff 
+ */
 public class MovimentacaoDAO {
 
+    /**
+     * Declaração da lista que receberá as movimentações do MySQL
+     */
     public List<MovimentacaoEstoque> movimentacoes = new ArrayList<>();
+
+    /**
+     * Declaração da lista atualizada que receberá as movimentações do MySQL
+     */
     protected List<MovimentacaoEstoque> listaAtualizada = new ArrayList<>();
     private ProdutoDAO produtoDAO;
 
+    /**
+     *
+     * @param produtoDAO valor inicial do produtoDAO
+     */
     public MovimentacaoDAO(ProdutoDAO produtoDAO) {
         this.produtoDAO = produtoDAO;
     }
 
+    /**
+     *
+     * @param movimentacao cadastra uma movimentação no MySQL, com paramentro uma movimentação
+     */
     public void cadastraMovimentacao(MovimentacaoEstoque movimentacao) {
         int idProduto = movimentacao.getIdProduto();
         Date data = movimentacao.getDataMovimentacao();
@@ -45,6 +64,17 @@ public class MovimentacaoDAO {
     }
 
     //add movimentacao
+
+    /**
+     * cadastra uma movimentação no MySQL, com paramentros o idProduto,a data, a quantidade, o nomeProduto e o tipo
+     * 
+     * @param idProduto
+     * @param data
+     * @param quantidadeMovimentada
+     * @param nomeProduto
+     * @param tipoMovimentacao
+     * @throws SQLException
+     */
     public void inserirMovimentacao(int idProduto, Date data, int quantidadeMovimentada, String nomeProduto, String tipoMovimentacao) throws SQLException {
         try (Connection connection = Conexao.conectar()) {
             String sql = "INSERT INTO movimentacao_estoque (tipoMovimentacao, idProduto, nomeProduto, quantidadeMovimentada, dataMovimentacao) "
@@ -59,7 +89,12 @@ public class MovimentacaoDAO {
         }
     }
 
-    //pra retornar a lista de movimentações da tabela movimentacao
+    
+
+    /**
+     *
+     * @return lista de movimentações da tabela movimentacao
+     */
     public List<MovimentacaoEstoque> listarProdutosMovimentados() {
         List<MovimentacaoEstoque> lista = new ArrayList<>();
 
@@ -84,12 +119,21 @@ public class MovimentacaoDAO {
         return lista;
     }
 
-    //metodo p adicionar ao estoque usando ProdutoDAO
+
+    /**
+     * metodo para adicionar ao estoque usando ProdutoDAO com os parametros o idProduto e a quantidade
+     * @param idProduto
+     * @param quantidadeAdicionar
+     */
     public void adicionarQuantidade(int idProduto, int quantidadeAdicionar) {
         produtoDAO.adicionarQuantidade(idProduto, quantidadeAdicionar); // repassa a chamada
     }
 
-    //metodo p retirar do estoque usando ProdutoDAO
+    /**
+     * metodo p retirar do estoque usando ProdutoDAO com os parametros o idProduto e a quantidade
+     * @param idProduto
+     * @param quantidadeRetirar
+     */
     public void retirarQuantidade(int idProduto, int quantidadeRetirar) {
         produtoDAO.retirarQuantidade(idProduto, quantidadeRetirar); // repassa a chamada
     }
