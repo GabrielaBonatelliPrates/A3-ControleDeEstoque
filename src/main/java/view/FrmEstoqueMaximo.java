@@ -8,6 +8,7 @@ import controller.EmiteRelatorio;
 
 /** FrmEstoqueMaximo é um JFrame que mostra os produtos que estão com seus estoques acima do máximo
  *
+ * @author Estermrn
  * @author Davi-Wolff
  */
 
