@@ -25,12 +25,7 @@ public class Conexao {
             String senha = "senha"; //senha do banco de dados
 
             connection = DriverManager.getConnection(url, user, senha); //vai tentar conectar com o banco
-
-            if (connection != null) {
-                System.out.println("Conectado!"); //se conseguir conectar vai enviar pro terminal que está conectado
-            } else {
-                System.out.println("Não Conectado!"); //se não conseguir conectar vai enviar pro terminal que está não conectado
-            }
+            
             return connection; //retorna o objeto de conexão
         } catch (ClassNotFoundException e) {
             System.out.println("Driver não encontrado."); //se não encontrar o drive vai enviar pro terminal que ele não foi encontrado
