@@ -31,7 +31,7 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
     
     /**
      * @author laispaivaportela
-     * @param mostraTabela Método para carregar na table os dados para o relatório
+     *  Método para carregar na table os dados para o relatório
      */
     public void mostraTabela() {
 

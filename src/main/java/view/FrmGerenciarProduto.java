@@ -32,7 +32,7 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
     }
 
     /**
-     *@param mostrarTabela carrega na table todos os produtos cadastrados 
+     *Método que carrega na table todos os produtos cadastrados 
      */
     public void mostrarTabela() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTableGerenciaProdutos.getModel(); // para manipular a tabela 
@@ -55,7 +55,7 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
     }
 
     /**
-     *@param mostrarCategoria carrega na combo box todas as categorias cadastradas
+     * Método que carrega na combo box todas as categorias cadastradas
      */
     public void mostrarCategorias() {
         //Cria um ArrayList para mostrar os nomes das categorias cadastrados no banco de dados

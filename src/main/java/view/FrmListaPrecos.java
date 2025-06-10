@@ -26,7 +26,7 @@ public class FrmListaPrecos extends javax.swing.JFrame {
     }
 
     /**
-     *@param mostrarTabela Método para carregar na table os dados para o relatório
+     *Método para carregar na table os dados para o relatório
      */
     public void mostrarTabela() {
         modelo.setRowCount(0);

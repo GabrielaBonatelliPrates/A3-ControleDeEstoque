@@ -31,7 +31,7 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
     /** 
      * @author GabrielaBonatelliPrates 
      * 
-     * @param mostrarCategorias carrega na combo box todas as categorias cadastradas
+     * Método paracarrega na combo box todas as categorias cadastradas
      */
     public void mostrarCategorias() {
         //Cria um ArrayList para mostrar os nomes das categorias cadastrados no banco de dados
@@ -462,7 +462,7 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
     private double somaTotalEstoque = 0;
 
     /**
-     * @param somaTotal método que calcula a soma total dos produtos
+     * Método que calcula a soma total dos produtos
      */
     public void somaTotal() {
         try {

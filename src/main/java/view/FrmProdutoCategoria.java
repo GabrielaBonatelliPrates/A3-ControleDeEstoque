@@ -32,7 +32,7 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
     /**
      * @author laispaivaportela
      * 
-     * @param carregaTabela Método para carregar na table os dados para o relatório
+     * Método para carregar na table os dados para o relatório
      */
     public void carregaTabela() {
         modelo.setRowCount(0); //limpa a tabela
