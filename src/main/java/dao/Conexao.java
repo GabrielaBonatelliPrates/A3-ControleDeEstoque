@@ -12,7 +12,7 @@ public class Conexao {
 
     /**
      * @author laispaivaportela
-     * @return
+     * @return connection retorna a conexão efetivada corretamente
      */
     public static Connection conectar() {
         Connection connection = null;
