@@ -68,11 +68,11 @@ public class MovimentacaoDAO {
     /**
      * cadastra uma movimentação no MySQL, com paramentros o idProduto,a data, a quantidade, o nomeProduto e o tipo
      * 
-     * @param idProduto
-     * @param data
-     * @param quantidadeMovimentada
-     * @param nomeProduto
-     * @param tipoMovimentacao
+     * @param idProduto valor inicial para o id do produto
+     * @param data valor inicial para a data
+     * @param quantidadeMovimentada valor inicial para a quantidade movimentada
+     * @param nomeProduto valor inicial para o nome produto
+     * @param tipoMovimentacao valor inicial para o tipo da movimentacao
      * @throws SQLException
      */
     public void inserirMovimentacao(int idProduto, Date data, int quantidadeMovimentada, String nomeProduto, String tipoMovimentacao) throws SQLException {
@@ -122,8 +122,8 @@ public class MovimentacaoDAO {
 
     /**
      * metodo para adicionar ao estoque usando ProdutoDAO com os parametros o idProduto e a quantidade
-     * @param idProduto
-     * @param quantidadeAdicionar
+     * @param idProduto valor inicial para o id do produto
+     * @param quantidadeAdicionar valor inicial para a quantidade a ser adicionada
      */
     public void adicionarQuantidade(int idProduto, int quantidadeAdicionar) {
         produtoDAO.adicionarQuantidade(idProduto, quantidadeAdicionar); // repassa a chamada
@@ -131,8 +131,8 @@ public class MovimentacaoDAO {
 
     /**
      * metodo p retirar do estoque usando ProdutoDAO com os parametros o idProduto e a quantidade
-     * @param idProduto
-     * @param quantidadeRetirar
+     * @param idProduto valor inicial para o id do produto
+     * @param quantidadeRetirar valor inicial para a quantidade a ser retirada
      */
     public void retirarQuantidade(int idProduto, int quantidadeRetirar) {
         produtoDAO.retirarQuantidade(idProduto, quantidadeRetirar); // repassa a chamada
