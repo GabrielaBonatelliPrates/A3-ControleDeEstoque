@@ -17,6 +17,10 @@ import java.sql.Connection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/** FrmMenuPrincipal é um JFrame inicial para mostrar todas as disponibilidades do sistema
+ *
+ * @author GabrielaBonatelliPrates
+ */
 public class FrmMenuPrincipal extends javax.swing.JFrame {
     
     private ProdutoDAO produtoDAO;
@@ -25,6 +29,12 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     
     FrmRelatorios telaRelatorio = new FrmRelatorios(produtoDAO); //ainda vai adicionar implementação
     
+    /**
+     *
+     * @param produtoDAO valor inicial de produtoDAO
+     * @param categoriaDAO valor inicial de categoriaDAO
+     * @param movimentacaoDAO valor inicial de movimentacaoDAO
+     */
     public FrmMenuPrincipal(ProdutoDAO produtoDAO, CategoriaDAO categoriaDAO, MovimentacaoDAO movimentacaoDAO) {
         initComponents();
        setSize(1920, 1080);
@@ -37,6 +47,10 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
     }
     
+    /**
+     *@author laispaivaportela
+     *@param exibeStatus método para mostrar o status do sistema 
+     */
     public void exibeStatus() {
         int numeroProdutos = produtoDAO.pegarProdutos().size(); //recebe o total de produtos (o tamanho da lista que pega os produtos presente no bd)
         int numeroCategorias = categoriaDAO.mostrarCategorias().size();  //recebe o total de categotorias (o tamanho da lista que pega as categorias presente no bd)
@@ -58,6 +72,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }
 
     //deixa os JOptionPanes da classe com formatação padrão (mais elegante visualmente) 
+
+    /**
+     *@author laispaivaportela 
+     *@param editaJOption método para embelezar o JOption
+     */
     public void editaJOption() {
         
         
@@ -86,6 +105,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }
     
     //cria mensagem formatada pro JOption Pane (showMessage)
+
+    /**
+     *@author laispaivaportela
+     *@param mensagem 
+     */
     public void mensagem(String mensagem) {
         String titulo = "Controle de Estoque";
          ImageIcon icone = null;
@@ -101,7 +125,12 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, mensagem, titulo, JOptionPane.INFORMATION_MESSAGE, icone); //JOptionPane formatado
     }
     
-      public int mensagemOpcoes(String[] opcoes) {
+    /**
+     *@author laispaivaportela
+     *@param opcoes
+     *@return
+     */
+    public int mensagemOpcoes(String[] opcoes) {
         String titulo = "Controle de Estoque";
         String mensagem = "Escolha uma opção";
         ImageIcon icone = null;

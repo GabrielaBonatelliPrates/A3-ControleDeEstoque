@@ -150,7 +150,12 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         
     }//GEN-LAST:event_formWindowOpened
-
+    /**
+     * Chama a classe que emite os relatórios com os dados da tabela de estoque mínimo.
+     * 
+     * @author Estermrn
+     * @param evt evento ao clicar no botão.
+     */
     private void JBExportarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBExportarRelatorioActionPerformed
         EmiteRelatorio emiteRelatorio = new EmiteRelatorio();
         emiteRelatorio.exportaArquivo(JTEstoqueMinimo);     //metodo que emite o relatorio
