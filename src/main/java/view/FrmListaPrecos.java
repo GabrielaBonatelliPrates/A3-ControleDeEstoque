@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.Produto;
 
-/** FrmGerenciarProduto é um JFrame para mostrar o relatório de lista de preços
+/** FrmListaPrecos é um JFrame para mostrar o relatório de lista de preços
  *
  * @author GabrielaBonatelliPrates
  */
