@@ -7,14 +7,20 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.Produto;
 
-/*
-author Davi-Wolff
-*/
+/** FrmEstoqueMinimo é um JFrame que mostra os produtos que estão com seus estoques abaixo do minimo
+ *
+ * @author Davi-Wolff
+ */
+
 
 public class FrmEstoqueMinimo extends javax.swing.JFrame {
 private ProdutoDAO produtoDAO;
 private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nome", "Estoque Atual", "Estoque Mínimo"}, 0); //cria um modelo para a tabela
  
+    /**
+     *
+     * @param produtoDAO valor inicial do produtoDAO
+     */
     public FrmEstoqueMinimo(ProdutoDAO produtoDAO) {
         this.produtoDAO = produtoDAO;
         initComponents();
@@ -22,6 +28,9 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
         setExtendedState(FrmEstoqueMinimo.MAXIMIZED_BOTH);
     }
     
+    /**
+     *author Davi-Wolff
+     */
     public void carregaTabela() {
          modelo.setRowCount(0); //limpa a tabela
         modelo.setNumRows(0); //posiciona na primeira linha da tabela
@@ -147,6 +156,10 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
         emiteRelatorio.exportaArquivo(JTEstoqueMinimo);     //metodo que emite o relatorio
     }//GEN-LAST:event_JBExportarRelatorioActionPerformed
 
+    /**
+     *
+     * @param args método principal do EstoqueMinimo
+     */
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

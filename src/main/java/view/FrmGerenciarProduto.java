@@ -491,6 +491,11 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
 
     }//GEN-LAST:event_JTFUnidadeProdutoActionPerformed
 
+    
+/** método para reajustar o preco dos produtos com base em uma porcentagem pedida
+ *
+ * @author Davi-Wolff
+ */
     private void JBReajustarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBReajustarProdutoActionPerformed
         List<Produto> listaProdutos = produtoDAO.pegarProdutos();
         try {
@@ -521,6 +526,10 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
 
     }//GEN-LAST:event_JBReajustarProdutoActionPerformed
 
+/** método para reajustar o preco dos produtos com base em uma porcentagem pedida
+ *
+ * @author Davi-Wolff
+ */
     private void JBReajustarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBReajustarEstoqueActionPerformed
         List<Produto> listaProdutos = produtoDAO.pegarProdutos();
 

@@ -6,14 +6,20 @@ import javax.swing.table.DefaultTableModel;
 import model.Produto;
 import controller.EmiteRelatorio;
 
-/*
-author Davi-Wolff
-*/
+/** FrmEstoqueMaximo é um JFrame que mostra os produtos que estão com seus estoques acima do máximo
+ *
+ * @author Davi-Wolff
+ */
+
 
 public class FrmEstoqueMaximo extends javax.swing.JFrame {
 private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nome", "Estoque Atual", "Estoque Máximo"}, 0); //cria um modelo para a tabela
 private ProdutoDAO produtoDAO;
 
+    /**
+     *
+     * @param produtoDAO valor inicial do produtoDAO
+     */
     public FrmEstoqueMaximo(ProdutoDAO produtoDAO) {
         this.produtoDAO = produtoDAO;
         initComponents();
@@ -21,6 +27,9 @@ private ProdutoDAO produtoDAO;
         setExtendedState(FrmEstoqueMaximo.MAXIMIZED_BOTH);
     }
 
+    /**
+     *@author Davi-Wolff
+     */
     public void carregaTabela() {
         
         modelo.setRowCount(0); //limpa a tabela
@@ -141,6 +150,10 @@ private ProdutoDAO produtoDAO;
         emiteRelatorio.exportaArquivo(JTEstoqueMaximo); //metodo que emite o relatorio
     }//GEN-LAST:event_JBExportarTabelaActionPerformed
 
+    /**
+     *
+     * @param args método principal do EstoqueMaximo
+     */
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

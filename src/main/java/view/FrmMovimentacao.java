@@ -14,12 +14,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Produto;
 
+/** FrmMovimentacao é um JFrame que da update na quantidade dos produtos no estoque.
+ *
+ * @author Davi-Wolff
+ */
+
 public class FrmMovimentacao extends javax.swing.JFrame {
     private ProdutoDAO produtoDAO;
     private Produto produto;
     private MovimentacaoDAO movimentacaoDAO;
     private List<Produto> produtos;
 
+    /**
+     *
+     * @param produtoDAO valor inicial do produtoDAO
+     * @param movimentacaoDAO   valor inicial do movimentacaoDAO
+     */
     public FrmMovimentacao(ProdutoDAO produtoDAO, MovimentacaoDAO movimentacaoDAO) {
         initComponents();
         this.produto = new Produto();
@@ -265,6 +275,10 @@ public class FrmMovimentacao extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JBRemoverActionPerformed
 
+    /**
+     *
+     * @param args metodo principal do FrmMoviemntacao
+     */
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
