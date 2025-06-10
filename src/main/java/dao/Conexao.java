@@ -4,8 +4,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**classe Conexao é uma classe que conecta o sistema com o banco de dados
+ *
+ * @author Mateo-Padilla
+ */
 public class Conexao {
 
+    /**
+     * @author laispaivaportela
+     * @return
+     */
     public static Connection conectar() {
         Connection connection = null;
         try {
