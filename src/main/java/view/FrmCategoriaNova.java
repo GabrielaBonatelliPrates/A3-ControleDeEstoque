@@ -7,13 +7,25 @@ import model.Categoria;
 import dao.ProdutoDAO;
 import dao.CategoriaDAO;
 
+/**
+ * FrmCategoriaNova é um JFrame usado para cadastrar novas categorias.
+ * @author Estermrn
+ * @author GabrielaBonatelliPrates
+ */
 public class FrmCategoriaNova extends javax.swing.JFrame {
     private ProdutoDAO produtoDAO;
     private CategoriaDAO categoriaDAO;
 
+    /**
+     * Lista que armazena as categorias cadastradas.
+     */
     public List<Categoria> categorias = new ArrayList();
     
-
+    /**
+     *
+     * @param produtoDAO valor inicial de ProdutoDAO
+     * @param categoriaDAO valor inicial de categoriaDAO
+     */
     public FrmCategoriaNova(ProdutoDAO produtoDAO, CategoriaDAO categoriaDAO) {
         this.produtoDAO = produtoDAO;
         this.categoriaDAO = categoriaDAO;
@@ -167,7 +179,7 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
     }//GEN-LAST:event_JTFNomeCategoriaActionPerformed
 
     private void JBVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JBVoltarMouseClicked
-        this.dispose();
+        this.dispose();//Fecha este JFrame.
     }//GEN-LAST:event_JBVoltarMouseClicked
 
     private void JBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastrarActionPerformed
@@ -240,6 +252,10 @@ public class FrmCategoriaNova extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_JBVoltarActionPerformed
 
+    /**
+     *
+     * @param args método principal de FrmCategoriaNova
+     */
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
