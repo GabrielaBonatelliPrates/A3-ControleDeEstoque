@@ -8,11 +8,19 @@ import model.Produto;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+/**FrmBalancoFinanceiro é um JFrame que mostra a relação de balanço financeiro entre produtos e valor de estoque 
+ *
+ * @author Mateo-Padilla
+ */
 public class FrmBalancoFinanceiro extends javax.swing.JFrame {
     private ProdutoDAO produtoDAO;
     private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Produto", "Quantidade", "Preço Unitário (R$)", "Preço Total Produto (R$)", "Preço Total Estoque (R$)"}, 0);
     private double valorTotalEstoque;
 
+    /**
+     *
+     * @param produtoDAO valor inicial de produtoDAO
+     */
     public FrmBalancoFinanceiro(ProdutoDAO produtoDAO) {
         this.produtoDAO = produtoDAO;
         initComponents();
@@ -21,6 +29,9 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
         
     }
     
+    /**
+     * @author laispaivaportela
+     */
     public void mostraTabela() {
 
         modelo.setRowCount(0); //limpa a tabela
@@ -190,6 +201,10 @@ public class FrmBalancoFinanceiro extends javax.swing.JFrame {
         emiteRelatorio.exportaArquivo(JTBalancoFinanceiro);
     }//GEN-LAST:event_JBEmitirRelatorioActionPerformed
 
+    /**
+     *
+     * @param args metodo principal do JFrame 
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
