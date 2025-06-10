@@ -145,10 +145,15 @@ private ProdutoDAO produtoDAO;
     private void JBVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBVoltarActionPerformed
         this.dispose();
     }//GEN-LAST:event_JBVoltarActionPerformed
-
+    /**
+     * Chama a classe que emite os relatórios com os dados da tabela de estoque máximo.
+     * 
+     * @author Estermrn
+     * @param evt evento ao clicar botão.
+     */
     private void JBExportarTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBExportarTabelaActionPerformed
         EmiteRelatorio emiteRelatorio = new EmiteRelatorio();
-        emiteRelatorio.exportaArquivo(JTEstoqueMaximo); //metodo que emite o relatorio
+        emiteRelatorio.exportaArquivo(JTEstoqueMaximo);
     }//GEN-LAST:event_JBExportarTabelaActionPerformed
 
     /**
