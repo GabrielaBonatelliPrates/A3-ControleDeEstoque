@@ -15,16 +15,39 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import model.Categoria;
 
+/**ProdutoDAO é uma classe que implementa um novo produto ao banco de dados
+ *
+ * @author laispaivaportela
+ */
 public class ProdutoDAO {
 
+    /**
+     *declaração e instancia de atributos
+     */
     protected CategoriaDAO categoriaDAO;
     protected List<Produto> produtos = new ArrayList<>(); //cria lista que vai armazenar os produtos da sessão (caso haja algum problema no banco de dados)
     protected List<Produto> listaAtualizada = new ArrayList<>(); //cria lista que vai armazenar os produtos a partir do banco de dados
 
+    /**
+     *
+     * @param categoriaDAO valor inicial de categoriaDAO
+     */
     public ProdutoDAO(CategoriaDAO categoriaDAO) {
         this.categoriaDAO = categoriaDAO;
     }
 
+    /**@param cadastrarProduto metodo para cadastrar novo produto 
+     *
+     * @param nomeProduto atributo requerido para atribuir o nome a um produto
+     * @param precoUnit atributo requerido para atribuir o preço unitario a um produto
+     * @param unidadeProduto atributo requerido para atribuir uma unidade de medida a um produto
+     * @param quantidadeEstoque atributo requerido para atribuir a quantidade em estoque a um produto
+     * @param estoqueMinimo atributo requerido para atribuir a quantidade em estoque minima a um produto
+     * @param estoqueMaximo atributo requerido para atribuir a quantidade em estoque maxima a um produto
+     * @param nomeCategoria atributo requerido para atribuir o nome de uma categoria a um produto
+     * @param tamanho atributo requerido para atribuir o tamanho de uma categoria a um produto
+     * @param embalagem atributo requerido para atribuir a embalagem de uma categoria a um produto
+     */
     public void cadastrarProduto(String nomeProduto, double precoUnit, String unidadeProduto,
             int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo,
             String nomeCategoria, String tamanho, String embalagem) { //vai servir pra cadastrar produtos com quando a classe categoria tiver implementada certinho
@@ -34,6 +57,19 @@ public class ProdutoDAO {
                 estoqueMinimo, estoqueMaximo, nomeCategoria, tamanho, embalagem);
     }
 
+    /**
+     * 
+     * @param inserirProduto metodo para inserir novo produto ao banco de dados
+     * @param nomeProduto atributo requerido para atribuir o nome a um produto no banco de dados
+     * @param precoUnit atributo requerido para atribuir o preço unitario a um produto no banco de dados
+     * @param unidadeProduto atributo requerido para atribuir uma unidade de medida a um produto no banco de dados
+     * @param quantidadeEstoque atributo requerido para atribuir a quantidade em estoque a um produto no banco de dados
+     * @param estoqueMinimo atributo requerido para atribuir a quantidade em estoque minima a um produto no banco de dados
+     * @param estoqueMaximo atributo requerido para atribuir a quantidade em estoque maxima a um produto no banco de dados
+     * @param nomeCategoria atributo requerido para atribuir o nome de uma categoria a um produto no banco de dados
+     * @param tamanho atributo requerido para atribuir o tamanho de uma categoria a um produto no banco de dados
+     * @param embalagem atributo requerido para atribuir a embalagem de uma categoria a um produto no banco de dados
+     */
     public void inserirProduto(String nomeProduto, double precoUnit, String unidadeProduto, int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo, String nomeCategoria, String tamanho, String embalagem) {
 
         String sql = "INSERT INTO produtos (nome, preco_unitario, unidade, estoque_atual, estoque_minimo, estoque_maximo, nome_categoria, tamanho, embalagem) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"; //insere os dados na tabela
@@ -75,30 +111,48 @@ public class ProdutoDAO {
         }
     }
 
+    /**
+     *
+     * @return produtos retorna uma lista de produtos
+     */
     public List emiteLista() {
         return produtos; //retorna a lista 
     }
 
+    /**
+     *
+     * @return statement.executeQuery() executa a consulta e retorna o resultado
+     */
     public ResultSet listarProdutos() { //método que retorna todos os produtos do banco
         String sql = "SELECT * FROM produtos"; //consulta sql que seleciona tudo da tabela produtos
         try {
             Connection connection = Conexao.conectar();
             PreparedStatement statement = connection.prepareStatement(sql); //prepara a consulta
-            return statement.executeQuery(); //executa a consulta e retorna o resultado
+            return statement.executeQuery();
         } catch (SQLException ex) { //em caso de erro
             Logger.getLogger(Conexao.class.getName()).log(Level.SEVERE, null, ex); //log do erro
             return null; //retorna nulo se ocorrer falha
         }
     }
 
+    /**
+     *
+     * @throws SQLException detecta erros de conexão com o banco SQL
+     */
     public DefaultTableModel tabelaAtualizada() throws SQLException {
         ResultSet resultSet = listarProdutos(); //todos os produtos do banco
         DefaultTableModel model = montarTabela(resultSet);
         return model;
     }
 
+    /**
+     *
+     * @param resultSet serve como base para construir um modelo de tabela
+     * @return model retorna um novo modelo de tabela
+     * @throws SQLException detecta erros de conexão com SQL
+     */
     public DefaultTableModel montarTabela(ResultSet resultSet) throws SQLException { //constroi um modelo de tabela com base no ResultSet
-        DefaultTableModel model = new DefaultTableModel(); //cria um novo modelo de tabela
+        DefaultTableModel model = new DefaultTableModel();
         ResultSetMetaData metaData = resultSet.getMetaData(); //pega os metadados do resultado
         int columnCount = metaData.getColumnCount(); //conta o numero de colunas
 
@@ -120,6 +174,13 @@ public class ProdutoDAO {
     }
 
     //carrega um produto pelo nome
+
+    /**
+     *
+     * @param buscarPorNome metodo que busca um produto pelo nome 
+     * @param nomePesquisado parametro para funcionamento correto do metodo
+     * @return produto retorna o produto pesquisado
+     */
     public Produto buscarPorNome(String nomePesquisado) { //busca um produto específico no banco através do nome dele
         Connection connection = Conexao.conectar();
         Produto produto = null; //inicializa o objeto que será retornado
@@ -157,6 +218,11 @@ public class ProdutoDAO {
         return produto; //retorna o produto encontrado ou null
     }
 
+    /**
+     *
+     * @param produto parametro para atualizar um objeto instanciado do tipo produto
+     * @param categoria parametro para atualizar um objeto instanciado do tipo categoria
+     */
     public boolean atualizarProduto(Produto produto, Categoria categoria) {
         String sql = "UPDATE produtos set nome = ? , preco_unitario = ? ,unidade = ? ,estoque_atual = ? ,estoque_minimo = ? ,estoque_maximo = ? , nome_categoria = ? ,tamanho = ? ,embalagem = ? WHERE idProduto = ?";
         try {
@@ -183,6 +249,20 @@ public class ProdutoDAO {
         }
     }
 
+    /**
+     *
+     * @param atualizarProdutoBD metodo para atualizar produto do banco de dados
+     * @param nomeProduto atributo requerido para atualizar o nome de um produto no banco de dados
+     * @param precoUnit atributo requerido para atualizar o preço unitario de um produto no banco de dados
+     * @param unidadeProduto atributo requerido para atualizar a unidade de medida de um produto no banco de dados
+     * @param quantidadeEstoque atributo requerido para atualizar a quantidade em estoque de um produto no banco de dados
+     * @param estoqueMinimo atributo requerido para atualizar a quantidade minima em estoque de um produto no banco de dados
+     * @param estoqueMaximo atributo requerido para atualizar a quantidade maxima em estoque de um produto no banco de dados
+     * @param nomeCategoria atributo requerido para atualizar o nome da categoria de um produto no banco de dados
+     * @param tamanho atributo requerido para atualizar o tamanho de um produto no banco de dados
+     * @param embalagem atributo requerido para atualizar a embalagem de um produto no banco de dados
+     * @return retorna a atualização do produto efetivamente 
+     */
     public boolean atualizarProdutoBD(int idProduto, String nomeProduto, double precoUnit, String unidadeProduto, int quantidadeEstoque,
             int estoqueMinimo, int estoqueMaximo, String nomeCategoria, String tamanho, String embalagem) {
         Categoria categoria = new Categoria(nomeCategoria, tamanho, embalagem);
@@ -193,6 +273,13 @@ public class ProdutoDAO {
         return true;
     }
 
+    /**
+     *
+     * @param atualizarPreco metodo que atualiza o preço de um produto no banco de dados
+     * @param nome atributo requerido para a atualização de um preço
+     * @param preco atributo requerido para a atualização de um preço
+     * @param id atributo requerido para a atualização de um preço
+     */
     public boolean atualizarPreco(String nome, Double preco, int id) {
         String sql = "UPDATE produtos set nome = ?, preco_unitario = ? WHERE idProduto = ?";
         try (Connection connection = Conexao.conectar(); PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -210,11 +297,20 @@ public class ProdutoDAO {
         }
     }
 
+    /**
+     *
+     * @param idProduto atributo necessario para apagar um produto do banco de dados
+     * @return retorna o delete de um produto efetivamente
+     */
     public boolean deletarProdutoBD(int idProduto) {
         deletarProduto(idProduto);
         return true;
     }
 
+    /**
+     *
+     * @param idProduto atributo necessario para apagar um produto
+     */
     public boolean deletarProduto(int idProduto) {
         String sql = "DELETE FROM produtos WHERE idProduto = ?";
         try {
@@ -233,6 +329,18 @@ public class ProdutoDAO {
         }
     }
 
+    /**
+     *
+     * @param nomeProduto atributo necessário para inserir o nome de um produto a uma lista
+     * @param id atributo necessário para inserir o id de um produto a uma lista
+     * @param precoUnit atributo necessário para inserir o preço unitario de um produto a uma lista
+     * @param unidadeProduto atributo necessário para inserir a unidade de medida de um produto a uma lista
+     * @param quantidadeEstoque atributo necessário para inserir a quantidade em estoque de um produto a uma lista
+     * @param estoqueMinimo atributo necessário para inserir a quantidade minima em estoque de um produto a uma lista
+     * @param estoqueMaximo atributo necessário para inserir a quantidade minima em estoque de um produto a uma lista
+     * @param categoria atributo necessário para inserir a categoria de um produto a uma lista
+     * @return insere o produto à lista
+     */
     public List<Produto> insereLista(String nomeProduto, int id, double precoUnit, String unidadeProduto, int quantidadeEstoque, int estoqueMinimo, int estoqueMaximo, Categoria categoria) {
         Produto produto = new Produto(nomeProduto, id, precoUnit, unidadeProduto, quantidadeEstoque, estoqueMinimo, estoqueMaximo, categoria);
         produtos.add(produto); //adiciona o objeto criado à lista produtos 
@@ -240,6 +348,12 @@ public class ProdutoDAO {
     }
 
     //carrega um produto pelo id
+
+    /**
+     *
+     * @param idPesquisado parametro necessario para buscar um produto pelo id
+     * @return retorna o produto buscado
+     */
     public Produto buscarPorId(int idPesquisado) { //busca um produto específico no banco através do id
         Connection connection = Conexao.conectar();
         Produto produto = null; //inicializa o objeto que será retornado
@@ -278,6 +392,12 @@ public class ProdutoDAO {
     }
 
     //cria a ficha do produto
+
+    /**
+     *
+     * @param nomePesquisado parametro necessario para mostrar a ficha de um produto quando este é pesquisado
+     * @return retorna o produto e todas as suas atribuições
+     */
     public String fichaProduto(String nomePesquisado) {
         Produto produtoPesquisado = buscarPorNome(nomePesquisado); //atribui o produto ao produto primeiro produto encontrado a partir do nome
 
@@ -314,6 +434,12 @@ public class ProdutoDAO {
     }
 
     //verifica o status do estoque do produto
+
+    /**
+     *
+     * @param nomePesquisado parametro necessario para verificar a situação de um produto
+     * @return retorna o status do produto 
+     */
     public String verificaProduto(String nomePesquisado) {
         Produto produtoPesquisado = buscarPorNome(nomePesquisado); //atribui o produto ao produto primeiro produto encontrado a partir do nome
         int estoqueAtual = produtoPesquisado.getQuantidadeEstoque();
@@ -337,6 +463,10 @@ public class ProdutoDAO {
         return statusProduto; //retorna o status do produto
     }
 
+    /**
+     *
+     * @return retorna uma lista atualizada dos produtos
+     */
     public List<Produto> pegarProdutos() {
         listaAtualizada.clear();
 
@@ -370,6 +500,12 @@ public class ProdutoDAO {
     }
 
     //metodo para pegar lista de produtos numa categoria especifica
+
+    /**
+     *
+     * @param categoriaPesquisada parametro para efetivar o metodo produtosCategoria
+     * @return retorna os produtos cuja categoria é comum entre eles
+     */
     public List<Produto> produtosCategoria(Categoria categoriaPesquisada) {
         List<Produto> todosProdutos = pegarProdutos(); //lista com todos os produtos
         List<Produto> produtoCategoria = new ArrayList<>(); //arraylist que vai contem os produtos numa mesma categoria (p posteriormente pegar o tamanho dessa lista)
@@ -391,6 +527,10 @@ public class ProdutoDAO {
         return produtoCategoria; //lista com produtos únicos dessa categoria
     }
 
+    /**
+     *
+     * @return retorna uma lista de produtos atualizada e organizada em ordem alfabetica
+     */
     public List<Produto> produtosOrdemAlfabética() {
         listaAtualizada.clear();
 
@@ -423,6 +563,10 @@ public class ProdutoDAO {
         return listaAtualizada;
     }
 
+    /**
+     *
+     * @return retorna produtos cuja quantidade em estoque esteja acima do maximo permitido
+     */
     public List<Produto> pegarProdutosAcimaMaximo() {
         List<Produto> verificarProdutos = pegarProdutos();
         List<Produto> produtosAcima = new ArrayList<>();
@@ -434,6 +578,10 @@ public class ProdutoDAO {
         return produtosAcima;
     }
 
+    /**
+     *
+     * @return retorna produtos cuja quantidade em estoque esteja abaixo do minimo permitido
+     */
     public List<Produto> pegarProdutosAbaixoMinimo() {
         List<Produto> verificarProdutos = pegarProdutos();
         List<Produto> produtosAbaixo = new ArrayList<>();
@@ -445,6 +593,10 @@ public class ProdutoDAO {
         return produtosAbaixo;
     }
 
+    /**
+     *
+     * @return retorna o valor total do estoque
+     */
     public double valorTotal() {
         double valorTotalEstoque = 0;
         List<Produto> todosProdutos = pegarProdutos();
@@ -455,6 +607,11 @@ public class ProdutoDAO {
     }
     //metodo para aumentar quantidade ao estoque do produto
 
+    /**
+     *
+     * @param idProduto parametro necessario para que o metodo funcione
+     * @param quantidadeAdicionar parametro necessario para que o metodo funcione
+     */
     public void adicionarQuantidade(int idProduto, int quantidadeAdicionar) {
         String sql = "UPDATE produtos SET estoque_atual = estoque_atual + ? WHERE idProduto = ?";
 
@@ -469,6 +626,12 @@ public class ProdutoDAO {
     }
 
     //metodo para diminuir quantidade do estoque do produto
+
+    /**
+     *
+     * @param idProduto parametro necessario para que o metodo funcione
+     * @param quantidadeRetirar parametro necessario para que o metodo funcione
+     */
     public void retirarQuantidade(int idProduto, int quantidadeRetirar) {
         String sql = "UPDATE produtos SET estoque_atual = estoque_atual - ? WHERE idProduto = ?";
 
