@@ -27,10 +27,18 @@ import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableModel;
 
-
+/** Classe EmitirRelatorio é uma classe feita para emitir relatórios arquivos em pdf/word/excel
+ *
+ * @author laispaivaportela
+ */
 public class EmiteRelatorio {
 
     //exporta a table pra um arquivo (pdf, xlsx ou docx)
+
+    /**
+     * metodo que exporta o arquivo
+     * @param table valor inicial para o table
+     */
     public void exportaArquivo(JTable table) {
         //file chooser (seletor de ficheiros) - elemento que permite escolher um ficheiro 
         JFileChooser chooser = new JFileChooser(); //cria um seletor de arquivos
@@ -71,6 +79,12 @@ public class EmiteRelatorio {
     }
 
     //exporta os dados da table para uma planilha excel (.xlsx)
+
+    /**
+     * metodo que exporta tabela para o excel
+     * @param table valor inicial para o table
+     * @param arquivo valor inicial para o arquivo
+     */
     public void exportaTabelaParaExcel(JTable table, File arquivo) {
         try (Workbook workbook = new XSSFWorkbook()) { //cria uma nova planilha do tipo .xlsx
             Sheet sheet = workbook.createSheet("Produtos"); //cria a aba chamada "Produtos"
@@ -118,6 +132,12 @@ public class EmiteRelatorio {
     }
 
     //exporta os dados da table para um arquivo pdf usando a biblioteca iText
+
+    /**
+     * metodo que exporta tabela para o pdf
+     * @param arquivo valor inicial para o arquivo
+     * @param table valor inicial para o table
+     */
     public void exportarParaPDF(File arquivo, JTable table) {
         try {
             Document document = new Document(); //cria um documento pdf
@@ -162,6 +182,12 @@ public class EmiteRelatorio {
     }
 
     //exporta os dados da table para um documento word (.docx) usando "apache poi"
+
+    /**     
+     * metodo que exporta tabela para o word
+     * @param table valor inicial para o table
+     * @param arquivo valor inicial para o arquivo
+     */
     public void exportarParaWord(JTable table, File arquivo) {
         try (XWPFDocument document = new XWPFDocument()) { //cria um novo documento Word
             XWPFTable wordTable = document.createTable(); //cria uma tabela no documento
