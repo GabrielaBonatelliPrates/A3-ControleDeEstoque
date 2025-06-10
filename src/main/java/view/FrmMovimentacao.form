@@ -29,14 +29,14 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="600" max="-2" attributes="0"/>
-              <Component id="JBLimpar" min="-2" pref="100" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-              <Component id="JBAdicionar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-              <Component id="JBRemover" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
-              <Component id="JBSair" min="-2" pref="100" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="530" max="-2" attributes="0"/>
+              <Component id="JBLimpar" min="-2" pref="170" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <Component id="JBAdicionar" min="-2" pref="169" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <Component id="JBRemover" min="-2" pref="171" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <Component id="JBSair" min="-2" pref="170" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
           <Group type="102" attributes="0">
@@ -100,13 +100,11 @@
               </Group>
               <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="JBAdicionar" pref="79" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="JBRemover" alignment="3" min="-2" pref="76" max="-2" attributes="0"/>
-                          <Component id="JBSair" alignment="3" min="-2" pref="76" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="JBLimpar" max="32767" attributes="0"/>
+                  <Component id="JBSair" min="-2" pref="76" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="JBLimpar" alignment="3" pref="79" max="32767" attributes="0"/>
+                      <Component id="JBAdicionar" alignment="3" pref="79" max="32767" attributes="0"/>
+                      <Component id="JBRemover" alignment="3" min="-2" pref="76" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="217" max="32767" attributes="0"/>
@@ -208,6 +206,9 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="1" name="https://raw.githubusercontent.com/GabrielaBonatelliPrates/A3-ControleDeEstoque/main/src/resources/Caixa_logo%20(2).png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="jLabel1"/>
       </Properties>
     </Component>
