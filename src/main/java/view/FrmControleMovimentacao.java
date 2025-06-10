@@ -30,7 +30,7 @@ public class FrmControleMovimentacao extends javax.swing.JFrame {
     }
     
     /**
-     * author Davi-Wolff
+     * @author Davi-Wolff
      */
     public void carregaTabela() {
     
