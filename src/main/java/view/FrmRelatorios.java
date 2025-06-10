@@ -1,8 +1,17 @@
 package view;
 import dao.ProdutoDAO;
+
+/**FrmRelatorios é um JFrame que oferece os tipos de relatorios do sistema
+ *
+ * @author Mateo-Padilla
+ */
 public class FrmRelatorios extends javax.swing.JFrame {
 private ProdutoDAO produtoDAO;
 
+  /**
+     *
+     * @param produtoDAO valor inicial de produtoDAO
+     */
     public FrmRelatorios(ProdutoDAO produtoDAO) {
         initComponents();
         this.produtoDAO = produtoDAO;
@@ -143,6 +152,10 @@ private ProdutoDAO produtoDAO;
                 new FrmProdutos(produtoDAO).setVisible(true);
     }//GEN-LAST:event_JBProdutosMouseClicked
 
+   /**
+     *
+     * @param args método principal de FrmRelatorios
+     */
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
