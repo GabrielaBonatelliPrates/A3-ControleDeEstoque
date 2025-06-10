@@ -175,6 +175,8 @@ public class FrmMovimentacao extends javax.swing.JFrame {
 
     private void JBAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAdicionarActionPerformed
  try {
+            //checando se há erros ou falta de informação
+            
             String nomeProduto = JTFProdutoMovimentacao.getText().trim();
             if (nomeProduto.isEmpty()) {
                 throw new IllegalArgumentException("Informe o nome do produto.");
@@ -190,10 +192,10 @@ public class FrmMovimentacao extends javax.swing.JFrame {
                 throw new IllegalArgumentException("A quantidade deve ser maior que zero.");
             }
 
-            int idProduto = produto.getIdProduto();
-            Date data = Date.from(Instant.now());
-            String tipoMovimentacao = "entrada";
-            MovimentacaoEstoque movimentacao = new MovimentacaoEstoque();
+            int idProduto = produto.getIdProduto(); //pegando o id do produto
+            Date data = Date.from(Instant.now());   //pegando o momento da movimentação
+            String tipoMovimentacao = "entrada";    //inserindo qual o tipo de movimentação
+            MovimentacaoEstoque movimentacao = new MovimentacaoEstoque();  //instanciando nova movimentação para 
             movimentacao.setNomeProduto(nomeProduto);
             movimentacao.setIdProduto(idProduto);
             movimentacao.setDataMovimentacao(data);

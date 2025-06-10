@@ -7,9 +7,13 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.Produto;
 
+/*
+author Davi-Wolff
+*/
+
 public class FrmEstoqueMinimo extends javax.swing.JFrame {
 private ProdutoDAO produtoDAO;
-private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nome", "Estoque Atual", "Estoque Mínimo"}, 0);
+private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nome", "Estoque Atual", "Estoque Mínimo"}, 0); //cria um modelo para a tabela
  
     public FrmEstoqueMinimo(ProdutoDAO produtoDAO) {
         this.produtoDAO = produtoDAO;
@@ -21,13 +25,10 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
     public void carregaTabela() {
          modelo.setRowCount(0); //limpa a tabela
         modelo.setNumRows(0); //posiciona na primeira linha da tabela
+
+        List<Produto> abaixoMinimo = produtoDAO.pegarProdutosAbaixoMinimo();    //acha os produtos abiaxo do minimo
         
-       //modelo = new DefaultTableModel(new Object[]{"ID", "Nome", "Qtd", "Mínimo"}, 0);
-        //DefaultTableModel modelo = (DefaultTableModel) this.JTEstoqueMinimo.getModel();
-        
-        List<Produto> abaixoMinimo = produtoDAO.pegarProdutosAbaixoMinimo();
-        
-        for (Produto produto : abaixoMinimo) {
+        for (Produto produto : abaixoMinimo) {  //adiciona à tabela
             modelo.addRow(new Object[]{
                 produto.getIdProduto(),
                 produto.getNomeProduto(),
@@ -35,7 +36,7 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
                 produto.getEstoqueMinimo(),
             });
         }
-         JTEstoqueMinimo.setModel(modelo);
+         JTEstoqueMinimo.setModel(modelo);  //atualiza a tabela
     }
 
     @SuppressWarnings("unchecked")
@@ -143,7 +144,7 @@ private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nom
 
     private void JBExportarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBExportarRelatorioActionPerformed
         EmiteRelatorio emiteRelatorio = new EmiteRelatorio();
-        emiteRelatorio.exportaArquivo(JTEstoqueMinimo);
+        emiteRelatorio.exportaArquivo(JTEstoqueMinimo);     //metodo que emite o relatorio
     }//GEN-LAST:event_JBExportarRelatorioActionPerformed
 
     public static void main(String args[]) {

@@ -6,8 +6,12 @@ import javax.swing.table.DefaultTableModel;
 import model.Produto;
 import controller.EmiteRelatorio;
 
+/*
+author Davi-Wolff
+*/
+
 public class FrmEstoqueMaximo extends javax.swing.JFrame {
-private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nome", "Estoque Atual", "Estoque Máximo"}, 0);
+private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nome", "Estoque Atual", "Estoque Máximo"}, 0); //cria um modelo para a tabela
 private ProdutoDAO produtoDAO;
 
     public FrmEstoqueMaximo(ProdutoDAO produtoDAO) {
@@ -134,7 +138,7 @@ private ProdutoDAO produtoDAO;
 
     private void JBExportarTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBExportarTabelaActionPerformed
         EmiteRelatorio emiteRelatorio = new EmiteRelatorio();
-        emiteRelatorio.exportaArquivo(JTEstoqueMaximo);
+        emiteRelatorio.exportaArquivo(JTEstoqueMaximo); //metodo que emite o relatorio
     }//GEN-LAST:event_JBExportarTabelaActionPerformed
 
     public static void main(String args[]) {

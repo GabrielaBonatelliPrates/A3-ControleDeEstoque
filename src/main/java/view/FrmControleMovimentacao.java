@@ -9,10 +9,10 @@ import java.util.List;
 
 /**
  *
- * @author daviw
+ * @author Davi-Wolff
  */
 public class FrmControleMovimentacao extends javax.swing.JFrame {
-        private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Tipo", "Quantidade", "Produto", "Data"}, 0);
+        private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Tipo", "Quantidade", "Produto", "Data"}, 0);   //cria um modelo para a tabela
     private MovimentacaoEstoque movimentacaoEstoque = new MovimentacaoEstoque();
     private MovimentacaoDAO movimentacaoDAO;
 

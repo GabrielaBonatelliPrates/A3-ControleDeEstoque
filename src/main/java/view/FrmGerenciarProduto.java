@@ -494,22 +494,22 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
     private void JBReajustarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBReajustarProdutoActionPerformed
         List<Produto> listaProdutos = produtoDAO.pegarProdutos();
         try {
-            for (Produto produto : listaProdutos) {
-                if (produto.getNomeProduto().equals(JTFProdutoNovoPreco.getText())) {
-                    double precoAtual = produto.getPrecoUnit();
-                    double percentual = Double.parseDouble(JTFAumentoPercentualProduto.getText());
+            for (Produto produto : listaProdutos) { //cria um objeto Produto que passará por toda a lista "listaProdutos" que possui todos os produtos
+                if (produto.getNomeProduto().equals(JTFProdutoNovoPreco.getText())) { //quando o nome do produto for igual a um outro nome da lista
+                    double precoAtual = produto.getPrecoUnit(); //pega o preço do produto
+                    double percentual = Double.parseDouble(JTFAumentoPercentualProduto.getText());  //pega a porcentagem a ser aumentada/diminuida
                     double precoNovo = 0;
 
-                    if (JRBAumento.isSelected()) {
-                        precoNovo = precoAtual * (1 + percentual / 100);
-                    } else if (JRBDesconto.isSelected()) {
-                        precoNovo = precoAtual * (1 - percentual / 100);
+                    if (JRBAumento.isSelected()) {  //se o botão de aumentar for selecionado
+                        precoNovo = precoAtual * (1 + percentual / 100);    //calculo para ajustar o preço de acordo com a porcentagem nova
+                    } else if (JRBDesconto.isSelected()) {  //se o botão de reduzir for selecionado
+                        precoNovo = precoAtual * (1 - percentual / 100);    //calculo para ajustar o preço de acordo com a porcentagem nova
                     } else {
-                        throw new Mensagem("Selecione o reajuste a ser efetivado.");
+                        throw new Mensagem("Selecione o reajuste a ser efetivado.");    //Mesagem gerada ao não selecionar nenhum botão
                     }
 
-                    produto.setPrecoUnit(precoNovo);
-                    produtoDAO.atualizarPreco(produto.getNomeProduto(), produto.getPrecoUnit(), produto.getIdProduto());
+                    produto.setPrecoUnit(precoNovo);    //insere o novo preço nos produtos
+                    produtoDAO.atualizarPreco(produto.getNomeProduto(), produto.getPrecoUnit(), produto.getIdProduto());    //insere o novo preço nos produtos no banco de dados
 
                 }
             }
@@ -525,21 +525,21 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
         List<Produto> listaProdutos = produtoDAO.pegarProdutos();
 
         try {
-            for (Produto produto : listaProdutos) {
-                double precoAtual = produto.getPrecoUnit();
-                double percentual = Double.parseDouble(JTFAumentoPercentualEstoque.getText());
+            for (Produto produto : listaProdutos) { //cria um objeto Produto que passará por toda a lista "listaProdutos" que possui todos os produtos
+                double precoAtual = produto.getPrecoUnit(); //pega o preço do produto
+                double percentual = Double.parseDouble(JTFAumentoPercentualEstoque.getText()); //pega a porcentagem a ser aumentada/diminuida
                 double precoNovo = 0.0;
 
-                if (JRBAumento1.isSelected()) {
-                    precoNovo = precoAtual * (1 + (percentual / 100));
-                } else if (JRBDesconto1.isSelected()) {
-                    precoNovo = precoAtual * (1 - (percentual / 100));
+                if (JRBAumento1.isSelected()) { //se o botão de aumentar for selecionado
+                    precoNovo = precoAtual * (1 + (percentual / 100));   //calculo para ajustar o preço de acordo com a porcentagem nova
+                } else if (JRBDesconto1.isSelected()) { //se o botão de reduzir for selecionado
+                    precoNovo = precoAtual * (1 - (percentual / 100));  //calculo para ajustar o preço de acordo com a porcentagem nova
                 } else {
-                    throw new Mensagem("Selecione o reajuste a ser efetivado.");
+                    throw new Mensagem("Selecione o reajuste a ser efetivado.");    //Mesagem gerada ao não selecionar nenhum botão
                 }
 
-                produto.setPrecoUnit(precoNovo);
-                produtoDAO.atualizarPreco(produto.getNomeProduto(), produto.getPrecoUnit(), produto.getIdProduto());
+                produto.setPrecoUnit(precoNovo);    //insere o novo preço nos produtos
+                produtoDAO.atualizarPreco(produto.getNomeProduto(), produto.getPrecoUnit(), produto.getIdProduto());     //insere o novo preço nos produtos no banco de dados
             }
 
         } catch (NumberFormatException ex) {
@@ -579,6 +579,8 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
 
     private void JBAtualizarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAtualizarProdutoActionPerformed
         try {
+            
+            //Criando variaveis para pegar os dados
             int idProduto = 0;
             String nomeProduto = "";
             double precoUnit = 0.00;
@@ -586,7 +588,8 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
             int quantidadeEstoque = 0;
             int estoqueMinimo = 0;
             int estoqueMaximo = 0;
-
+            
+            //Checando erros em:
             // Atualizar nome do produto
             if (this.JTFNomeProduto.getText().length() < 2) {
                 throw new Mensagem(" O nome do produto deve conter ao menos 2 caracteres.");
