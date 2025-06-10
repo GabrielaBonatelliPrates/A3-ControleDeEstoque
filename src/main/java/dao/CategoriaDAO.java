@@ -16,6 +16,11 @@ import model.Categoria;
 public class CategoriaDAO {
 
     public static final List<Categoria> categorias = new ArrayList<>(); //cria lista que vai armazenar os produtos
+
+    /**
+     * Lista criada para armazenar novas categorias a partir do banco de dados.
+     * @author Estermrn
+     */
     public static final List<Categoria> listaAtualizada = new ArrayList<>();
 
     public CategoriaDAO() {
@@ -163,7 +168,16 @@ public class CategoriaDAO {
         return objeto; //retorna a categoria encontrada ou null
     }
   
-
+    /**
+     * Atualiza os dados de uma categoria no banco de dados.
+     * 
+     * @author Estermrn
+     * @param nomeCategoria novo nome da categoria.
+     * @param tamanho novo tamanho da categoria.
+     * @param embalagem nova embalagem da categoria.
+     * @param idCategoria o identificador da categoria que será atualizada.
+     * @return true se a atualização foi feita, false caso contrário.
+     */
     public boolean atualizarCategoria(String nomeCategoria, String tamanho, String embalagem, int idCategoria) {
         String sql = "UPDATE categorias set nomeCategoria = ? , tamanho = ? , embalagem = ? WHERE idCategoria = ?";
         try {
@@ -185,6 +199,13 @@ public class CategoriaDAO {
         }
     }
 
+    /**
+     * Deleta uma categoria do banco de dados com base no ID.
+     *
+     * @author Estermrn
+     * @param idCategoria identificador da categoria que será deletada.
+     * @return true caso a categoria seja deletada, false caso contrário.
+     */
     public boolean deletarCategoria(int idCategoria) {
 
         String sql = "DELETE FROM categorias WHERE idCategoria = ?";
@@ -291,6 +312,12 @@ public class CategoriaDAO {
         return false;
     }
 
+    /**
+     * Pega todas as categorias cadastradas no banco de dados e retorna uma lista atualizada.
+     * 
+     * @author Estermrn
+     * @return lista atualizada com todas as categorias encontradas no banco de dados.
+     */
     public List<Categoria> pegarCategorias() {
         listaAtualizada.clear();
 
