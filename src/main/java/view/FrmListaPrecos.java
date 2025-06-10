@@ -6,11 +6,18 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.Produto;
 
+/** FrmGerenciarProduto é um JFrame para mostrar o relatório de lista de preços
+ *
+ * @author GabrielaBonatelliPrates
+ */
 public class FrmListaPrecos extends javax.swing.JFrame {
 
     private ProdutoDAO produtoDAO;
     private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id do Produto", "Nome do Produto", "Preço Unitário", "Unidade de Medida", "Categoria"}, 0);
 
+    /**
+     * @param produtoDAO  valor inicial de produtoDAO
+     */
     public FrmListaPrecos(ProdutoDAO produtoDAO) {
         this.produtoDAO = produtoDAO;
         initComponents();
@@ -18,7 +25,9 @@ public class FrmListaPrecos extends javax.swing.JFrame {
         setExtendedState(FrmListaPrecos.MAXIMIZED_BOTH);
     }
 
-    //Para mostrar na tabela de relatório os dados solicitados
+    /**
+     *@param mostrarTabela Método para carregar na table os dados para o relatório
+     */
     public void mostrarTabela() {
         modelo.setRowCount(0);
         modelo.setNumRows(0);
@@ -142,6 +151,9 @@ public class FrmListaPrecos extends javax.swing.JFrame {
         emiteRelatorio.exportaArquivo(jTableListaPrecos); //Exporta a tabela
     }//GEN-LAST:event_JBExportarRelatorioActionPerformed
 
+    /**
+     * @param args método principal de FrmListaPrecos
+     */
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

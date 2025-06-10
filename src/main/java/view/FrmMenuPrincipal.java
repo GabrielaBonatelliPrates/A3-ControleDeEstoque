@@ -9,7 +9,13 @@ import model.Produto;
 import java.util.ArrayList;
 import dao.ProdutoDAO;
 import dao.CategoriaDAO;
+import dao.Conexao;
 import dao.MovimentacaoDAO;
+import java.awt.Color;
+import java.awt.Font;
+import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FrmMenuPrincipal extends javax.swing.JFrame {
     
@@ -26,8 +32,103 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
        this.produtoDAO = produtoDAO;
        this.categoriaDAO = categoriaDAO;
        this.movimentacaoDAO = movimentacaoDAO;
+       exibeStatus();
+       editaJOption();
+
+    }
+    
+    public void exibeStatus() {
+        int numeroProdutos = produtoDAO.pegarProdutos().size(); //recebe o total de produtos (o tamanho da lista que pega os produtos presente no bd)
+        int numeroCategorias = categoriaDAO.mostrarCategorias().size();  //recebe o total de categotorias (o tamanho da lista que pega as categorias presente no bd)
+        String statusBD = ""; //declara o statusBD
+        Connection connection = Conexao.conectar(); //atribui a conexão à classe que faz a conexão com o banco de dados
+        if (connection != null) { //se o método conectar devolver algo que não é nul (ou seja, se contectar)
+            statusBD = "Banco de Dados Conectado!";
+        } else {
+            statusBD = "Banco de Dados não conectado.";
+        }
+        String status = String.format( //status do estoque + da conexao mysql
+                " Status Estoque\n"
+                + "   Total de produtos cadastrados: %d\n"
+                + "   Total de categorias cadastradas: %d\n"
+                + "   Conexão MySQL: %s",
+                numeroProdutos, numeroCategorias, statusBD
+        );
+        txtStatus.setText(status); //imprime o status no text area
     }
 
+    //deixa os JOptionPanes da classe com formatação padrão (mais elegante visualmente) 
+    public void editaJOption() {
+        
+        
+        ImageIcon icone = null;
+        //url do icone para as mensagens
+          URL url;
+        try {
+            url = new URL("https://raw.githubusercontent.com/GabrielaBonatelliPrates/A3-ControleDeEstoque/main/src/resources/caixa_logo_JOption.png");
+            //icone para as mensagens
+          icone = new ImageIcon(url);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(FrmMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        //define o icone como padrão
+        UIManager.put("OptionPane.icon", icone);
+        
+        //define a fonte do JOption (pra utilizada na interface gráfica)
+        Font novaFonte = new Font("Inter 18pt", Font.BOLD, 14);
+
+        //aplica a nova fonte a vários componentes do JOptionPane
+        UIManager.put("OptionPane.messageFont", novaFonte);
+        UIManager.put("OptionPane.buttonFont", novaFonte);
+        UIManager.put("OptionPane.messageForeground", Color.BLACK); //define a cor do texto
+        UIManager.put("Button.background", Color.WHITE); //define a cor de fundo dos botões 
+    }
+    
+    //cria mensagem formatada pro JOption Pane (showMessage)
+    public void mensagem(String mensagem) {
+        String titulo = "Controle de Estoque";
+         ImageIcon icone = null;
+        //url do icone para as mensagens
+          URL url;
+        try {
+            url = new URL("https://raw.githubusercontent.com/GabrielaBonatelliPrates/A3-ControleDeEstoque/main/src/resources/caixa_logo_JOption.png"); //url do icone pro JOptionPane
+            //icone para as mensagens
+          icone = new ImageIcon(url);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(FrmMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, mensagem, titulo, JOptionPane.INFORMATION_MESSAGE, icone); //JOptionPane formatado
+    }
+    
+      public int mensagemOpcoes(String[] opcoes) {
+        String titulo = "Controle de Estoque";
+        String mensagem = "Escolha uma opção";
+        ImageIcon icone = null;
+        //url do icone para as mensagens
+        URL url;
+        try {
+            url = new URL("https://raw.githubusercontent.com/GabrielaBonatelliPrates/A3-ControleDeEstoque/main/src/resources/caixa_logo_JOption.png"); //url do icone pro JOptionPane
+            //icone para as mensagens
+            icone = new ImageIcon(url);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(FrmMenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return JOptionPane.showOptionDialog( //JOptionPane formatado
+                null,
+                mensagem,
+                titulo,
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.PLAIN_MESSAGE,
+                icone,
+                opcoes,
+                opcoes[0]
+        );
+    }
+
+    
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -37,11 +138,19 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtCampoPesquisa = new javax.swing.JTextField();
-        txtFicha = new java.awt.TextArea();
-        btnPesquisar = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
         JLEstampa = new javax.swing.JLabel();
+        btnMovimentacao = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        btnRelatorio = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        btnCadastro = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        btnGerenciamento = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtStatus = new javax.swing.JTextArea();
+        jLabel9 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuSobre = new javax.swing.JMenuItem();
@@ -75,11 +184,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Controle de Estoque");
         setAutoRequestFocus(false);
+        setBackground(new java.awt.Color(255, 204, 204));
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setForeground(java.awt.Color.white);
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(1436, 955));
-        setUndecorated(true);
 
         jLabel3.setToolTipText("");
         jLabel3.setName(""); // NOI18N
@@ -96,30 +205,121 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             }
         }.getIcon());
 
-        txtCampoPesquisa.setFont(new java.awt.Font("Inter 18pt", 0, 23)); // NOI18N
-
-        txtFicha.setFont(new java.awt.Font("Inter 18pt Light", 0, 20)); // NOI18N
-
-        btnPesquisar.setIcon(new javax.swing.JLabel() {
+        JLEstampa.setIcon(new javax.swing.JLabel() {
             public javax.swing.Icon getIcon() {
                 try {
                     return new javax.swing.ImageIcon(
-                        new java.net.URL("https://raw.githubusercontent.com/GabrielaBonatelliPrates/A3-ControleDeEstoque/main/src/resources/lupa_pesquisa.png")
+                        new java.net.URL("https://raw.githubusercontent.com/GabrielaBonatelliPrates/A3-ControleDeEstoque/main/src/resources/caixa_icone.png")
                     );
                 } catch (java.net.MalformedURLException e) {
                 }
                 return null;
             }
         }.getIcon());
-        btnPesquisar.setMinimumSize(new java.awt.Dimension(48, 48));
-        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+
+        btnMovimentacao.setFont(new java.awt.Font("Inter 18pt Light", 0, 14)); // NOI18N
+        btnMovimentacao.setText("Adicionar Movimentação");
+        btnMovimentacao.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnMovimentacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisarActionPerformed(evt);
+                btnMovimentacaoActionPerformed(evt);
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Inter 18pt Medium", 0, 30)); // NOI18N
-        jLabel5.setText("Ficha Produto");
+        jLabel4.setIcon(new javax.swing.JLabel() {
+            public javax.swing.Icon getIcon() {
+                try {
+                    return new javax.swing.ImageIcon(
+                        new java.net.URL("https://raw.githubusercontent.com/GabrielaBonatelliPrates/A3-ControleDeEstoque/main/src/resources/caminhaozinho.png")
+                    );
+                } catch (java.net.MalformedURLException e) {
+                }
+                return null;
+            }
+        }.getIcon());
+
+        jLabel5.setFont(new java.awt.Font("Inter 18pt", 0, 18)); // NOI18N
+        jLabel5.setText("Atalhos");
+
+        jLabel6.setIcon(new javax.swing.JLabel() {
+            public javax.swing.Icon getIcon() {
+                try {
+                    return new javax.swing.ImageIcon(
+                        new java.net.URL("https://raw.githubusercontent.com/GabrielaBonatelliPrates/A3-ControleDeEstoque/main/src/resources/emite_relatorio_logo.png")
+                    );
+                } catch (java.net.MalformedURLException e) {
+                }
+                return null;
+            }
+        }.getIcon());
+
+        btnRelatorio.setFont(new java.awt.Font("Inter 18pt Light", 0, 14)); // NOI18N
+        btnRelatorio.setText("Relatórios");
+        btnRelatorio.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRelatorioActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setIcon(new javax.swing.JLabel() {
+            public javax.swing.Icon getIcon() {
+                try {
+                    return new javax.swing.ImageIcon(
+                        new java.net.URL("https://raw.githubusercontent.com/GabrielaBonatelliPrates/A3-ControleDeEstoque/main/src/resources/cadastro_logo.png")
+                    );
+                } catch (java.net.MalformedURLException e) {
+                }
+                return null;
+            }
+        }.getIcon());
+
+        btnCadastro.setFont(new java.awt.Font("Inter 18pt Light", 0, 14)); // NOI18N
+        btnCadastro.setText("Cadastro");
+        btnCadastro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastroActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setIcon(new javax.swing.JLabel() {
+            public javax.swing.Icon getIcon() {
+                try {
+                    return new javax.swing.ImageIcon(
+                        new java.net.URL("https://raw.githubusercontent.com/GabrielaBonatelliPrates/A3-ControleDeEstoque/main/src/resources/lapis_gerenciar.png")
+                    );
+                } catch (java.net.MalformedURLException e) {
+                }
+                return null;
+            }
+        }.getIcon());
+
+        btnGerenciamento.setFont(new java.awt.Font("Inter 18pt Light", 0, 14)); // NOI18N
+        btnGerenciamento.setText("Gerenciamento");
+        btnGerenciamento.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnGerenciamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerenciamentoActionPerformed(evt);
+            }
+        });
+
+        txtStatus.setColumns(20);
+        txtStatus.setFont(new java.awt.Font("Inter 18pt Light", 0, 20)); // NOI18N
+        txtStatus.setRows(5);
+        jScrollPane1.setViewportView(txtStatus);
+
+        jLabel9.setIcon(new javax.swing.JLabel() {
+            public javax.swing.Icon getIcon() {
+                try {
+                    return new javax.swing.ImageIcon(
+                        new java.net.URL("https://raw.githubusercontent.com/GabrielaBonatelliPrates/A3-ControleDeEstoque/main/src/resources/borda_marrom.png")
+                    );
+                } catch (java.net.MalformedURLException e) {
+                }
+                return null;
+            }
+        }.getIcon());
 
         jMenuBar1.setBackground(new java.awt.Color(156, 73, 0));
         jMenuBar1.setBorder(null);
@@ -311,49 +511,81 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2944, 2944, 2944))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(JLEstampa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(txtCampoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 838, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(txtFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(237, 237, 237))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(248, 248, 248)
+                            .addComponent(jLabel5))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(78, 78, 78)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(58, 58, 58)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(67, 67, 67)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 750, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(75, 75, 75))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(JLEstampa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel2))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(323, 323, 323)
+                        .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(78, 78, 78)
+                        .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58)
+                        .addComponent(btnMovimentacao, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67)
+                        .addComponent(btnGerenciamento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(83, 83, 83)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(JLEstampa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(495, 495, 495))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(89, 89, 89)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCampoPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addComponent(jLabel5)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(JLEstampa, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(28, 28, 28)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtFicha, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54)
+                .addComponent(jLabel5)
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnMovimentacao, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnGerenciamento, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(38, 38, 38))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(1436, 955));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -395,32 +627,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         telaMovimentacao.setVisible(true);
         //Ativação da tela de movimentação de estoque
     }//GEN-LAST:event_jMenuMovimentacaoActionPerformed
-
-    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-/*
-        String nomeProduto = txtCampoPesquisa.getText();
-        String dadosProduto = "";
-        if (!telaCadastro.produtos.isEmpty()) {
-            boolean encontrado = false;
-            for (int i = 0; i < telaCadastro.produtos.size(); i++) {
-                Produto produtoProcurado = telaCadastro.produtos.get(i);
-                if (produtoProcurado.getNomeProduto().equals(nomeProduto.trim())) {
-                    dadosProduto = String.format("Nome: %s\nID: %s\nPreço unitário: %s\nUnidade de medida: %s\nQuantidades em estoque: %s\nQuantidade mínima: %s\nQuantidade máxima: %s\nCategoria: %s\n",
-                            produtoProcurado.getNomeProduto(),
-                            produtoProcurado.getIdProduto(),
-                            produtoProcurado.getPrecoUnit(),
-                            produtoProcurado.getUnidadeProduto(),
-                            produtoProcurado.getQuantidadeEstoque(),
-                            produtoProcurado.getEstoqueMinimo(),
-                            produtoProcurado.getEstoqueMaximo(),
-                            produtoProcurado.getCategoria());
-                    encontrado = true;
-                    break;
-                }
-            }
-            txtFicha.setText(dadosProduto);
-        } */
-    }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void jMenuBalancoFinanceiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuBalancoFinanceiroActionPerformed
        //instancia a interface gráfica do balanço financeiro
@@ -482,13 +688,104 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
          movimentacoes.setVisible(true);
     }//GEN-LAST:event_jMenuMovimentacoesActionPerformed
 
+    private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
+       FrmRelatorios telaRelatorios = new FrmRelatorios (produtoDAO);
+       telaRelatorios.setVisible(true);
+    }//GEN-LAST:event_btnRelatorioActionPerformed
+
+    private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
+        String[] opcoes = {"Adicionar Produto", "Adicionar Categoria", "Voltar"}; //opções
+        int escolha = mensagemOpcoes(opcoes); //manda pro metodo com JOptionPane 
+        switch (escolha) {
+            case 0:
+                mensagem("Carregando...");
+                FrmProdutoNovo telaCadastro = new FrmProdutoNovo(produtoDAO, categoriaDAO);
+                telaCadastro.setVisible(true);
+                break;
+            case 1:
+                mensagem("Carregando...");
+                //instancia a interface gráfica do cadastro de categoria
+                FrmCategoriaNova telaCategoria = new FrmCategoriaNova(produtoDAO, categoriaDAO);
+                //deixa ela vísível
+                telaCategoria.setVisible(true);
+                break;
+            case 2:
+                mensagem("Voltando...");
+                break;
+            default:
+                mensagem("Nenhuma opção selecionada.");
+                break;
+        }
+    }//GEN-LAST:event_btnCadastroActionPerformed
+
+    private void btnMovimentacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovimentacaoActionPerformed
+          String[] opcoes = {"Adicionar Movimentação", "Ver Movimentações", "Voltar"};
+         int escolha = mensagemOpcoes(opcoes); //manda pro metodo com JOptionPane 
+        switch (escolha) {
+            case 0:
+                mensagem("Carregando...");
+              FrmMovimentacao telaMovimentacao = new FrmMovimentacao(produtoDAO, movimentacaoDAO);
+        telaMovimentacao.setVisible(true);
+        //Ativação da tela de movimentação de estoque
+                break;
+            case 1:
+                mensagem("Carregando...");
+                //instancia a interface gráfica de movimentacoes
+                  FrmControleMovimentacao movimentacoes = new FrmControleMovimentacao(movimentacaoDAO);
+                  //deixa ela visivel
+         movimentacoes.setVisible(true);
+                break;
+            case 2:
+                mensagem("Voltando...");
+                break;
+            default:
+                mensagem("Nenhuma opção selecionada.");
+                break;
+        }
+    }//GEN-LAST:event_btnMovimentacaoActionPerformed
+
+    private void btnGerenciamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciamentoActionPerformed
+        String[] opcoes = {"Gerenciar Produto", "Gerenciar Categoria", "Voltar"};
+         int escolha = mensagemOpcoes(opcoes); //manda pro metodo com JOptionPane 
+        switch (escolha) {
+            case 0:
+                mensagem("Carregando...");
+              //instancia a interface gráfica do gerenciamento de  produto
+        FrmGerenciarProduto telaGerenciar = new FrmGerenciarProduto(produtoDAO);
+        //deixa ela vísível
+        telaGerenciar.setVisible(true);
+                break;
+            case 1:
+                mensagem("Carregando...");
+                 //instancia a interface gráfica para gerenciar as categorias
+        FrmGerenciarCategoria categoriaGerenciar = new FrmGerenciarCategoria(categoriaDAO);
+        //deixa ela vísível
+        categoriaGerenciar.setVisible(true);
+                break;
+            case 2:
+                mensagem("Voltando...");
+                break;
+            default:
+                mensagem("Nenhuma opção selecionada.");
+                break;
+        }
+    }//GEN-LAST:event_btnGerenciamentoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel JLEstampa;
-    private javax.swing.JButton btnPesquisar;
+    private javax.swing.JButton btnCadastro;
+    private javax.swing.JButton btnGerenciamento;
+    private javax.swing.JButton btnMovimentacao;
+    private javax.swing.JButton btnRelatorio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private static final javax.swing.JLabel jLabel3 = new javax.swing.JLabel();
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -513,7 +810,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuSair;
     private javax.swing.JMenuItem jMenuSobre;
     private javax.swing.JMenuItem jMenuVerCategorias;
-    private javax.swing.JTextField txtCampoPesquisa;
-    private java.awt.TextArea txtFicha;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea txtStatus;
     // End of variables declaration//GEN-END:variables
 }
