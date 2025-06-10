@@ -6,8 +6,17 @@ import javax.swing.JOptionPane;
 import model.Categoria;
 import dao.ProdutoDAO;
 
+/**FrmProdutoNovo é um JFrame para cadastrar produtos
+ *
+ * @author Mateo-Padilla
+ */
 public class FrmProdutoNovo extends javax.swing.JFrame {
 
+    /**
+     *
+     * @param produtoDAO valor inicial de produtoDAO
+     * @param categoriaDAO valor inicial de categoriaDAO
+     */
     private ProdutoDAO produtoDAO;
     private CategoriaDAO categoriaDAO;
 
@@ -19,7 +28,9 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
         setExtendedState(FrmProdutoNovo.MAXIMIZED_BOTH);
     }
 
-    //método para mostrar as categorias na combo box
+    /**
+     * @author GabrielaBonatelliPrates !!!!!!!!!!!!!!!
+     */
     public void mostrarCategorias() {
         //Cria um ArrayList para mostrar os nomes das categorias cadastrados no banco de dados
         List<Categoria> mostrarCategorias = categoriaDAO.mostrarCategorias();
@@ -437,6 +448,9 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
 
     private double somaTotalEstoque = 0;
 
+    /**
+     * @param somaTotal método que calcula a soma total dos produtos
+     */
     public void somaTotal() {
         try {
 
@@ -450,6 +464,9 @@ public class FrmProdutoNovo extends javax.swing.JFrame {
 
     }
 
+    /**
+     * @return somaTotalEstoque soma total do estoque de produtos 
+     */
     public double getSomaTotalEstoque() {
         return somaTotalEstoque;
     }
