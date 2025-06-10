@@ -265,7 +265,7 @@ public class Produto {
     }
     
     /**
-     *author Davi-Wolff
+     *@author Davi-Wolff
      * metodo para checar se o produto esta acima/abaixo da media
      */
     public void verificaMediaAcima() {
@@ -277,7 +277,7 @@ public class Produto {
     }
 
     /**
-     *author Davi-Wolff
+     *@author Davi-Wolff
      * metodo para checar se o produto esta acima/abaixo da media
      */
     public void verificaMediaAbaixo() {
