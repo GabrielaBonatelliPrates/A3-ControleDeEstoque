@@ -8,11 +8,19 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import model.Categoria;
 
+/** FrmGerenciarProduto é um JFrame para atualizar e excluir produtos, além de reajustar os preços percentualmente
+ *
+ * @author GabrielaBonatelliPrates
+ */
 public class FrmGerenciarProduto extends javax.swing.JFrame {
 
     private ProdutoDAO produtoDAO;
     private CategoriaDAO categoriaDAO;
 
+    /**
+     * @param produtoDAO valor inicial de produtoDAO
+     * @param categoriaDAO valor inicial de categoriaDAO
+     */
     public FrmGerenciarProduto(ProdutoDAO produtoDAO) {
         this.produtoDAO = produtoDAO;
         this.categoriaDAO = new CategoriaDAO();
@@ -22,6 +30,9 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
         setExtendedState(FrmGerenciarProduto.MAXIMIZED_BOTH);
     }
 
+    /**
+     *@param mostrarTabela carrega na table todos os produtos cadastrados 
+     */
     public void mostrarTabela() {
         DefaultTableModel modelo = (DefaultTableModel) this.jTableGerenciaProdutos.getModel(); // para manipular a tabela 
         modelo.setNumRows(0); //limpa as linhas do modelo da tabela
@@ -42,10 +53,12 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
         }
     }
 
+    /**
+     *@param mostrarCategoria carrega na combo box todas as categorias cadastradas
+     */
     public void mostrarCategorias() {
         //Cria um ArrayList para mostrar os nomes das categorias cadastrados no banco de dados
         List<Categoria> mostrarCategorias = categoriaDAO.mostrarCategorias();
-        //int id = 1;
 
         jComboBoxCategoria.removeAllItems(); //limpa itens anteriores para evitar erros
 
@@ -558,6 +571,10 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_JBReajustarEstoqueActionPerformed
 
+/** método para mostrar as informações do produto para poderem ser alteradas ao clicar em um produto na tabela 
+ *
+ * @author GabrielaBonatelliPrates
+ */
     private void jTableGerenciaProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableGerenciaProdutosMouseClicked
         //Evento para fazer os dados completarem os Text Field e a Combo Box quando clicar em um produto da tabela
         if (this.jTableGerenciaProdutos.getSelectedRow() != -1) {
@@ -586,6 +603,10 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTableGerenciaProdutosMouseClicked
 
+/** método para atualizar dados de um determinado produto selecionado
+ *
+ * @author GabrielaBonatelliPrates
+ */
     private void JBAtualizarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBAtualizarProdutoActionPerformed
         try {
             
@@ -701,6 +722,10 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
 
     }//GEN-LAST:event_JBAtualizarProdutoActionPerformed
 
+/** método para excluir um determinado produto
+ *
+ * @author GabrielaBonatelliPrates
+ */
     private void JBExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBExcluirProdutoActionPerformed
         try {
             int idProduto = 0; // variável para armazenar o ID excluído
@@ -737,7 +762,7 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_JBExcluirProdutoActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        this.mostrarTabela();
+        this.mostrarTabela(); 
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -753,6 +778,10 @@ public class FrmGerenciarProduto extends javax.swing.JFrame {
         this.JTFEstoqueMaximo.setText("");
     }//GEN-LAST:event_JBLimparActionPerformed
 
+    /**
+     *
+     * @param args método principal de FrmGerenciarProduto
+     */
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
