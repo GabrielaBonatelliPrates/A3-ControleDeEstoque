@@ -19,7 +19,8 @@ public class FrmControleMovimentacao extends javax.swing.JFrame {
 
     
     /**
-     * Creates new form FrmControleMovimentacao
+     * 
+     * @param movimentacaoDAO   valor inicial do movimentacaoDAO
      */
     public FrmControleMovimentacao(MovimentacaoDAO movimentacaoDAO) {
         this.movimentacaoDAO = movimentacaoDAO;
@@ -28,7 +29,10 @@ public class FrmControleMovimentacao extends javax.swing.JFrame {
         setExtendedState(FrmControleMovimentacao.MAXIMIZED_BOTH);
     }
     
-public void carregaTabela() {
+    /**
+     * author Davi-Wolff
+     */
+    public void carregaTabela() {
     
     modelo.setRowCount(0); //limpa a tabela
 
