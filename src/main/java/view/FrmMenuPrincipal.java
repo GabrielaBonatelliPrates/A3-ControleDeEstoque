@@ -168,15 +168,15 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         JLEstampa = new javax.swing.JLabel();
-        btnMovimentacao = new javax.swing.JButton();
+        JBMovimentacao = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        btnRelatorio = new javax.swing.JButton();
+        JBRelatorio = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        btnCadastro = new javax.swing.JButton();
+        JBCadastro = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
-        btnGerenciamento = new javax.swing.JButton();
+        JBGerenciamento = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtStatus = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
@@ -218,6 +218,14 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         setForeground(java.awt.Color.white);
         setLocationByPlatform(true);
         setMinimumSize(new java.awt.Dimension(1436, 955));
+        setUndecorated(true);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         jLabel3.setToolTipText("");
         jLabel3.setName(""); // NOI18N
@@ -246,12 +254,12 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             }
         }.getIcon());
 
-        btnMovimentacao.setFont(new java.awt.Font("Inter 18pt Light", 0, 14)); // NOI18N
-        btnMovimentacao.setText("Adicionar Movimentação");
-        btnMovimentacao.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnMovimentacao.addActionListener(new java.awt.event.ActionListener() {
+        JBMovimentacao.setFont(new java.awt.Font("Inter 18pt Light", 0, 14)); // NOI18N
+        JBMovimentacao.setText("Adicionar Movimentação");
+        JBMovimentacao.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        JBMovimentacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMovimentacaoActionPerformed(evt);
+                JBMovimentacaoActionPerformed(evt);
             }
         });
 
@@ -282,12 +290,12 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             }
         }.getIcon());
 
-        btnRelatorio.setFont(new java.awt.Font("Inter 18pt Light", 0, 14)); // NOI18N
-        btnRelatorio.setText("Relatórios");
-        btnRelatorio.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnRelatorio.addActionListener(new java.awt.event.ActionListener() {
+        JBRelatorio.setFont(new java.awt.Font("Inter 18pt Light", 0, 14)); // NOI18N
+        JBRelatorio.setText("Relatórios");
+        JBRelatorio.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        JBRelatorio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRelatorioActionPerformed(evt);
+                JBRelatorioActionPerformed(evt);
             }
         });
 
@@ -303,12 +311,12 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             }
         }.getIcon());
 
-        btnCadastro.setFont(new java.awt.Font("Inter 18pt Light", 0, 14)); // NOI18N
-        btnCadastro.setText("Cadastro");
-        btnCadastro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnCadastro.addActionListener(new java.awt.event.ActionListener() {
+        JBCadastro.setFont(new java.awt.Font("Inter 18pt Light", 0, 14)); // NOI18N
+        JBCadastro.setText("Cadastro");
+        JBCadastro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        JBCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastroActionPerformed(evt);
+                JBCadastroActionPerformed(evt);
             }
         });
 
@@ -324,12 +332,12 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             }
         }.getIcon());
 
-        btnGerenciamento.setFont(new java.awt.Font("Inter 18pt Light", 0, 14)); // NOI18N
-        btnGerenciamento.setText("Gerenciamento");
-        btnGerenciamento.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnGerenciamento.addActionListener(new java.awt.event.ActionListener() {
+        JBGerenciamento.setFont(new java.awt.Font("Inter 18pt Light", 0, 14)); // NOI18N
+        JBGerenciamento.setText("Gerenciamento");
+        JBGerenciamento.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        JBGerenciamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGerenciamentoActionPerformed(evt);
+                JBGerenciamentoActionPerformed(evt);
             }
         });
 
@@ -570,13 +578,13 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
                                 .addComponent(jLabel2))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(323, 323, 323)
-                        .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JBRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(78, 78, 78)
-                        .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JBCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(58, 58, 58)
-                        .addComponent(btnMovimentacao, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JBMovimentacao, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(67, 67, 67)
-                        .addComponent(btnGerenciamento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JBGerenciamento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(83, 83, 83)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -604,17 +612,17 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(JBRelatorio, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JBCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnMovimentacao, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnGerenciamento, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(JBMovimentacao, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(JBGerenciamento, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(38, 38, 38))
         );
 
-        setSize(new java.awt.Dimension(1436, 955));
+        setSize(new java.awt.Dimension(1420, 946));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -717,12 +725,12 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
          movimentacoes.setVisible(true);
     }//GEN-LAST:event_jMenuMovimentacoesActionPerformed
 
-    private void btnRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRelatorioActionPerformed
+    private void JBRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBRelatorioActionPerformed
        FrmRelatorios telaRelatorios = new FrmRelatorios (produtoDAO);
        telaRelatorios.setVisible(true);
-    }//GEN-LAST:event_btnRelatorioActionPerformed
+    }//GEN-LAST:event_JBRelatorioActionPerformed
 
-    private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
+    private void JBCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBCadastroActionPerformed
         String[] opcoes = {"Adicionar Produto", "Adicionar Categoria", "Voltar"}; //opções
         int escolha = mensagemOpcoes(opcoes); //manda pro metodo com JOptionPane 
         switch (escolha) {
@@ -745,9 +753,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
                 mensagem("Nenhuma opção selecionada.");
                 break;
         }
-    }//GEN-LAST:event_btnCadastroActionPerformed
+    }//GEN-LAST:event_JBCadastroActionPerformed
 
-    private void btnMovimentacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMovimentacaoActionPerformed
+    private void JBMovimentacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBMovimentacaoActionPerformed
           String[] opcoes = {"Adicionar Movimentação", "Ver Movimentações", "Voltar"};
          int escolha = mensagemOpcoes(opcoes); //manda pro metodo com JOptionPane 
         switch (escolha) {
@@ -771,9 +779,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
                 mensagem("Nenhuma opção selecionada.");
                 break;
         }
-    }//GEN-LAST:event_btnMovimentacaoActionPerformed
+    }//GEN-LAST:event_JBMovimentacaoActionPerformed
 
-    private void btnGerenciamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerenciamentoActionPerformed
+    private void JBGerenciamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBGerenciamentoActionPerformed
         String[] opcoes = {"Gerenciar Produto", "Gerenciar Categoria", "Voltar"};
          int escolha = mensagemOpcoes(opcoes); //manda pro metodo com JOptionPane 
         switch (escolha) {
@@ -798,14 +806,18 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
                 mensagem("Nenhuma opção selecionada.");
                 break;
         }
-    }//GEN-LAST:event_btnGerenciamentoActionPerformed
+    }//GEN-LAST:event_JBGerenciamentoActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        exibeStatus();
+    }//GEN-LAST:event_formWindowGainedFocus
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JBCadastro;
+    private javax.swing.JButton JBGerenciamento;
+    private javax.swing.JButton JBMovimentacao;
+    private javax.swing.JButton JBRelatorio;
     private javax.swing.JLabel JLEstampa;
-    private javax.swing.JButton btnCadastro;
-    private javax.swing.JButton btnGerenciamento;
-    private javax.swing.JButton btnMovimentacao;
-    private javax.swing.JButton btnRelatorio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private static final javax.swing.JLabel jLabel3 = new javax.swing.JLabel();

@@ -4,6 +4,7 @@ package controller;
 import dao.ProdutoDAO;
 import dao.CategoriaDAO;
 import dao.MovimentacaoDAO;
+import java.sql.SQLException;
 import view.FrmMenuPrincipal;
 
 /**classe ControleEstoque é uma classe utilizada para gerenciar a movimentação do estoque
@@ -23,15 +24,18 @@ public class ControleEstoque {
     protected ProdutoDAO produtoDAO = new ProdutoDAO(categoriaDAO);
     protected MovimentacaoDAO movimentacaoDAO = new MovimentacaoDAO(produtoDAO);
 
+
     /**
      * 
      *@param iniciaAplicação metodo que inicia o sistema
      */
-    public void iniciaAplicação(){
+    public void iniciaAplicação() throws SQLException{
+ 
         //instancia a interface gráfica do menu principal
          FrmMenuPrincipal telaMenu = new FrmMenuPrincipal(produtoDAO, categoriaDAO, movimentacaoDAO);
          //deixa ele visível
          telaMenu.setVisible(true);
+         produtoDAO.pegarProdutos();
     }
 
 }

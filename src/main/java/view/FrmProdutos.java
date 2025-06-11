@@ -22,12 +22,15 @@ import javax.swing.table.TableModel;
 import javax.swing.JTable;
 import javax.swing.table.TableModel;
 import java.io.FileOutputStream;
+import java.util.List;
+import model.Produto;
 
 /** FrmProdutos é um JFrame para mostrar as informações e o status dos produtos
  * @author laispaivaportela
  */
 public class FrmProdutos extends javax.swing.JFrame {
     private ProdutoDAO produtoDAO;
+    private DefaultTableModel modelo = new DefaultTableModel(new Object[]{"Id", "Nome", "Preço Unitário", "Unidade", "Estoque Atual", "Estoque Mínimo", "Estoque Máximo", "Categoria", "Tamanho", "Embalagem" }, 0);
 
     /**
      * @param produtoDAO valor inicial de produtoDAO
@@ -36,13 +39,29 @@ public class FrmProdutos extends javax.swing.JFrame {
         this.produtoDAO = produtoDAO;
         initComponents();
         setExtendedState(FrmProdutos.MAXIMIZED_BOTH);
-        try {
-            DefaultTableModel model = produtoDAO.tabelaAtualizada();
-            jTableProdutos.setModel(model); //atualiza a exibição
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+      mostrarTabela();
     }
+     public void mostrarTabela() {
+        modelo.setNumRows(0); //limpa as linhas do modelo da tabela
+        List<Produto> listaProdutos = produtoDAO.pegarProdutos(); //pega todos os produtos do banco de dados
+        for (Produto p : listaProdutos) { //passa por todos os produtos e cria as linhas da tabela com os dados solicitados
+            String preçoFormatado = String.format("R$ %.2f" , p.getPrecoUnit());
+            modelo.addRow(new Object[]{
+                p.getIdProduto(),
+                p.getNomeProduto(),
+                preçoFormatado,
+                p.getUnidadeProduto(),
+                p.getQuantidadeEstoque(),
+                p.getEstoqueMinimo(),
+                p.getEstoqueMaximo(),
+                p.getCategoria().getNomeCategoria(),
+                p.getCategoria().getTamanho(),
+                p.getCategoria().getEmbalagem()
+            });
+        }
+        jTableProdutos.setModel(modelo);
+    }
+    
     
 
     @SuppressWarnings("unchecked")
@@ -201,12 +220,7 @@ public class FrmProdutos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try {
-            DefaultTableModel model = produtoDAO.tabelaAtualizada();
-            jTableProdutos.setModel(model); //atualiza a exibição
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+        mostrarTabela();
     }//GEN-LAST:event_formWindowOpened
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
@@ -227,12 +241,7 @@ public class FrmProdutos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-       try {
-            DefaultTableModel model = produtoDAO.tabelaAtualizada();
-            jTableProdutos.setModel(model); //atualiza a exibição
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
+       mostrarTabela();
     }//GEN-LAST:event_formWindowActivated
 
     private void BtnExportarTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnExportarTabelaActionPerformed
